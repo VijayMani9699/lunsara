@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Lunsara | lunsara.com - Sarees & Lungis</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+  
   <style>
     *, *::before, *::after {
         box-sizing: border-box;
@@ -52,6 +55,14 @@
     .navbar a {
         color: white;
         text-decoration: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .navbar a:hover {
+        background-color: white;
+        color: #8e44ad;
     }
 
     .hero {
@@ -112,12 +123,24 @@
       padding: 4rem 2rem;
       text-align: center;
     }
+    
+    #products h2, 
+    .craftsmanship h2 {
+        font-family: 'Cinzel Decorative', serif;
+        font-size: 3rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        color: #8e44ad;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.15);
+        margin-bottom: 4rem;
+    }
 
     .products {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 5rem;
+      margin-top: 2rem;
     }
 
     .product-card {
@@ -192,6 +215,7 @@
 
     .craftsmanship {
         background-color: #fafafa;
+        overflow-x: hidden; /* Prevents horizontal scrollbar during animation */
     }
 
     .craft-container {
@@ -201,12 +225,21 @@
         flex-direction: column;
         gap: 4rem;
     }
-
+    
+    /* New animation styles for craft-item */
     .craft-item {
         display: flex;
         align-items: center;
         gap: 4rem;
         text-align: center;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    
+    .craft-item.visible {
+        opacity: 1;
+        transform: translateY(0);
     }
     
     .craft-item.reverse {
@@ -280,6 +313,10 @@
         .hero h1 {
             font-size: 1.5rem;
         }
+        
+        #products h2, .craftsmanship h2 {
+            font-size: 2.5rem;
+        }
 
         #about h2, .craft-text h3 {
             font-size: 1.8rem;
@@ -307,7 +344,7 @@
   </section>
   
   <section class="section craftsmanship">
-    <h2 style="margin-bottom: 4rem;">The Art of Our Weaves</h2>
+    <h2>The Art of Our Weaves</h2>
     <div class="craft-container">
       
       <div class="craft-item">
@@ -403,6 +440,7 @@
 
     function isInViewport(el) {
       const rect = el.getBoundingClientRect();
+      // Adjusted the trigger point to be 100px from the bottom
       return rect.top <= (window.innerHeight || document.documentElement.clientHeight) - 100;
     }
 
@@ -416,6 +454,20 @@
 
     window.addEventListener('scroll', animateCards);
     window.addEventListener('load', animateCards);
+
+    // New code for the craft items animation
+    const craftItems = document.querySelectorAll('.craft-item');
+
+    function animateCraftItems() {
+      craftItems.forEach(item => {
+        if (isInViewport(item)) {
+          item.classList.add('visible');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', animateCraftItems);
+    window.addEventListener('load', animateCraftItems);
   </script>
 
 </body>
