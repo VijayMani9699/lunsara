@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kanchipuram Silk Sarees Collection | Lunsara</title>
     <style>
-        /* Basic styles from index.html for consistency */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Segoe UI', sans-serif;
             margin: 0;
@@ -32,7 +35,6 @@
             margin-left: 15px;
         }
         
-        /* New styles for the product grid */
         .product-grid-container {
             padding: 4rem 2rem;
             text-align: center;
@@ -45,9 +47,8 @@
         }
 
         .product-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
             gap: 2rem;
         }
         
@@ -55,7 +56,7 @@
             background-color: white;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            width: 280px;
+            width: 100%;
             text-align: center;
             padding: 1.5rem;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -98,6 +99,40 @@
             border-radius: 15px;
             text-align: center;
             color: white;
+        }
+        
+        @media (max-width: 1024px) {
+            .product-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .product-grid-container h2 {
+                font-size: 2rem;
+            }
+            .product-image-placeholder {
+                height: 160px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-grid-container {
+                padding: 2rem 1rem;
+            }
+
+            .product-grid-container h2 {
+                font-size: 1.8rem;
+            }
         }
     </style>
 </head>
