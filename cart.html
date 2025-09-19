@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Shopping Cart | Lunsara</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Lato', sans-serif; margin: 0; background-color: #f9f9f9; color: #333; }
+        header { background-color: #8e44ad; color: white; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        header h2 { margin: 0; }
+        .navbar { display: flex; gap: 10px; align-items: center; }
+        .navbar a { color: white; text-decoration: none; padding: 8px 15px; border-radius: 5px; transition: background-color 0.3s ease, color 0.3s ease; display: flex; align-items: center; gap: 8px; }
+        .navbar a.active-cart { background: white; color: #8e44ad; }
+        .cart-icon-container { position: relative; display: flex; align-items: center; }
+        .cart-badge { position: absolute; top: -8px; right: -12px; background-color: #ff4d4d; color: white; border-radius: 50%; width: 22px; height: 22px; font-size: 12px; display: none; align-items: center; justify-content: center; font-weight: bold; border: 2px solid #8e44ad; }
+        .cart-container { max-width: 900px; margin: 2rem auto; padding: 2rem; background: white; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #8e44ad; }
+        .cart-item { display: flex; align-items: center; border-bottom: 1px solid #eee; padding: 1.5rem 0; gap: 1rem; }
+        .cart-item img { width: 100px; height: 100px; object-fit: cover; border-radius: 8px; }
+        .item-details { flex-grow: 1; }
+        .item-details h3 { margin: 0 0 0.5rem; }
+        .item-details p { margin: 0; color: #666; }
+        .item-quantity { font-size: 1.1rem; }
+        .item-price { font-weight: bold; min-width: 100px; text-align: right; font-size: 1.1rem; }
+        .remove-btn { background: #ff4d4d; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer; transition: background-color 0.2s; }
+        .remove-btn:hover { background: #c0392b; }
+        .cart-summary { text-align: right; margin-top: 2rem; border-top: 2px solid #8e44ad; padding-top: 1.5rem; }
+        .cart-summary h2 { font-size: 1.8rem; margin: 0; }
+        .checkout-btn { background-color: #27ae60; color: white; border: none; padding: 1rem 2.5rem; font-size: 1.2rem; border-radius: 5px; cursor: pointer; margin-top: 1rem; transition: background-color 0.2s; }
+        .checkout-btn:hover { background-color: #2ecc71; }
+        #empty-cart-message { text-align: center; padding: 3rem; display: none; } /* Initially hidden */
+        #cart-content { display: block; } /* Initially visible */
+    </style>
+</head>
+<body>
+    <header>
+        <h2>Lunsara</h2>
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="cart.html" class="active-cart">
+                <span class="cart-icon-container">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count" class="cart-badge">0</span>
+                </span>
+                <span>Cart</span>
+            </a>
+        </nav>
+    </header>
+
+    <main class="cart-container">
+        <h1>Your Shopping Cart</h1>
+        
+        <div id="cart-content">
+            <div id="cart-items-container">
+                </div>
+            <div class="cart-summary" id="cart-summary-container">
+                </div>
+        </div>
+
+        <div id="empty-cart-message">
+            <h2>Your cart is empty.</h2>
+            <p><a href="index.html">Continue Shopping</a></p>
+        </div>
+    </main>
+
+    <script src="cart.js"></script>
+    <script>
+        // This script runs only on the cart page
+        document.addEventListener('DOMContentLoaded', () => {
+            displayCartItems();
+        });
+
+        const cartItemsContainer = document.getElementById('cart-items-container');
+        const cartSummaryContainer = document.getElementById('cart-summary-container');
+        const emptyCartMessage = document.getElementById('empty-cart-message');
+        const cartContent = document.getElementById('cart-content');
+
+        function displayCartItems() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            // Clear any previous content
+            cartItemsContainer.innerHTML = ''; 
+            
+            if (cart.length === 0) {
+                // If cart is empty, show the message and hide the content
+                cartContent.style.display = 'none';
+                emptyCartMessage.style.display = 'block';
+            } else {
+                // If cart has items, hide the message and show the content
+                cartContent.style.display = 'block';
+                emptyCartMessage.style.display = 'none';
+                
+                let grandTotal = 0;
+                
+                cart.forEach((item, index) => {
+                    const itemTotal = item.price * item.quantity;
+                    grandTotal += itemTotal;
+                    
+                    const itemElement = document.createElement('div');
+                    itemElement.classList.add('cart-item');
+                    itemElement.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="item-details">
+                            <h3>${item.name}</h3>
+                            <p>Price: ₹${item.price.toLocaleString()}</p>
+                        </div>
+                        <div class="item-quantity">
+                            <span>Qty: ${item.quantity}</span>
+                        </div>
+                        <div class="item-price">₹${itemTotal.toLocaleString()}</div>
+                        <button class="remove-btn" onclick="removeItemFromCart(${index})">Remove</button>
+                    `;
+                    cartItemsContainer.appendChild(itemElement);
+                });
+
+                // Display the total price and checkout button
+                cartSummaryContainer.innerHTML = `
+                    <h2>Total: ₹${grandTotal.toLocaleString()}</h2>
+                    <button class="checkout-btn" onclick="alert('Checkout not implemented yet!')">Proceed to Checkout</button>
+                `;
+            }
+        }
+
+        function removeItemFromCart(itemIndex) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            // Remove the item from the array at the specified index
+            cart.splice(itemIndex, 1); 
+            
+            // Save the modified cart back to local storage
+            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            // Refresh the displayed items and the header icon
+            displayCartItems();
+            updateCartIcon();
+        }
+    </script>
+</body>
+</html>

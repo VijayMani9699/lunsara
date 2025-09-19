@@ -7,6 +7,8 @@
   
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
   
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
   <style>
     *, *::before, *::after {
         box-sizing: border-box;
@@ -53,18 +55,45 @@
     }
 
     .navbar a {
-        color: white;
-        text-decoration: none;
-        padding: 8px 15px;
-        border-radius: 5px;
-        transition: background-color 0.3s ease, color 0.3s ease;
-    }
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    /* --- Add these two lines --- */
+    display: flex;
+    align-items: center;
+}
 
     .navbar a:hover {
         background-color: white;
         color: #8e44ad;
     }
 
+    .cart-icon-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-right: 8px; /* Adds some space between the icon and the word "Cart" */
+}
+
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -12px;
+    background-color: #ff4d4d;
+    color: white;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border: 2px solid #8e44ad;
+}
+        
     .hero {
       background: url('images/background2.jpg') no-repeat center center/cover;
       background-attachment: fixed;
@@ -336,6 +365,13 @@
         <a href="#products">Products</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
+        <a href="cart.html" class="cart-nav-link cart-link">
+          <span class="cart-icon-container">
+              <i class="fas fa-shopping-cart"></i>
+              <span id="cart-count" class="cart-badge">0</span>
+          </span>
+          <span>Cart</span>
+      </a>
     </nav>
   </header>
 
@@ -435,6 +471,7 @@
     </div>
   </footer>
 
+  <script src="cart.js"></script>
   <script>
     const cards = document.querySelectorAll('.product-card');
 

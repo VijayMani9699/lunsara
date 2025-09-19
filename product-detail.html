@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kanchipuram Silk Saree | Lunsara</title>
+    
+    <!-- Google Fonts for better typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            background-color: #8e44ad;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        header h2 {
+            margin: 0;
+        }
+        
+        .navbar {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .navbar a:hover {
+            background-color: white;
+            color: #8e44ad;
+        }
+        
+        /* New Styles for Cart Badge */
+        .cart-icon-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -12px;
+            background-color: #ff4d4d;
+            color: white;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border: 2px solid #8e44ad;
+        }
+
+        /* Main Product Container */
+        .product-detail-container {
+            display: flex;
+            flex-direction: row;
+            padding: 4rem 2rem;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* Upgraded Product Gallery */
+        .product-gallery {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-slider-wrapper {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .image-slider-wrapper img {
+            width: 100%;
+            flex-shrink: 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #333;
+            border: none;
+            width: 45px;
+            height: 45px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10;
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slider-arrow.left { left: 15px; }
+        .slider-arrow.right { right: 15px; }
+        
+        .page-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .indicator-dot {
+            width: 10px;
+            height: 10px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .indicator-dot.active {
+            background-color: #8e44ad;
+        }
+
+        /* Product Info Section */
+        .product-info {
+            flex: 1;
+            padding-left: 2rem;
+        }
+
+        .product-info h2 {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 2.8rem;
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        .product-price {
+            font-size: 2rem;
+            color: #8e44ad;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-description, .product-materials {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-actions button {
+            background-color: #8e44ad;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-right: 1rem;
+            font-weight: bold;
+        }
+
+        .product-actions button:hover {
+            background-color: #72338a;
+        }
+
+        /* Related Products Section */
+        .related-products-section {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 2rem auto;
+            text-align: center;
+        }
+
+        .related-products-section h2 {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 3rem;
+        }
+
+        .related-products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .related-product-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 1rem;
+            border: 1px solid #eee;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .related-product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .related-product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .related-product-card h3 {
+            font-size: 1.2rem;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .related-product-card p {
+            font-weight: bold;
+            color: #8e44ad;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            padding: 1rem 2rem;
+            margin: 2rem auto;
+            width: 90%;
+            max-width: 1200px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        
+        .footer-content {
+            text-align: center;
+            color: white;
+            font-size: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .related-products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .product-detail-container {
+                flex-direction: column;
+                padding: 2rem 1rem;
+                gap: 2rem;
+            }
+            .product-info {
+                padding-left: 0;
+                text-align: center;
+            }
+            .product-actions {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
+            .product-info h2 { font-size: 2.2rem; }
+            .product-price { font-size: 1.8rem; }
+        }
+
+        @media (max-width: 576px) {
+            .related-products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h2>Lunsara</h2>
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <!-- THIS IS THE UPDATED CART LINK -->
+            <a href="cart.html" class="cart-nav-link cart-link">
+                <span class="cart-icon-container">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count" class="cart-badge">0</span>
+                </span>
+                <span>Cart</span>
+            </a>
+        </nav>
+    </header>
+
+    <main class="product-detail-container">
+        <div class="product-gallery">
+            <div class="image-slider-wrapper">
+                <!-- Images will be added by JavaScript -->
+            </div>
+            <button class="slider-arrow left" onclick="prevImage()">&#10094;</button>
+            <button class="slider-arrow right" onclick="nextImage()">&#10095;</button>
+            <div class="page-indicators">
+                <!-- Indicator dots will be added by JavaScript -->
+            </div>
+        </div>
+        <div class="product-info">
+            <h2>Kanchipuram Silk Saree</h2>
+            <p class="product-price">₹12,500</p>
+            <p class="product-description">A luxurious, handwoven Kanchipuram silk saree with intricate zari work. Perfect for weddings and special occasions. </p>
+            <p class="product-materials"><strong>Material:</strong> Pure Silk, Golden Zari</p>
+            <div class="product-actions">
+                <button onclick="addToCart('Kanchipuram Silk Saree', 12500, 'images/silk_saree_collection.jpg')">Add to Cart</button>
+                <button onclick="buyNow()">Buy Now</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Related Products Section -->
+    <section class="related-products-section">
+        <h2>You Might Also Like</h2>
+        <div class="related-products-grid">
+            <a href="#" class="related-product-card">
+                <img src="images/printed_saree_collection.jpg" alt="Printed Saree">
+                <h3>Printed Saree</h3>
+                <p>₹2,800</p>
+            </a>
+            <a href="#" class="related-product-card">
+                <img src="images/lungi_collection.jpg" alt="Traditional Lungi">
+                <h3>Traditional Lungi</h3>
+                <p>₹950</p>
+            </a>
+            <a href="#" class="related-product-card">
+                <img src="images/silk_saree.jpg" alt="Red Silk Saree">
+                <h3>Red Silk Saree</h3>
+                <p>₹15,000</p>
+            </a>
+            <a href="#" class="related-product-card">
+                <img src="images/printed_saree.jpg" alt="Designer Printed Saree">
+                <h3>Designer Printed Saree</h3>
+                <p>₹3,200</p>
+            </a>
+        </div>
+    </section>
+
+    <footer>
+      <div class="footer-content">
+        <p>&copy; 2025 Lunsara. All Rights Reserved.</p>
+      </div>
+    </footer>
+
+    <script src="cart.js"></script>
+    <script>
+        // --- UPGRADED IMAGE GALLERY SCRIPT ---
+        const galleryImages = [
+            'images/silk_saree_collection.jpg',
+            'images/silk_saree.jpg',
+            'images/background1.jpg',
+            'images/background2.jpg'
+        ];
+
+        let currentImageIndex = 0;
+        const sliderWrapper = document.querySelector('.image-slider-wrapper');
+        const indicatorsContainer = document.querySelector('.page-indicators');
+
+        function initializeGallery() {
+            sliderWrapper.innerHTML = '';
+            indicatorsContainer.innerHTML = '';
+            galleryImages.forEach((src, index) => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = `Product image ${index + 1}`;
+                sliderWrapper.appendChild(img);
+                const dot = document.createElement('div');
+                dot.classList.add('indicator-dot');
+                dot.onclick = () => showImage(index);
+                indicatorsContainer.appendChild(dot);
+            });
+            showImage(0);
+        }
+
+        function showImage(index) {
+            currentImageIndex = index;
+            sliderWrapper.style.transform = `translateX(${-currentImageIndex * 100}%)`;
+            document.querySelectorAll('.indicator-dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentImageIndex);
+            });
+        }
+
+        function nextImage() {
+            showImage((currentImageIndex + 1) % galleryImages.length);
+        }
+
+        function prevImage() {
+            showImage((currentImageIndex - 1 + galleryImages.length) % galleryImages.length);
+        }
+        
+        document.addEventListener('DOMContentLoaded', initializeGallery);
+    </script>
+</body>
+</html>
+
