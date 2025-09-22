@@ -31,13 +31,18 @@
 
         header h2 {
             margin: 0;
+            font-size: 32px;
+            font-weight: 700;
+            color: white;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            font-family: 'Cinzel Decorative', serif;
         }
         
-        /* Styles for the navigation bar */
         .navbar {
             display: flex;
             gap: 10px;
-            align-items: center; /* Ensures vertical alignment */
+            align-items: center;
         }
 
         .navbar a {
@@ -48,7 +53,6 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
         
-        /* This is the new hover effect */
         .navbar a:hover {
             background-color: white;
             color: #8e44ad;
@@ -58,6 +62,29 @@
             display: flex;
             align-items: center;
             gap: 8px;
+        }
+
+        .cart-icon-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -12px;
+            background-color: #ff6161;
+            color: white;
+            border-radius: 10px;
+            width: 20px;
+            height: 20px;
+            font-size: 11px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            border: 1px solid #8e44ad;
         }
         
         .product-grid-container {
@@ -90,6 +117,8 @@
             padding: 1.5rem;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             border: 1px solid #8e44ad;
+            display: flex; /* Added for layout control */
+            flex-direction: column; /* Stacks items vertically */
         }
         
         .product-item-card:hover {
@@ -97,21 +126,18 @@
             box-shadow: 0 8px 25px rgba(142, 68, 173, 0.3);
         }
 
-        .product-image-placeholder {
+        /* CHANGED: Styles for the new <img> element */
+        .product-image {
             width: 100%;
             height: 250px;
-            background-color: #e0e0e0;
+            object-fit: cover; /* This is key to prevent image stretching */
             border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #888;
-            font-weight: bold;
+            margin-bottom: 1rem;
         }
         
         .product-item-card h3 {
             color: #333;
-            margin-top: 1rem;
+            margin-top: auto; /* Pushes title to the bottom if cards have different content heights */
             margin-bottom: 0.5rem;
         }
         
@@ -131,9 +157,119 @@
             color: white;
         }
         
-        @media (max-width: 1024px) { .product-grid { grid-template-columns: repeat(3, 1fr); } }
-        @media (max-width: 768px) { header { flex-direction: column; gap: 1rem; } .product-grid { grid-template-columns: repeat(2, 1fr); } .product-grid-container h2 { font-size: 2rem; } .product-image-placeholder { height: 160px; } }
-        @media (max-width: 480px) { .product-grid-container { padding: 2rem 1rem; } .product-grid-container h2 { font-size: 1.8rem; } }
+        /* Enhanced Responsive Design */
+        @media (max-width: 1024px) {
+            .product-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.5rem;
+            }
+        }
+
+        /* Mobile Header Styles */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 0.8rem 1.5rem;
+            }
+
+            header h2 {
+                font-size: 28px;
+                font-weight: 700;
+            }
+
+            .navbar {
+                gap: 16px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .navbar a {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+
+            .product-grid-container {
+                padding: 2rem 1rem;
+            }
+
+            .product-grid-container h2 {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .product-image {
+                height: 200px;
+            }
+
+            .product-item-card {
+                padding: 1rem;
+            }
+
+            .product-item-card h3 {
+                font-size: 14px;
+            }
+
+            .product-item-card p {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 0.6rem 1rem;
+            }
+
+            header h2 {
+                font-size: 24px;
+                font-weight: 700;
+            }
+
+            .navbar {
+                gap: 12px;
+            }
+
+            .navbar a {
+                padding: 4px 8px;
+                font-size: 12px;
+            }
+
+            .product-grid-container {
+                padding: 1.5rem 0.5rem;
+            }
+
+            .product-grid-container h2 {
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+
+            .product-image {
+                height: 180px;
+            }
+
+            .product-item-card {
+                padding: 0.8rem;
+            }
+
+            .product-item-card h3 {
+                font-size: 13px;
+                margin-top: 0.5rem;
+            }
+
+            .product-item-card p {
+                font-size: 11px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -142,11 +278,12 @@
         <h2>Lunsara</h2>
         <nav class="navbar">
             <a href="index.html">Home</a>
-            <a href="index.html#about">About</a>
-            <a href="index.html#contact">Contact</a>
-            <a href="cart.html" class="cart-link cart-nav-link" style="display: none;">
-                <i class="fas fa-shopping-cart"></i>
-                <span>Cart (<span id="cart-count">0</span>)</span>
+            <a href="cart.html" class="cart-link">
+                <span class="cart-icon-container">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count" class="cart-badge">0</span>
+                </span>
+                <span>Cart</span>
             </a>
         </nav>
     </header>
@@ -154,18 +291,90 @@
     <main class="product-grid-container">
         <h2>Our Lungi Collection</h2>
         <div class="product-grid">
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;"><div class="product-item-card"><div class="product-image-placeholder">Image</div><h3>Design #1</h3><p>Click for details</p></div></a>
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;"><div class="product-item-card"><div class="product-image-placeholder">Image</div><h3>Design #2</h3><p>Click for details</p></div></a>
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;"><div class="product-item-card"><div class="product-image-placeholder">Image</div><h3>Design #3</h3><p>Click for details</p></div></a>
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;"><div class="product-item-card"><div class="product-image-placeholder">Image</div><h3>Design #4</h3><p>Click for details</p></div></a>
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;"><div class="product-item-card"><div class="product-image-placeholder">Image</div><h3>Design #5</h3><p>Click for details</p></div></a>
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;"><div class="product-item-card"><div class="product-image-placeholder">Image</div><h3>Design #6</h3><p>Click for details</p></div></a>
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;"><div class="product-item-card"><div class="product-image-placeholder">Image</div><h3>Design #7</h3><p>Click for details</p></div></a>
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;"><div class="product-item-card"><div class="product-image-placeholder">Image</div><h3>Design #8</h3><p>Click for details</p></div></a>
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;"><div class="product-item-card"><div class="product-image-placeholder">Image</div><h3>Design #9</h3><p>Click for details</p></div></a>
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;"><div class="product-item-card"><div class="product-image-placeholder">Image</div><h3>Design #10</h3><p>Click for details</p></div></a>
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;"><div class="product-item-card"><div class="product-image-placeholder">Image</div><h3>Design #11</h3><p>Click for details</p></div></a>
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;"><div class="product-item-card"><div class="product-image-placeholder">Image</div><h3>Design #12</h3><p>Click for details</p></div></a>
+            <a href="images/" style="text-decoration: none; color: inherit;">
+                <div class="product-item-card">
+                    <img src="images/lungi_collection.jpg" alt="Classic blue checkered lungi" class="product-image">
+                    <h3>The Madrasi Check</h3>
+                    <p>Click for details</p>
+                </div>
+            </a>
+            <a href="product-detail.html" style="text-decoration: none; color: inherit;">
+                <div class="product-item-card">
+                    <img src="images/lungi_collection.jpg" alt="Elegant striped lungi" class="product-image">
+                    <h3>Royal Bengal Stripe</h3>
+                    <p>Click for details</p>
+                </div>
+            </a>
+            <a href="product-detail.html" style="text-decoration: none; color: inherit;">
+                <div class="product-item-card">
+                    <img src="images/lungi_collection.jpg" alt="Minimalist white lungi with border" class="product-image">
+                    <h3>Kerala Temple Border</h3>
+                    <p>Click for details</p>
+                </div>
+            </a>
+            <a href="product-detail.html" style="text-decoration: none; color: inherit;">
+                <div class="product-item-card">
+                    <img src="images/lungi_collection.jpg" alt="Vibrant green and yellow lungi" class="product-image">
+                    <h3>Emerald Festive Weave</h3>
+                    <p>Click for details</p>
+                </div>
+            </a>
+            <a href="product-detail.html" style="text-decoration: none; color: inherit;">
+                <div class="product-item-card">
+                    <img src="images/lungi_collection.jpg" alt="Rich maroon lungi" class="product-image">
+                    <h3>Maroon Comfort Cotton</h3>
+                    <p>Click for details</p>
+                </div>
+            </a>
+            <a href="product-detail.html" style="text-decoration: none; color: inherit;">
+                <div class="product-item-card">
+                    <img src="images/lungi_collection.jpg" alt="Dark blue lungi" class="product-image">
+                    <h3>Midnight Indigo</h3>
+                    <p>Click for details</p>
+                </div>
+            </a>
+            <a href="product-detail.html" style="text-decoration: none; color: inherit;">
+                <div class="product-item-card">
+                    <img src="images/lungi_collection.jpg" alt="Brown patterned lungi" class="product-image">
+                    <h3>Earthy Batik Print</h3>
+                    <p>Click for details</p>
+                </div>
+            </a>
+            <a href="product-detail.html" style="text-decoration: none; color: inherit;">
+                <div class="product-item-card">
+                    <img src="images/lungi_collection.jpg" alt="Light blue and white lungi" class="product-image">
+                    <h3>Azure Sky Cotton</h3>
+                    <p>Click for details</p>
+                </div>
+            </a>
+            <a href="product-detail.html" style="text-decoration: none; color: inherit;">
+                <div class="product-item-card">
+                    <img src="images/lungi_collection.jpg" alt="Crimson red checkered lungi" class="product-image">
+                    <h3>Crimson Classic</h3>
+                    <p>Click for details</p>
+                </div>
+            </a>
+            <a href="product-detail.html" style="text-decoration: none; color: inherit;">
+                <div class="product-item-card">
+                    <img src="images/lungi_collection.jpg" alt="Grey and black formal lungi" class="product-image">
+                    <h3>Charcoal Silk Blend</h3>
+                    <p>Click for details</p>
+                </div>
+            </a>
+            <a href="product-detail.html" style="text-decoration: none; color: inherit;">
+                <div class="product-item-card">
+                    <img src="images/lungi_collection.jpg" alt="Orange and gold lungi" class="product-image">
+                    <h3>Saffron Daylight</h3>
+                    <p>Click for details</p>
+                </div>
+            </a>
+            <a href="product-detail.html" style="text-decoration: none; color: inherit;">
+                <div class="product-item-card">
+                    <img src="images/lungi_collection.jpg" alt="Purple patterned lungi" class="product-image">
+                    <h3>Jaipuri Block Print</h3>
+                    <p>Click for details</p>
+                </div>
+            </a>
         </div>
     </main>
     
@@ -174,5 +383,22 @@
     </footer>
 
     <script src="cart.js"></script>
+    <script>
+        // Update cart badge when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartBadge();
+        });
+
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const badge = document.getElementById('cart-count');
+
+            if (badge) {
+                badge.textContent = totalItems;
+                badge.style.display = totalItems > 0 ? 'flex' : 'none';
+            }
+        }
+    </script>
 </body>
 </html>

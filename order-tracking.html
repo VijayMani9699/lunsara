@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Order Tracking | Lunsara</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f1f3f6;
+            color: #212121;
+            line-height: 1.4;
+        }
+
+        /* Header */
+        header {
+            background: #8e44ad;
+            color: white;
+            padding: 12px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header h2 {
+            margin: 0;
+            font-size: 32px;
+            font-weight: 700;
+            color: white;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            font-family: 'Cinzel Decorative', serif;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Main Container */
+        .tracking-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        /* Order Tracking Header */
+        .tracking-header {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .tracking-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #212121;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .tracking-subtitle {
+            font-size: 16px;
+            color: #878787;
+            margin-bottom: 20px;
+        }
+
+        .order-search {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .search-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #d7d7d7;
+            border-radius: 10px;
+            font-size: 14px;
+        }
+
+        .search-btn {
+            background: #8e44ad;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .search-btn:hover {
+            background: #9356ad;
+            color: white;
+        }
+
+        /* Order Cards */
+        .orders-container {
+            display: grid;
+            gap: 20px;
+        }
+
+        .order-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .order-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .order-header {
+            background: #f8f9fa;
+            padding: 16px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .order-id {
+            font-size: 16px;
+            font-weight: 600;
+            color: #212121;
+        }
+
+        .order-date {
+            font-size: 14px;
+            color: #878787;
+        }
+
+        .order-status {
+            background: #388e3c;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-delivered { background: #388e3c; }
+        .status-shipped { background: #8e44ad; }
+        .status-processing { background: #ffc107; color: #212121; }
+        .status-cancelled { background: #dc3545; }
+
+        .order-body {
+            padding: 20px;
+        }
+
+        .order-items {
+            margin-bottom: 20px;
+        }
+
+        .order-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .order-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 16px;
+        }
+
+        .order-item-details {
+            flex-grow: 1;
+        }
+
+        .order-item-details h4 {
+            font-size: 14px;
+            font-weight: 500;
+            color: #212121;
+            margin: 0 0 4px 0;
+            line-height: 1.3;
+        }
+
+        .order-item-details .quantity {
+            font-size: 12px;
+            color: #878787;
+        }
+
+        .order-item-price {
+            font-size: 14px;
+            font-weight: 600;
+            color: #212121;
+        }
+
+        /* Tracking Timeline */
+        .tracking-timeline {
+            margin-top: 20px;
+        }
+
+        .timeline-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #212121;
+            margin-bottom: 16px;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .timeline-item:not(:last-child)::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 24px;
+            width: 2px;
+            height: calc(100% - 8px);
+            background: #f0f0f0;
+        }
+
+        .timeline-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .timeline-icon.active {
+            background: #8e44ad;
+            color: white;
+        }
+
+        .timeline-icon.completed {
+            background: #388e3c;
+            color: white;
+        }
+
+        .timeline-content {
+            flex-grow: 1;
+        }
+
+        .timeline-content h4 {
+            font-size: 14px;
+            font-weight: 500;
+            color: #212121;
+            margin: 0 0 4px 0;
+        }
+
+        .timeline-content p {
+            font-size: 12px;
+            color: #878787;
+            margin: 0;
+        }
+
+        .timeline-content .date {
+            font-size: 11px;
+            color: #999;
+        }
+
+        /* Order Summary */
+        .order-summary {
+            background: #f8f9fa;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .summary-row.total {
+            border-top: 1px solid #f0f0f0;
+            padding-top: 12px;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .empty-state i {
+            font-size: 64px;
+            color: #d7d7d7;
+            margin-bottom: 20px;
+        }
+
+        .empty-state h3 {
+            font-size: 20px;
+            color: #212121;
+            margin-bottom: 10px;
+        }
+
+        .empty-state p {
+            color: #878787;
+            margin-bottom: 20px;
+        }
+
+        .shop-now-btn {
+            background: #8e44ad;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .shop-now-btn:hover {
+            background: #9356ad;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .tracking-container {
+                padding: 0 12px;
+            }
+
+            .tracking-header {
+                padding: 20px;
+            }
+
+            .tracking-title {
+                font-size: 24px;
+            }
+
+            .search-group {
+                flex-direction: column;
+            }
+
+            header h2 {
+                font-size: 28px;
+                font-weight: 700;
+            }
+
+            .order-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .timeline-item {
+                padding-left: 0;
+            }
+
+            .timeline-icon {
+                margin-right: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 8px 12px;
+            }
+
+            header h2 {
+                font-size: 24px;
+                font-weight: 700;
+            }
+
+            .tracking-header {
+                padding: 16px;
+            }
+
+            .tracking-title {
+                font-size: 20px;
+            }
+
+            .order-body {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>Lunsara</h2>
+    </header>
+
+    <main class="tracking-container">
+        <div class="tracking-header">
+            <h1 class="tracking-title">Order Tracking</h1>
+            <p class="tracking-subtitle">Track your orders and view delivery status</p>
+
+            <div class="order-search">
+                <div class="search-group">
+                    <input type="text" class="search-input" placeholder="Enter order ID or tracking number" id="searchInput">
+                    <button class="search-btn" onclick="searchOrder()">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
+                <small style="color: #878787;">Example: LUN1726995600000</small>
+            </div>
+        </div>
+
+        <div class="orders-container" id="ordersContainer">
+            <!-- Orders will be dynamically loaded here -->
+        </div>
+    </main>
+
+    <script>
+        // Sample order data - In real app, this would come from a database
+        const sampleOrders = [
+            {
+                id: 'LUN1726995600000',
+                date: '2024-09-22',
+                status: 'delivered',
+                items: [
+                    { name: 'Kanchipuram Silk Saree', quantity: 1, price: 12500, image: 'images/silk_saree.jpg' },
+                    { name: 'Traditional Lungi', quantity: 2, price: 950, image: 'images/lungi_collection.jpg' }
+                ],
+                total: 14400,
+                deliveryAddress: '123 Main St, Podatur Pettai, Tamil Nadu - 631208',
+                tracking: [
+                    { status: 'Order Placed', date: '2024-09-22 10:30 AM', completed: true },
+                    { status: 'Processing', date: '2024-09-22 02:15 PM', completed: true },
+                    { status: 'Shipped', date: '2024-09-23 09:45 AM', completed: true },
+                    { status: 'Out for Delivery', date: '2024-09-24 08:20 AM', completed: true },
+                    { status: 'Delivered', date: '2024-09-24 03:30 PM', completed: true }
+                ]
+            },
+            {
+                id: 'LUN1726900000000',
+                date: '2024-09-20',
+                status: 'shipped',
+                items: [
+                    { name: 'Printed Saree Collection', quantity: 1, price: 2800, image: 'images/printed_saree_collection.jpg' }
+                ],
+                total: 2800,
+                deliveryAddress: '456 Market Rd, Chennai, Tamil Nadu - 600001',
+                tracking: [
+                    { status: 'Order Placed', date: '2024-09-20 11:20 AM', completed: true },
+                    { status: 'Processing', date: '2024-09-20 04:30 PM', completed: true },
+                    { status: 'Shipped', date: '2024-09-21 10:15 AM', completed: true },
+                    { status: 'Out for Delivery', date: 'Expected: 2024-09-25', completed: false },
+                    { status: 'Delivered', date: 'Expected: 2024-09-25', completed: false }
+                ]
+            },
+            {
+                id: 'LUN1726800000000',
+                date: '2024-09-18',
+                status: 'processing',
+                items: [
+                    { name: 'Designer Printed Saree', quantity: 1, price: 3200, image: 'images/printed_saree.jpg' },
+                    { name: 'Handloom Lungi', quantity: 1, price: 1200, image: 'images/handloom_lungi.jpg' }
+                ],
+                total: 4400,
+                deliveryAddress: '789 Temple St, Madurai, Tamil Nadu - 625001',
+                tracking: [
+                    { status: 'Order Placed', date: '2024-09-18 09:45 AM', completed: true },
+                    { status: 'Processing', date: 'In Progress', completed: false },
+                    { status: 'Shipped', date: 'Expected: 2024-09-26', completed: false },
+                    { status: 'Out for Delivery', date: 'Expected: 2024-09-27', completed: false },
+                    { status: 'Delivered', date: 'Expected: 2024-09-27', completed: false }
+                ]
+            }
+        ];
+
+        // Load orders on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadOrders();
+        });
+
+        /**
+         * Loads and displays all orders
+         */
+        function loadOrders() {
+            const container = document.getElementById('ordersContainer');
+
+            if (sampleOrders.length === 0) {
+                showEmptyState();
+                return;
+            }
+
+            container.innerHTML = '';
+
+            sampleOrders.forEach(order => {
+                const orderCard = createOrderCard(order);
+                container.appendChild(orderCard);
+            });
+        }
+
+        /**
+         * Creates an order card element
+         */
+        function createOrderCard(order) {
+            const cardDiv = document.createElement('div');
+            cardDiv.className = 'order-card';
+
+            const statusClass = `status-${order.status}`;
+            const total = order.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            cardDiv.innerHTML = `
+                <div class="order-header">
+                    <div>
+                        <div class="order-id">Order ${order.id}</div>
+                        <div class="order-date">Placed on ${formatDate(order.date)}</div>
+                    </div>
+                    <div class="order-status ${statusClass}">${capitalizeFirst(order.status)}</div>
+                </div>
+
+                <div class="order-body">
+                    <div class="order-items">
+                        ${order.items.map(item => `
+                            <div class="order-item">
+                                <img src="${item.image}" alt="${item.name}">
+                                <div class="order-item-details">
+                                    <h4>${item.name}</h4>
+                                    <div class="quantity">Quantity: ${item.quantity}</div>
+                                </div>
+                                <div class="order-item-price">₹${(item.price * item.quantity).toLocaleString()}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    <div class="tracking-timeline">
+                        <div class="timeline-title">Tracking Information</div>
+                        ${createTimeline(order.tracking)}
+                    </div>
+
+                    <div class="order-summary">
+                        <div class="summary-row">
+                            <span>Delivery Address</span>
+                            <span>${order.deliveryAddress}</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total Amount</span>
+                            <span>₹${total.toLocaleString()}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            return cardDiv;
+        }
+
+        /**
+         * Creates timeline HTML
+         */
+        function createTimeline(tracking) {
+            return tracking.map((step, index) => `
+                <div class="timeline-item">
+                    <div class="timeline-icon ${step.completed ? 'completed' : index === 0 ? 'active' : ''}">
+                        <i class="fas fa-${getTimelineIcon(step.status)}"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h4>${step.status}</h4>
+                        <p class="date">${step.date}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        /**
+         * Gets appropriate icon for timeline step
+         */
+        function getTimelineIcon(status) {
+            const icons = {
+                'Order Placed': 'clipboard-check',
+                'Processing': 'cog',
+                'Shipped': 'truck',
+                'Out for Delivery': 'box',
+                'Delivered': 'check-circle'
+            };
+            return icons[status] || 'circle';
+        }
+
+        /**
+         * Searches for a specific order
+         */
+        function searchOrder() {
+            const searchTerm = document.getElementById('searchInput').value.trim();
+
+            if (!searchTerm) {
+                loadOrders();
+                return;
+            }
+
+            const filteredOrders = sampleOrders.filter(order =>
+                order.id.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+
+            const container = document.getElementById('ordersContainer');
+            container.innerHTML = '';
+
+            if (filteredOrders.length === 0) {
+                showEmptyState('No orders found matching your search.');
+                return;
+            }
+
+            filteredOrders.forEach(order => {
+                const orderCard = createOrderCard(order);
+                container.appendChild(orderCard);
+            });
+        }
+
+        /**
+         * Shows empty state
+         */
+        function showEmptyState(message = 'No orders found.') {
+            const container = document.getElementById('ordersContainer');
+            container.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-box-open"></i>
+                    <h3>No Orders Yet</h3>
+                    <p>${message}</p>
+                    <a href="index.html" class="shop-now-btn">Continue Shopping</a>
+                </div>
+            `;
+        }
+
+        /**
+         * Formats date for display
+         */
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-IN', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            });
+        }
+
+        /**
+         * Capitalizes first letter of a string
+         */
+        function capitalizeFirst(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
+        // Search on Enter key
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchOrder();
+            }
+        });
+    </script>
+</body>
+</html>
