@@ -205,20 +205,185 @@
     }
 
     #contact {
-      background-color: #eee2f4;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
       padding: 4rem 2rem;
-      border-radius: 15px;
+      border-radius: 20px;
       color: #333;
-      width: 90%;
-      max-width: 1200px;
+      width: 95%;
+      max-width: 1400px;
       margin: 2rem auto;
+      box-shadow: 0 10px 30px rgba(142, 68, 173, 0.1);
+    }
+
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .contact-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-left: 4px solid #8e44ad;
+      opacity: 0;
+      transform: translateY(30px) scale(0.95);
+      transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .contact-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(142, 68, 173, 0.15);
+    }
+
+    .contact-card.animate-in {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .contact-form {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      opacity: 0;
+      transform: translateY(30px) scale(0.95);
+      transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .contact-form.animate-in {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .contact-card-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .contact-icon {
+      background: linear-gradient(135deg, #8e44ad, #9b59b6);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .contact-card h3 {
+      color: #8e44ad;
+      margin: 0;
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    .contact-card p {
+      margin: 0.5rem 0 0 0;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .contact-form {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .contact-form h3 {
+      color: #8e44ad;
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
       text-align: center;
     }
-    
-    .contact-details {
-      display: inline-block;
-      text-align: left;
-      margin-top: 1rem;
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #333;
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.8rem;
+      border: 2px solid #e1e5e9;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #8e44ad;
+      box-shadow: 0 0 0 3px rgba(142, 68, 173, 0.1);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .submit-btn {
+      background: linear-gradient(135deg, #8e44ad, #9b59b6);
+      color: white;
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      width: 100%;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(142, 68, 173, 0.3);
+    }
+
+
+    @media (max-width: 768px) {
+      .contact-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      #contact {
+        padding: 2rem 1rem;
+      }
     }
 
     footer {
@@ -365,6 +530,7 @@
         <a href="#products">Products</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
+        <a href="order-tracking.html">Orders</a>
         <a href="cart.html" class="cart-nav-link cart-link">
           <span class="cart-icon-container">
               <i class="fas fa-shopping-cart"></i>
@@ -457,11 +623,83 @@
   </section>
 
   <section id="contact" class="section">
-    <h2>Contact Us</h2>
-    <div class="contact-details">
-      <p>Email: vijayannr07@gmail.com</p>
-      <p>Phone: +91 7904955956, +91 9344805404</p>
-      <p>Address: Podatur Pettai, Tamil Nadu, India</p>
+    <h2>Get in Touch</h2>
+    <p style="text-align: center; color: #666; margin-bottom: 3rem; font-size: 1.1rem;">
+      We'd love to hear from you! Reach out to us for inquiries, custom orders, or any questions about our handwoven collections.
+    </p>
+
+    <div class="contact-container">
+      <div class="contact-info">
+        <div class="contact-card">
+          <div class="contact-card-header">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <h3>Email Us</h3>
+          </div>
+          <p><strong>General Inquiries:</strong><br>info@lunsara.com</p>
+          <p><strong>Business:</strong><br>vijayannr07@gmail.com</p>
+          <p style="font-size: 0.9rem; color: #777; margin-top: 0.5rem;">
+            We typically respond within 24 hours
+          </p>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-card-header">
+            <div class="contact-icon">
+              <i class="fas fa-phone"></i>
+            </div>
+            <h3>Call Us</h3>
+          </div>
+          <p><strong>Customer Support:</strong><br>+91 7904955956</p>
+          <p><strong>Business Inquiries:</strong><br>+91 9344805404</p>
+          <p style="font-size: 0.9rem; color: #777; margin-top: 0.5rem;">
+            Available Monday - Saturday, 9 AM - 7 PM IST
+          </p>
+        </div>
+
+      </div>
+
+      <div class="contact-form">
+        <h3>Send us a Message</h3>
+        <form id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">First Name *</label>
+              <input type="text" id="firstName" name="firstName" required>
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name *</label>
+              <input type="text" id="lastName" name="lastName" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone">
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Subject *</label>
+            <input type="text" id="subject" name="subject" required>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message *</label>
+            <textarea id="message" name="message" required placeholder="Tell us about your inquiry, custom order requirements, or any questions..."></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            <i class="fas fa-paper-plane" style="margin-right: 0.5rem;"></i>
+            Send Message
+          </button>
+        </form>
+      </div>
     </div>
   </section>
 
@@ -505,6 +743,83 @@
 
     window.addEventListener('scroll', animateCraftItems);
     window.addEventListener('load', animateCraftItems);
+
+    // Contact section animations
+    const contactCards = document.querySelectorAll('.contact-card');
+    const contactForm = document.querySelector('.contact-form');
+
+    function animateContactElements() {
+      // Animate contact cards
+      contactCards.forEach((card, index) => {
+        if (isInViewport(card)) {
+          setTimeout(() => {
+            card.classList.add('animate-in');
+          }, index * 200); // Stagger the animations
+        }
+      });
+
+      // Animate contact form
+      if (isInViewport(contactForm)) {
+        setTimeout(() => {
+          contactForm.classList.add('animate-in');
+        }, 400); // Animate form after cards
+      }
+    }
+
+    window.addEventListener('scroll', animateContactElements);
+    window.addEventListener('load', animateContactElements);
+
+    // Contact form functionality
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Get form data
+      const formData = new FormData(this);
+      const firstName = document.getElementById('firstName').value;
+      const lastName = document.getElementById('lastName').value;
+      const email = document.getElementById('email').value;
+      const subject = document.getElementById('subject').value;
+      const message = document.getElementById('message').value;
+
+      // Simple validation
+      if (!firstName || !lastName || !email || !subject || !message) {
+        alert('Please fill in all required fields.');
+        return;
+      }
+
+      // Show success message
+      const submitBtn = this.querySelector('.submit-btn');
+      const originalText = submitBtn.innerHTML;
+      submitBtn.innerHTML = '<i class="fas fa-check" style="margin-right: 0.5rem;"></i>Message Sent!';
+      submitBtn.style.background = 'linear-gradient(135deg, #27ae60, #2ecc71)';
+
+      // Reset form after 2 seconds
+      setTimeout(() => {
+        this.reset();
+        submitBtn.innerHTML = originalText;
+        submitBtn.style.background = 'linear-gradient(135deg, #8e44ad, #9b59b6)';
+      }, 2000);
+
+      // In a real application, you would send the data to a server here
+      console.log('Form submitted:', {
+        firstName,
+        lastName,
+        email,
+        subject,
+        message
+      });
+    });
+
+    // Add smooth scroll behavior for contact links
+    document.querySelectorAll('a[href="#contact"]').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('contact').scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      });
+    });
   </script>
 
 </body>

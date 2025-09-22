@@ -5,62 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kanchipuram Silk Saree | Lunsara</title>
     
-    <!-- Google Fonts for better typography -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome for icons -->
+    <!-- Font Awesome for the cart icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
     <style>
-        *, *::before, *::after {
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Lato', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f1f3f6;
+            color: #212121;
+            line-height: 1.4;
         }
 
+        /* Header Styles */
         header {
-            background-color: #8e44ad;
+            background: #8e44ad;
             color: white;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         
-        header h2 {
-            margin: 0;
-        }
-        
-        .navbar {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
+       .header-top {
+    display: flex;
+    justify-content: space-between; /* Pushes items to the ends */
+    align-items: center;            /* Vertically centers them */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12px 40px; /* This sets the space: 40px on left/right */
+}
 
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .navbar a:hover {
-            background-color: white;
-            color: #8e44ad;
-        }
-        
-        /* New Styles for Cart Badge */
+         header h2 {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+        .navbar {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    /* --- Add these two lines --- */
+    display: flex;
+    align-items: center;
+}
+
+    .navbar a:hover {
+        background-color: white;
+        color: #8e44ad;
+    }
+
         .cart-icon-container {
             position: relative;
             display: flex;
@@ -71,189 +76,636 @@
             position: absolute;
             top: -8px;
             right: -12px;
-            background-color: #ff4d4d;
+            background-color: #ff6161;
             color: white;
-            border-radius: 50%;
-            width: 22px;
-            height: 22px;
-            font-size: 12px;
-            display: flex;
+            border-radius: 10px;
+            width: 20px;
+            height: 20px;
+            font-size: 11px;
+            display: none;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
-            border: 2px solid #8e44ad;
+            font-weight: 600;
+            border: 1px solid #8e44ad;
         }
 
         /* Main Product Container */
-        .product-detail-container {
-            display: flex;
-            flex-direction: row;
-            padding: 4rem 2rem;
-            gap: 3rem;
+        .product-container {
             max-width: 1200px;
-            margin: auto;
-        }
-
-        /* Upgraded Product Gallery */
-        .product-gallery {
-            flex: 1;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .image-slider-wrapper {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
-
-        .image-slider-wrapper img {
-            width: 100%;
-            flex-shrink: 0;
+            margin: 20px auto;
+            padding: 0 20px;
+            background: white;
             border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
-        
-        .slider-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(255, 255, 255, 0.8);
-            color: #333;
-            border: none;
-            width: 45px;
-            height: 45px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            z-index: 10;
-            border-radius: 50%;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+
+        /* Product Layout */
+        .product-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            padding: 30px;
+        }
+
+        /* Image Gallery */
+        .product-gallery {
+            position: relative;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 1px solid #f0f0f0;
+        }
+
+        .thumbnail-container {
             display: flex;
-            align-items: center;
+            gap: 12px;
+            margin-top: 16px;
             justify-content: center;
         }
 
-        .slider-arrow.left { left: 15px; }
-        .slider-arrow.right { right: 15px; }
-        
-        .page-indicators {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-        }
-
-        .indicator-dot {
-            width: 10px;
-            height: 10px;
-            background-color: rgba(255, 255, 255, 0.7);
-            border-radius: 50%;
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 10px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            border: 2px solid transparent;
+            transition: border-color 0.2s;
         }
 
-        .indicator-dot.active {
-            background-color: #8e44ad;
+        .thumbnail.active {
+            border-color: #8e44ad;
         }
 
-        /* Product Info Section */
+        .thumbnail:hover {
+            border-color: #8e44ad;
+        }
+
+        /* Product Information */
         .product-info {
-            flex: 1;
-            padding-left: 2rem;
+            padding-left: 20px;
         }
 
-        .product-info h2 {
-            font-family: 'Cinzel Decorative', serif;
-            font-size: 2.8rem;
-            color: #333;
-            margin-top: 0;
-            margin-bottom: 1rem;
+        .product-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #212121;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .rating-stars {
+            color: #ffc107;
+            font-size: 16px;
+        }
+
+        .rating-count {
+            color: #878787;
+            font-size: 14px;
         }
 
         .product-price {
-            font-size: 2rem;
-            color: #8e44ad;
-            font-weight: bold;
-            margin-bottom: 1.5rem;
+            margin-bottom: 20px;
         }
 
-        .product-description, .product-materials {
-            font-size: 1.1rem;
-            color: #555;
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
+        .current-price {
+            font-size: 28px;
+            font-weight: 600;
+            color: #212121;
+            margin-right: 12px;
         }
 
-        .product-actions button {
-            background-color: #8e44ad;
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-right: 1rem;
-            font-weight: bold;
+        .original-price {
+            font-size: 16px;
+            color: #878787;
+            text-decoration: line-through;
         }
 
-        .product-actions button:hover {
-            background-color: #72338a;
+        .discount {
+            color: #388e3c;
+            font-size: 14px;
+            font-weight: 500;
         }
 
-        /* Related Products Section */
-        .related-products-section {
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 2rem auto;
-            text-align: center;
-        }
-
-        .related-products-section h2 {
-            font-family: 'Cinzel Decorative', serif;
-            font-size: 2.5rem;
-            color: #333;
-            margin-bottom: 3rem;
-        }
-
-        .related-products-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-        }
-
-        .related-product-card {
-            background-color: white;
+        .price-breakdown {
+            background: #f8f9fa;
+            padding: 16px;
             border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            padding: 1rem;
-            border: 1px solid #eee;
-            text-decoration: none;
-            color: inherit;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .related-product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            margin-bottom: 20px;
         }
 
-        .related-product-card img {
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .price-row.total {
+            border-top: 1px solid #e0e0e0;
+            padding-top: 12px;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        /* Mobile Price Breakdown */
+        @media (max-width: 768px) {
+            .price-breakdown {
+                max-width: 300px;
+                margin-left: auto;
+                margin-right: auto;
+                margin-bottom: 20px;
+            }
+
+            .price-row {
+                font-size: 15px;
+                margin-bottom: 10px;
+            }
+
+            .price-row.total {
+                font-size: 17px;
+                padding-top: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .price-breakdown {
+                padding: 14px;
+            }
+
+            .price-row {
+                font-size: 14px;
+            }
+
+            .price-row.total {
+                font-size: 16px;
+            }
+        }
+
+        /* Product Highlights */
+        .highlights {
+            margin-bottom: 24px;
+        }
+
+        .highlights h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #212121;
+            margin-bottom: 12px;
+        }
+
+        .highlight-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #212121;
+        }
+
+        .highlight-item i {
+            color: #388e3c;
+            margin-right: 8px;
+            width: 16px;
+        }
+
+        /* Mobile Highlight List */
+        @media (max-width: 768px) {
+            .highlights {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            .highlights h3 {
+                text-align: center;
+                margin-bottom: 16px;
+            }
+
+            .highlight-list {
+                text-align: left;
+                display: inline-block;
+                max-width: 400px;
+            }
+
+            .highlight-item {
+                text-align: left;
+                margin-bottom: 12px;
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .highlight-item {
+                font-size: 14px;
+            }
+
+            .highlight-item i {
+                margin-right: 10px;
+            }
+        }
+
+        /* Quantity and Actions */
+        .product-actions {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            border: 1px solid #d7d7d7;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .quantity-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: #f8f9fa;
+            cursor: pointer;
+            font-size: 18px;
+            color: #212121;
+            transition: background-color 0.2s;
+        }
+
+        .quantity-btn:hover {
+            background: #e9ecef;
+        }
+
+        .quantity-input {
+            width: 60px;
+            height: 40px;
+            border: none;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background: #8e44ad;
+            color: white;
+            border: 1px solid #8e44ad;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            background: #9356ad;
+        }
+
+        .btn-secondary {
+            background: #fb641b;
+            color: white;
+            border: 1px solid #fb641b;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-secondary:hover {
+            background: #e55a1a;
+        }
+
+        /* Delivery Info */
+        .delivery-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 24px;
+        }
+
+        .delivery-info h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #212121;
+            margin-bottom: 12px;
+        }
+
+        .delivery-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #212121;
+        }
+
+        .delivery-item i {
+            color: #388e3c;
+            margin-right: 8px;
+            width: 16px;
+        }
+
+        /* Seller Info */
+        .seller-info {
+            background: #fff8e1;
+            padding: 16px;
+            border-radius: 10px;
+            border-left: 4px solid #8e44ad;
+        }
+
+        .seller-name {
+            font-weight: 600;
+            color: #212121;
+            margin-bottom: 4px;
+        }
+
+        .seller-rating {
+            color: #878787;
+            font-size: 14px;
+        }
+
+        /* Product Details Tabs */
+        .product-tabs {
+            border-bottom: 1px solid #e0e0e0;
+            margin-bottom: 24px;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 0;
+        }
+
+        .tab-btn {
+            padding: 16px 24px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            color: #878787;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .tab-btn.active {
+            color: #8e44ad;
+            border-bottom-color: #8e44ad;
+        }
+
+        /* Mobile Tab Styles */
+        @media (max-width: 768px) {
+            .tab-buttons {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+
+            .tab-buttons::-webkit-scrollbar {
+                display: none;
+            }
+
+            .tab-btn {
+                padding: 14px 20px;
+                font-size: 15px;
+                min-width: 120px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tab-btn {
+                padding: 12px 16px;
+                font-size: 14px;
+                min-width: 100px;
+            }
+        }
+
+        .tab-content {
+            display: none;
+            padding: 24px 0;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .specifications-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .specifications-table th,
+        .specifications-table td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .specifications-table th {
+            font-weight: 600;
+            color: #212121;
+            width: 30%;
+            background: #f8f9fa;
+        }
+
+        .specifications-table tr:last-child td,
+        .specifications-table tr:last-child th {
+            border-bottom: none;
+        }
+
+        /* Tab Description Styling */
+        .tab-description {
+            max-width: 800px;
+        }
+
+        .tab-description h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #212121;
+            margin-bottom: 16px;
+            margin-top: 0;
+        }
+
+        .tab-description h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #212121;
+            margin: 24px 0 12px 0;
+        }
+
+        .tab-description p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #212121;
+            margin-bottom: 16px;
+            text-align: justify;
+        }
+
+        .tab-description ul {
+            margin: 16px 0;
+            padding-left: 20px;
+        }
+
+        .tab-description li {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #212121;
+            margin-bottom: 8px;
+        }
+
+        /* Reviews Section */
+        .reviews-section {
+            max-width: 800px;
+        }
+
+        .reviews-header {
+            margin-bottom: 24px;
+        }
+
+        .reviews-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #212121;
+            margin-bottom: 8px;
+        }
+
+        .reviews-summary {
+            color: #878787;
+            font-size: 14px;
+        }
+
+        .review-item {
+            padding: 20px;
+            border: 1px solid #f0f0f0;
+            border-radius: 10px;
+            margin-bottom: 16px;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            transition: box-shadow 0.2s;
+        }
+
+        .review-item:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .reviewer-name {
+            font-weight: 600;
+            color: #212121;
+            font-size: 16px;
+        }
+
+        .review-rating {
+            color: #ffc107;
+            font-size: 14px;
+        }
+
+        .review-text {
+            color: #212121;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .review-date {
+            color: #878787;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        /* Related Products */
+        .related-products {
+            background: white;
+            margin: 20px auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            max-width: 1200px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #212121;
+            margin-bottom: 24px;
+            text-align: center;
+            position: relative;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background: white;
+            border: 1px solid #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .product-card img {
             width: 100%;
             height: 200px;
             object-fit: cover;
-            border-radius: 8px;
         }
 
-        .related-product-card h3 {
-            font-size: 1.2rem;
-            margin: 1rem 0 0.5rem;
+        .product-card-info {
+            padding: 16px;
         }
 
-        .related-product-card p {
-            font-weight: bold;
-            color: #8e44ad;
+        .product-card-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #212121;
+            margin-bottom: 8px;
+        }
+
+        .product-card-price {
+            font-size: 18px;
+            font-weight: 600;
+            color: #212121;
         }
 
         /* Footer */
@@ -264,7 +716,8 @@
             width: 90%;
             max-width: 1200px;
             border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            text-align: center;
+            color: white;
         }
         
         .footer-content {
@@ -273,160 +726,718 @@
             font-size: 1rem;
         }
 
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .related-products-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
+        /* Mobile Responsiveness */
+        /* Mobile Header Styles */
         @media (max-width: 768px) {
-            .product-detail-container {
-                flex-direction: column;
-                padding: 2rem 1rem;
-                gap: 2rem;
+            .header-top {
+                padding: 10px 16px;
             }
+
+            header h2 {
+                font-size: 28px;
+                font-weight: 700;
+            }
+
+            .navbar {
+                gap: 16px;
+            }
+
+            .navbar a {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+
+            .product-layout {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 20px;
+            }
+
             .product-info {
                 padding-left: 0;
+            }
+
+            .product-title {
+                font-size: 20px;
                 text-align: center;
+                margin-bottom: 16px;
             }
+
+            .product-rating {
+                justify-content: center;
+                margin-bottom: 20px;
+            }
+
+            .current-price {
+                font-size: 24px;
+                text-align: center;
+                display: block;
+                margin-bottom: 8px;
+            }
+
+            .original-price {
+                text-align: center;
+                display: block;
+                margin-bottom: 8px;
+            }
+
+            .discount {
+                text-align: center;
+                display: block;
+            }
+
+            .price-breakdown {
+                margin: 20px auto;
+                max-width: 300px;
+            }
+
+            .highlights {
+                text-align: left;
+            }
+
             .product-actions {
-                display: flex;
                 flex-direction: column;
-                gap: 1rem;
-                align-items: center;
+                gap: 12px;
+                max-width: 300px;
+                margin: 0 auto 24px auto;
             }
-            .product-info h2 { font-size: 2.2rem; }
-            .product-price { font-size: 1.8rem; }
+
+            .quantity-selector {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .delivery-info {
+                text-align: left;
+                max-width: 400px;
+                margin: 0 auto 24px auto;
+            }
+
+            .seller-info {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .thumbnail-container {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 10px;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+
+            /* Tab Content Mobile Alignment */
+            .tab-content {
+                padding: 20px 10px;
+            }
+
+            .tab-description {
+                text-align: left;
+                max-width: none;
+            }
+
+            .tab-description h3 {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            .tab-description h4 {
+                text-align: left;
+                margin: 20px 0 12px 0;
+            }
+
+            .tab-description p {
+                text-align: justify;
+                margin-bottom: 16px;
+            }
+
+            .tab-description ul {
+                padding-left: 20px;
+                margin: 16px 0;
+            }
+
+            .specifications-table {
+                font-size: 14px;
+            }
+
+            .specifications-table th,
+            .specifications-table td {
+                padding: 12px 8px;
+            }
+
+            .reviews-section {
+                max-width: none;
+            }
+
+            .reviews-header {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            .review-item {
+                margin-bottom: 20px;
+            }
+
+            .review-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .review-text {
+                text-align: justify;
+            }
         }
 
-        @media (max-width: 576px) {
-            .related-products-grid {
+        @media (max-width: 480px) {
+            .header-top {
+                padding: 8px 12px;
+            }
+
+            header h2 {
+                font-size: 24px;
+                font-weight: 700;
+            }
+
+            .navbar {
+                gap: 12px;
+            }
+
+            .navbar a {
+                padding: 4px 8px;
+                font-size: 12px;
+            }
+
+            .cart-badge {
+                width: 18px;
+                height: 18px;
+                font-size: 10px;
+            }
+
+            .product-container {
+                margin: 10px;
+                padding: 0 10px;
+            }
+
+            .product-layout {
+                padding: 16px;
+            }
+
+            .main-image {
+                height: 300px;
+            }
+
+            .thumbnail {
+                width: 60px;
+                height: 60px;
+            }
+
+            .products-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .product-title {
+                font-size: 18px;
+            }
+
+            .current-price {
+                font-size: 22px;
+            }
+
+            .tab-content {
+                padding: 16px 5px;
+            }
+
+            .tab-description h3 {
+                font-size: 18px;
+            }
+
+            .tab-description h4 {
+                font-size: 15px;
+            }
+
+            .tab-description p,
+            .tab-description li {
+                font-size: 13px;
+            }
+
+            .specifications-table th,
+            .specifications-table td {
+                padding: 10px 6px;
+                font-size: 13px;
+            }
+
+            .review-item {
+                padding: 16px;
+            }
+
+            .reviewer-name {
+                font-size: 15px;
+            }
+
+            .review-text {
+                font-size: 13px;
             }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h2>Lunsara</h2>
-        <nav class="navbar">
-            <a href="index.html">Home</a>
-            <!-- THIS IS THE UPDATED CART LINK -->
-            <a href="cart.html" class="cart-nav-link cart-link">
-                <span class="cart-icon-container">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span id="cart-count" class="cart-badge">0</span>
-                </span>
-                <span>Cart</span>
-            </a>
-        </nav>
+ <header>
+        <div class="header-top">
+            <h2>Lunsara</h2>
+
+            <nav class="navbar">
+                <a href="index.html">Home</a>
+                <a href="cart.html" class="cart-nav-link cart-link">
+                    <span class="cart-icon-container">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span id="cart-count" class="cart-badge">0</span>
+                    </span>
+                    <span>Cart</span>
+                </a>
+            </nav>
+        </div>
     </header>
 
-    <main class="product-detail-container">
-        <div class="product-gallery">
-            <div class="image-slider-wrapper">
-                <!-- Images will be added by JavaScript -->
+
+    <main class="product-container">
+        <div class="product-layout">
+            <!-- Product Gallery -->
+            <div class="product-gallery">
+                <img src="images/silk_saree_collection.jpg" alt="Kanchipuram Silk Saree" class="main-image" id="mainImage">
+                <div class="thumbnail-container">
+                    <img src="images/silk_saree_collection.jpg" alt="View 1" class="thumbnail active" onclick="changeImage(this, 0)">
+                    <img src="images/silk_saree.jpg" alt="View 2" class="thumbnail" onclick="changeImage(this, 1)">
+                    <img src="images/background1.jpg" alt="View 3" class="thumbnail" onclick="changeImage(this, 2)">
+                    <img src="images/background2.jpg" alt="View 4" class="thumbnail" onclick="changeImage(this, 3)">
+                </div>
             </div>
-            <button class="slider-arrow left" onclick="prevImage()">&#10094;</button>
-            <button class="slider-arrow right" onclick="nextImage()">&#10095;</button>
-            <div class="page-indicators">
-                <!-- Indicator dots will be added by JavaScript -->
+
+            <!-- Product Information -->
+            <div class="product-info">
+                <h1 class="product-title">Kanchipuram Silk Saree</h1>
+
+                <div class="product-rating">
+                    <div class="rating-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <span class="rating-count">4.2 (1,234 ratings)</span>
+                </div>
+
+                <div class="product-price">
+                    <span class="current-price">₹12,500</span>
+                    <span class="original-price">₹18,000</span>
+                    <div class="discount">30% off</div>
+                </div>
+
+                <div class="price-breakdown">
+                    <div class="price-row">
+                        <span>Price:</span>
+                        <span>₹12,500</span>
+                    </div>
+                    <div class="price-row">
+                        <span>Delivery:</span>
+                        <span class="delivery-free">FREE</span>
+                    </div>
+                    <div class="price-row total">
+                        <span>Total:</span>
+                        <span>₹12,500</span>
+                    </div>
+                </div>
+
+                <div class="highlights">
+                    <h3>Product Highlights</h3>
+                    <ul class="highlight-list">
+                        <li class="highlight-item">
+                            <i class="fas fa-check"></i>
+                            Premium Kanchipuram silk fabric
+                        </li>
+                        <li class="highlight-item">
+                            <i class="fas fa-check"></i>
+                            Handwoven with golden zari work
+                        </li>
+                        <li class="highlight-item">
+                            <i class="fas fa-check"></i>
+                            Perfect for weddings and special occasions
+                        </li>
+                        <li class="highlight-item">
+                            <i class="fas fa-check"></i>
+                            Traditional South Indian design
+                        </li>
+                        <li class="highlight-item">
+                            <i class="fas fa-check"></i>
+                            Comes with matching blouse piece
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="product-actions">
+                    <div class="quantity-selector">
+                        <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                        <input type="text" class="quantity-input" value="1" id="quantity" readonly>
+                        <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                    </div>
+                    <button class="btn-primary" onclick="addToCart()">
+                        <i class="fas fa-shopping-cart"></i>
+                        ADD TO CART
+                    </button>
+                    <button class="btn-secondary" onclick="buyNow()">
+                        <i class="fas fa-bolt"></i>
+                        BUY NOW
+                    </button>
+                </div>
+
+                <div class="delivery-info">
+                    <h3>Delivery Options</h3>
+                    <div class="delivery-item">
+                        <i class="fas fa-truck"></i>
+                        <span>Free delivery by <strong>Tomorrow, 23 Sep</strong></span>
+                    </div>
+                    <div class="delivery-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Deliver to <strong>Podatur Pettai - 631208</strong></span>
+                    </div>
+                    <div class="delivery-item">
+                        <i class="fas fa-undo-alt"></i>
+                        <span>30-day easy return available</span>
+                    </div>
+                </div>
+
+                <div class="seller-info">
+                    <div class="seller-name">Sold by Lunsara Store</div>
+                    <div class="seller-rating">
+                        <i class="fas fa-star"></i>
+                        4.5 (2,345 ratings)
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="product-info">
-            <h2>Kanchipuram Silk Saree</h2>
-            <p class="product-price">₹12,500</p>
-            <p class="product-description">A luxurious, handwoven Kanchipuram silk saree with intricate zari work. Perfect for weddings and special occasions. </p>
-            <p class="product-materials"><strong>Material:</strong> Pure Silk, Golden Zari</p>
-            <div class="product-actions">
-                <button onclick="addToCart('Kanchipuram Silk Saree', 12500, 'images/silk_saree_collection.jpg')">Add to Cart</button>
-                <button onclick="buyNow()">Buy Now</button>
+
+        <!-- Product Details Tabs -->
+        <div class="product-tabs">
+            <div class="tab-buttons">
+                <button class="tab-btn active" onclick="showTabByElement(this, 'description')">Description</button>
+                <button class="tab-btn" onclick="showTabByElement(this, 'specifications')">Specifications</button>
+                <button class="tab-btn" onclick="showTabByElement(this, 'reviews')">Reviews</button>
+            </div>
+
+            <div id="description" class="tab-content active">
+                <div class="tab-description">
+                    <h3>Product Description</h3>
+                    <p>Experience the timeless elegance of our Kanchipuram Silk Saree, a masterpiece of traditional South Indian craftsmanship. This luxurious saree is handwoven using pure mulberry silk threads and features intricate golden zari work that creates stunning patterns across the fabric.</p>
+                    <p>Perfect for weddings, festivals, and special occasions, this saree comes with a matching blouse piece and showcases the rich heritage of Kanchipuram weaving. The silk fabric provides excellent drape and comfort, making it ideal for all-day wear.</p>
+
+                    <h4>Care Instructions:</h4>
+                    <ul>
+                        <li>Dry clean only</li>
+                        <li>Store in a cool, dry place</li>
+                        <li>Avoid direct sunlight</li>
+                        <li>Use mild detergent for washing</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="specifications" class="tab-content">
+                <table class="specifications-table">
+                    <tr>
+                        <th>Material</th>
+                        <td>Pure Kanchipuram Silk</td>
+                    </tr>
+                    <tr>
+                        <th>Zari Work</th>
+                        <td>Golden Zari Thread</td>
+                    </tr>
+                    <tr>
+                        <th>Length</th>
+                        <td>6.5 meters</td>
+                    </tr>
+                    <tr>
+                        <th>Blouse Piece</th>
+                        <td>Included (1 meter)</td>
+                    </tr>
+                    <tr>
+                        <th>Occasion</th>
+                        <td>Wedding, Festival, Party</td>
+                    </tr>
+                    <tr>
+                        <th>Care</th>
+                        <td>Dry Clean Only</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="reviews" class="tab-content">
+                <div class="reviews-section">
+                    <div class="reviews-header">
+                        <h3 class="reviews-title">Customer Reviews</h3>
+                        <div class="reviews-summary">Based on 1,234 customer reviews</div>
+                    </div>
+
+                    <div class="review-item">
+                        <div class="review-header">
+                            <span class="reviewer-name">Priya Sharma</span>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span style="margin-left: 8px; color: #878787; font-size: 12px;">5.0</span>
+                            </div>
+                        </div>
+                        <div class="review-text">Beautiful saree! The quality is excellent and the zari work is intricate. Perfect for my wedding. Highly recommended!</div>
+                        <div class="review-date">Reviewed on September 15, 2024</div>
+                    </div>
+
+                    <div class="review-item">
+                        <div class="review-header">
+                            <span class="reviewer-name">Anita Reddy</span>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span style="margin-left: 8px; color: #878787; font-size: 12px;">4.0</span>
+                            </div>
+                        </div>
+                        <div class="review-text">Good quality silk saree. The color is exactly as shown. Delivery was fast and packaging was good. Very satisfied with the purchase.</div>
+                        <div class="review-date">Reviewed on September 10, 2024</div>
+                    </div>
+
+                    <div class="review-item">
+                        <div class="review-header">
+                            <span class="reviewer-name">Meera Krishnan</span>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span style="margin-left: 8px; color: #878787; font-size: 12px;">4.5</span>
+                            </div>
+                        </div>
+                        <div class="review-text">Absolutely stunning piece! The silk quality is premium and the craftsmanship is exceptional. Perfect for special occasions.</div>
+                        <div class="review-date">Reviewed on September 8, 2024</div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
 
-    <!-- Related Products Section -->
-    <section class="related-products-section">
-        <h2>You Might Also Like</h2>
-        <div class="related-products-grid">
-            <a href="#" class="related-product-card">
+    <!-- Related Products -->
+    <section class="related-products">
+        <h2 class="section-title">You Might Also Like</h2>
+        <div class="products-grid">
+            <div class="product-card" onclick="window.location.href='printed.html'">
                 <img src="images/printed_saree_collection.jpg" alt="Printed Saree">
-                <h3>Printed Saree</h3>
-                <p>₹2,800</p>
-            </a>
-            <a href="#" class="related-product-card">
+                <div class="product-card-info">
+                    <h3 class="product-card-title">Printed Saree</h3>
+                    <div class="product-card-price">₹2,800</div>
+                </div>
+            </div>
+            <div class="product-card" onclick="window.location.href='lungis.html'">
                 <img src="images/lungi_collection.jpg" alt="Traditional Lungi">
-                <h3>Traditional Lungi</h3>
-                <p>₹950</p>
-            </a>
-            <a href="#" class="related-product-card">
+                <div class="product-card-info">
+                    <h3 class="product-card-title">Traditional Lungi</h3>
+                    <div class="product-card-price">₹950</div>
+                </div>
+            </div>
+            <div class="product-card" onclick="window.location.href='silk.html'">
                 <img src="images/silk_saree.jpg" alt="Red Silk Saree">
-                <h3>Red Silk Saree</h3>
-                <p>₹15,000</p>
-            </a>
-            <a href="#" class="related-product-card">
+                <div class="product-card-info">
+                    <h3 class="product-card-title">Red Silk Saree</h3>
+                    <div class="product-card-price">₹15,000</div>
+                </div>
+            </div>
+            <div class="product-card" onclick="window.location.href='printed.html'">
                 <img src="images/printed_saree.jpg" alt="Designer Printed Saree">
-                <h3>Designer Printed Saree</h3>
-                <p>₹3,200</p>
-            </a>
+                <div class="product-card-info">
+                    <h3 class="product-card-title">Designer Printed Saree</h3>
+                    <div class="product-card-price">₹3,200</div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <footer>
-      <div class="footer-content">
-        <p>&copy; 2025 Lunsara. All Rights Reserved.</p>
-      </div>
-    </footer>
-
     <script src="cart.js"></script>
     <script>
-        // --- UPGRADED IMAGE GALLERY SCRIPT ---
-        const galleryImages = [
-            'images/silk_saree_collection.jpg',
-            'images/silk_saree.jpg',
-            'images/background1.jpg',
-            'images/background2.jpg'
-        ];
+        // Product data
+        const product = {
+            name: 'Kanchipuram Silk Saree',
+            price: 12500,
+            originalPrice: 18000,
+            images: [
+                'images/silk_saree_collection.jpg',
+                'images/silk_saree.jpg',
+                'images/background1.jpg',
+                'images/background2.jpg'
+            ]
+        };
 
         let currentImageIndex = 0;
-        const sliderWrapper = document.querySelector('.image-slider-wrapper');
-        const indicatorsContainer = document.querySelector('.page-indicators');
+        let quantity = 1;
 
-        function initializeGallery() {
-            sliderWrapper.innerHTML = '';
-            indicatorsContainer.innerHTML = '';
-            galleryImages.forEach((src, index) => {
-                const img = document.createElement('img');
-                img.src = src;
-                img.alt = `Product image ${index + 1}`;
-                sliderWrapper.appendChild(img);
-                const dot = document.createElement('div');
-                dot.classList.add('indicator-dot');
-                dot.onclick = () => showImage(index);
-                indicatorsContainer.appendChild(dot);
-            });
-            showImage(0);
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartBadge();
+            initializeImageGallery();
+        });
+
+        // Update cart badge
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const badge = document.getElementById('cart-count');
+
+            if (badge) {
+                badge.textContent = totalItems;
+                badge.style.display = totalItems > 0 ? 'flex' : 'none';
+            }
         }
 
-        function showImage(index) {
+        // Image gallery functions
+        function initializeImageGallery() {
+            const mainImage = document.getElementById('mainImage');
+            mainImage.src = product.images[0];
+        }
+
+        function changeImage(thumbnail, index) {
+            const mainImage = document.getElementById('mainImage');
+            mainImage.src = thumbnail.src;
             currentImageIndex = index;
-            sliderWrapper.style.transform = `translateX(${-currentImageIndex * 100}%)`;
-            document.querySelectorAll('.indicator-dot').forEach((dot, i) => {
-                dot.classList.toggle('active', i === currentImageIndex);
+
+            // Update active thumbnail
+            document.querySelectorAll('.thumbnail').forEach(thumb => {
+                thumb.classList.remove('active');
             });
+            thumbnail.classList.add('active');
         }
 
-        function nextImage() {
-            showImage((currentImageIndex + 1) % galleryImages.length);
+        // Quantity functions
+        function increaseQuantity() {
+            quantity++;
+            document.getElementById('quantity').value = quantity;
+            updatePrice();
         }
 
-        function prevImage() {
-            showImage((currentImageIndex - 1 + galleryImages.length) % galleryImages.length);
+        function decreaseQuantity() {
+            if (quantity > 1) {
+                quantity--;
+                document.getElementById('quantity').value = quantity;
+                updatePrice();
+            }
         }
-        
-        document.addEventListener('DOMContentLoaded', initializeGallery);
+
+        function updatePrice() {
+            const totalPrice = product.price * quantity;
+            document.querySelector('.current-price').textContent = `₹${totalPrice.toLocaleString()}`;
+            document.querySelector('.price-breakdown .total span:last-child').textContent = `₹${totalPrice.toLocaleString()}`;
+        }
+
+        // Tab functions
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Alternative tab function with proper event handling
+        function showTabByElement(element, tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            element.classList.add('active');
+        }
+
+        // Cart functions
+        function addToCart() {
+            const cartItem = {
+                name: product.name,
+                price: product.price,
+                image: product.images[0],
+                quantity: quantity
+            };
+
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const existingItemIndex = cart.findIndex(item => item.name === product.name);
+
+            if (existingItemIndex > -1) {
+                cart[existingItemIndex].quantity += quantity;
+            } else {
+                cart.push(cartItem);
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartBadge();
+            alert(`Added ${quantity} item(s) to cart!`);
+        }
+
+        function buyNow() {
+            // Add item to cart for processing
+            const cartItem = {
+                name: product.name,
+                price: product.price,
+                image: product.images[0],
+                quantity: quantity
+            };
+
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const existingItemIndex = cart.findIndex(item => item.name === product.name);
+
+            if (existingItemIndex > -1) {
+                cart[existingItemIndex].quantity += quantity;
+            } else {
+                cart.push(cartItem);
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartBadge();
+
+            // Redirect directly to delivery address page - NO ALERT
+            window.location.href = 'delivery-address.html';
+        }
+
+        // Update cart badge
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const badge = document.getElementById('cart-count');
+
+            if (badge) {
+                badge.textContent = totalItems;
+                badge.style.display = totalItems > 0 ? 'flex' : 'none';
+            }
+        }
     </script>
 </body>
 </html>
