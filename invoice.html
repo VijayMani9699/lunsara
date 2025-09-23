@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice | Lunsara</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: white;
+            color: #333;
+            padding: 20px;
+        }
+
+        .invoice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #8e44ad;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .company-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+        }
+
+        .company-details h1 {
+            font-size: 24px;
+            color: #8e44ad;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .company-details p {
+            color: #666;
+            font-size: 12px;
+        }
+
+        .invoice-title {
+            text-align: right;
+        }
+
+        .invoice-title h2 {
+            font-size: 28px;
+            color: #8e44ad;
+            margin-bottom: 5px;
+        }
+
+        .invoice-number {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .invoice-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .detail-section h3 {
+            color: #8e44ad;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+
+        .product-section {
+            margin-bottom: 30px;
+        }
+
+        .product-section h3 {
+            color: #8e44ad;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .product-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .product-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 15px;
+        }
+
+        .product-info h4 {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .product-quantity {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .price-breakdown {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 12px;
+        }
+
+        .price-row.total {
+            border-top: 2px solid #8e44ad;
+            padding-top: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #8e44ad;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: #666;
+            font-size: 11px;
+        }
+
+        @media print {
+            body { padding: 0; }
+            .invoice-header { border-bottom: 2px solid #667eea; }
+            .print-button { display: none !important; }
+        }
+
+        .print-button {
+            background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            margin: 10px auto;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(142, 68, 173, 0.2);
+        }
+
+        .print-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(142, 68, 173, 0.4);
+        }
+
+        /* Print-specific styles */
+        @media print {
+            .navbar, .invoice-actions, .invoice-footer {
+                display: none !important;
+            }
+
+            .invoice-container {
+                max-width: none;
+                margin: 0;
+                padding: 0;
+                box-shadow: none;
+            }
+
+            .invoice-header {
+                border-bottom: 2px solid #8e44ad;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice-header">
+        <div class="company-info">
+            <img src="images/logo.png" alt="Lunsara Logo" class="logo">
+            <div class="company-details">
+                <h1>Lunsara</h1>
+                <p>Your Trusted Online Shopping Partner</p>
+                <p>📧 support@lunsara.com | 📞 +91-XXXX-XXXXXX</p>
+                <p>📍 76 Thoppu Street, Podatur Pet, Palli Pet Talluk, Tiruvallur District - 631208</p>
+            </div>
+        </div>
+        <div class="invoice-title">
+            <h2>INVOICE</h2>
+            <div class="invoice-number">Invoice #: <span id="invoice-number">LUNS-2024-001</span></div>
+        </div>
+    </div>
+
+    <div class="invoice-details">
+        <div class="detail-section">
+            <h3>Order Information</h3>
+            <div class="detail-row">
+                <span>Order Date:</span>
+                <span id="order-date">September 22, 2024</span>
+            </div>
+            <div class="detail-row">
+                <span>Order ID:</span>
+                <span id="order-id">LUNS-2024-001</span>
+            </div>
+            <div class="detail-row">
+                <span>Payment Method:</span>
+                <span>Online Payment</span>
+            </div>
+            <div class="detail-row">
+                <span>GST Number:</span>
+                <span>22AAAAA0000A1Z5</span>
+            </div>
+        </div>
+
+        <div class="detail-section">
+            <h3>Delivery Address</h3>
+            <div id="delivery-address" style="font-size: 12px; line-height: 1.4; color: #666;">
+                Customer Address
+            </div>
+        </div>
+    </div>
+
+    <div class="product-section">
+        <h3>Product Details</h3>
+        <div id="product-details">
+            <!-- Product details will be populated here -->
+        </div>
+    </div>
+
+    <div style="text-align: center; margin: 20px 0;">
+        <button class="print-button" onclick="window.print()" style="margin-right: 10px;">
+            <i class="fas fa-print"></i> Print Invoice
+        </button>
+        <button class="print-button" onclick="downloadInvoice()">
+            <i class="fas fa-download"></i> Download PDF
+        </button>
+    </div>
+
+    <div class="footer">
+        <p><strong>Lunsara</strong> - Your Trusted Online Shopping Partner</p>
+        <p>🛡️ 100% Authentic Products | 🔄 Easy Returns | 🚚 Fast Delivery | 💳 Secure Payments</p>
+        <p style="margin-top: 10px;">📄 GST Invoice | This is a computer generated invoice | All prices include GST @ 18%</p>
+    </div>
+
+    <script>
+        // Get order and product data from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const orderId = urlParams.get('orderId');
+        const productIndex = urlParams.get('productIndex');
+
+        // Load invoice data when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            if (orderId && productIndex !== null) {
+                loadInvoiceData(orderId, parseInt(productIndex));
+            } else {
+                // Load default/sample data if no parameters
+                loadDefaultInvoice();
+            }
+        });
+
+        /**
+         * Loads invoice data for specific order and product
+         */
+        function loadInvoiceData(orderId, productIndex) {
+            const orders = JSON.parse(localStorage.getItem('userOrders') || '[]');
+            const order = orders.find(o => o.id === orderId);
+
+            if (!order) {
+                loadDefaultInvoice();
+                return;
+            }
+
+            const product = order.items[productIndex];
+
+            // Populate invoice data
+            document.getElementById('invoice-number').textContent = orderId;
+            document.getElementById('order-date').textContent = formatDate(order.date);
+            document.getElementById('order-id').textContent = orderId;
+            document.getElementById('delivery-address').textContent = order.deliveryAddress;
+
+            // Calculate GST for the product
+            const basePrice = product.price;
+            const gstAmount = Math.round(basePrice * 0.18);
+            const totalWithGST = basePrice + gstAmount;
+
+            // Create product details HTML
+            const productHTML = `
+                <div class="product-item">
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <div class="product-info">
+                        <h4>${product.name}</h4>
+                        <div class="product-quantity">Quantity: ${product.quantity}</div>
+                        <div class="price-breakdown">
+                            <div class="price-row">
+                                <span>Base Price:</span>
+                                <span>₹${basePrice.toLocaleString()}</span>
+                            </div>
+                            <div class="price-row">
+                                <span>GST (18%):</span>
+                                <span>₹${gstAmount.toLocaleString()}</span>
+                            </div>
+                            <div class="price-row total">
+                                <span>Total Amount:</span>
+                                <span>₹${(totalWithGST * product.quantity).toLocaleString()}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('product-details').innerHTML = productHTML;
+
+            // Auto-print after loading
+            setTimeout(() => {
+                window.print();
+            }, 1000);
+        }
+
+        /**
+         * Loads default/sample invoice data
+         */
+        function loadDefaultInvoice() {
+            // Sample data for demonstration
+            document.getElementById('invoice-number').textContent = 'LUNS-2024-001';
+            document.getElementById('order-date').textContent = 'September 22, 2024';
+            document.getElementById('order-id').textContent = 'LUNS-2024-001';
+            document.getElementById('delivery-address').textContent = '76 Thoppu Street, Podatur Pet, Palli Pet Talluk, Tiruvallur District - 631208';
+
+            const sampleProductHTML = `
+                <div class="product-item">
+                    <img src="images/silk_saree.jpg" alt="Kanchipuram Silk Saree" class="product-image">
+                    <div class="product-info">
+                        <h4>Kanchipuram Silk Saree</h4>
+                        <div class="product-quantity">Quantity: 1</div>
+                        <div class="price-breakdown">
+                            <div class="price-row">
+                                <span>Base Price:</span>
+                                <span>₹12,500</span>
+                            </div>
+                            <div class="price-row">
+                                <span>GST (18%):</span>
+                                <span>₹2,250</span>
+                            </div>
+                            <div class="price-row total">
+                                <span>Total Amount:</span>
+                                <span>₹14,750</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('product-details').innerHTML = sampleProductHTML;
+        }
+
+        /**
+         * Formats date for display
+         */
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-IN', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+
+        /**
+         * Downloads the invoice as PDF
+         */
+        function downloadInvoice() {
+            const element = document.body;
+            const orderId = document.getElementById('order-id').textContent;
+            const productName = document.querySelector('.product-info h4').textContent;
+
+            const opt = {
+                margin: [0.5, 0.5, 0.5, 0.5],
+                filename: `Lunsara_Invoice_${orderId}_${productName.replace(/\s+/g, '_')}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: {
+                    scale: 2,
+                    useCORS: true,
+                    allowTaint: true,
+                    backgroundColor: '#ffffff'
+                },
+                jsPDF: {
+                    unit: 'in',
+                    format: 'a4',
+                    orientation: 'portrait',
+                    compress: true
+                }
+            };
+
+            html2pdf().set(opt).from(element).save();
+        }
+    </script>
+</body>
+</html>
