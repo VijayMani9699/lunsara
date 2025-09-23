@@ -366,6 +366,37 @@
             font-weight: 500;
             color: #212121;
             margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #8e44ad;
+        }
+
+        /* Price Details Section */
+        .price-details-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-top: 12px;
+        }
+
+        .price-details-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #212121;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #8e44ad;
+            position: relative;
+        }
+
+        .price-details-title::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: -2px;
+            width: 60px;
+            height: 2px;
+            background: #8e44ad;
         }
 
         .order-items {
@@ -429,6 +460,67 @@
             color: #212121;
         }
 
+        /* Price Details Styling */
+        .price-details-list {
+            margin-bottom: 20px;
+        }
+
+        .price-detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: #212121;
+        }
+
+        .price-detail-item .label {
+            flex-grow: 1;
+        }
+
+        .price-detail-item .value {
+            font-weight: 500;
+        }
+
+        .price-detail-item.total {
+            border-top: 1px solid #e0e0e0;
+            padding-top: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #212121;
+        }
+
+        .price-detail-item.discount {
+            color: #388e3c;
+        }
+
+        .price-detail-item .old-price {
+            text-decoration: line-through;
+            color: #878787;
+            margin-left: 8px;
+        }
+
+        /* Savings Message */
+        .savings-message {
+            background: #e8f5e8;
+            border: 1px solid #388e3c;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-top: 16px;
+            text-align: center;
+        }
+
+        .savings-text {
+            color: #388e3c;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .savings-amount {
+            color: #2e7d32;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
             .container {
@@ -450,6 +542,26 @@
 
             .save-btn, .cancel-btn {
                 width: 100%;
+            }
+
+            .price-detail-item {
+                font-size: 13px;
+            }
+
+            .price-detail-item.total {
+                font-size: 15px;
+            }
+
+            .savings-message {
+                padding: 10px 12px;
+            }
+
+            .savings-text {
+                font-size: 13px;
+            }
+
+            .savings-amount {
+                font-size: 14px;
             }
         }
     </style>
@@ -607,23 +719,42 @@
             <div class="summary-title">Order Summary</div>
             <div class="order-items" id="order-items">
             </div>
+        </div>
 
-            <div class="price-breakdown">
-                <div class="price-row">
-                    <span>Subtotal</span>
-                    <span id="summary-subtotal">₹0</span>
+        <!-- Price Details Section -->
+        <div class="price-details-section">
+            <div class="price-details-title">Price Details</div>
+            <div class="price-details-list">
+                <div class="price-detail-item">
+                    <span class="label">Price (<span id="total-items-count">0</span> items)</span>
+                    <span class="value" id="price-items">₹0</span>
                 </div>
-                <div class="price-row">
-                    <span>Delivery Charges</span>
-                    <span id="summary-delivery">₹40</span>
+                <div class="price-detail-item">
+                    <span class="label">Discount</span>
+                    <span class="value discount" id="discount-amount">-₹0</span>
                 </div>
-                <div class="price-row">
-                    <span>Taxes & Fees</span>
-                    <span id="summary-taxes">₹0</span>
+                <div class="price-detail-item">
+                    <span class="label">Delivery Charges</span>
+                    <span class="value" id="delivery-charges">₹40</span>
                 </div>
-                <div class="price-row total">
-                    <span>Total</span>
-                    <span id="summary-total">₹0</span>
+                <div class="price-detail-item">
+                    <span class="label">Secured Packaging Fee</span>
+                    <span class="value" id="packaging-fee">₹29</span>
+                </div>
+                <div class="price-detail-item">
+                    <span class="label">Taxes & Fees</span>
+                    <span class="value" id="taxes-fees">₹0</span>
+                </div>
+                <div class="price-detail-item total">
+                    <span class="label">Total Amount</span>
+                    <span class="value" id="total-amount">₹0</span>
+                </div>
+            </div>
+
+            <!-- Savings Message -->
+            <div class="savings-message">
+                <div class="savings-text">
+                    You will save <span class="savings-amount" id="savings-amount">₹0</span> on this order!
                 </div>
             </div>
         </div>
@@ -904,10 +1035,12 @@
             orderItemsContainer.innerHTML = '';
 
             let grandTotal = 0;
+            let totalItems = 0;
 
             cart.forEach(item => {
                 const itemTotal = item.price * item.quantity;
                 grandTotal += itemTotal;
+                totalItems += item.quantity;
 
                 const orderItemElement = document.createElement('div');
                 orderItemElement.classList.add('order-item');
@@ -922,15 +1055,34 @@
                 orderItemsContainer.appendChild(orderItemElement);
             });
 
-            // Update price breakdown
-            const deliveryCharges = grandTotal > 500 ? 0 : 40;
-            const taxes = Math.round(grandTotal * 0.18);
-            const finalTotal = grandTotal + deliveryCharges + taxes;
+            // Update price details section
+            updatePriceDetails(grandTotal, totalItems);
+        }
 
-            document.getElementById('summary-subtotal').textContent = `₹${grandTotal.toLocaleString()}`;
-            document.getElementById('summary-delivery').textContent = deliveryCharges === 0 ? 'FREE' : `₹${deliveryCharges}`;
-            document.getElementById('summary-taxes').textContent = `₹${taxes.toLocaleString()}`;
-            document.getElementById('summary-total').textContent = `₹${finalTotal.toLocaleString()}`;
+        /**
+         * Updates the price details section with Flipkart-style breakdown
+         */
+        function updatePriceDetails(grandTotal, totalItems) {
+            // Calculate individual components
+            const mrpTotal = Math.round(grandTotal * 1.3); // Original MRP (30% higher)
+            const discountAmount = mrpTotal - grandTotal;
+            const deliveryCharges = grandTotal > 500 ? 0 : 40;
+            const packagingFee = 29;
+            const taxes = Math.round(grandTotal * 0.18);
+            const finalTotal = grandTotal + deliveryCharges + packagingFee + taxes;
+
+            // Update all price detail elements
+            document.getElementById('total-items-count').textContent = totalItems;
+            document.getElementById('price-items').textContent = `₹${mrpTotal.toLocaleString()}`;
+            document.getElementById('discount-amount').textContent = `-₹${discountAmount.toLocaleString()}`;
+            document.getElementById('delivery-charges').textContent = deliveryCharges === 0 ? 'FREE' : `₹${deliveryCharges}`;
+            document.getElementById('packaging-fee').textContent = `₹${packagingFee}`;
+            document.getElementById('taxes-fees').textContent = `₹${taxes.toLocaleString()}`;
+            document.getElementById('total-amount').textContent = `₹${finalTotal.toLocaleString()}`;
+
+            // Update savings message
+            const totalSavings = discountAmount + (deliveryCharges === 0 ? 40 : 0); // Discount + free delivery savings
+            document.getElementById('savings-amount').textContent = `₹${totalSavings.toLocaleString()}`;
         }
 
         // Format input fields

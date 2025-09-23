@@ -126,16 +126,16 @@
             box-shadow: 0 8px 25px rgba(142, 68, 173, 0.3);
         }
 
-        .product-image-placeholder {
+        .product-image {
             width: 100%;
             height: 250px;
-            background-color: #e0e0e0;
+            object-fit: cover;
             border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #888;
-            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .product-item-card:hover .product-image {
+            transform: scale(1.05);
         }
         
         .product-item-card h3 {
@@ -294,18 +294,66 @@
     <main class="product-grid-container">
         <h2>Our Printed Sarees Collection</h2>
         <div class="product-grid">
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;"><div class="product-item-card"><div class="product-image-placeholder">Image</div><h3>Design #1</h3><p>Click for details</p></div></a>
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;"><div class="product-item-card"><div class="product-image-placeholder">Image</div><h3>Design #2</h3><p>Click for details</p></div></a>
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;"><div class="product-item-card"><div class="product-image-placeholder">Image</div><h3>Design #3</h3><p>Click for details</p></div></a>
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;"><div class="product-item-card"><div class="product-image-placeholder">Image</div><h3>Design #4</h3><p>Click for details</p></div></a>
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;"><div class="product-item-card"><div class="product-image-placeholder">Image</div><h3>Design #5</h3><p>Click for details</p></div></a>
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;"><div class="product-item-card"><div class="product-image-placeholder">Image</div><h3>Design #6</h3><p>Click for details</p></div></a>
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;"><div class="product-item-card"><div class="product-image-placeholder">Image</div><h3>Design #7</h3><p>Click for details</p></div></a>
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;"><div class="product-item-card"><div class="product-image-placeholder">Image</div><h3>Design #8</h3><p>Click for details</p></div></a>
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;"><div class="product-item-card"><div class="product-image-placeholder">Image</div><h3>Design #9</h3><p>Click for details</p></div></a>
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;"><div class="product-item-card"><div class="product-image-placeholder">Image</div><h3>Design #10</h3><p>Click for details</p></div></a>
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;"><div class="product-item-card"><div class="product-image-placeholder">Image</div><h3>Design #11</h3><p>Click for details</p></div></a>
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;"><div class="product-item-card"><div class="product-image-placeholder">Image</div><h3>Design #12</h3><p>Click for details</p></div></a>
+            <div class="product-item-card" onclick="viewProduct('printed-floral-paradise', 'Printed Floral Paradise Saree', '₹2,800', '₹4,200', 'images/printed_saree.jpg')">
+                <img src="images/printed_saree.jpg" alt="Printed Floral Paradise Saree" class="product-image">
+                <h3>Printed Floral Paradise Saree</h3>
+                <p>₹2,800 <span style="text-decoration: line-through; color: #999;">₹4,200</span></p>
+            </div>
+            <div class="product-item-card" onclick="viewProduct('printed-geometric-delight', 'Printed Geometric Delight Saree', '₹3,200', '₹4,800', 'images/printed_saree_collection.jpg')">
+                <img src="images/printed_saree_collection.jpg" alt="Printed Geometric Delight Saree" class="product-image">
+                <h3>Printed Geometric Delight Saree</h3>
+                <p>₹3,200 <span style="text-decoration: line-through; color: #999;">₹4,800</span></p>
+            </div>
+            <div class="product-item-card" onclick="viewProduct('printed-ethnic-motifs', 'Printed Ethnic Motifs Saree', '₹2,600', '₹3,900', 'images/background1.jpg')">
+                <img src="images/background1.jpg" alt="Printed Ethnic Motifs Saree" class="product-image">
+                <h3>Printed Ethnic Motifs Saree</h3>
+                <p>₹2,600 <span style="text-decoration: line-through; color: #999;">₹3,900</span></p>
+            </div>
+            <div class="product-item-card" onclick="viewProduct('printed-abstract-art', 'Printed Abstract Art Saree', '₹3,500', '₹5,200', 'images/background2.jpg')">
+                <img src="images/background2.jpg" alt="Printed Abstract Art Saree" class="product-image">
+                <h3>Printed Abstract Art Saree</h3>
+                <p>₹3,500 <span style="text-decoration: line-through; color: #999;">₹5,200</span></p>
+            </div>
+            <div class="product-item-card" onclick="viewProduct('printed-traditional-borders', 'Printed Traditional Borders Saree', '₹2,900', '₹4,300', 'images/background3.jpg')">
+                <img src="images/background3.jpg" alt="Printed Traditional Borders Saree" class="product-image">
+                <h3>Printed Traditional Borders Saree</h3>
+                <p>₹2,900 <span style="text-decoration: line-through; color: #999;">₹4,300</span></p>
+            </div>
+            <div class="product-item-card" onclick="viewProduct('printed-modern-geometric', 'Printed Modern Geometric Saree', '₹3,100', '₹4,600', 'images/printed_saree.jpg')">
+                <img src="images/printed_saree.jpg" alt="Printed Modern Geometric Saree" class="product-image">
+                <h3>Printed Modern Geometric Saree</h3>
+                <p>₹3,100 <span style="text-decoration: line-through; color: #999;">₹4,600</span></p>
+            </div>
+            <div class="product-item-card" onclick="viewProduct('printed-floral-vines', 'Printed Floral Vines Saree', '₹2,700', '₹4,000', 'images/printed_saree_collection.jpg')">
+                <img src="images/printed_saree_collection.jpg" alt="Printed Floral Vines Saree" class="product-image">
+                <h3>Printed Floral Vines Saree</h3>
+                <p>₹2,700 <span style="text-decoration: line-through; color: #999;">₹4,000</span></p>
+            </div>
+            <div class="product-item-card" onclick="viewProduct('printed-elegant-stripes', 'Printed Elegant Stripes Saree', '₹3,300', '₹4,900', 'images/background1.jpg')">
+                <img src="images/background1.jpg" alt="Printed Elegant Stripes Saree" class="product-image">
+                <h3>Printed Elegant Stripes Saree</h3>
+                <p>₹3,300 <span style="text-decoration: line-through; color: #999;">₹4,900</span></p>
+            </div>
+            <div class="product-item-card" onclick="viewProduct('printed-vintage-charm', 'Printed Vintage Charm Saree', '₹2,800', '₹4,100', 'images/background2.jpg')">
+                <img src="images/background2.jpg" alt="Printed Vintage Charm Saree" class="product-image">
+                <h3>Printed Vintage Charm Saree</h3>
+                <p>₹2,800 <span style="text-decoration: line-through; color: #999;">₹4,100</span></p>
+            </div>
+            <div class="product-item-card" onclick="viewProduct('printed-contemporary-twist', 'Printed Contemporary Twist Saree', '₹3,400', '₹5,000', 'images/background3.jpg')">
+                <img src="images/background3.jpg" alt="Printed Contemporary Twist Saree" class="product-image">
+                <h3>Printed Contemporary Twist Saree</h3>
+                <p>₹3,400 <span style="text-decoration: line-through; color: #999;">₹5,000</span></p>
+            </div>
+            <div class="product-item-card" onclick="viewProduct('printed-boho-chic', 'Printed Boho Chic Saree', '₹2,950', '₹4,400', 'images/printed_saree.jpg')">
+                <img src="images/printed_saree.jpg" alt="Printed Boho Chic Saree" class="product-image">
+                <h3>Printed Boho Chic Saree</h3>
+                <p>₹2,950 <span style="text-decoration: line-through; color: #999;">₹4,400</span></p>
+            </div>
+            <div class="product-item-card" onclick="viewProduct('printed-minimalist-lines', 'Printed Minimalist Lines Saree', '₹3,000', '₹4,500', 'images/printed_saree_collection.jpg')">
+                <img src="images/printed_saree_collection.jpg" alt="Printed Minimalist Lines Saree" class="product-image">
+                <h3>Printed Minimalist Lines Saree</h3>
+                <p>₹3,000 <span style="text-decoration: line-through; color: #999;">₹4,500</span></p>
+            </div>
         </div>
     </main>
     
@@ -329,6 +377,23 @@
                 badge.textContent = totalItems;
                 badge.style.display = totalItems > 0 ? 'flex' : 'none';
             }
+        }
+
+        function viewProduct(productId, productName, productPrice, originalPrice, productImage) {
+            // Store product details in localStorage
+            const productDetails = {
+                id: productId,
+                name: productName,
+                price: Number(productPrice.replace(/[₹,]/g, '')),
+                originalPrice: Number(originalPrice.replace(/[₹,]/g, '')),
+                image: productImage,
+                category: 'printed-saree'
+            };
+
+            localStorage.setItem('selectedProduct', JSON.stringify(productDetails));
+
+            // Redirect to product detail page
+            window.location.href = 'product-detail.html';
         }
     </script>
 </body>
