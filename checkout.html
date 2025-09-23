@@ -762,7 +762,37 @@
                 // Generate order ID
                 const orderId = 'LUN' + Date.now();
 
-                // Store order ID for order tracking
+                // Get cart data for order details
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                const selectedAddress = JSON.parse(localStorage.getItem('selectedDeliveryAddress')) || {};
+
+                // Create order object
+                const orderData = {
+                    id: orderId,
+                    date: new Date().toISOString().split('T')[0],
+                    status: 'processing',
+                    items: cart,
+                    total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+                    deliveryAddress: `${selectedAddress.address}, ${selectedAddress.city}, ${selectedAddress.state} - ${selectedAddress.pincode}`,
+                    tracking: [
+                        { status: 'Order Placed', date: new Date().toLocaleString('en-IN'), completed: true },
+                        { status: 'Packed', date: 'In Progress', completed: false },
+                        { status: 'Shipped', date: 'Expected: ' + new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toLocaleDateString('en-IN'), completed: false },
+                        { status: 'Out for Delivery', date: 'Expected: ' + new Date(Date.now() + 4 * 24 * 60 * 60 * 1000).toLocaleDateString('en-IN'), completed: false },
+                        { status: 'Delivered', date: 'Expected: ' + new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toLocaleDateString('en-IN'), completed: false }
+                    ]
+                };
+
+                // Get existing orders or create new array
+                const existingOrders = JSON.parse(localStorage.getItem('userOrders') || '[]');
+
+                // Add new order to the beginning of the array
+                existingOrders.unshift(orderData);
+
+                // Save to localStorage
+                localStorage.setItem('userOrders', JSON.stringify(existingOrders));
+
+                // Store order ID for reference
                 localStorage.setItem('currentOrderId', orderId);
 
                 // Clear cart AFTER storing order data
