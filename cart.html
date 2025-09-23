@@ -145,6 +145,22 @@
             object-fit: cover;
             border-radius: 10px;
             margin-right: 16px;
+            cursor: pointer;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+
+        .cart-item img:hover {
+            transform: scale(0.95);
+            opacity: 0.8;
+        }
+
+        .cart-item .product-name-clickable {
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .cart-item .product-name-clickable:hover {
+            color: #8e44ad;
         }
 
         .item-details {
@@ -170,6 +186,36 @@
             font-size: 12px;
             color: #388e3c;
             margin-bottom: 8px;
+        }
+
+        /* Rating and Reviews in Cart */
+        .cart-item-rating {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+
+        .rating-stars {
+            color: #ffc107;
+            font-size: 12px;
+        }
+
+        .rating-value {
+            font-size: 11px;
+            color: #878787;
+            margin-left: 4px;
+        }
+
+        .review-count {
+            font-size: 11px;
+            color: #2874f0;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .review-count:hover {
+            text-decoration: underline;
         }
 
         .quantity-controls {
@@ -313,6 +359,90 @@
             margin-right: 4px;
         }
 
+        /* Price Details Section */
+        .price-details-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-top: 12px;
+        }
+
+        .price-details-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #212121;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #8e44ad;
+            position: relative;
+        }
+
+        .price-details-title::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: -2px;
+            width: 60px;
+            height: 2px;
+            background: #8e44ad;
+        }
+
+        /* Price Details Styling */
+        .price-details-list {
+            margin-bottom: 20px;
+        }
+
+        .price-detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: #212121;
+        }
+
+        .price-detail-item .label {
+            flex-grow: 1;
+        }
+
+        .price-detail-item .value {
+            font-weight: 500;
+        }
+
+        .price-detail-item.total {
+            border-top: 1px solid #e0e0e0;
+            padding-top: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #212121;
+        }
+
+        .price-detail-item.discount {
+            color: #388e3c;
+        }
+
+        /* Savings Message */
+        .savings-message {
+            background: #e8f5e8;
+            border: 1px solid #388e3c;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-top: 16px;
+            text-align: center;
+        }
+
+        .savings-text {
+            color: #388e3c;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .savings-amount {
+            color: #2e7d32;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
         .trust-badges {
             display: flex;
             justify-content: center;
@@ -380,6 +510,7 @@
 
         .recommendation-item:hover {
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
         }
 
         .recommendation-item img {
@@ -485,6 +616,22 @@
                 font-size: 16px;
             }
 
+            .cart-item-rating {
+                gap: 6px;
+            }
+
+            .rating-stars {
+                font-size: 11px;
+            }
+
+            .rating-value {
+                font-size: 10px;
+            }
+
+            .review-count {
+                font-size: 10px;
+            }
+
             .quantity-controls {
                 margin-right: 0;
                 margin-bottom: 12px;
@@ -587,6 +734,26 @@
             .trust-badge i {
                 font-size: 14px;
             }
+
+            .price-detail-item {
+                font-size: 13px;
+            }
+
+            .price-detail-item.total {
+                font-size: 15px;
+            }
+
+            .savings-message {
+                padding: 10px 12px;
+            }
+
+            .savings-text {
+                font-size: 13px;
+            }
+
+            .savings-amount {
+                font-size: 14px;
+            }
         }
 
         /* Extra small screens */
@@ -602,6 +769,14 @@
             .cart-item img {
                 width: 80px;
                 height: 80px;
+            }
+
+            .cart-item img:hover {
+                transform: scale(0.98);
+            }
+
+            .cart-item .product-name-clickable:hover {
+                color: #8e44ad;
             }
 
             .item-details h3 {
@@ -674,25 +849,50 @@
             </div>
 
             <div class="cart-summary" id="cart-summary-container">
-                <div class="price-breakdown">
-                    <div class="price-row">
-                        <span>Subtotal</span>
-                        <span id="subtotal">₹0</span>
-                    </div>
-                    <div class="price-row">
-                        <span>Delivery Charges</span>
-                        <span id="delivery">₹40</span>
-                    </div>
-                    <div class="price-row">
-                        <span>Taxes & Fees</span>
-                        <span id="taxes">₹0</span>
-                    </div>
-                    <div class="price-row total">
-                        <span>Total</span>
-                        <span id="grand-total">₹0</span>
-                    </div>
-                    <div class="savings">You will save ₹0 on this order</div>
+                <div class="summary-title">Order Summary</div>
+                <div class="order-items" id="order-items">
                 </div>
+            </div>
+
+            <!-- Price Details Section -->
+            <div class="price-details-section">
+                <div class="price-details-title">Price Details</div>
+                <div class="price-details-list">
+                    <div class="price-detail-item">
+                        <span class="label">Price (<span id="total-items-count">0</span> items)</span>
+                        <span class="value" id="price-items">₹0</span>
+                    </div>
+                    <div class="price-detail-item">
+                        <span class="label">Discount</span>
+                        <span class="value discount" id="discount-amount">-₹0</span>
+                    </div>
+                    <div class="price-detail-item">
+                        <span class="label">Delivery Charges</span>
+                        <span class="value" id="delivery-charges">₹40</span>
+                    </div>
+                    <div class="price-detail-item">
+                        <span class="label">Secured Packaging Fee</span>
+                        <span class="value" id="packaging-fee">₹29</span>
+                    </div>
+                    <div class="price-detail-item">
+                        <span class="label">Taxes & Fees</span>
+                        <span class="value" id="taxes-fees">₹0</span>
+                    </div>
+                    <div class="price-detail-item total">
+                        <span class="label">Total Amount</span>
+                        <span class="value" id="total-amount">₹0</span>
+                    </div>
+                </div>
+
+                <!-- Savings Message -->
+                <div class="savings-message">
+                    <div class="savings-text">
+                        You will save <span class="savings-amount" id="savings-amount">₹0</span> on this order!
+                    </div>
+                </div>
+            </div>
+
+            <div class="cart-summary" id="cart-summary-container-bottom">
                 <button class="checkout-btn" onclick="proceedToCheckout()">
                     PLACE ORDER
                 </button>
@@ -812,10 +1012,21 @@
 
                     const itemElement = document.createElement('div');
                     itemElement.classList.add('cart-item');
+
+                    // Get rating and review data for the product
+                    const productRating = getProductRating(item.name);
+
                     itemElement.innerHTML = `
-                        <img src="${item.image}" alt="${item.name}">
+                        <img src="${item.image}" alt="${item.name}" onclick="decreaseQuantityFromProduct(${index})">
                         <div class="item-details">
-                            <h3>${item.name}</h3>
+                            <h3 class="product-name-clickable" onclick="decreaseQuantityFromProduct(${index})">${item.name}</h3>
+                            <div class="cart-item-rating">
+                                <div class="rating-stars">
+                                    ${generateStars(productRating.rating)}
+                                </div>
+                                <span class="rating-value">${productRating.rating}</span>
+                                <a href="#" class="review-count" onclick="showProductReviews('${item.name}')">(${productRating.reviews} reviews)</a>
+                            </div>
                             <div class="seller">Sold by: Lunsara Store</div>
                             <div class="delivery-info">
                                 <i class="fas fa-truck"></i>
@@ -836,28 +1047,38 @@
                     cartItemsContainer.appendChild(itemElement);
                 });
 
-                // Update price breakdown
-                const deliveryCharges = grandTotal > 500 ? 0 : 40;
-                const taxes = Math.round(grandTotal * 0.18); // 18% GST
-                const finalTotal = grandTotal + deliveryCharges + taxes;
-
-                // Fix NaN issues by ensuring numbers are valid
-                const safeGrandTotal = isNaN(grandTotal) ? 0 : grandTotal;
-                const safeDeliveryCharges = isNaN(deliveryCharges) ? 0 : deliveryCharges;
-                const safeTaxes = isNaN(taxes) ? 0 : taxes;
-                const safeFinalTotal = isNaN(finalTotal) ? safeGrandTotal : finalTotal;
-
-                document.getElementById('subtotal').textContent = `₹${safeGrandTotal.toLocaleString()}`;
-                document.getElementById('delivery').textContent = safeDeliveryCharges === 0 ? 'FREE' : `₹${safeDeliveryCharges}`;
-                document.getElementById('taxes').textContent = `₹${safeTaxes.toLocaleString()}`;
-                document.getElementById('grand-total').textContent = `₹${safeFinalTotal.toLocaleString()}`;
-
-                const savings = Math.max(0, safeGrandTotal - safeFinalTotal + 100); // Mock savings calculation
-                document.querySelector('.savings').textContent = `You will save ₹${savings} on this order`;
+                // Update price details section
+                updatePriceDetails(grandTotal, totalItems);
 
                 // Show recommendations if there are items in cart
                 showRecommendations();
             }
+        }
+
+        /**
+         * Updates the price details section with Flipkart-style breakdown
+         */
+        function updatePriceDetails(grandTotal, totalItems) {
+            // Calculate individual components
+            const mrpTotal = Math.round(grandTotal * 1.3); // Original MRP (30% higher)
+            const discountAmount = mrpTotal - grandTotal;
+            const deliveryCharges = grandTotal > 500 ? 0 : 40;
+            const packagingFee = 29;
+            const taxes = Math.round(grandTotal * 0.18);
+            const finalTotal = grandTotal + deliveryCharges + packagingFee + taxes;
+
+            // Update all price detail elements
+            document.getElementById('total-items-count').textContent = totalItems;
+            document.getElementById('price-items').textContent = `₹${mrpTotal.toLocaleString()}`;
+            document.getElementById('discount-amount').textContent = `-₹${discountAmount.toLocaleString()}`;
+            document.getElementById('delivery-charges').textContent = deliveryCharges === 0 ? 'FREE' : `₹${deliveryCharges}`;
+            document.getElementById('packaging-fee').textContent = `₹${packagingFee}`;
+            document.getElementById('taxes-fees').textContent = `₹${taxes.toLocaleString()}`;
+            document.getElementById('total-amount').textContent = `₹${finalTotal.toLocaleString()}`;
+
+            // Update savings message
+            const totalSavings = discountAmount + (deliveryCharges === 0 ? 40 : 0); // Discount + free delivery savings
+            document.getElementById('savings-amount').textContent = `₹${totalSavings.toLocaleString()}`;
         }
 
         /**
@@ -894,12 +1115,13 @@
                 mockRecommendations.forEach(item => {
                     const recommendationElement = document.createElement('div');
                     recommendationElement.classList.add('recommendation-item');
+                    recommendationElement.onclick = () => viewRecommendationProduct(item);
                     recommendationElement.innerHTML = `
                         <img src="${item.image}" alt="${item.name}">
                         <div class="recommendation-details">
                             <h4>${item.name}</h4>
                             <div class="price">₹${item.price.toLocaleString()}</div>
-                            <button class="add-to-cart-btn" onclick="addToCart('${item.name}', ${item.price}, '${item.image}')">
+                            <button class="add-to-cart-btn" onclick="event.stopPropagation(); addToCart('${item.name}', ${item.price}, '${item.image}')">
                                 ADD TO CART
                             </button>
                         </div>
@@ -1003,6 +1225,129 @@
          */
         function buyNow() {
             proceedToCheckout();
+        }
+
+        /**
+         * Handles clicking on recommendation products to view product details.
+         * @param {Object} item - The recommendation item object.
+         */
+        function viewRecommendationProduct(item) {
+            const productData = {
+                id: item.name.toLowerCase().replace(/\s+/g, '-'),
+                name: item.name,
+                price: item.price,
+                originalPrice: Math.round(item.price * 1.3), // Mock original price (30% higher)
+                image: item.image
+            };
+
+            // Store selected product in localStorage
+            localStorage.setItem('selectedProduct', JSON.stringify(productData));
+
+            // Redirect to product detail page
+            window.location.href = 'product-detail.html';
+        }
+
+        /**
+         * Generates star rating HTML based on rating value
+         * @param {number} rating - The rating value (1-5)
+         * @returns {string} HTML string for star rating
+         */
+        function generateStars(rating) {
+            let stars = '';
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 !== 0;
+
+            // Add full stars
+            for (let i = 0; i < fullStars; i++) {
+                stars += '<i class="fas fa-star"></i>';
+            }
+
+            // Add half star if needed
+            if (hasHalfStar) {
+                stars += '<i class="fas fa-star-half-alt"></i>';
+            }
+
+            // Add empty stars
+            const emptyStars = 5 - Math.ceil(rating);
+            for (let i = 0; i < emptyStars; i++) {
+                stars += '<i class="far fa-star"></i>';
+            }
+
+            return stars;
+        }
+
+        /**
+         * Gets rating and review data for a product
+         * @param {string} productName - The name of the product
+         * @returns {Object} Object containing rating and review count
+         */
+        function getProductRating(productName) {
+            // Mock rating data - in a real app, this would come from a database
+            const ratingData = {
+                'The Madrasi Check Lungi': { rating: 4.2, reviews: 156 },
+                'Royal Bengal Stripe Lungi': { rating: 4.5, reviews: 203 },
+                'Kerala Temple Border Lungi': { rating: 4.1, reviews: 89 },
+                'Emerald Festive Weave Lungi': { rating: 4.3, reviews: 134 },
+                'Maroon Comfort Cotton Lungi': { rating: 4.0, reviews: 78 },
+                'Midnight Indigo Lungi': { rating: 4.4, reviews: 167 },
+                'Earthy Batik Print Lungi': { rating: 4.2, reviews: 92 },
+                'Azure Sky Cotton Lungi': { rating: 3.9, reviews: 45 },
+                'Crimson Classic Lungi': { rating: 4.3, reviews: 123 },
+                'Charcoal Silk Blend Lungi': { rating: 4.6, reviews: 189 },
+                'Saffron Daylight Lungi': { rating: 4.1, reviews: 67 },
+                'Jaipuri Block Print Lungi': { rating: 4.4, reviews: 145 },
+                'Premium Cotton Saree': { rating: 4.3, reviews: 234 },
+                'Designer Blouse Piece': { rating: 4.1, reviews: 98 },
+                'Traditional Jewelry Set': { rating: 4.5, reviews: 156 }
+            };
+
+            // Return product-specific rating or default rating
+            return ratingData[productName] || { rating: 4.2, reviews: 100 };
+        }
+
+        /**
+         * Shows product reviews (placeholder function)
+         * @param {string} productName - The name of the product
+         */
+        function showProductReviews(productName) {
+            alert(`Reviews for "${productName}" would be displayed here. In a real application, this would open a reviews modal or redirect to the product page.`);
+        }
+
+        /**
+         * Decreases quantity when clicking on product image or name
+         * @param {number} itemIndex - The index of the item in the cart
+         */
+        function decreaseQuantityFromProduct(itemIndex) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (cart[itemIndex] && cart[itemIndex].quantity > 1) {
+                cart[itemIndex].quantity -= 1;
+                localStorage.setItem('cart', JSON.stringify(cart));
+                displayCartItems();
+                updateCartBadge();
+            } else if (cart[itemIndex] && cart[itemIndex].quantity === 1) {
+                // If quantity is 1, remove the item entirely
+                removeItemFromCart(itemIndex);
+            }
+        }
+
+        /**
+         * Handles clicking on recommendation products to view product details.
+         * @param {Object} item - The recommendation item object.
+         */
+        function viewRecommendationProduct(item) {
+            const productData = {
+                id: item.name.toLowerCase().replace(/\s+/g, '-'),
+                name: item.name,
+                price: item.price,
+                originalPrice: Math.round(item.price * 1.3), // Mock original price (30% higher)
+                image: item.image
+            };
+
+            // Store selected product in localStorage
+            localStorage.setItem('selectedProduct', JSON.stringify(productData));
+
+            // Redirect to product detail page
+            window.location.href = 'product-detail.html';
         }
     </script>
 </body>

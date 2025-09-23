@@ -1152,31 +1152,8 @@
             </div>
 
             <div id="specifications" class="tab-content">
-                <table class="specifications-table">
-                    <tr>
-                        <th>Material</th>
-                        <td>Pure Kanchipuram Silk</td>
-                    </tr>
-                    <tr>
-                        <th>Zari Work</th>
-                        <td>Golden Zari Thread</td>
-                    </tr>
-                    <tr>
-                        <th>Length</th>
-                        <td>6.5 meters</td>
-                    </tr>
-                    <tr>
-                        <th>Blouse Piece</th>
-                        <td>Included (1 meter)</td>
-                    </tr>
-                    <tr>
-                        <th>Occasion</th>
-                        <td>Wedding, Festival, Party</td>
-                    </tr>
-                    <tr>
-                        <th>Care</th>
-                        <td>Dry Clean Only</td>
-                    </tr>
+                <table class="specifications-table" id="specifications-table">
+                    <!-- Specifications will be dynamically updated based on product type -->
                 </table>
             </div>
 
@@ -1276,8 +1253,8 @@
 
     <script src="cart.js"></script>
     <script>
-        // Product data
-        const product = {
+        // Product data - will be updated by loadSelectedProduct()
+        let product = {
             name: 'Kanchipuram Silk Saree',
             price: 12500,
             originalPrice: 18000,
@@ -1296,6 +1273,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             updateCartBadge();
             initializeImageGallery();
+            loadSelectedProduct();
         });
 
         // Update cart badge
@@ -1307,6 +1285,269 @@
             if (badge) {
                 badge.textContent = totalItems;
                 badge.style.display = totalItems > 0 ? 'flex' : 'none';
+            }
+        }
+
+        // Load selected product from localStorage
+        function loadSelectedProduct() {
+            const selectedProduct = JSON.parse(localStorage.getItem('selectedProduct'));
+
+            if (selectedProduct) {
+                // Update product information
+                document.querySelector('.product-title').textContent = selectedProduct.name;
+                document.querySelector('.current-price').textContent = `₹${selectedProduct.price.toLocaleString()}`;
+                document.querySelector('.original-price').textContent = `₹${selectedProduct.originalPrice.toLocaleString()}`;
+
+                // Calculate discount percentage
+                const discountPercent = Math.round(((selectedProduct.originalPrice - selectedProduct.price) / selectedProduct.originalPrice) * 100);
+                document.querySelector('.discount').textContent = `${discountPercent}% off`;
+
+                // Update main image
+                document.getElementById('mainImage').src = selectedProduct.image;
+
+                // Update thumbnails (use same image for all thumbnails for now)
+                const thumbnails = document.querySelectorAll('.thumbnail');
+                thumbnails.forEach(thumbnail => {
+                    thumbnail.src = selectedProduct.image;
+                });
+
+                // Update product data object
+                product.name = selectedProduct.name;
+                product.price = selectedProduct.price;
+                product.originalPrice = selectedProduct.originalPrice;
+                product.images = [selectedProduct.image, selectedProduct.image, selectedProduct.image, selectedProduct.image];
+
+                // Update price breakdown
+                updatePrice();
+
+                // Update page title
+                document.title = `${selectedProduct.name} | Lunsara`;
+
+                // Update product highlights based on product type
+                updateProductHighlights(selectedProduct.name);
+
+                // Update product description based on product type
+                updateProductDescription(selectedProduct.name);
+
+                // Update specifications based on product type
+                updateProductSpecifications(selectedProduct.name);
+            }
+        }
+
+        // Update product specifications based on product type
+        function updateProductSpecifications(productName) {
+            const specificationsTable = document.getElementById('specifications-table');
+
+            if (productName.toLowerCase().includes('lungi')) {
+                specificationsTable.innerHTML = `
+                    <tr>
+                        <th>Material</th>
+                        <td>Premium Cotton</td>
+                    </tr>
+                    <tr>
+                        <th>Length</th>
+                        <td>2.5 meters</td>
+                    </tr>
+                    <tr>
+                        <th>Width</th>
+                        <td>1.25 meters</td>
+                    </tr>
+                    <tr>
+                        <th>Pattern</th>
+                        <td>Traditional Checkered/Striped</td>
+                    </tr>
+                    <tr>
+                        <th>Occasion</th>
+                        <td>Daily Wear, Casual, Traditional</td>
+                    </tr>
+                    <tr>
+                        <th>Care</th>
+                        <td>Machine Wash</td>
+                    </tr>
+                `;
+            } else if (productName.toLowerCase().includes('printed')) {
+                specificationsTable.innerHTML = `
+                    <tr>
+                        <th>Material</th>
+                        <td>Polyester Blend</td>
+                    </tr>
+                    <tr>
+                        <th>Length</th>
+                        <td>6.3 meters</td>
+                    </tr>
+                    <tr>
+                        <th>Blouse Piece</th>
+                        <td>Included (0.8 meters)</td>
+                    </tr>
+                    <tr>
+                        <th>Print Type</th>
+                        <td>Digital Print</td>
+                    </tr>
+                    <tr>
+                        <th>Occasion</th>
+                        <td>Casual, Semi-Formal, Daily Wear</td>
+                    </tr>
+                    <tr>
+                        <th>Care</th>
+                        <td>Machine Wash</td>
+                    </tr>
+                `;
+            } else if (productName.toLowerCase().includes('silk')) {
+                specificationsTable.innerHTML = `
+                    <tr>
+                        <th>Material</th>
+                        <td>Pure Mulberry Silk</td>
+                    </tr>
+                    <tr>
+                        <th>Zari Work</th>
+                        <td>Golden Zari Thread</td>
+                    </tr>
+                    <tr>
+                        <th>Length</th>
+                        <td>6.5 meters</td>
+                    </tr>
+                    <tr>
+                        <th>Blouse Piece</th>
+                        <td>Included (1 meter)</td>
+                    </tr>
+                    <tr>
+                        <th>Occasion</th>
+                        <td>Wedding, Festival, Party</td>
+                    </tr>
+                    <tr>
+                        <th>Care</th>
+                        <td>Dry Clean Only</td>
+                    </tr>
+                `;
+            }
+        }
+
+        // Update product highlights based on product type
+        function updateProductHighlights(productName) {
+            const highlightsList = document.querySelector('.highlight-list');
+            const highlightsTitle = document.querySelector('.highlights h3');
+
+            if (productName.toLowerCase().includes('lungi')) {
+                highlightsTitle.textContent = 'Lungi Highlights';
+                highlightsList.innerHTML = `
+                    <li class="highlight-item">
+                        <i class="fas fa-check"></i>
+                        Premium quality cotton fabric
+                    </li>
+                    <li class="highlight-item">
+                        <i class="fas fa-check"></i>
+                        Traditional handwoven patterns
+                    </li>
+                    <li class="highlight-item">
+                        <i class="fas fa-check"></i>
+                        Comfortable for daily wear
+                    </li>
+                    <li class="highlight-item">
+                        <i class="fas fa-check"></i>
+                        Perfect for traditional occasions
+                    </li>
+                    <li class="highlight-item">
+                        <i class="fas fa-check"></i>
+                        Easy to maintain and wash
+                    </li>
+                `;
+            } else if (productName.toLowerCase().includes('printed')) {
+                highlightsTitle.textContent = 'Printed Saree Highlights';
+                highlightsList.innerHTML = `
+                    <li class="highlight-item">
+                        <i class="fas fa-check"></i>
+                        Vibrant digital print patterns
+                    </li>
+                    <li class="highlight-item">
+                        <i class="fas fa-check"></i>
+                        Lightweight and comfortable
+                    </li>
+                    <li class="highlight-item">
+                        <i class="fas fa-check"></i>
+                        Perfect for casual and semi-formal wear
+                    </li>
+                    <li class="highlight-item">
+                        <i class="fas fa-check"></i>
+                        Modern contemporary designs
+                    </li>
+                    <li class="highlight-item">
+                        <i class="fas fa-check"></i>
+                        Easy care and machine washable
+                    </li>
+                `;
+            } else if (productName.toLowerCase().includes('silk')) {
+                highlightsTitle.textContent = 'Silk Saree Highlights';
+                highlightsList.innerHTML = `
+                    <li class="highlight-item">
+                        <i class="fas fa-check"></i>
+                        Premium quality silk fabric
+                    </li>
+                    <li class="highlight-item">
+                        <i class="fas fa-check"></i>
+                        Handwoven with intricate patterns
+                    </li>
+                    <li class="highlight-item">
+                        <i class="fas fa-check"></i>
+                        Perfect for weddings and special occasions
+                    </li>
+                    <li class="highlight-item">
+                        <i class="fas fa-check"></i>
+                        Traditional South Indian design
+                    </li>
+                    <li class="highlight-item">
+                        <i class="fas fa-check"></i>
+                        Comes with matching blouse piece
+                    </li>
+                `;
+            }
+        }
+
+        // Update product description based on product type
+        function updateProductDescription(productName) {
+            const descriptionContent = document.querySelector('.tab-description');
+
+            if (productName.toLowerCase().includes('lungi')) {
+                descriptionContent.innerHTML = `
+                    <h3>Product Description</h3>
+                    <p>Discover the comfort and tradition of our premium lungi collection. Made from high-quality cotton fabric, these lungis feature traditional patterns and modern designs that are perfect for everyday wear and special occasions.</p>
+                    <p>Our lungis are designed for maximum comfort with breathable fabric that keeps you cool in warm weather. The traditional checkered and striped patterns reflect the rich cultural heritage while providing a contemporary look.</p>
+
+                    <h4>Care Instructions:</h4>
+                    <ul>
+                        <li>Machine wash in cold water</li>
+                        <li>Use mild detergent</li>
+                        <li>Dry in shade</li>
+                        <li>Iron on medium heat</li>
+                    </ul>
+                `;
+            } else if (productName.toLowerCase().includes('printed')) {
+                descriptionContent.innerHTML = `
+                    <h3>Product Description</h3>
+                    <p>Experience the vibrant world of printed sarees with our exclusive collection. Featuring modern digital print technology, these sarees showcase contemporary patterns and designs that are perfect for casual outings and semi-formal occasions.</p>
+                    <p>The lightweight fabric ensures comfort throughout the day, while the bold prints make a style statement. Each saree is crafted with attention to detail and quality finishing.</p>
+
+                    <h4>Care Instructions:</h4>
+                    <ul>
+                        <li>Machine wash in cold water</li>
+                        <li>Use gentle cycle</li>
+                        <li>Avoid direct sunlight while drying</li>
+                        <li>Iron on low to medium heat</li>
+                    </ul>
+                `;
+            } else if (productName.toLowerCase().includes('silk')) {
+                descriptionContent.innerHTML = `
+                    <h3>Product Description</h3>
+                    <p>Experience the timeless elegance of our premium silk saree collection, a masterpiece of traditional craftsmanship. This luxurious saree is handwoven using pure mulberry silk threads and features intricate patterns that create stunning visual appeal.</p>
+                    <p>Perfect for weddings, festivals, and special occasions, this saree comes with a matching blouse piece and showcases the rich heritage of traditional weaving. The silk fabric provides excellent drape and comfort, making it ideal for all-day wear.</p>
+
+                    <h4>Care Instructions:</h4>
+                    <ul>
+                        <li>Dry clean only</li>
+                        <li>Store in a cool, dry place</li>
+                        <li>Avoid direct sunlight</li>
+                        <li>Use mild detergent for washing</li>
+                    </ul>
+                `;
             }
         }
 

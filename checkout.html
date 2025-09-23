@@ -569,7 +569,10 @@
             const orderItemsContainer = document.getElementById('order-items');
 
             if (cart.length === 0) {
-                window.location.href = 'cart.html';
+                // Only redirect to cart if we're not in the middle of payment processing
+                if (!document.getElementById('place-order-btn').disabled) {
+                    window.location.href = 'cart.html';
+                }
                 return;
             }
 
@@ -759,11 +762,14 @@
                 // Generate order ID
                 const orderId = 'LUN' + Date.now();
 
-                // Clear cart
+                // Store order ID for order tracking
+                localStorage.setItem('currentOrderId', orderId);
+
+                // Clear cart AFTER storing order data
                 localStorage.removeItem('cart');
 
                 // Show success message
-                alert(`Order placed successfully! Your order ID is ${orderId}`);
+                alert(`🎉 Order placed successfully!\n\n📋 Order ID: ${orderId}\n💳 Payment Method: ${selectedPayment.value.toUpperCase()}\n✅ Your order has been confirmed and will be delivered soon!\n\nClick OK to continue shopping.`);
 
                 // Redirect to home page
                 window.location.href = 'index.html';

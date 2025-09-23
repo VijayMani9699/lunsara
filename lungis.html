@@ -146,6 +146,31 @@
             font-weight: bold;
         }
 
+        /* Product Price Styling */
+        .product-price {
+            margin-top: 0.5rem;
+        }
+
+        .current-price {
+            font-size: 18px;
+            font-weight: 600;
+            color: #212121;
+            margin-right: 8px;
+        }
+
+        .original-price {
+            font-size: 14px;
+            color: #878787;
+            text-decoration: line-through;
+            margin-right: 8px;
+        }
+
+        .discount {
+            color: #388e3c;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
         footer {
             background-color: #2c3e50;
             padding: 1rem 2rem;
@@ -291,90 +316,114 @@
     <main class="product-grid-container">
         <h2>Our Lungi Collection</h2>
         <div class="product-grid">
-            <a href="images/" style="text-decoration: none; color: inherit;">
-                <div class="product-item-card">
-                    <img src="images/lungi_collection.jpg" alt="Classic blue checkered lungi" class="product-image">
-                    <h3>The Madrasi Check</h3>
-                    <p>Click for details</p>
+            <div class="product-item-card" onclick="viewProduct('madrasi-check', 'The Madrasi Check Lungi', '₹850', '₹1,200', 'images/lungi_collection.jpg')">
+                <img src="images/lungi_collection.jpg" alt="Classic blue checkered lungi" class="product-image">
+                <h3>The Madrasi Check</h3>
+                <div class="product-price">
+                    <span class="current-price">₹850</span>
+                    <span class="original-price">₹1,200</span>
+                    <div class="discount">29% off</div>
                 </div>
-            </a>
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;">
-                <div class="product-item-card">
-                    <img src="images/lungi_collection.jpg" alt="Elegant striped lungi" class="product-image">
-                    <h3>Royal Bengal Stripe</h3>
-                    <p>Click for details</p>
+            </div>
+            <div class="product-item-card" onclick="viewProduct('royal-bengal-stripe', 'Royal Bengal Stripe Lungi', '₹950', '₹1,400', 'images/handloom_lungi.jpg')">
+                <img src="images/handloom_lungi.jpg" alt="Elegant striped lungi" class="product-image">
+                <h3>Royal Bengal Stripe</h3>
+                <div class="product-price">
+                    <span class="current-price">₹950</span>
+                    <span class="original-price">₹1,400</span>
+                    <div class="discount">32% off</div>
                 </div>
-            </a>
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;">
-                <div class="product-item-card">
-                    <img src="images/lungi_collection.jpg" alt="Minimalist white lungi with border" class="product-image">
-                    <h3>Kerala Temple Border</h3>
-                    <p>Click for details</p>
+            </div>
+            <div class="product-item-card" onclick="viewProduct('kerala-temple-border', 'Kerala Temple Border Lungi', '₹1,200', '₹1,800', 'images/background1.jpg')">
+                <img src="images/background1.jpg" alt="Minimalist white lungi with border" class="product-image">
+                <h3>Kerala Temple Border</h3>
+                <div class="product-price">
+                    <span class="current-price">₹1,200</span>
+                    <span class="original-price">₹1,800</span>
+                    <div class="discount">33% off</div>
                 </div>
-            </a>
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;">
-                <div class="product-item-card">
-                    <img src="images/lungi_collection.jpg" alt="Vibrant green and yellow lungi" class="product-image">
-                    <h3>Emerald Festive Weave</h3>
-                    <p>Click for details</p>
+            </div>
+            <div class="product-item-card" onclick="viewProduct('emerald-festive-weave', 'Emerald Festive Weave Lungi', '₹1,050', '₹1,500', 'images/background2.jpg')">
+                <img src="images/background2.jpg" alt="Vibrant green and yellow lungi" class="product-image">
+                <h3>Emerald Festive Weave</h3>
+                <div class="product-price">
+                    <span class="current-price">₹1,050</span>
+                    <span class="original-price">₹1,500</span>
+                    <div class="discount">30% off</div>
                 </div>
-            </a>
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;">
-                <div class="product-item-card">
-                    <img src="images/lungi_collection.jpg" alt="Rich maroon lungi" class="product-image">
-                    <h3>Maroon Comfort Cotton</h3>
-                    <p>Click for details</p>
+            </div>
+            <div class="product-item-card" onclick="viewProduct('maroon-comfort-cotton', 'Maroon Comfort Cotton Lungi', '₹800', '₹1,100', 'images/background3.jpg')">
+                <img src="images/background3.jpg" alt="Rich maroon lungi" class="product-image">
+                <h3>Maroon Comfort Cotton</h3>
+                <div class="product-price">
+                    <span class="current-price">₹800</span>
+                    <span class="original-price">₹1,100</span>
+                    <div class="discount">27% off</div>
                 </div>
-            </a>
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;">
-                <div class="product-item-card">
-                    <img src="images/lungi_collection.jpg" alt="Dark blue lungi" class="product-image">
-                    <h3>Midnight Indigo</h3>
-                    <p>Click for details</p>
+            </div>
+            <div class="product-item-card" onclick="viewProduct('midnight-indigo', 'Midnight Indigo Lungi', '₹900', '₹1,300', 'images/lungi_collection.jpg')">
+                <img src="images/lungi_collection.jpg" alt="Dark blue lungi" class="product-image">
+                <h3>Midnight Indigo</h3>
+                <div class="product-price">
+                    <span class="current-price">₹900</span>
+                    <span class="original-price">₹1,300</span>
+                    <div class="discount">31% off</div>
                 </div>
-            </a>
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;">
-                <div class="product-item-card">
-                    <img src="images/lungi_collection.jpg" alt="Brown patterned lungi" class="product-image">
-                    <h3>Earthy Batik Print</h3>
-                    <p>Click for details</p>
+            </div>
+            <div class="product-item-card" onclick="viewProduct('earthy-batik-print', 'Earthy Batik Print Lungi', '₹1,100', '₹1,600', 'images/handloom_lungi.jpg')">
+                <img src="images/handloom_lungi.jpg" alt="Brown patterned lungi" class="product-image">
+                <h3>Earthy Batik Print</h3>
+                <div class="product-price">
+                    <span class="current-price">₹1,100</span>
+                    <span class="original-price">₹1,600</span>
+                    <div class="discount">31% off</div>
                 </div>
-            </a>
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;">
-                <div class="product-item-card">
-                    <img src="images/lungi_collection.jpg" alt="Light blue and white lungi" class="product-image">
-                    <h3>Azure Sky Cotton</h3>
-                    <p>Click for details</p>
+            </div>
+            <div class="product-item-card" onclick="viewProduct('azure-sky-cotton', 'Azure Sky Cotton Lungi', '₹750', '₹1,000', 'images/background1.jpg')">
+                <img src="images/background1.jpg" alt="Light blue and white lungi" class="product-image">
+                <h3>Azure Sky Cotton</h3>
+                <div class="product-price">
+                    <span class="current-price">₹750</span>
+                    <span class="original-price">₹1,000</span>
+                    <div class="discount">25% off</div>
                 </div>
-            </a>
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;">
-                <div class="product-item-card">
-                    <img src="images/lungi_collection.jpg" alt="Crimson red checkered lungi" class="product-image">
-                    <h3>Crimson Classic</h3>
-                    <p>Click for details</p>
+            </div>
+            <div class="product-item-card" onclick="viewProduct('crimson-classic', 'Crimson Classic Lungi', '₹950', '₹1,400', 'images/background2.jpg')">
+                <img src="images/background2.jpg" alt="Crimson red checkered lungi" class="product-image">
+                <h3>Crimson Classic</h3>
+                <div class="product-price">
+                    <span class="current-price">₹950</span>
+                    <span class="original-price">₹1,400</span>
+                    <div class="discount">32% off</div>
                 </div>
-            </a>
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;">
-                <div class="product-item-card">
-                    <img src="images/lungi_collection.jpg" alt="Grey and black formal lungi" class="product-image">
-                    <h3>Charcoal Silk Blend</h3>
-                    <p>Click for details</p>
+            </div>
+            <div class="product-item-card" onclick="viewProduct('charcoal-silk-blend', 'Charcoal Silk Blend Lungi', '₹1,300', '₹2,000', 'images/background3.jpg')">
+                <img src="images/background3.jpg" alt="Grey and black formal lungi" class="product-image">
+                <h3>Charcoal Silk Blend</h3>
+                <div class="product-price">
+                    <span class="current-price">₹1,300</span>
+                    <span class="original-price">₹2,000</span>
+                    <div class="discount">35% off</div>
                 </div>
-            </a>
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;">
-                <div class="product-item-card">
-                    <img src="images/lungi_collection.jpg" alt="Orange and gold lungi" class="product-image">
-                    <h3>Saffron Daylight</h3>
-                    <p>Click for details</p>
+            </div>
+            <div class="product-item-card" onclick="viewProduct('saffron-daylight', 'Saffron Daylight Lungi', '₹850', '₹1,200', 'images/lungi_collection.jpg')">
+                <img src="images/lungi_collection.jpg" alt="Orange and gold lungi" class="product-image">
+                <h3>Saffron Daylight</h3>
+                <div class="product-price">
+                    <span class="current-price">₹850</span>
+                    <span class="original-price">₹1,200</span>
+                    <div class="discount">29% off</div>
                 </div>
-            </a>
-            <a href="product-detail.html" style="text-decoration: none; color: inherit;">
-                <div class="product-item-card">
-                    <img src="images/lungi_collection.jpg" alt="Purple patterned lungi" class="product-image">
-                    <h3>Jaipuri Block Print</h3>
-                    <p>Click for details</p>
+            </div>
+            <div class="product-item-card" onclick="viewProduct('jaipuri-block-print', 'Jaipuri Block Print Lungi', '₹1,000', '₹1,500', 'images/handloom_lungi.jpg')">
+                <img src="images/handloom_lungi.jpg" alt="Purple patterned lungi" class="product-image">
+                <h3>Jaipuri Block Print</h3>
+                <div class="product-price">
+                    <span class="current-price">₹1,000</span>
+                    <span class="original-price">₹1,500</span>
+                    <div class="discount">33% off</div>
                 </div>
-            </a>
+            </div>
         </div>
     </main>
     
@@ -398,6 +447,23 @@
                 badge.textContent = totalItems;
                 badge.style.display = totalItems > 0 ? 'flex' : 'none';
             }
+        }
+
+        // Product selection function
+        function viewProduct(productId, productName, productPrice, originalPrice, productImage) {
+            const productData = {
+                id: productId,
+                name: productName,
+                price: Number(productPrice.replace(/[₹,]/g, '')),
+                originalPrice: Number(originalPrice.replace(/[₹,]/g, '')),
+                image: productImage
+            };
+
+            // Store selected product in localStorage
+            localStorage.setItem('selectedProduct', JSON.stringify(productData));
+
+            // Redirect to product detail page
+            window.location.href = 'product-detail.html';
         }
     </script>
 </body>
