@@ -86,8 +86,10 @@
         }
         
         .product-grid-container {
-            padding: 4rem 2rem;
+            padding: 2rem;
             text-align: center;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         .product-grid-container h2 {
@@ -97,13 +99,254 @@
             letter-spacing: 2px;
             color: #8e44ad;
             text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.15);
-            margin-bottom: 4rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Filter and Sort Section */
+        .filter-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e1e5e9;
+        }
+
+        .filter-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: white;
+            border: 1px solid #ddd;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .filter-toggle:hover {
+            border-color: #8e44ad;
+            color: #8e44ad;
+        }
+
+        .sort-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .sort-label {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .sort-select {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background: white;
+            font-size: 14px;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .sort-select:focus {
+            outline: none;
+            border-color: #8e44ad;
+        }
+
+        /* Filter Sidebar */
+        .filter-sidebar {
+            position: fixed;
+            top: 0;
+            left: -350px;
+            width: 320px;
+            height: 100vh;
+            height: 100dvh; /* Dynamic viewport height for mobile */
+            background: white;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 2rem 1.5rem;
+            scrollbar-width: thin;
+            scrollbar-color: #8e44ad #f0f0f0;
+        }
+
+        .filter-sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .filter-sidebar::-webkit-scrollbar-track {
+            background: #f0f0f0;
+            border-radius: 3px;
+        }
+
+        .filter-sidebar::-webkit-scrollbar-thumb {
+            background: #8e44ad;
+            border-radius: 3px;
+        }
+
+        .filter-sidebar::-webkit-scrollbar-thumb:hover {
+            background: #7d3c98;
+        }
+
+        .filter-sidebar.open {
+            left: 0;
+        }
+
+        .filter-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .filter-overlay.active {
+            display: block;
+        }
+
+        /* Hide body scrollbar when filter is open */
+        body.filter-open {
+            overflow: hidden;
+        }
+
+        .filter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e1e5e9;
+        }
+
+        .filter-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin: 0;
+        }
+
+        .filter-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #666;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .filter-group {
+            margin-bottom: 2rem;
+        }
+
+        .filter-group-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .filter-option input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: #8e44ad;
+        }
+
+        .price-range {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .price-input {
+            flex: 1;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .price-separator {
+            color: #666;
+            font-weight: 500;
+        }
+
+        .apply-filters {
+            width: 100%;
+            padding: 0.75rem;
+            background: #8e44ad;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .apply-filters:hover {
+            background: #7d3c98;
+        }
+
+        .clear-filters {
+            width: 100%;
+            padding: 0.75rem;
+            background: transparent;
+            color: #8e44ad;
+            border: 1px solid #8e44ad;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 0.5rem;
+        }
+
+        .clear-filters:hover {
+            background: #8e44ad;
+            color: white;
+        }
+
+        /* Main Content Layout */
+        .main-content {
+            display: flex;
+            gap: 2rem;
         }
 
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            flex: 1;
+        }
+
+        .results-count {
+            text-align: left;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 1rem;
         }
         
         .product-item-card {
@@ -157,10 +400,28 @@
         }
         
         /* Enhanced Responsive Design */
-        @media (max-width: 1024px) {
+        @media (max-width: 1200px) {
             .product-grid {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(2, 1fr);
                 gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .filter-section {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .sort-section {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
             }
         }
 
@@ -188,21 +449,39 @@
             }
 
             .product-grid-container {
-                padding: 2rem 1rem;
+                padding: 1rem;
             }
 
             .product-grid-container h2 {
                 font-size: 2rem;
-                margin-bottom: 2rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .filter-section {
+                margin-bottom: 1.5rem;
+            }
+
+            .filter-toggle {
+                font-size: 13px;
+                padding: 0.4rem 0.8rem;
+            }
+
+            .sort-label {
+                font-size: 13px;
+            }
+
+            .sort-select {
+                font-size: 13px;
+                padding: 0.4rem 0.8rem;
             }
 
             .product-grid {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: 1fr;
                 gap: 1rem;
             }
 
-            .product-image-placeholder {
-                height: 160px;
+            .product-image {
+                height: 200px;
             }
 
             .product-item-card {
@@ -215,6 +494,11 @@
 
             .product-item-card p {
                 font-size: 12px;
+            }
+
+            .filter-sidebar {
+                width: 280px;
+                left: -300px;
             }
         }
 
@@ -238,12 +522,28 @@
             }
 
             .product-grid-container {
-                padding: 1.5rem 0.5rem;
+                padding: 0.5rem;
             }
 
             .product-grid-container h2 {
                 font-size: 1.5rem;
-                margin-bottom: 1.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .filter-section {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .filter-toggle {
+                font-size: 12px;
+                padding: 0.3rem 0.6rem;
+            }
+
+            .sort-section {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-start;
             }
 
             .product-grid {
@@ -251,8 +551,8 @@
                 gap: 0.8rem;
             }
 
-            .product-image-placeholder {
-                height: 120px;
+            .product-image {
+                height: 180px;
             }
 
             .product-item-card {
@@ -267,6 +567,15 @@
             .product-item-card p {
                 font-size: 11px;
             }
+
+            .filter-sidebar {
+                width: 250px;
+                padding: 1rem;
+            }
+
+            .filter-title {
+                font-size: 16px;
+            }
         }
     </style>
 </head>
@@ -275,9 +584,9 @@
     <header>
         <h2>Lunsara</h2>
         <nav class="navbar">
-            <a href="index.html">Home</a>
-            <a href="index.html#about">About</a>
-            <a href="index.html#contact">Contact</a>
+            <a href="homepage.html">Home</a>
+            <a href="homepage.html#about">About</a>
+            <a href="homepage.html#contact">Contact</a>
             <a href="cart.html" class="cart-link cart-nav-link">
                 <span class="cart-icon-container">
                     <i class="fas fa-shopping-cart"></i>
@@ -288,9 +597,121 @@
         </nav>
     </header>
 
+    <!-- Filter Overlay -->
+    <div class="filter-overlay" id="filter-overlay"></div>
+
+    <!-- Filter Sidebar -->
+    <div class="filter-sidebar" id="filter-sidebar">
+        <div class="filter-header">
+            <h3 class="filter-title">Filters</h3>
+            <button class="filter-close" onclick="closeFilter()">&times;</button>
+        </div>
+
+        <div class="filter-group">
+            <h4 class="filter-group-title">Price Range</h4>
+            <div class="price-range">
+                <input type="number" class="price-input" placeholder="Min" id="min-price">
+                <span class="price-separator">to</span>
+                <input type="number" class="price-input" placeholder="Max" id="max-price">
+            </div>
+        </div>
+
+        <div class="filter-group">
+            <h4 class="filter-group-title">Discount</h4>
+            <div class="filter-option">
+                <input type="checkbox" id="discount-20" value="20">
+                <label for="discount-20">20% or more</label>
+            </div>
+            <div class="filter-option">
+                <input type="checkbox" id="discount-30" value="30">
+                <label for="discount-30">30% or more</label>
+            </div>
+            <div class="filter-option">
+                <input type="checkbox" id="discount-40" value="40">
+                <label for="discount-40">40% or more</label>
+            </div>
+        </div>
+
+        <div class="filter-group">
+            <h4 class="filter-group-title">Colors</h4>
+            <div class="filter-option">
+                <input type="checkbox" id="blue" value="blue">
+                <label for="blue">Blue</label>
+            </div>
+            <div class="filter-option">
+                <input type="checkbox" id="red" value="red">
+                <label for="red">Red</label>
+            </div>
+            <div class="filter-option">
+                <input type="checkbox" id="green" value="green">
+                <label for="green">Green</label>
+            </div>
+            <div class="filter-option">
+                <input type="checkbox" id="purple" value="purple">
+                <label for="purple">Purple</label>
+            </div>
+            <div class="filter-option">
+                <input type="checkbox" id="pink" value="pink">
+                <label for="pink">Pink</label>
+            </div>
+            <div class="filter-option">
+                <input type="checkbox" id="orange" value="orange">
+                <label for="orange">Orange</label>
+            </div>
+            <div class="filter-option">
+                <input type="checkbox" id="yellow" value="yellow">
+                <label for="yellow">Yellow</label>
+            </div>
+            <div class="filter-option">
+                <input type="checkbox" id="black" value="black">
+                <label for="black">Black</label>
+            </div>
+            <div class="filter-option">
+                <input type="checkbox" id="white" value="white">
+                <label for="white">White</label>
+            </div>
+            <div class="filter-option">
+                <input type="checkbox" id="maroon" value="maroon">
+                <label for="maroon">Maroon</label>
+            </div>
+            <div class="filter-option">
+                <input type="checkbox" id="teal" value="teal">
+                <label for="teal">Teal</label>
+            </div>
+            <div class="filter-option">
+                <input type="checkbox" id="magenta" value="magenta">
+                <label for="magenta">Magenta</label>
+            </div>
+        </div>
+
+        <button class="apply-filters" onclick="applyFilters()">Apply Filters</button>
+        <button class="clear-filters" onclick="clearFilters()">Clear All</button>
+    </div>
+
     <main class="product-grid-container">
         <h2>Our Kanchipuram Silk Sarees Collection</h2>
-        <div class="product-grid">
+
+        <!-- Filter and Sort Section -->
+        <div class="filter-section">
+            <button class="filter-toggle" onclick="openFilter()">
+                <i class="fas fa-filter"></i>
+                Filters
+            </button>
+            <div class="sort-section">
+                <span class="sort-label">Sort by:</span>
+                <select class="sort-select" id="sort-select" onchange="sortProducts()">
+                    <option value="featured">Featured</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="discount">Discount</option>
+                    <option value="newest">Newest</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="results-count" id="results-count">Showing 12 products</div>
+
+        <div class="product-grid" id="product-grid">
             <div class="product-item-card" onclick="viewProduct('kanchipuram-royal-blue', 'Kanchipuram Royal Blue Saree', '₹15,500', '₹22,000', 'images/silk_saree.jpg')">
                 <img src="images/silk_saree.jpg" alt="Kanchipuram Royal Blue Saree" class="product-image">
                 <h3>Kanchipuram Royal Blue Saree</h3>
@@ -360,9 +781,138 @@
 
     <script src="cart.js"></script>
     <script>
+        // Product data
+        const products = [
+            {
+                id: 'kanchipuram-royal-blue',
+                name: 'Kanchipuram Royal Blue Saree',
+                price: 15500,
+                originalPrice: 22000,
+                image: 'images/silk_saree.jpg',
+                discount: 30,
+                colors: ['blue'],
+                category: 'silk-saree'
+            },
+            {
+                id: 'kanchipuram-red-gold',
+                name: 'Kanchipuram Red Gold Saree',
+                price: 18200,
+                originalPrice: 25000,
+                image: 'images/silk_saree_collection.jpg',
+                discount: 27,
+                colors: ['red'],
+                category: 'silk-saree'
+            },
+            {
+                id: 'kanchipuram-green-temple',
+                name: 'Kanchipuram Green Temple Saree',
+                price: 16800,
+                originalPrice: 24000,
+                image: 'images/background1.jpg',
+                discount: 30,
+                colors: ['green'],
+                category: 'silk-saree'
+            },
+            {
+                id: 'kanchipuram-purple-elegance',
+                name: 'Kanchipuram Purple Elegance Saree',
+                price: 19500,
+                originalPrice: 28000,
+                image: 'images/background2.jpg',
+                discount: 30,
+                colors: ['purple'],
+                category: 'silk-saree'
+            },
+            {
+                id: 'kanchipuram-pink-pearl',
+                name: 'Kanchipuram Pink Pearl Saree',
+                price: 17300,
+                originalPrice: 26000,
+                image: 'images/background3.jpg',
+                discount: 33,
+                colors: ['pink'],
+                category: 'silk-saree'
+            },
+            {
+                id: 'kanchipuram-orange-bliss',
+                name: 'Kanchipuram Orange Bliss Saree',
+                price: 14900,
+                originalPrice: 21000,
+                image: 'images/silk_saree.jpg',
+                discount: 29,
+                colors: ['orange'],
+                category: 'silk-saree'
+            },
+            {
+                id: 'kanchipuram-yellow-sunshine',
+                name: 'Kanchipuram Yellow Sunshine Saree',
+                price: 16200,
+                originalPrice: 23000,
+                image: 'images/silk_saree_collection.jpg',
+                discount: 30,
+                colors: ['yellow'],
+                category: 'silk-saree'
+            },
+            {
+                id: 'kanchipuram-black-diamond',
+                name: 'Kanchipuram Black Diamond Saree',
+                price: 21500,
+                originalPrice: 32000,
+                image: 'images/background1.jpg',
+                discount: 33,
+                colors: ['black'],
+                category: 'silk-saree'
+            },
+            {
+                id: 'kanchipuram-white-silver',
+                name: 'Kanchipuram White Silver Saree',
+                price: 18700,
+                originalPrice: 27000,
+                image: 'images/background2.jpg',
+                discount: 31,
+                colors: ['white'],
+                category: 'silk-saree'
+            },
+            {
+                id: 'kanchipuram-maroon-royal',
+                name: 'Kanchipuram Maroon Royal Saree',
+                price: 19200,
+                originalPrice: 29000,
+                image: 'images/background3.jpg',
+                discount: 34,
+                colors: ['maroon'],
+                category: 'silk-saree'
+            },
+            {
+                id: 'kanchipuram-teal-dream',
+                name: 'Kanchipuram Teal Dream Saree',
+                price: 15800,
+                originalPrice: 24000,
+                image: 'images/silk_saree.jpg',
+                discount: 34,
+                colors: ['teal'],
+                category: 'silk-saree'
+            },
+            {
+                id: 'kanchipuram-magenta-magic',
+                name: 'Kanchipuram Magenta Magic Saree',
+                price: 17600,
+                originalPrice: 26000,
+                image: 'images/silk_saree_collection.jpg',
+                discount: 32,
+                colors: ['magenta'],
+                category: 'silk-saree'
+            }
+        ];
+
+        let filteredProducts = [...products];
+        let currentSort = 'featured';
+
         // Update cart badge when page loads
         document.addEventListener('DOMContentLoaded', function() {
             updateCartBadge();
+            displayProducts();
+            updateResultsCount();
         });
 
         function updateCartBadge() {
@@ -376,22 +926,133 @@
             }
         }
 
+        // Filter functions
+        function openFilter() {
+            document.getElementById('filter-sidebar').classList.add('open');
+            document.getElementById('filter-overlay').classList.add('active');
+            document.body.classList.add('filter-open');
+        }
+
+        function closeFilter() {
+            document.getElementById('filter-sidebar').classList.remove('open');
+            document.getElementById('filter-overlay').classList.remove('active');
+            document.body.classList.remove('filter-open');
+        }
+
+        function applyFilters() {
+            const minPrice = document.getElementById('min-price').value ? parseInt(document.getElementById('min-price').value) : 0;
+            const maxPrice = document.getElementById('max-price').value ? parseInt(document.getElementById('max-price').value) : Infinity;
+
+            const discountFilters = [];
+            if (document.getElementById('discount-20').checked) discountFilters.push(20);
+            if (document.getElementById('discount-30').checked) discountFilters.push(30);
+            if (document.getElementById('discount-40').checked) discountFilters.push(40);
+
+            const colorFilters = [];
+            if (document.getElementById('blue').checked) colorFilters.push('blue');
+            if (document.getElementById('red').checked) colorFilters.push('red');
+            if (document.getElementById('green').checked) colorFilters.push('green');
+            if (document.getElementById('purple').checked) colorFilters.push('purple');
+            if (document.getElementById('pink').checked) colorFilters.push('pink');
+            if (document.getElementById('orange').checked) colorFilters.push('orange');
+            if (document.getElementById('yellow').checked) colorFilters.push('yellow');
+            if (document.getElementById('black').checked) colorFilters.push('black');
+            if (document.getElementById('white').checked) colorFilters.push('white');
+            if (document.getElementById('maroon').checked) colorFilters.push('maroon');
+            if (document.getElementById('teal').checked) colorFilters.push('teal');
+            if (document.getElementById('magenta').checked) colorFilters.push('magenta');
+
+            filteredProducts = products.filter(product => {
+                const priceMatch = product.price >= minPrice && product.price <= maxPrice;
+                const discountMatch = discountFilters.length === 0 || discountFilters.some(d => product.discount >= d);
+                const colorMatch = colorFilters.length === 0 || colorFilters.some(color => product.colors.includes(color));
+
+                return priceMatch && discountMatch && colorMatch;
+            });
+
+            sortProducts();
+            closeFilter();
+        }
+
+        function clearFilters() {
+            document.getElementById('min-price').value = '';
+            document.getElementById('max-price').value = '';
+
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(cb => cb.checked = false);
+
+            filteredProducts = [...products];
+            sortProducts();
+        }
+
+        function sortProducts() {
+            const sortValue = document.getElementById('sort-select').value;
+
+            switch(sortValue) {
+                case 'price-low':
+                    filteredProducts.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-high':
+                    filteredProducts.sort((a, b) => b.price - a.price);
+                    break;
+                case 'discount':
+                    filteredProducts.sort((a, b) => b.discount - a.discount);
+                    break;
+                case 'newest':
+                    // Keep original order for newest
+                    break;
+                default:
+                    filteredProducts = [...products];
+            }
+
+            currentSort = sortValue;
+            displayProducts();
+            updateResultsCount();
+        }
+
+        function displayProducts() {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
+
+            filteredProducts.forEach(product => {
+                const discount = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
+                const card = document.createElement('div');
+                card.className = 'product-item-card';
+                card.onclick = () => viewProduct(product.id, product.name, `₹${product.price.toLocaleString()}`, `₹${product.originalPrice.toLocaleString()}`, product.image);
+
+                card.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <h3>${product.name}</h3>
+                    <p>₹${product.price.toLocaleString()} <span style="text-decoration: line-through; color: #999;">₹${product.originalPrice.toLocaleString()}</span></p>
+                `;
+
+                grid.appendChild(card);
+            });
+        }
+
+        function updateResultsCount() {
+            const count = document.getElementById('results-count');
+            count.textContent = `Showing ${filteredProducts.length} product${filteredProducts.length !== 1 ? 's' : ''}`;
+        }
+
         function viewProduct(productId, productName, productPrice, originalPrice, productImage) {
-            // Store product details in localStorage
-            const productDetails = {
+            const product = products.find(p => p.id === productId);
+            const productData = {
                 id: productId,
                 name: productName,
                 price: Number(productPrice.replace(/[₹,]/g, '')),
                 originalPrice: Number(originalPrice.replace(/[₹,]/g, '')),
                 image: productImage,
-                category: 'silk-saree'
+                category: 'silk-saree',
+                colors: product.colors
             };
 
-            localStorage.setItem('selectedProduct', JSON.stringify(productDetails));
-
-            // Redirect to product detail page
+            localStorage.setItem('selectedProduct', JSON.stringify(productData));
             window.location.href = 'product-detail.html';
         }
+
+        // Close filter when clicking overlay
+        document.getElementById('filter-overlay').addEventListener('click', closeFilter);
     </script>
 </body>
 </html>

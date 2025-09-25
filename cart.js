@@ -1,16 +1,17 @@
 // This function should run on every page to ensure the badge is always up-to-date.
 document.addEventListener('DOMContentLoaded', () => {
     updateCartBadge();
+    loadUserCart();
 });
 
 /**
  * Updates the cart count badge in the header.
- * It gets the total quantity of items from localStorage.
+ * It gets the total quantity of items from user-specific cart storage.
  */
 function updateCartBadge() {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cart = getUserCart();
     const cartCountElement = document.getElementById('cart-count');
-    
+
     // The count is the sum of quantities, not just the number of array entries.
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
@@ -32,8 +33,8 @@ function updateCartBadge() {
  * @param {string} image - The source URL of the product image.
  */
 function addToCart(name, price, image) {
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    
+    const cart = getUserCart();
+
     // Check if item already exists in cart.
     const existingProductIndex = cart.findIndex(item => item.name === name);
 
@@ -45,8 +46,47 @@ function addToCart(name, price, image) {
         const product = { name, price, image, quantity: 1 };
         cart.push(product);
     }
-    
-    localStorage.setItem('cart', JSON.stringify(cart));
+
+    saveUserCart(cart);
     updateCartBadge();
     alert(`'${name}' has been added to your cart!`);
+}
+
+/**
+ * Gets the current user's cart from localStorage
+ * @returns {Array} User's cart items
+ */
+function getUserCart() {
+    if (typeof auth !== 'undefined' && auth.isLoggedIn()) {
+        const currentUser = auth.getCurrentUser();
+        const userCartKey = `cart_${currentUser.id}`;
+        return JSON.parse(localStorage.getItem(userCartKey)) || [];
+    } else {
+        // Fallback to general cart for non-logged-in users
+        return JSON.parse(localStorage.getItem('cart')) || [];
+    }
+}
+
+/**
+ * Saves the cart to localStorage for the current user
+ * @param {Array} cart - Cart items to save
+ */
+function saveUserCart(cart) {
+    if (typeof auth !== 'undefined' && auth.isLoggedIn()) {
+        const currentUser = auth.getCurrentUser();
+        const userCartKey = `cart_${currentUser.id}`;
+        localStorage.setItem(userCartKey, JSON.stringify(cart));
+    } else {
+        // Fallback to general cart for non-logged-in users
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+}
+
+/**
+ * Loads user cart data (for pages that need to display cart contents)
+ */
+function loadUserCart() {
+    // This function can be used by cart.html and other pages that need to display cart contents
+    const cart = getUserCart();
+    return cart;
 }

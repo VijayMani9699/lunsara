@@ -1,0 +1,1053 @@
+p<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Lunsara</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #a46ebb 0%, #c8a5d5 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Watermark styles */
+        body::before {
+            content: "LUNSARA";
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+            font-size: 3rem;
+            font-weight: 700;
+            color: rgba(21, 7, 7, 0.08);
+            z-index: 0;
+            pointer-events: none;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        body::after {
+            content: "HANDLOOM LUNGIS";
+            position: absolute;
+            top: 70%;
+            right: 10%;
+            transform: translate(50%, 50%) rotate(15deg);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: rgba(21, 7, 7, 0.08);
+            z-index: 0;
+            pointer-events: none;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .watermark-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .watermark-text {
+            position: absolute;
+            font-size: 2rem;
+            font-weight: 700;
+            color: rgba(21, 7, 7, 0.08);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        .watermark-1 { top: 15%; left: 60%; transform: rotate(25deg); }
+        .watermark-1::before { content: "SILK SAREES"; }
+        .watermark-2 { top: 45%; left: 5%; transform: rotate(-25deg); }
+        .watermark-2::before { content: "PRINTED SAREES"; }
+        .watermark-3 { top: 85%; left: 70%; transform: rotate(10deg); }
+        .watermark-3::before { content: "COTTON LUNGIS"; }
+        .watermark-4 { top: 35%; left: 75%; transform: rotate(-10deg); }
+        .watermark-4::before { content: "TRADITIONAL WEAR"; }
+        .watermark-5 { top: 65%; left: 25%; transform: rotate(20deg); }
+        .watermark-5::before { content: "QUALITY FABRICS"; }
+        .watermark-6 { top: 25%; left: 30%; transform: rotate(-20deg); }
+        .watermark-6::before { content: "AUTHENTIC TEXTILES"; }
+        .watermark-7 { top: 75%; left: 45%; transform: rotate(15deg); }
+        .watermark-7::before { content: "HANDCRAFTED"; }
+        .watermark-8 { top: 10%; left: 20%; transform: rotate(35deg); }
+        .watermark-8::before { content: "DESIGNER WEAR"; }
+        .watermark-9 { top: 90%; left: 15%; transform: rotate(-15deg); }
+        .watermark-9::before { content: "PREMIUM QUALITY"; }
+        .watermark-10 { top: 50%; left: 85%; transform: rotate(30deg); }
+        .watermark-10::before { content: "EXCLUSIVE COLLECTION"; }
+        .watermark-11 { top: 30%; left: 15%; transform: rotate(-30deg); }
+        .watermark-11::before { content: "FINE WEAVING"; }
+        .watermark-12 { top: 80%; left: 35%; transform: rotate(25deg); }
+        .watermark-12::before { content: "ARTISAN MADE"; }
+        .watermark-13 { top: 40%; left: 50%; transform: rotate(-35deg); }
+        .watermark-13::before { content: "TIMELESS ELEGANCE"; }
+        .watermark-14 { top: 60%; left: 60%; transform: rotate(12deg); }
+        .watermark-14::before { content: "HERITAGE TEXTILES"; }
+        .watermark-15 { top: 20%; left: 80%; transform: rotate(-12deg); }
+        .watermark-15::before { content: "MASTER CRAFTSMAN"; }
+        .watermark-16 { top: 70%; left: 10%; transform: rotate(18deg); }
+        .watermark-16::before { content: "LUXURY FABRICS"; }
+        .watermark-17 { top: 55%; left: 40%; transform: rotate(-18deg); }
+        .watermark-17::before { content: "TRADITIONAL ART"; }
+        .watermark-18 { top: 85%; left: 55%; transform: rotate(8deg); }
+        .watermark-18::before { content: "HANDWOVEN"; }
+        .watermark-19 { top: 5%; left: 45%; transform: rotate(-8deg); }
+        .watermark-19::before { content: "CLASSIC DESIGNS"; }
+        .watermark-20 { top: 95%; left: 80%; transform: rotate(22deg); }
+        .watermark-20::before { content: "PREMIUM SILK"; }
+        .watermark-21 { top: 15%; left: 85%; transform: rotate(-25deg); }
+        .watermark-21::before { content: "HANDLOOM EXCELLENCE"; }
+        .watermark-22 { top: 75%; left: 5%; transform: rotate(35deg); }
+        .watermark-22::before { content: "CRAFTSMANSHIP"; }
+        .watermark-23 { top: 45%; left: 90%; transform: rotate(-15deg); }
+        .watermark-23::before { content: "TRADITIONAL PATTERNS"; }
+        .watermark-24 { top: 85%; left: 25%; transform: rotate(20deg); }
+        .watermark-24::before { content: "FINEST QUALITY"; }
+        .watermark-25 { top: 25%; left: 5%; transform: rotate(-30deg); }
+        .watermark-25::before { content: "AUTHENTIC DESIGNS"; }
+        .watermark-26 { top: 65%; left: 95%; transform: rotate(12deg); }
+        .watermark-26::before { content: "LUXURIOUS TEXTILES"; }
+        .watermark-27 { top: 35%; left: 35%; transform: rotate(25deg); }
+        .watermark-27::before { content: "TIMELESS STYLE"; }
+        .watermark-28 { top: 55%; left: 75%; transform: rotate(-20deg); }
+        .watermark-28::before { content: "HANDMADE PERFECTION"; }
+
+
+        /* Modal overlay with website purple color */
+        .modal-overlay {
+            background: rgba(142, 68, 173, 0.7) !important;
+        }
+
+        .auth-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+
+        .auth-header {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .auth-header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .auth-header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        .auth-tabs {
+            display: flex;
+            background: #f8f9fa;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .auth-tab.active {
+            color: #8e44ad;
+            background: white;
+            border-bottom-color: #8e44ad;
+        }
+
+        .auth-form {
+            padding: 30px 20px;
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #8e44ad;
+            box-shadow: 0 0 0 3px rgba(142, 68, 173, 0.1);
+        }
+
+        .form-group input.error {
+            border-color: #e74c3c;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .password-toggle {
+            position: relative;
+        }
+
+        .password-toggle input {
+            padding-right: 45px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #666;
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .remember-me input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+
+        .forgot-password {
+            color: #8e44ad;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .auth-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(142, 68, 173, 0.3);
+        }
+
+        .auth-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .auth-divider {
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .auth-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e1e5e9;
+        }
+
+        .auth-divider span {
+            background: white;
+            padding: 0 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .social-login {
+            display: flex;
+            justify-content: center;
+        }
+
+        .social-btn {
+            padding: 12px 24px;
+            border: 2px solid #4285f4;
+            border-radius: 10px;
+            background: #4285f4;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 14px;
+            color: white;
+            min-width: 200px;
+        }
+
+        .social-btn:hover {
+            background: #3367d6;
+            border-color: #3367d6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
+        }
+
+        .auth-footer {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .auth-footer a {
+            color: #8e44ad;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #8e44ad;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .auth-container {
+                margin: 5px;
+                border-radius: 15px;
+                max-width: 100%;
+            }
+
+            .auth-header {
+                padding: 25px 20px;
+            }
+
+            .auth-header h1 {
+                font-size: 22px;
+            }
+
+            .auth-header p {
+                font-size: 13px;
+            }
+
+            .auth-tabs {
+                margin: 0 20px;
+            }
+
+            .auth-tab {
+                padding: 12px;
+                font-size: 14px;
+            }
+
+            .auth-form {
+                padding: 25px 20px;
+            }
+
+            .form-group input {
+                font-size: 16px; /* Prevents zoom on iOS */
+                padding: 14px 16px;
+            }
+
+            .form-options {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .remember-me {
+                margin-bottom: 5px;
+            }
+
+            .auth-btn {
+                padding: 16px;
+                font-size: 16px;
+                min-height: 50px;
+            }
+
+            .social-btn {
+                min-width: 200px;
+                padding: 14px 20px;
+                font-size: 15px;
+            }
+
+            .auth-footer {
+                padding: 15px 20px;
+                font-size: 13px;
+            }
+
+            .auth-footer p {
+                line-height: 1.4;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 5px;
+            }
+
+            .auth-container {
+                margin: 0;
+                border-radius: 12px;
+            }
+
+            .auth-header {
+                padding: 20px 15px;
+            }
+
+            .auth-header h1 {
+                font-size: 20px;
+                line-height: 1.2;
+            }
+
+            .auth-header p {
+                font-size: 12px;
+            }
+
+            .auth-tabs {
+                margin: 0 15px;
+            }
+
+            .auth-tab {
+                padding: 10px 8px;
+                font-size: 13px;
+            }
+
+            .auth-form {
+                padding: 20px 15px;
+            }
+
+            .form-group input {
+                padding: 12px 14px;
+                font-size: 16px;
+            }
+
+            .form-group label {
+                font-size: 13px;
+            }
+
+            .auth-btn {
+                padding: 14px;
+                font-size: 15px;
+                min-height: 48px;
+            }
+
+            .social-btn {
+                min-width: 180px;
+                padding: 12px 16px;
+                font-size: 14px;
+            }
+
+            .auth-footer {
+                padding: 12px 15px;
+                font-size: 12px;
+            }
+
+            .auth-divider {
+                font-size: 13px;
+                margin: 15px 0;
+            }
+
+            .auth-divider span {
+                padding: 0 10px;
+            }
+
+            /* Adjust watermark positioning for mobile */
+            .watermark-1 { top: 10%; left: 70%; }
+            .watermark-2 { top: 40%; left: 2%; }
+            .watermark-3 { top: 80%; left: 75%; }
+            .watermark-4 { top: 30%; left: 80%; }
+            .watermark-5 { top: 60%; left: 20%; }
+            .watermark-6 { top: 20%; left: 25%; }
+            .watermark-7 { top: 70%; left: 40%; }
+            .watermark-8 { top: 5%; left: 15%; }
+            .watermark-9 { top: 85%; left: 10%; }
+            .watermark-10 { top: 45%; left: 90%; }
+            .watermark-11 { top: 25%; left: 10%; }
+            .watermark-12 { top: 75%; left: 30%; }
+            .watermark-13 { top: 35%; left: 45%; }
+            .watermark-14 { top: 55%; left: 65%; }
+            .watermark-15 { top: 15%; left: 85%; }
+            .watermark-16 { top: 65%; left: 5%; }
+            .watermark-17 { top: 50%; left: 35%; }
+            .watermark-18 { top: 80%; left: 50%; }
+            .watermark-19 { top: 2%; left: 40%; }
+            .watermark-20 { top: 90%; left: 85%; }
+            .watermark-21 { top: 10%; left: 90%; }
+            .watermark-22 { top: 70%; left: 2%; }
+            .watermark-23 { top: 40%; left: 95%; }
+            .watermark-24 { top: 80%; left: 20%; }
+            .watermark-25 { top: 20%; left: 2%; }
+            .watermark-26 { top: 60%; left: 98%; }
+            .watermark-27 { top: 30%; left: 30%; }
+            .watermark-28 { top: 50%; left: 80%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-header">
+            <h1>Welcome to Lunsara</h1>
+            <p>Sign in to your account or create a new one</p>
+        </div>
+
+        <div class="auth-tabs">
+            <div class="auth-tab active" onclick="showTab('login')">Login</div>
+            <div class="auth-tab" onclick="showTab('register')">Register</div>
+        </div>
+
+        <!-- Login Form -->
+        <div id="login-form" class="auth-form active">
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="login-email">Email Address</label>
+                    <input type="email" id="login-email" required>
+                    <div class="error-message" id="login-email-error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <div class="password-toggle">
+                        <input type="password" id="login-password" required>
+                        <i class="fas fa-eye toggle-password" onclick="togglePassword('login-password')"></i>
+                    </div>
+                    <div class="error-message" id="login-password-error"></div>
+                </div>
+
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" id="remember-me">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#" class="forgot-password" onclick="showForgotPassword()">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="auth-btn" id="login-btn">
+                    <span class="btn-text">Sign In</span>
+                </button>
+            </form>
+        </div>
+
+        <!-- Register Form -->
+        <div id="register-form" class="auth-form">
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="register-name">Full Name</label>
+                    <input type="text" id="register-name" required>
+                    <div class="error-message" id="register-name-error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="register-email">Email Address</label>
+                    <input type="email" id="register-email" required>
+                    <div class="error-message" id="register-email-error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="register-phone">Phone Number</label>
+                    <input type="tel" id="register-phone" required>
+                    <div class="error-message" id="register-phone-error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="register-password">Password</label>
+                    <div class="password-toggle">
+                        <input type="password" id="register-password" required>
+                        <i class="fas fa-eye toggle-password" onclick="togglePassword('register-password')"></i>
+                    </div>
+                    <div class="error-message" id="register-password-error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="register-confirm-password">Confirm Password</label>
+                    <div class="password-toggle">
+                        <input type="password" id="register-confirm-password" required>
+                        <i class="fas fa-eye toggle-password" onclick="togglePassword('register-confirm-password')"></i>
+                    </div>
+                    <div class="error-message" id="register-confirm-password-error"></div>
+                </div>
+
+                <button type="submit" class="auth-btn" id="register-btn">
+                    <span class="btn-text">Create Account</span>
+                </button>
+            </form>
+        </div>
+
+        <div class="auth-divider">
+            <span>Or continue with</span>
+        </div>
+
+        <div class="auth-form active">
+            <div class="social-login">
+                <button class="social-btn" onclick="socialLogin('google')">
+                    <i class="fab fa-google"></i>
+                    Continue with Google
+                </button>
+            </div>
+        </div>
+
+        <div class="auth-footer">
+            <p>By signing in, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></p>
+        </div>
+    </div>
+
+    <!-- Watermark Overlay -->
+    <div class="watermark-overlay">
+        <div class="watermark-text watermark-1"></div>
+        <div class="watermark-text watermark-2"></div>
+        <div class="watermark-text watermark-3"></div>
+        <div class="watermark-text watermark-4"></div>
+        <div class="watermark-text watermark-5"></div>
+        <div class="watermark-text watermark-6"></div>
+        <div class="watermark-text watermark-7"></div>
+        <div class="watermark-text watermark-8"></div>
+        <div class="watermark-text watermark-9"></div>
+        <div class="watermark-text watermark-10"></div>
+        <div class="watermark-text watermark-11"></div>
+        <div class="watermark-text watermark-12"></div>
+        <div class="watermark-text watermark-13"></div>
+        <div class="watermark-text watermark-14"></div>
+        <div class="watermark-text watermark-15"></div>
+        <div class="watermark-text watermark-16"></div>
+        <div class="watermark-text watermark-17"></div>
+        <div class="watermark-text watermark-18"></div>
+        <div class="watermark-text watermark-19"></div>
+        <div class="watermark-text watermark-20"></div>
+        <div class="watermark-text watermark-21"></div>
+        <div class="watermark-text watermark-22"></div>
+        <div class="watermark-text watermark-23"></div>
+        <div class="watermark-text watermark-24"></div>
+        <div class="watermark-text watermark-25"></div>
+        <div class="watermark-text watermark-26"></div>
+        <div class="watermark-text watermark-27"></div>
+        <div class="watermark-text watermark-28"></div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div id="forgot-password-modal" class="modal-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; align-items: center; justify-content: center;">
+        <div style="background: white; border-radius: 15px; padding: 30px; width: 90%; max-width: 400px;">
+            <h3 style="margin-bottom: 20px; color: #8e44ad; text-align: center;">Reset Password</h3>
+            <p style="margin-bottom: 20px; color: #666; text-align: center; font-size: 14px;">
+                Enter your email address and we'll send you a link to reset your password.
+            </p>
+            <form id="forgotPasswordForm">
+                <div class="form-group">
+                    <label for="forgot-email">Email Address</label>
+                    <input type="email" id="forgot-email" required>
+                    <div class="error-message" id="forgot-email-error"></div>
+                </div>
+                <button type="submit" class="auth-btn">
+                    <span class="btn-text">Send Reset Link</span>
+                </button>
+                <div style="text-align: center; margin-top: 15px;">
+                    <button type="button" onclick="hideForgotPassword()" style="background: none; border: none; color: #8e44ad; cursor: pointer; font-size: 14px;">
+                        Back to Login
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching functionality
+        function showTab(tab) {
+            // Update tab buttons
+            document.querySelectorAll('.auth-tab').forEach(tabBtn => {
+                tabBtn.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+
+            // Update forms
+            document.querySelectorAll('.auth-form').forEach(form => {
+                form.classList.remove('active');
+            });
+
+            if (tab === 'login') {
+                document.getElementById('login-form').classList.add('active');
+            } else {
+                document.getElementById('register-form').classList.add('active');
+            }
+        }
+
+        // Password toggle functionality
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const icon = input.parentElement.querySelector('.toggle-password');
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        // Show forgot password modal
+        function showForgotPassword() {
+            document.getElementById('forgot-password-modal').style.display = 'flex';
+        }
+
+        // Hide forgot password modal
+        function hideForgotPassword() {
+            document.getElementById('forgot-password-modal').style.display = 'none';
+            document.getElementById('forgotPasswordForm').reset();
+            clearErrors();
+        }
+
+        // Forgot password form submission
+        document.getElementById('forgotPasswordForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const email = document.getElementById('forgot-email').value.trim();
+
+            if (!email) {
+                showError('forgot-email', 'Email is required');
+                return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showError('forgot-email', 'Please enter a valid email address');
+                return;
+            }
+
+            // Show loading state
+            const submitBtn = this.querySelector('.auth-btn');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<div class="loading"></div>';
+            submitBtn.disabled = true;
+
+            // Use auth module for password reset
+            setTimeout(() => {
+                const result = auth.requestPasswordReset(email);
+
+                if (result.success) {
+                    alert(`Password reset instructions have been sent to ${email}\n\nFor demo purposes, the reset token is: ${result.token}`);
+                    hideForgotPassword();
+                } else {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    showError('forgot-email', result.message);
+                }
+            }, 1000);
+        });
+
+        // Social login placeholder
+        function socialLogin(provider) {
+            alert(`${provider} login will be implemented soon!`);
+        }
+
+        // Form validation
+        function showError(inputId, message) {
+            const input = document.getElementById(inputId);
+            const errorDiv = document.getElementById(inputId + '-error');
+
+            input.classList.add('error');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+
+        function clearErrors() {
+            document.querySelectorAll('.error-message').forEach(error => {
+                error.style.display = 'none';
+            });
+            document.querySelectorAll('input').forEach(input => {
+                input.classList.remove('error');
+            });
+        }
+
+        // Login form submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            clearErrors();
+
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value;
+
+            // Basic validation
+            if (!email || !password) {
+                if (!email) showError('login-email', 'Email is required');
+                if (!password) showError('login-password', 'Password is required');
+                return;
+            }
+
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showError('login-email', 'Please enter a valid email address');
+                return;
+            }
+
+            // Show loading state
+            const loginBtn = document.getElementById('login-btn');
+            const originalText = loginBtn.innerHTML;
+            loginBtn.innerHTML = '<div class="loading"></div>';
+            loginBtn.disabled = true;
+
+            // Simulate login process
+            setTimeout(() => {
+                // Check if user exists in localStorage
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+                const user = users.find(u => u.email === email && u.password === password);
+
+                if (user) {
+                    // Successful login
+                    const userSession = {
+                        id: user.id,
+                        name: user.name,
+                        email: user.email,
+                        loginTime: new Date().toISOString()
+                    };
+
+                    localStorage.setItem('currentUser', JSON.stringify(userSession));
+
+                    // Remember me functionality
+                    if (document.getElementById('remember-me').checked) {
+                        localStorage.setItem('rememberedUser', email);
+                    } else {
+                        localStorage.removeItem('rememberedUser');
+                    }
+
+                    alert('Login successful! Redirecting...');
+                    const redirectPage = localStorage.getItem('redirectAfterLogin') || 'homepage.html';
+                    localStorage.removeItem('redirectAfterLogin');
+                    window.location.href = redirectPage;
+                } else {
+                    // Login failed
+                    loginBtn.innerHTML = originalText;
+                    loginBtn.disabled = false;
+                    showError('login-password', 'Invalid email or password');
+                }
+            }, 1000);
+        });
+
+        // Register form submission
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            clearErrors();
+
+            const name = document.getElementById('register-name').value.trim();
+            const email = document.getElementById('register-email').value.trim();
+            const phone = document.getElementById('register-phone').value.trim();
+            const password = document.getElementById('register-password').value;
+            const confirmPassword = document.getElementById('register-confirm-password').value;
+
+            // Validation
+            if (!name) {
+                showError('register-name', 'Full name is required');
+                return;
+            }
+
+            if (!email) {
+                showError('register-email', 'Email is required');
+                return;
+            }
+
+            if (!phone) {
+                showError('register-phone', 'Phone number is required');
+                return;
+            }
+
+            if (!password) {
+                showError('register-password', 'Password is required');
+                return;
+            }
+
+            if (!confirmPassword) {
+                showError('register-confirm-password', 'Please confirm your password');
+                return;
+            }
+
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showError('register-email', 'Please enter a valid email address');
+                return;
+            }
+
+            // Phone validation
+            const phoneRegex = /^[6-9]\d{9}$/;
+            if (!phoneRegex.test(phone)) {
+                showError('register-phone', 'Please enter a valid 10-digit mobile number');
+                return;
+            }
+
+            // Password validation
+            if (password.length < 6) {
+                showError('register-password', 'Password must be at least 6 characters long');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                showError('register-confirm-password', 'Passwords do not match');
+                return;
+            }
+
+            // Show loading state
+            const registerBtn = document.getElementById('register-btn');
+            const originalText = registerBtn.innerHTML;
+            registerBtn.innerHTML = '<div class="loading"></div>';
+            registerBtn.disabled = true;
+
+            // Simulate registration process
+            setTimeout(() => {
+                // Check if user already exists
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+                const existingUser = users.find(u => u.email === email);
+
+                if (existingUser) {
+                    registerBtn.innerHTML = originalText;
+                    registerBtn.disabled = false;
+                    showError('register-email', 'An account with this email already exists');
+                    return;
+                }
+
+                // Create new user
+                const newUser = {
+                    id: Date.now().toString(),
+                    name,
+                    email,
+                    phone,
+                    password,
+                    createdAt: new Date().toISOString()
+                };
+
+                users.push(newUser);
+                localStorage.setItem('users', JSON.stringify(users));
+
+                // Auto-login after registration
+                const userSession = {
+                    id: newUser.id,
+                    name: newUser.name,
+                    email: newUser.email,
+                    loginTime: new Date().toISOString()
+                };
+
+                localStorage.setItem('currentUser', JSON.stringify(userSession));
+
+                alert('Account created successfully! Please login to continue.');
+                window.location.href = 'login.html';
+            }, 1000);
+        });
+
+        // Load remembered email and handle redirects
+        document.addEventListener('DOMContentLoaded', function() {
+            const rememberedEmail = localStorage.getItem('rememberedUser');
+            if (rememberedEmail) {
+                document.getElementById('login-email').value = rememberedEmail;
+                document.getElementById('remember-me').checked = true;
+            }
+
+            // Handle redirect parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const redirectTo = urlParams.get('redirect');
+
+            if (redirectTo) {
+                localStorage.setItem('redirectAfterLogin', redirectTo);
+            }
+
+            // Check if user is already logged in
+            if (window.auth && window.auth.isLoggedIn()) {
+                const redirectPage = localStorage.getItem('redirectAfterLogin') || 'homepage.html';
+                localStorage.removeItem('redirectAfterLogin');
+                window.location.href = redirectPage;
+            }
+        });
+    </script>
+</body>
+</html>
