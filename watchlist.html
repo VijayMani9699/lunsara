@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Watchlist | Lunsara</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #8e44ad;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(142, 68, 173, 0.3);
+        }
+
+        header h2 {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .logo {
+            height: 40px;
+            width: auto;
+            margin-right: 5px;
+        }
+
+        .navbar {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar a:hover {
+            background-color: white;
+            color: #8e44ad;
+        }
+
+        /* Profile Status Bar */
+        .profile-status-bar {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            border-radius: 25px;
+            padding: 8px 16px;
+            box-shadow: 0 4px 15px rgba(142, 68, 173, 0.3);
+            margin-left: 15px;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .profile-status-bar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(142, 68, 173, 0.4);
+        }
+
+        .status-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+        }
+
+        .user-details {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .user-name-display {
+            font-weight: 600;
+            font-size: 14px;
+            color: white;
+        }
+
+        .user-status {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: none;
+        }
+
+        .status-actions {
+            display: flex;
+            gap: 15px;
+            margin-left: 8px;
+        }
+
+        .status-btn {
+            width: auto;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-size: 12px;
+            padding: 0 10px;
+            gap: 5px;
+        }
+
+        .status-label {
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .status-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        /* Main Content */
+        .watchlist-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .watchlist-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .watchlist-header h1 {
+            font-size: 2.5rem;
+            color: #8e44ad;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .watchlist-header p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Watchlist Stats */
+        .watchlist-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            min-width: 150px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #8e44ad;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Watchlist Items */
+        .watchlist-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .watchlist-item {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .watchlist-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .watchlist-item-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .watchlist-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .watchlist-item:hover .watchlist-item-image img {
+            transform: scale(1.05);
+        }
+
+        .watchlist-item-content {
+            padding: 1.5rem;
+        }
+
+        .watchlist-item-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .watchlist-item-description {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin-bottom: 1rem;
+        }
+
+        .watchlist-item-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .watchlist-item-price {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #8e44ad;
+        }
+
+        .watchlist-item-date {
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        .watchlist-item-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            padding: 0.6rem 1rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            width: 120px;
+            height: 40px;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(142, 68, 173, 0.3);
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+
+        /* Empty State */
+        .empty-watchlist {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .empty-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 32px;
+            color: white;
+        }
+
+        .empty-title {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .empty-message {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #f8f8f8;
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+            border-top: 1px solid #e1e5e9;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            color: #333;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #8e44ad;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid #e1e5e9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-copyright {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #8e44ad;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Notification - Hidden by default */
+        .notification {
+            display: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .navbar {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .profile-status-bar {
+                margin-left: 0;
+                margin-top: 10px;
+                padding: 8px 14px;
+                border-radius: 20px;
+            }
+
+            .watchlist-container {
+                padding: 1rem;
+            }
+
+            .watchlist-header h1 {
+                font-size: 2rem;
+            }
+
+            .watchlist-stats {
+                gap: 1rem;
+            }
+
+            .stat-card {
+                min-width: 120px;
+                padding: 1rem;
+            }
+
+            .stat-number {
+                font-size: 1.5rem;
+            }
+
+            .watchlist-items {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .watchlist-container {
+                padding: 0.5rem;
+            }
+
+            .watchlist-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .watchlist-header p {
+                font-size: 1rem;
+            }
+
+            .watchlist-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .stat-card {
+                min-width: 100%;
+            }
+
+            .watchlist-items {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .watchlist-item-content {
+                padding: 1rem;
+            }
+
+            .watchlist-item-title {
+                font-size: 1.1rem;
+            }
+
+            .watchlist-item-description {
+                font-size: 0.85rem;
+            }
+
+            .watchlist-item-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .footer-section {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>
+            <img src="images/logo.png" alt="Lunsara Logo" class="logo">
+            Lunsara
+        </h2>
+
+        <nav class="navbar">
+            <!-- Navigation items removed as they're redundant with status bar -->
+        </nav>
+
+        <div class="profile-status-bar" id="profile-status-bar" style="display: none;">
+            <div class="status-content">
+                <div class="user-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="user-details">
+                    <div class="user-name-display" id="user-name-display">Welcome!</div>
+                    <div class="user-status">Premium Member</div>
+                </div>
+                <div class="status-actions">
+                    <a href="homepage.html" class="status-btn home-btn" title="Home">
+                        <span class="status-label">Home</span>
+                        <i class="fas fa-home"></i>
+                    </a>
+                    <a href="profile.html" class="status-btn profile-btn" title="Profile">
+                        <span class="status-label">Profile</span>
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <a href="cart.html" class="status-btn bag-btn" title="Shopping Bag">
+                        <span class="status-label">Cart</span>
+                        <i class="fas fa-shopping-bag"></i>
+                        <span id="status-cart-count" class="status-cart-badge">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="watchlist-container">
+        <div class="watchlist-header">
+            <h1><i class="fas fa-heart"></i> My Watchlist</h1>
+            <p>Keep track of your favorite items and get notified when they're available or on sale.</p>
+        </div>
+
+        <div class="watchlist-stats">
+            <div class="stat-card">
+                <div class="stat-number" id="total-items">0</div>
+                <div class="stat-label">Total Items</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="available-items">0</div>
+                <div class="stat-label">Available</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="on-sale-items">0</div>
+                <div class="stat-label">On Sale</div>
+            </div>
+        </div>
+
+        <div class="watchlist-items" id="watchlist-items">
+            <!-- Watchlist items will be populated here -->
+        </div>
+
+        <div class="empty-watchlist" id="empty-watchlist" style="display: none;">
+            <div class="empty-icon">
+                <i class="fas fa-heart"></i>
+            </div>
+            <h2 class="empty-title">Your Watchlist is Empty</h2>
+            <p class="empty-message">
+                Start browsing our collections and add items to your watchlist to keep track of products you're interested in.
+            </p>
+            <a href="lungis.html" class="btn btn-primary">
+                <i class="fas fa-shopping-bag"></i>
+                Browse Products
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>Online Shopping</h4>
+                <ul>
+                    <li><a href="lungis.html">Lungis</a></li>
+                    <li><a href="silk.html">Silk Sarees</a></li>
+                    <li><a href="printed.html">Printed Sarees</a></li>
+                    <li><a href="homepage.html">All Products</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Customer Service</h4>
+                <ul>
+                    <li><a href="order-tracking.html">Track Order</a></li>
+                    <li><a href="watchlist.html">My Watchlist</a></li>
+                    <li><a href="#">Return Policy</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="#">Sustainability</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Contact Info</h4>
+                <ul>
+                    <li><a href="#footer">Contact Us</a></li>
+                    <li>
+                        <a href="mailto:info@lunsara.com">
+                            <i class="fas fa-envelope"></i>
+                            info@lunsara.com
+                        </a>
+                    </li>
+                    <li>
+                        <a href="tel:+917904955956">
+                            <i class="fas fa-phone"></i>
+                            +91 7904955956
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h4>Connect With Us</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-copyright">
+                &copy; 2025 Lunsara. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+
+    <script src="auth.js"></script>
+    <script src="cart.js"></script>
+    <script>
+        // Sample watchlist data structure
+        const sampleWatchlistItems = [
+            {
+                id: 1,
+                name: "Premium Cotton Lungi",
+                description: "Traditional handwoven cotton lungi with intricate border design",
+                price: "₹850",
+                originalPrice: "₹950",
+                image: "images/lungi_collection.jpg",
+                dateAdded: "2025-01-15",
+                available: true,
+                onSale: true,
+                category: "Lungis"
+            },
+            {
+                id: 2,
+                name: "Pure Silk Saree",
+                description: "Handwoven pure silk saree with traditional motifs",
+                price: "₹2,500",
+                originalPrice: "₹3,000",
+                image: "images/silk_saree_collection.jpg",
+                dateAdded: "2025-01-10",
+                available: true,
+                onSale: true,
+                category: "Silk Sarees"
+            },
+            {
+                id: 3,
+                name: "Designer Printed Saree",
+                description: "Modern printed saree with contemporary designs",
+                price: "₹1,200",
+                originalPrice: "₹1,200",
+                image: "images/printed_saree_collection.jpg",
+                dateAdded: "2025-01-08",
+                available: false,
+                onSale: false,
+                category: "Printed Sarees"
+            }
+        ];
+
+        // DOM Elements
+        const watchlistItemsContainer = document.getElementById('watchlist-items');
+        const emptyWatchlistContainer = document.getElementById('empty-watchlist');
+        const totalItemsEl = document.getElementById('total-items');
+        const availableItemsEl = document.getElementById('available-items');
+        const onSaleItemsEl = document.getElementById('on-sale-items');
+        const notificationEl = document.getElementById('notification');
+
+        // Load watchlist from localStorage or use sample data
+        function loadWatchlist() {
+            const savedWatchlist = localStorage.getItem('watchlist');
+            if (savedWatchlist) {
+                return JSON.parse(savedWatchlist);
+            }
+            return sampleWatchlistItems;
+        }
+
+        // Save watchlist to localStorage
+        function saveWatchlist(watchlist) {
+            localStorage.setItem('watchlist', JSON.stringify(watchlist));
+        }
+
+        // Show notification
+        function showNotification(message, type = 'success') {
+            notificationEl.textContent = message;
+            notificationEl.className = `notification ${type}`;
+            notificationEl.classList.add('show');
+
+            setTimeout(() => {
+                notificationEl.classList.remove('show');
+            }, 3000);
+        }
+
+        // Remove item from watchlist
+        function removeFromWatchlist(itemId) {
+            const watchlist = loadWatchlist();
+            const updatedWatchlist = watchlist.filter(item => item.id !== itemId);
+            saveWatchlist(updatedWatchlist);
+            renderWatchlist();
+            showNotification('Item removed from watchlist', 'error');
+        }
+
+        // Format date
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-IN', {
+                day: 'numeric',
+                month: 'short',
+                year: 'numeric'
+            });
+        }
+
+        // Create watchlist item HTML
+        function createWatchlistItemHTML(item) {
+            const isOnSale = item.onSale;
+            const isAvailable = item.available;
+
+            return `
+                <div class="watchlist-item">
+                    <div class="watchlist-item-image">
+                        <img src="${item.image}" alt="${item.name}" onerror="this.src='images/placeholder.jpg'">
+                        ${!isAvailable ? '<div class="sold-out-overlay">Out of Stock</div>' : ''}
+                        ${isOnSale ? '<div class="sale-badge">SALE</div>' : ''}
+                    </div>
+                    <div class="watchlist-item-content">
+                        <h3 class="watchlist-item-title">${item.name}</h3>
+                        <p class="watchlist-item-description">${item.description}</p>
+                        <div class="watchlist-item-meta">
+                            <div class="watchlist-item-price">
+                                ${isOnSale ? item.price : item.price}
+                            </div>
+                            <div class="watchlist-item-date">
+                                Added: ${formatDate(item.dateAdded)}
+                            </div>
+                        </div>
+                        <div class="watchlist-item-actions">
+                            <a href="product-detail.html?id=${item.id}" class="btn btn-primary">
+                                <i class="fas fa-eye"></i>
+                                View Details
+                            </a>
+                            <button class="btn btn-danger" onclick="removeFromWatchlist(${item.id})">
+                                <i class="fas fa-trash"></i>
+                                Remove
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Render watchlist
+        function renderWatchlist() {
+            const watchlist = loadWatchlist();
+
+            if (watchlist.length === 0) {
+                watchlistItemsContainer.style.display = 'none';
+                emptyWatchlistContainer.style.display = 'block';
+            } else {
+                watchlistItemsContainer.style.display = 'grid';
+                emptyWatchlistContainer.style.display = 'none';
+
+                watchlistItemsContainer.innerHTML = watchlist.map(item =>
+                    createWatchlistItemHTML(item)
+                ).join('');
+            }
+
+            // Update stats
+            totalItemsEl.textContent = watchlist.length;
+            availableItemsEl.textContent = watchlist.filter(item => item.available).length;
+            onSaleItemsEl.textContent = watchlist.filter(item => item.onSale).length;
+        }
+
+        // Update user interface based on authentication state
+        function updateUserInterface() {
+            const profileStatusBar = document.getElementById('profile-status-bar');
+            const userNameDisplay = document.getElementById('user-name-display');
+
+            if (auth.isLoggedIn()) {
+                const currentUser = auth.getCurrentUser();
+
+                if (profileStatusBar) {
+                    profileStatusBar.style.display = 'block';
+                }
+                if (userNameDisplay) {
+                    userNameDisplay.textContent = `Welcome, ${currentUser.name}!`;
+                }
+            } else {
+                if (profileStatusBar) {
+                    profileStatusBar.style.display = 'none';
+                }
+            }
+        }
+
+        // Handle logout
+        function handleLogout(event) {
+            event.preventDefault();
+            if (confirm('Are you sure you want to logout?')) {
+                auth.logout();
+                alert('You have been logged out successfully');
+                window.location.href = 'homepage.html';
+            }
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            updateUserInterface();
+            renderWatchlist();
+
+            // Add click handler for watchlist button in header
+            document.querySelector('.status-btn.watchlist-btn')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Watchlist is already the current page
+            });
+        });
+
+        // Listen for authentication state changes
+        window.addEventListener('authStateChanged', function(e) {
+            updateUserInterface();
+        });
+
+        // Global utility functions for watchlist
+        window.addToWatchlist = function(item) {
+            const watchlist = loadWatchlist();
+
+            // Check if item already exists
+            const existingItem = watchlist.find(watchlistItem => watchlistItem.id === item.id);
+
+            if (existingItem) {
+                showNotification('Item already in watchlist!', 'error');
+                return false;
+            }
+
+            // Add item to watchlist
+            watchlist.push({
+                ...item,
+                dateAdded: new Date().toISOString()
+            });
+
+            saveWatchlist(watchlist);
+            showNotification('Item added to watchlist successfully!');
+            renderWatchlist(); // Refresh the watchlist
+
+            return true;
+        };
+
+        // Global utility function for notifications
+        window.showNotification = function(message, type = 'success') {
+            showNotification(message, type);
+        };
+    </script>
+</body>
+</html>
