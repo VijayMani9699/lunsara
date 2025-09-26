@@ -16,31 +16,36 @@
 
         /* Header Styles */
         header {
-            background: #8e44ad;
+            background-color: #8e44ad;
             color: white;
-            padding: 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header-top {
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
+            gap: 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(142, 68, 173, 0.3);
         }
 
         header h2 {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-weight: 700;
             margin: 0;
-            font-size: 24px;
-            font-weight: 600;
-            color: white;
-            text-align: center;
-            position: relative;
+        }
+
+        .logo {
+            height: 40px;
+            width: auto;
+            margin-right: 5px;
+        }
+
+        header h2 small a {
+            color: #ddd;
+            text-decoration: none;
         }
 
         .navbar {
@@ -52,24 +57,247 @@
         .navbar a {
             color: white;
             text-decoration: none;
-            padding: 8px 16px;
-            border-radius: 2px;
-            transition: background-color 0.2s;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 8px;
+        }
+
+/* Logout Confirmation Modal Styles */
+.logout-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 10001;
+    display: none; /* Hidden by default */
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+}
+
+.logout-modal-content {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    transform: scale(0.8);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+/* This class is added by JavaScript to trigger the animation */
+.logout-modal.show .logout-modal-content {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.logout-modal-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 32px;
+    color: white;
+}
+
+.logout-modal-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.logout-modal-message {
+    color: #666;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
+
+.logout-modal-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.logout-modal-btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.logout-modal-btn-primary {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+}
+
+.logout-modal-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+}
+
+.logout-modal-btn-secondary {
+    background: #f8f9fa;
+    color: #666;
+    border: 2px solid #e1e5e9;
+}
+
+.logout-modal-btn-secondary:hover {
+    background: #e9ecef;
+    border-color: #e74c3c;
+    color: #e74c3c;
+}
+        /* Profile Status Bar Styles */
+        .profile-status-bar {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            border-radius: 25px;
+            padding: 8px 16px;
+            box-shadow: 0 4px 15px rgba(142, 68, 173, 0.3);
+            margin-left: 15px;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .profile-status-bar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(142, 68, 173, 0.4);
+        }
+
+        .status-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+        }
+
+        .user-details {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .user-name-display {
+            font-weight: 600;
             font-size: 14px;
+            color: white;
         }
 
-        .navbar a:hover {
+        .user-status {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: none;
+        }
+
+        .status-actions {
+            display: flex;
+            gap: 15px;
+            margin-left: 8px;
+        }
+
+        .status-btn {
+            width: auto;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-size: 12px;
+            padding: 0 10px;
+            gap: 5px;
+        }
+
+        .status-label {
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .status-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .status-btn.home-btn:hover {
+            background: white;
+            color: #8e44ad;
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(142, 68, 173, 0.3);
+        }
+
+        .status-btn.watchlist-btn:hover {
             background: white;
             color: #8e44ad;
         }
 
-        .navbar a.active-cart {
+        .status-btn.bag-btn:hover {
             background: white;
             color: #8e44ad;
-            font-weight: 500;
+        }
+
+        .status-btn.address-btn:hover {
+            background: white;
+            color: #8e44ad;
+        }
+
+        .status-btn.logout-btn:hover {
+            background: white;
+            color: #8e44ad;
+        }
+
+        .status-btn.address-btn:hover {
+            background: white;
+            color: #8e44ad;
+        }
+
+        /* Status Bar Cart Badge */
+        .status-cart-badge {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border: 2px solid #8e44ad;
+            display: none;
         }
 
         .cart-icon-container {
@@ -590,6 +818,60 @@
 
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .profile-status-bar {
+                margin-left: 0;
+                margin-top: 10px;
+                padding: 8px 14px;
+                border-radius: 20px;
+            }
+
+            .status-content {
+                gap: 10px;
+                justify-content: center;
+            }
+
+            .user-avatar {
+                width: 30px;
+                height: 30px;
+                font-size: 16px;
+            }
+
+            .user-name-display {
+                font-size: 13px;
+                text-align: center;
+            }
+
+            .user-status {
+                font-size: 10px;
+                text-align: center;
+            }
+
+            .status-actions {
+                gap: 8px;
+                margin-left: 8px;
+                justify-content: center;
+            }
+
+            .status-btn {
+                width: auto;
+                height: 26px;
+                font-size: 11px;
+                padding: 0 10px;
+                min-height: 26px;
+            }
+
+            .status-label {
+                font-size: 11px;
+            }
+
             .cart-container {
                 padding: 0 12px;
             }
@@ -758,6 +1040,58 @@
 
         /* Extra small screens */
         @media (max-width: 480px) {
+            header {
+                padding: 0.8rem;
+                gap: 0.8rem;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .profile-status-bar {
+                padding: 6px 12px;
+                border-radius: 18px;
+                margin: 0 auto;
+            }
+
+            .status-content {
+                gap: 8px;
+                justify-content: center;
+            }
+
+            .user-avatar {
+                width: 26px;
+                height: 26px;
+                font-size: 14px;
+            }
+
+            .user-name-display {
+                font-size: 12px;
+                text-align: center;
+            }
+
+            .user-status {
+                font-size: 9px;
+                text-align: center;
+            }
+
+            .status-actions {
+                gap: 6px;
+                margin-left: 6px;
+                justify-content: center;
+            }
+
+            .status-btn {
+                width: auto;
+                height: 22px;
+                font-size: 10px;
+                padding: 0 8px;
+                min-height: 22px;
+            }
+
+            .status-label {
+                font-size: 10px;
+            }
+
             .cart-container {
                 padding: 0 8px;
             }
@@ -810,23 +1144,53 @@
                 padding: 12px;
             }
         }
+
+
     </style>
 </head>
 <body>
     <header>
-        <div class="header-top">
-            <h2>Lunsara</h2>
-            <nav class="navbar">
-                <a href="homepage.html">Home</a>
-                <a href="cart.html" class="active-cart">
-                    <span class="cart-icon-container">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span id="cart-count" class="cart-badge">0</span>
-                    </span>
-                    <span>Cart</span>
+        <h2>
+            <img src="images/logo.png" alt="Lunsara Logo" class="logo">
+            Lunsara
+        </h2>
+
+        <nav class="navbar">
+            <!-- Authentication Buttons -->
+            <div class="auth-buttons">
+                <a href="login.html" class="auth-login" style="display: none;">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Login
                 </a>
-            </nav>
-        </div>
+
+                <!-- Profile Status Bar -->
+                <div class="profile-status-bar" id="profile-status-bar" style="display: none;">
+                    <div class="status-content">
+                        <div class="user-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="user-details">
+                            <div class="user-name-display" id="user-name-display">Welcome!</div>
+                            <div class="user-status">Premium Member</div>
+                        </div>
+                        <div class="status-actions">
+                            <a href="homepage.html" class="status-btn home-btn" title="Home">
+                                <span class="status-label">Home</span>
+                                <i class="fas fa-home"></i>
+                            </a>
+                            <a href="watchlist.html" class="status-btn watchlist-btn" title="Watchlist">
+                                <span class="status-label">Watchlist</span>
+                                <i class="fas fa-heart"></i>
+                            </a>
+                            <a href="#" class="status-btn logout-btn" onclick="handleLogout(event)" title="Logout">
+                                <span class="status-label">Logout</span>
+                                <i class="fas fa-sign-out-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
     </header>
 
     <main class="cart-container">
@@ -926,12 +1290,215 @@
         </div>
     </main>
 
+    <!-- Logout Confirmation Modal -->
+    <div id="logout-modal" class="logout-modal">
+      <div class="logout-modal-content">
+        <div class="logout-modal-icon">
+          <i class="fas fa-sign-out-alt"></i>
+        </div>
+        <h3 class="logout-modal-title">Confirm Logout</h3>
+        <p class="logout-modal-message">
+          Are you sure you want to logout? You'll need to sign in again to access your account.
+        </p>
+        <div class="logout-modal-buttons">
+          <button class="logout-modal-btn logout-modal-btn-primary" onclick="confirmLogout()">
+            Yes, Logout
+          </button>
+          <button class="logout-modal-btn logout-modal-btn-secondary" onclick="cancelLogout()">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="cart.js"></script>
     <script>
         // This function will run when the page is fully loaded.
         document.addEventListener('DOMContentLoaded', () => {
             updateCartBadge();
             displayCartItems(); // Call this here to show items on the cart page
+            updateUserInterface(); // Initialize user interface
+            updateCartCount(); // Initialize cart count
+            updateWatchlistCount(); // Initialize watchlist count
         });
+
+       // Authentication event handlers
+       function handleLogout(event) {
+           event.preventDefault();
+           showLogoutModal();
+       }
+
+       // Show logout confirmation modal
+       function showLogoutModal() {
+           const modal = document.getElementById('logout-modal');
+           modal.style.display = 'flex';
+
+           // Trigger animation
+           setTimeout(() => {
+               modal.classList.add('show');
+           }, 100);
+       }
+
+       // Hide logout confirmation modal
+       function hideLogoutModal() {
+           const modal = document.getElementById('logout-modal');
+           modal.classList.remove('show');
+
+           setTimeout(() => {
+               modal.style.display = 'none';
+           }, 300);
+       }
+
+       // Confirm logout action
+       function confirmLogout() {
+           hideLogoutModal();
+           auth.logout();
+           showNotification('You have been logged out successfully');
+           window.location.reload();
+       }
+
+       // Cancel logout action
+       function cancelLogout() {
+           hideLogoutModal();
+       }
+
+       // Close logout modal when clicking outside
+       document.getElementById('logout-modal').addEventListener('click', function(e) {
+           if (e.target === this) {
+               cancelLogout();
+           }
+       });
+
+       // Close logout modal with Escape key
+       document.addEventListener('keydown', function(e) {
+           if (e.key === 'Escape') {
+               const modal = document.getElementById('logout-modal');
+               if (modal.style.display === 'flex') {
+                   cancelLogout();
+               }
+           }
+       });
+
+         // Handle bag/cart click
+        function handleBagClick(event) {
+            event.preventDefault();
+            window.location.href = 'cart.html';
+        }
+
+        // Update cart count in status bar
+        function updateCartCount() {
+            const cartCount = document.getElementById('cart-count');
+            const statusBarCartCount = document.getElementById('status-cart-count');
+
+            if (cartCount && statusBarCartCount) {
+                const count = cartCount.textContent || '0';
+                statusBarCartCount.textContent = count;
+                statusBarCartCount.style.display = 'flex';
+            }
+        }
+
+        // Update watchlist count in status bar
+        function updateWatchlistCount() {
+            const statusBarWatchlistCount = document.getElementById('status-watchlist-count');
+
+            if (statusBarWatchlistCount) {
+                const watchlist = JSON.parse(localStorage.getItem('watchlist') || '[]');
+                const count = watchlist.length;
+                statusBarWatchlistCount.textContent = count;
+                statusBarWatchlistCount.style.display = 'flex';
+            }
+        }
+
+        // Update user interface based on authentication state
+        function updateUserInterface() {
+            const userNameElement = document.getElementById('user-name');
+            const userEmailElement = document.getElementById('user-email');
+            const profileStatusBar = document.getElementById('profile-status-bar');
+            const userNameDisplay = document.getElementById('user-name-display');
+            const loginButtons = document.querySelectorAll('.auth-login');
+            const logoutButtons = document.querySelectorAll('.auth-logout');
+            const userMenu = document.querySelector('.user-menu');
+
+            if (auth.isLoggedIn()) {
+                const currentUser = auth.getCurrentUser();
+
+                // Update profile status bar
+                if (profileStatusBar) {
+                    profileStatusBar.style.display = 'block';
+                }
+                if (userNameDisplay) {
+                    userNameDisplay.textContent = `Welcome, ${currentUser.name}!`;
+                }
+
+                // Update dropdown
+                if (userNameElement) userNameElement.textContent = currentUser.name;
+                if (userEmailElement) userEmailElement.textContent = currentUser.email;
+
+                // Hide login buttons, show logout buttons
+                loginButtons.forEach(btn => btn.style.display = 'none');
+                logoutButtons.forEach(btn => btn.style.display = 'block');
+                if (userMenu) userMenu.style.display = 'block';
+
+            } else {
+                // Hide profile status bar
+                if (profileStatusBar) {
+                    profileStatusBar.style.display = 'none';
+                }
+
+                // Show login buttons, hide logout buttons
+                loginButtons.forEach(btn => btn.style.display = 'block');
+                logoutButtons.forEach(btn => btn.style.display = 'none');
+                if (userMenu) userMenu.style.display = 'none';
+            }
+        }
+
+        // Listen for authentication state changes
+        window.addEventListener('authStateChanged', function(e) {
+            updateUserInterface();
+        });
+
+        // Listen for cart updates
+        window.addEventListener('cartUpdated', function() {
+            updateCartCount();
+        });
+
+        // Listen for watchlist updates
+        window.addEventListener('watchlistUpdated', function() {
+            updateWatchlistCount();
+        });
+
+        // Show notification (global utility function)
+        function showNotification(message, type = 'success') {
+            // Create notification element if it doesn't exist
+            let notification = document.getElementById('global-notification');
+            if (!notification) {
+                notification = document.createElement('div');
+                notification.id = 'global-notification';
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: ${type === 'error' ? '#e74c3c' : '#27ae60'};
+                    color: white;
+                    padding: 1rem 1.5rem;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+                    z-index: 10000;
+                    transform: translateX(100%);
+                    transition: transform 0.3s ease;
+                `;
+                document.body.appendChild(notification);
+            }
+
+            notification.textContent = message;
+            notification.style.background = type === 'error' ? '#e74c3c' : '#27ae60';
+            notification.classList.add('show');
+
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
         
         /**
          * Updates the cart count badge in the header.

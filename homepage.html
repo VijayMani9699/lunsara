@@ -230,13 +230,18 @@
     background: white;
     color: #8e44ad;
     transform: scale(1.1);
-    box-shadow: 0 4px 12px rgba(255, 193, 7, 0.4);
+    box-shadow: 0 4px 12px rgba(142, 68, 173, 0.3);
 }
 
 .status-btn.watchlist-btn:hover {
-    background: white;
-    color: #8e44ad;
-}
+     background: white;
+     color: #8e44ad;
+ }
+
+.status-btn.product-btn:hover {
+     background: white;
+     color: #8e44ad;
+ }
 
 .status-btn.bag-btn:hover {
     background: white;
@@ -244,9 +249,9 @@
 }
 
 .status-btn.logout-btn:hover {
-    background: white;
-    color: #8e44ad;
-}
+     background: white;
+     color: #8e44ad;
+ }
 
 /* Profile Dropdown Styles */
 .profile-dropdown-container {
@@ -329,8 +334,8 @@
 /* Status Bar Cart Badge */
 .status-cart-badge {
     position: absolute;
-    top: -6px;
-    right: -6px;
+    top: 2px;
+    right: 2px;
     background-color: #e74c3c;
     color: white;
     border-radius: 50%;
@@ -344,6 +349,7 @@
     border: 2px solid #8e44ad;
     display: none;
 }
+
 
 .user-info {
     padding: 15px 20px;
@@ -456,9 +462,108 @@
 }
 
 .login-prompt-btn-secondary:hover {
-    background: #e9ecef;
-    border-color: #8e44ad;
-    color: #8e44ad;
+background: #e9ecef;
+border-color: #8e44ad;
+color: #8e44ad;
+}
+
+/* Logout Confirmation Modal Styles */
+.logout-modal {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.7);
+z-index: 10001;
+display: none;
+align-items: center;
+justify-content: center;
+backdrop-filter: blur(5px);
+}
+
+.logout-modal-content {
+background: white;
+border-radius: 20px;
+padding: 30px;
+max-width: 400px;
+width: 90%;
+text-align: center;
+box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+transform: scale(0.8);
+opacity: 0;
+transition: all 0.3s ease;
+}
+
+.logout-modal.show .logout-modal-content {
+transform: scale(1);
+opacity: 1;
+}
+
+.logout-modal-icon {
+width: 80px;
+height: 80px;
+background: linear-gradient(135deg, #e74c3c, #c0392b);
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+margin: 0 auto 20px;
+font-size: 32px;
+color: white;
+}
+
+.logout-modal-title {
+font-size: 24px;
+font-weight: 600;
+color: #333;
+margin-bottom: 10px;
+}
+
+.logout-modal-message {
+color: #666;
+font-size: 16px;
+line-height: 1.5;
+margin-bottom: 25px;
+}
+
+.logout-modal-buttons {
+display: flex;
+gap: 15px;
+justify-content: center;
+}
+
+.logout-modal-btn {
+padding: 12px 24px;
+border: none;
+border-radius: 10px;
+font-size: 16px;
+font-weight: 500;
+cursor: pointer;
+transition: all 0.3s ease;
+min-width: 120px;
+}
+
+.logout-modal-btn-primary {
+background: linear-gradient(135deg, #e74c3c, #c0392b);
+color: white;
+}
+
+.logout-modal-btn-primary:hover {
+transform: translateY(-2px);
+box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+}
+
+.logout-modal-btn-secondary {
+background: #f8f9fa;
+color: #666;
+border: 2px solid #e1e5e9;
+}
+
+.logout-modal-btn-secondary:hover {
+background: #e9ecef;
+border-color: #e74c3c;
+color: #e74c3c;
 }
 
     .navbar a:hover {
@@ -706,17 +811,203 @@
     }
 
 
-
-
-
-
-
-
-
-
     .product-card h3,
     .product-card p {
       color: white;
+    }
+
+    /* Bottom Bar Styles */
+    .bottom-bar {
+      background: linear-gradient(135deg, rgb(241, 240, 240) 0%, rgb(254, 254, 254) 100%);
+      color: white;
+      padding: 2rem 0 1rem;
+      margin-top: 4rem;
+      border-top: 3px solid rgba(255, 255, 255, 0.2);
+      position: relative;
+
+    }
+
+    .bottom-bar-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .bottom-bar-section {
+      background: rgba(143, 102, 151, 0.05);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .bottom-bar-section:hover {
+      background: rgba(98, 93, 93, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .bottom-bar-section h4 {
+      color: rgb(94, 91, 91);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .bottom-bar-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .bottom-bar-section li {
+      margin-bottom: 0.5rem;
+    }
+
+    .bottom-bar-section a {
+      color: rgb(94, 91, 91);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    .bottom-bar-section a:hover {
+      color: rgb(94, 91, 91);;
+      transform: translateX(5px);
+    }
+
+    .bottom-bar-section i {
+      margin-right: 0.5rem;
+      font-size: 0.8rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      color: rgb(94, 91, 91);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .social-links a:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: rgb(94, 91, 91);
+      transform: translateY(-2px) scale(1.1);
+    }
+
+    .newsletter-signup {
+      margin-top: 1rem;
+    }
+
+    .newsletter-signup p {
+      color: rgb(94, 91, 91);
+      font-size: 0.8rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      padding: 0.6rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      color: rgb(94, 91, 91);
+      font-size: 0.8rem;
+    }
+
+    .newsletter-form input::placeholder {
+      color: rgb(94, 91, 91);
+    }
+
+    .newsletter-form input:focus {
+      outline: none;
+      border-color: rgb(94, 91, 91);
+      background: rgb(94, 91, 91);
+    }
+
+    .newsletter-form button {
+      padding: 0.6rem 0.8rem;
+      background: rgba(255, 255, 255, 0.2);
+      color: rgb(94, 91, 91);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .newsletter-form button:hover {
+      background: rgb(94, 91, 91);
+      transform: scale(1.05);
+    }
+
+    .bottom-bar-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .bottom-bar-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .copyright p {
+      color: rgb(94, 91, 91);
+      font-size: 0.8rem;
+      margin: 0;
+    }
+
+    .bottom-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .bottom-links a {
+      color: rgb(94, 91, 91);
+      text-decoration: none;
+      font-size: 0.8rem;
+      transition: color 0.3s ease;
+    }
+
+    .bottom-links a:hover {
+      color: rgb(94, 91, 91);
+    }
+
+    /* Business Hours Styling */
+    .business-hours {
+      color: rgb(94, 91, 91) !important;
+    }
+
+    .business-hours i {
+      color: rgb(94, 91, 91) !important;
     }
 
     /* Coming Soon Product Card Styles */
@@ -1022,6 +1313,22 @@
             align-items: center;
         }
 
+        /* Bottom Bar - Mobile Layout */
+        .bottom-bar-container {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .bottom-bar-content {
+            flex-direction: column;
+            gap: 1rem;
+            text-align: center;
+        }
+
+        .bottom-links {
+            justify-content: center;
+        }
+
         .navbar {
             flex-wrap: wrap;
             justify-content: center;
@@ -1311,6 +1618,20 @@
             align-items: center;
         }
 
+        /* Bottom Bar - Mobile Layout */
+        .bottom-bar-container {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .bottom-bar-section {
+            text-align: center;
+        }
+
+        .bottom-bar-content {
+            text-align: center;
+        }
+
         .navbar {
             gap: 10px;
             justify-content: center;
@@ -1550,6 +1871,35 @@
             gap: 0.6rem;
             justify-content: center;
             align-items: center;
+        }
+
+        /* Bottom Bar - Extra Small Mobile */
+        .bottom-bar-container {
+            gap: 1rem;
+        }
+
+        .bottom-bar-section {
+            padding: 0.6rem;
+        }
+
+        .bottom-bar-section h4 {
+            font-size: 0.95rem;
+        }
+
+        .bottom-bar-section a {
+            font-size: 0.8rem;
+        }
+
+        .bottom-bar-content {
+            padding: 0 0.6rem;
+        }
+
+        .copyright p {
+            font-size: 0.75rem;
+        }
+
+        .bottom-links a {
+            font-size: 0.75rem;
         }
 
         .navbar {
@@ -1960,19 +2310,12 @@
             text-align: center;
         }
 
-        .footer-container {
-            justify-content: center;
-            align-items: flex-start;
-            flex-wrap: wrap;
+        .bottom-bar-container {
+            grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
         }
 
-        .footer-section {
-            flex: 1 1 180px;
-            min-width: 180px;
-        }
-
-        .footer-section {
+        .bottom-bar-section {
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -1980,54 +2323,38 @@
             padding: 1.2rem;
         }
 
-        .footer-section:hover {
+        .bottom-bar-section:hover {
             transform: none; /* Disable hover effects on touch devices */
         }
 
-        .footer-section h4 {
+        .bottom-bar-section h4 {
             font-size: 1rem;
             letter-spacing: 1px;
         }
 
-        .footer-section li {
+        .bottom-bar-section li {
             text-align: center;
             padding-left: 0;
             animation: slideInUp 0.6s ease forwards;
         }
 
-        .footer-section li::before {
+        .bottom-bar-section li::before {
             left: 50%;
             transform: translateX(-50%);
             top: -15px;
             animation: none;
         }
 
-        .footer-section a {
+        .bottom-bar-section a {
             transform: none;
             font-size: 0.95rem;
         }
 
-        .footer-section a:hover {
+        .bottom-bar-section a:hover {
             transform: translateY(-2px);
         }
 
-        .newsletter-form {
-            flex-direction: row;
-            gap: 0.8rem;
-            align-items: center;
-        }
-
-        .newsletter-form input {
-            flex: 1;
-            min-width: 180px;
-        }
-
-        .newsletter-form button {
-            flex-shrink: 0;
-            white-space: nowrap;
-        }
-
-        .footer-bottom {
+        .bottom-bar-bottom {
             text-align: center;
             align-items: center;
             justify-content: center;
@@ -2072,6 +2399,10 @@
                           <span class="status-label">Profile</span>
                           <i class="fas fa-user"></i>
                       </a>
+                      <a href="#" class="status-btn product-btn" title="Products" onclick="toggleProductsSection(event)">
+                          <span class="status-label">Products</span>
+                          <i class="fas fa-box"></i>
+                      </a>
                       <a href="watchlist.html" class="status-btn watchlist-btn" title="Watchlist">
                           <span class="status-label">Watchlist</span>
                           <i class="fas fa-heart"></i>
@@ -2089,7 +2420,6 @@
               </div>
           </div>
           </div>
-      </div>
     </nav>
   </header>
 
@@ -2199,8 +2529,77 @@
     </p>
   </section>
 
+  <!-- Bottom Bar -->
+  <footer class="bottom-bar">
+    <div class="bottom-bar-container">
+      <div class="bottom-bar-section">
+        <h4>Online Shopping</h4>
+        <ul>
+          <li><a href="lungis.html">Lungis</a></li>
+          <li><a href="silk.html">Silk Sarees</a></li>
+          <li><a href="printed.html">Printed Sarees</a></li>
+          <li><a href="homepage.html">All Products</a></li>
+        </ul>
+      </div>
 
+      <div class="bottom-bar-section">
+        <h4>Customer Service</h4>
+        <ul>
+          <li><a href="order-tracking.html">Track Order</a></li>
+          <li><a href="watchlist.html">My Watchlist</a></li>
+          <li><a href="#">Return Policy</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
 
+      <div class="bottom-bar-section">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Sustainability</a></li>
+        </ul>
+      </div>
+
+      <div class="bottom-bar-section">
+        <h4>Contact Info</h4>
+        <ul>
+          <li><a href="#footer">Contact Us</a></li>
+          <li>
+            <a href="mailto:info@lunsara.com">
+              <i class="fas fa-envelope"></i>
+              info@lunsara.com
+            </a>
+          </li>
+          <li>
+            <a href="tel:+917904955956">
+              <i class="fas fa-phone"></i>
+              +91 7904955956
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="bottom-bar-section">
+        <h4>Connect With Us</h4>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-bar-bottom">
+      <div class="bottom-bar-content">
+        <div class="copyright">
+          <p>&copy; 2025 Lunsara. All Rights Reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
 
   <!-- Login Prompt Modal -->
   <div id="login-prompt-modal" class="login-prompt-modal">
@@ -2218,6 +2617,27 @@
         </button>
         <button class="login-prompt-btn login-prompt-btn-secondary" onclick="dismissLoginPrompt()">
           Later
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Logout Confirmation Modal -->
+  <div id="logout-modal" class="logout-modal">
+    <div class="logout-modal-content">
+      <div class="logout-modal-icon">
+        <i class="fas fa-sign-out-alt"></i>
+      </div>
+      <h3 class="logout-modal-title">Confirm Logout</h3>
+      <p class="logout-modal-message">
+        Are you sure you want to logout? You'll need to sign in again to access your account.
+      </p>
+      <div class="logout-modal-buttons">
+        <button class="logout-modal-btn logout-modal-btn-primary" onclick="confirmLogout()">
+          Yes, Logout
+        </button>
+        <button class="logout-modal-btn logout-modal-btn-secondary" onclick="cancelLogout()">
+          Cancel
         </button>
       </div>
     </div>
@@ -2269,12 +2689,59 @@
     // Authentication event handlers
     function handleLogout(event) {
       event.preventDefault();
-      if (confirm('Are you sure you want to logout?')) {
-        auth.logout();
-        alert('You have been logged out successfully');
-        window.location.reload();
-      }
+      showLogoutModal();
     }
+
+    // Show logout confirmation modal
+    function showLogoutModal() {
+      const modal = document.getElementById('logout-modal');
+      modal.style.display = 'flex';
+
+      // Trigger animation
+      setTimeout(() => {
+        modal.classList.add('show');
+      }, 100);
+    }
+
+    // Hide logout confirmation modal
+    function hideLogoutModal() {
+      const modal = document.getElementById('logout-modal');
+      modal.classList.remove('show');
+
+      setTimeout(() => {
+        modal.style.display = 'none';
+      }, 300);
+    }
+
+    // Confirm logout action
+    function confirmLogout() {
+      hideLogoutModal();
+      auth.logout();
+      showNotification('You have been logged out successfully');
+      window.location.reload();
+    }
+
+    // Cancel logout action
+    function cancelLogout() {
+      hideLogoutModal();
+    }
+
+    // Close logout modal when clicking outside
+    document.getElementById('logout-modal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        cancelLogout();
+      }
+    });
+
+    // Close logout modal with Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        const modal = document.getElementById('logout-modal');
+        if (modal.style.display === 'flex') {
+          cancelLogout();
+        }
+      }
+    });
 
     // Handle watchlist click
     function handleWatchlist(event) {
@@ -2302,6 +2769,9 @@
 
       localStorage.setItem('watchlist', JSON.stringify(watchlist));
       showNotification('Item added to watchlist successfully!');
+
+      // Dispatch custom event to update watchlist count
+      window.dispatchEvent(new CustomEvent('watchlistUpdated'));
 
       return true;
     }
@@ -2346,21 +2816,33 @@
 
     // Update cart count in status bar
     function updateCartCount() {
-      const cartCount = document.getElementById('cart-count');
-      const statusBarCartCount = document.getElementById('status-cart-count');
+       const cartCount = document.getElementById('cart-count');
+       const statusBarCartCount = document.getElementById('status-cart-count');
 
-      if (cartCount && statusBarCartCount) {
-        const count = cartCount.textContent;
-        statusBarCartCount.textContent = count;
+       if (cartCount && statusBarCartCount) {
+         const count = cartCount.textContent || '0';
+         statusBarCartCount.textContent = count;
+         // Always show the badge, even when count is 0
+         statusBarCartCount.style.display = 'flex';
+       }
+     }
 
-        // Show/hide cart count badge
-        if (count > 0) {
-          statusBarCartCount.style.display = 'flex';
-        } else {
-          statusBarCartCount.style.display = 'none';
-        }
-      }
-    }
+    // Update watchlist count in status bar
+    function updateWatchlistCount() {
+       const statusBarWatchlistCount = document.getElementById('status-watchlist-count');
+
+       if (statusBarWatchlistCount) {
+         const watchlist = JSON.parse(localStorage.getItem('watchlist') || '[]');
+         const count = watchlist.length;
+         statusBarWatchlistCount.textContent = count;
+
+         if (count > 0) {
+           statusBarWatchlistCount.style.display = 'flex';
+         } else {
+           statusBarWatchlistCount.style.display = 'none';
+         }
+       }
+     }
 
     // Update user interface based on authentication state
     function updateUserInterface() {
@@ -2412,21 +2894,27 @@
 
     // Initialize user interface on page load
     document.addEventListener('DOMContentLoaded', function() {
-      updateUserInterface();
-      updateCartCount(); // Initialize cart count
+       updateUserInterface();
+       updateCartCount(); // Initialize cart count
+       updateWatchlistCount(); // Initialize watchlist count
 
-      // Show login prompt after 5 seconds for non-logged-in users
-      if (!auth.isLoggedIn()) {
-        setTimeout(function() {
-          showLoginPrompt();
-        }, 5000);
-      }
-    });
+       // Show login prompt after 5 seconds for non-logged-in users
+       if (!auth.isLoggedIn()) {
+         setTimeout(function() {
+           showLoginPrompt();
+         }, 5000);
+       }
+     });
 
     // Listen for cart updates
     window.addEventListener('cartUpdated', function() {
-      updateCartCount();
-    });
+       updateCartCount();
+     });
+
+    // Listen for watchlist updates
+    window.addEventListener('watchlistUpdated', function() {
+       updateWatchlistCount();
+     });
 
     // Show login prompt modal
     function showLoginPrompt() {
@@ -2575,6 +3063,29 @@
 
     // Start slideshow on page load
     startSlideshow();
+
+    // Scroll to products section
+    function toggleProductsSection(event) {
+      event.preventDefault();
+
+      const productsSection = document.getElementById('products');
+
+      // Smooth scroll to products section
+      productsSection.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+
+      // Trigger animation for product cards if not already animated
+      setTimeout(() => {
+        const cards = productsSection.querySelectorAll('.product-card:not(.animate)');
+        cards.forEach((card, index) => {
+          setTimeout(() => {
+            card.classList.add('animate');
+          }, index * 100);
+        });
+      }, 300);
+    }
 
   </script>
 
