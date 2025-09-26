@@ -14,33 +14,38 @@
             line-height: 1.4;
         }
 
-        /* Header */
+       /* Header Styles */
         header {
-            background: #8e44ad;
+            background-color: #8e44ad;
             color: white;
-            padding: 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header-top {
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
+            gap: 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(142, 68, 173, 0.3);
         }
 
         header h2 {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-weight: 700;
             margin: 0;
-            font-size: 24px;
-            font-weight: 600;
-            color: white;
-            text-align: center;
-            position: relative;
+        }
+
+        .logo {
+            height: 40px;
+            width: auto;
+            margin-right: 5px;
+        }
+
+        header h2 small a {
+            color: #ddd;
+            text-decoration: none;
         }
 
         .navbar {
@@ -52,20 +57,229 @@
         .navbar a {
             color: white;
             text-decoration: none;
-            padding: 8px 16px;
-            border-radius: 2px;
-            transition: background-color 0.2s;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 14px;
         }
 
-        .navbar a:hover {
+/* Logout Confirmation Modal Styles */
+.logout-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 10001;
+    display: none; /* Hidden by default */
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+}
+
+.logout-modal-content {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    transform: scale(0.8);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+/* This class is added by JavaScript to trigger the animation */
+.logout-modal.show .logout-modal-content {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.logout-modal-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 32px;
+    color: white;
+}
+
+.logout-modal-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.logout-modal-message {
+    color: #666;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
+
+.logout-modal-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.logout-modal-btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.logout-modal-btn-primary {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    color: white;
+}
+
+.logout-modal-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+}
+
+.logout-modal-btn-secondary {
+    background: #f8f9fa;
+    color: #666;
+    border: 2px solid #e1e5e9;
+}
+
+.logout-modal-btn-secondary:hover {
+    background: #e9ecef;
+    border-color: #e74c3c;
+    color: #e74c3c;
+}
+        /* Profile Status Bar Styles */
+        .profile-status-bar {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            border-radius: 25px;
+            padding: 8px 16px;
+            box-shadow: 0 4px 15px rgba(142, 68, 173, 0.3);
+            margin-left: 15px;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .profile-status-bar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(142, 68, 173, 0.4);
+        }
+
+        .status-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+        }
+
+        .user-details {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .user-name-display {
+            font-weight: 600;
+            font-size: 14px;
+            color: white;
+        }
+
+        .user-status {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: none;
+        }
+
+        .status-actions {
+            display: flex;
+            gap: 15px;
+            margin-left: 8px;
+        }
+
+        .status-btn {
+            width: auto;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-size: 12px;
+            padding: 0 10px;
+            gap: 5px;
+        }
+
+        .status-label {
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .status-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .status-btn.home-btn:hover {
+            background: white;
+            color: #8e44ad;
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(142, 68, 173, 0.3);
+        }
+
+        .status-btn.watchlist-btn:hover {
             background: white;
             color: #8e44ad;
         }
 
+        .status-btn.bag-btn:hover {
+            background: white;
+            color: #8e44ad;
+        }
+
+        .status-btn.address-btn:hover {
+            background: white;
+            color: #8e44ad;
+        }
+
+        .status-btn.logout-btn:hover {
+            background: white;
+            color: #8e44ad;
+        }
+
+        .status-btn.address-btn:hover {
+            background: white;
+            color: #8e44ad;
+        }
         .cart-icon-container {
             position: relative;
             display: flex;
@@ -568,20 +782,49 @@
 </head>
 <body>
     <header>
-        <div class="header-top">
-            <h2>Lunsara</h2>
-            <nav class="navbar">
-                <a href="index.html">Home</a>
-                <a href="cart.html" class="cart-nav-link cart-link">
-                    <span class="cart-icon-container">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span id="cart-count" class="cart-badge">0</span>
-                    </span>
-                    <span>Cart</span>
+        <h2>
+            <img src="images/logo.png" alt="Lunsara Logo" class="logo">
+            Lunsara
+        </h2>
+
+        <nav class="navbar">
+            <!-- Authentication Buttons -->
+            <div class="auth-buttons">
+                <a href="login.html" class="auth-login" style="display: none;">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Login
                 </a>
-            </nav>
-        </div>
+
+                <!-- Profile Status Bar -->
+                <div class="profile-status-bar" id="profile-status-bar">
+                    <div class="status-content">
+                        <div class="user-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="user-details">
+                            <div class="user-name-display" id="user-name-display">Welcome!</div>
+                            <div class="user-status">Premium Member</div>
+                        </div>
+                        <div class="status-actions">
+                            <a href="homepage.html" class="status-btn home-btn" title="Home">
+                                <span class="status-label">Home</span>
+                                <i class="fas fa-home"></i>
+                            </a>
+                            <a href="watchlist.html" class="status-btn watchlist-btn" title="Watchlist">
+                                <span class="status-label">Watchlist</span>
+                                <i class="fas fa-heart"></i>
+                            </a>
+                            <a href="#" class="status-btn logout-btn" onclick="handleLogout(event)" title="Logout">
+                                <span class="status-label">Logout</span>
+                                <i class="fas fa-sign-out-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
     </header>
+
 
     <main class="container">
         <div class="address-section">
@@ -760,12 +1003,38 @@
         </div>
     </main>
 
+   <div id="logout-modal" class="logout-modal">
+    <div class="logout-modal-content">
+        <div class="logout-modal-icon">
+            <i class="fas fa-sign-out-alt"></i>
+        </div>
+        <h3 class="logout-modal-title">Confirm Logout</h3>
+        <p class="logout-modal-message">
+            Are you sure you want to logout? You'll need to sign in again to access your account.
+        </p>
+        <div class="logout-modal-buttons">
+            <button class="logout-modal-btn logout-modal-btn-primary" onclick="confirmLogout()">
+                Yes, Logout
+            </button>
+            <button class="logout-modal-btn logout-modal-btn-secondary" onclick="cancelLogout()">
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>
+
+    <script src="auth.js"></script>
     <script>
         // Load data when page loads
         document.addEventListener('DOMContentLoaded', () => {
             loadSavedAddresses();
             loadOrderSummary();
             updateCartBadge();
+
+            // Initialize user interface after a small delay to ensure auth.js loads
+            setTimeout(() => {
+                updateUserInterface();
+            }, 100);
         });
 
         /**
@@ -1105,6 +1374,64 @@
         document.getElementById('city').addEventListener('input', function(e) {
             this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
         });
+// This function is called when the logout button is clicked
+function handleLogout(event) {
+    event.preventDefault();
+    showLogoutModal();
+}
+
+// Shows the logout confirmation modal with an animation
+function showLogoutModal() {
+    const modal = document.getElementById('logout-modal');
+    modal.style.display = 'flex';
+
+    // A tiny delay allows the browser to apply "display: flex" before starting the animation
+    setTimeout(() => {
+        modal.classList.add('show');
+    }, 10);
+}
+
+// Hides the logout confirmation modal with an animation
+function hideLogoutModal() {
+    const modal = document.getElementById('logout-modal');
+    modal.classList.remove('show');
+
+    // Wait for the animation to finish before setting display to none
+    setTimeout(() => {
+        modal.style.display = 'none';
+    }, 300);
+}
+
+// This function is called by the "Yes, Logout" button inside the modal
+function confirmLogout() {
+    hideLogoutModal(); // First, hide the modal
+    if (window.auth) {
+        auth.logout(); // Then, perform the logout action from auth.js
+    }
+    // Removed the alert as requested
+    window.location.href = 'homepage.html'; // Redirect to the homepage
+}
+
+// This function is called by the "Cancel" button inside the modal
+function cancelLogout() {
+    hideLogoutModal();
+}
+
+// Add event listeners to close the modal if the user clicks outside of it or presses the Escape key
+document.getElementById('logout-modal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        cancelLogout();
+    }
+});
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        const modal = document.getElementById('logout-modal');
+        if (modal.style.display === 'flex') {
+            cancelLogout();
+        }
+    }
+});
     </script>
 </body>
 </html>

@@ -1,49 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Printed Sarees Collection | Lunsara</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="auth.js"></script>
     <style>
-        *, *::before, *::after {
+        * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
 
         body {
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
             margin: 0;
             padding: 0;
-            background-color: #f9f9f9;
+            width: 100vw;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        header {
+        /* Header */
+        .header {
             background-color: #8e44ad;
             color: white;
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(142, 68, 173, 0.3);
         }
 
-        header h2 {
-            margin: 0;
-            font-size: 32px;
+        .header h2 {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
             font-weight: 700;
-            color: white;
-            letter-spacing: 1px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            font-family: 'Cinzel Decorative', serif;
+            margin: 0;
         }
-        
-        /* Styles for the navigation bar */
+
+        .logo {
+            height: 40px;
+            width: auto;
+            margin-right: 5px;
+        }
+
         .navbar {
             display: flex;
-            gap: 10px;
-            align-items: center; /* Ensures vertical alignment */
+            gap: 20px;
+            align-items: center;
         }
 
         .navbar a {
@@ -52,349 +67,738 @@
             padding: 8px 15px;
             border-radius: 5px;
             transition: background-color 0.3s ease, color 0.3s ease;
+            display: flex;
+            align-items: center;
         }
-        
-        /* This is the new hover effect */
-        .navbar a:hover {
+
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .auth-login, .auth-logout {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+        }
+
+        .auth-login:hover, .auth-logout:hover {
             background-color: white;
             color: #8e44ad;
         }
 
-        .navbar .cart-link {
+        .header-content {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Profile Status Bar Styles */
+        .profile-status-bar {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            border-radius: 25px;
+            padding: 8px 16px;
+            box-shadow: 0 4px 15px rgba(142, 68, 173, 0.3);
+            margin-left: 15px;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        .status-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+        }
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+        }
+        .user-details {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .user-name-display {
+            font-weight: 600;
+            font-size: 14px;
+            color: white;
+        }
+        .status-actions {
+            display: flex;
+            gap: 15px;
+            margin-left: 8px;
+        }
+        .status-btn {
+            position: relative;
+            width: auto;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-size: 12px;
+            padding: 0 10px;
+            gap: 5px;
+        }
+        .status-label {
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        .status-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+        .status-btn.home-btn:hover,
+        .status-btn.watchlist-btn:hover,
+        .status-btn.bag-btn:hover,
+        .status-btn.logout-btn:hover {
+            background: white;
+            color: #8e44ad;
+        }
+        .status-cart-badge, .status-wishlist-badge {
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border: 2px solid #8e44ad;
+            position: absolute;
+            top: -6px;
+            right: -8px;
+            display: none;
+        }
+        .status-wishlist-badge {
+             background-color: #e91e63;
+        }
+
+        /* Main Container - Full Screen */
+        .main-container {
+            width: 100%;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 20px;
+        }
+
+        /* Filters Sidebar */
+        .filters-sidebar {
+            background: white;
+            border: 2px solid #8e44ad; 
+            border-radius: 8px;
+            padding: 20px;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+        .filter-section { margin-bottom: 24px; }
+        .filter-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #333;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .filter-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .filter-option {
             display: flex;
             align-items: center;
             gap: 8px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .filter-option input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: #8e44ad;
+        }
+        .filter-option label { cursor: pointer; flex: 1; }
+        .price-range { display: flex; flex-direction: column; gap: 8px; }
+        .price-input {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .clear-filters {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #666;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .clear-filters:hover { background: #e9ecef; }
+
+        /* Products Section */
+        .products-section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .sort-label { font-size: 14px; color: #666; }
+        .sort-select {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            background: white;
+            cursor: pointer;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
         }
 
-        .cart-icon-container {
+        /* Product Card */
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+            border: 1px solid #f0f0f0;
+        }
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        .product-image {
             position: relative;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            background: #f8f9fa;
+        }
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            pointer-events: none;
+        }
+        .product-card:hover .product-image img { transform: scale(1.05); }
+        .wishlist-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: white;
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
             display: flex;
             align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+            z-index: 10;
         }
-
-        .cart-badge {
-            position: absolute;
-            top: -8px;
-            right: -12px;
-            background-color: #ff6161;
-            color: white;
-            border-radius: 10px;
-            width: 20px;
-            height: 20px;
-            font-size: 11px;
-            display: none;
+        .wishlist-btn:hover { background: #ff4d4d; color: white; transform: scale(1.1); }
+        .wishlist-btn.clicked { animation: heartClick 0.3s ease; }
+        .wishlist-btn.favorited { background: #ff4d4d !important; color: white !important; }
+        .wishlist-btn.favorited i { color: white !important; font-weight: 900; }
+        @keyframes heartClick {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+        .product-info { padding: 16px; }
+        .product-brand { font-size: 12px; color: #666; margin-bottom: 4px; }
+        .product-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 8px;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .product-details { font-size: 12px; color: #666; margin-bottom: 8px; }
+        .price-section { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+        .current-price { font-size: 16px; font-weight: 600; color: #333; }
+        .original-price { font-size: 14px; color: #999; text-decoration: line-through; }
+        .discount { font-size: 12px; color: #ff4d4d; font-weight: 500; }
+        
+        .wishlist-modal { position: fixed; top: 90px; right: 20px; z-index: 10002; display: none; }
+        .wishlist-modal.show { display: block !important; }
+        .wishlist-modal-content {
+            background: #e8f5e8;
+            border-radius: 12px;
+            padding: 20px;
+            min-width: 320px;
+            max-width: 420px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border-left: 4px solid #4caf50;
+            border: 1px solid #c8e6c9;
+            transform: translateX(120%);
+            opacity: 1;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        .wishlist-modal.show .wishlist-modal-content {
+            transform: translateX(0);
+            opacity: 1;
+            animation: slideInRight 0.3s ease-out;
+        }
+        @keyframes slideInRight { from { transform: translateX(120%); } to { transform: translateX(0); } }
+        .wishlist-modal-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #e91e63, #ad1457);
+            border-radius: 50%;
+            display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 600;
-            border: 1px solid #8e44ad;
-        }
-        
-        .product-grid-container {
-            padding: 4rem 2rem;
-            text-align: center;
-        }
-
-        .product-grid-container h2 {
-            font-family: 'Cinzel Decorative', serif;
-            font-size: 3rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: #8e44ad;
-            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.15);
-            margin-bottom: 4rem;
-        }
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-        }
-        
-        .product-item-card {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            text-align: center;
-            padding: 1.5rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid #8e44ad;
-        }
-        
-        .product-item-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 25px rgba(142, 68, 173, 0.3);
-        }
-
-        .product-image {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            border-radius: 8px;
-            transition: transform 0.3s ease;
-        }
-
-        .product-item-card:hover .product-image {
-            transform: scale(1.05);
-        }
-        
-        .product-item-card h3 {
-            color: #333;
-            margin-top: 1rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .product-item-card p {
-            color: #8e44ad;
-            font-weight: bold;
-        }
-
-        footer {
-            background-color: #2c3e50;
-            padding: 1rem 2rem;
-            margin: 2rem auto;
-            width: 90%;
-            max-width: 1200px;
-            border-radius: 15px;
-            text-align: center;
+            font-size: 20px;
             color: white;
+            flex-shrink: 0;
+        }
+        .wishlist-modal-text { flex: 1; }
+        .wishlist-modal-title { font-size: 16px; font-weight: 600; color: #333; margin-bottom: 4px; }
+        .wishlist-modal-message { color: #666; font-size: 14px; line-height: 1.4; margin: 0; }
+
+        @media (max-width: 768px) {
+            .main-container { grid-template-columns: 1fr; }
+            .filters-sidebar { position: static; }
+            .products-grid { grid-template-columns: repeat(2, 1fr); }
+            .header { flex-direction: column; }
         }
         
-        /* Enhanced Responsive Design */
-        @media (max-width: 1024px) {
-            .product-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 1.5rem;
-            }
-        }
-
-        /* Mobile Header Styles */
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                gap: 1rem;
-                padding: 0.8rem 1.5rem;
-            }
-
-            header h2 {
-                font-size: 28px;
-                font-weight: 700;
-            }
-
-            .navbar {
-                gap: 16px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .navbar a {
-                padding: 6px 12px;
-                font-size: 13px;
-            }
-
-            .product-grid-container {
-                padding: 2rem 1rem;
-            }
-
-            .product-grid-container h2 {
-                font-size: 2rem;
-                margin-bottom: 2rem;
-            }
-
-            .product-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
-            }
-
-            .product-image-placeholder {
-                height: 160px;
-            }
-
-            .product-item-card {
-                padding: 1rem;
-            }
-
-            .product-item-card h3 {
-                font-size: 14px;
-            }
-
-            .product-item-card p {
-                font-size: 12px;
-            }
-        }
-
         @media (max-width: 480px) {
-            header {
-                padding: 0.6rem 1rem;
-            }
-
-            header h2 {
-                font-size: 24px;
-                font-weight: 700;
-            }
-
-            .navbar {
-                gap: 12px;
-            }
-
-            .navbar a {
-                padding: 4px 8px;
-                font-size: 12px;
-            }
-
-            .product-grid-container {
-                padding: 1.5rem 0.5rem;
-            }
-
-            .product-grid-container h2 {
-                font-size: 1.5rem;
-                margin-bottom: 1.5rem;
-            }
-
-            .product-grid {
-                grid-template-columns: 1fr;
-                gap: 0.8rem;
-            }
-
-            .product-image-placeholder {
-                height: 120px;
-            }
-
-            .product-item-card {
-                padding: 0.8rem;
-            }
-
-            .product-item-card h3 {
-                font-size: 13px;
-                margin-top: 0.5rem;
-            }
-
-            .product-item-card p {
-                font-size: 11px;
-            }
+            .products-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-
-    <header>
-        <h2>Lunsara</h2>
-        <nav class="navbar">
-            <a href="index.html">Home</a>
-            <a href="cart.html" class="cart-link cart-nav-link">
-                <span class="cart-icon-container">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span id="cart-count" class="cart-badge">0</span>
-                </span>
-                <span>Cart</span>
-            </a>
-        </nav>
+    <header class="header">
+        <div class="header-content">
+            <h2>
+                <img src="images/logo.png" alt="Lunsara Logo" class="logo">
+                Lunsara
+            </h2>
+            <nav class="navbar">
+                <div class="auth-buttons">
+                    <a href="login.html" class="auth-login" style="display: none;">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </a>
+                    <div class="profile-status-bar" id="profile-status-bar">
+                        <div class="status-content">
+                            <div class="user-avatar"><i class="fas fa-user-circle"></i></div>
+                            <div class="user-details">
+                                <div class="user-name-display" id="user-name-display">Welcome!</div>
+                            </div>
+                            <div class="status-actions">
+                                <a href="homepage.html" class="status-btn home-btn" title="Home"><span class="status-label">Home</span><i class="fas fa-home"></i></a>
+                                <a href="watchlist.html" class="status-btn watchlist-btn" title="Watchlist">
+                                    <span class="status-label">Watchlist</span><i class="fas fa-heart"></i>
+                                    <span id="status-wishlist-count" class="status-wishlist-badge">0</span>
+                                </a>
+                                <a href="cart.html" class="status-btn bag-btn" title="Shopping Bag">
+                                    <span class="status-label">Cart</span><i class="fas fa-shopping-bag"></i>
+                                    <span id="status-cart-count" class="status-cart-badge">0</span>
+                                </a>
+                                <a href="#" class="status-btn logout-btn" onclick="handleLogout(event)" title="Logout">
+                                    <span class="status-label">Logout</span><i class="fas fa-sign-out-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
     </header>
 
-    <main class="product-grid-container">
-        <h2>Our Printed Sarees Collection</h2>
-        <div class="product-grid">
-            <div class="product-item-card" onclick="viewProduct('printed-floral-paradise', 'Printed Floral Paradise Saree', '₹2,800', '₹4,200', 'images/printed_saree.jpg')">
-                <img src="images/printed_saree.jpg" alt="Printed Floral Paradise Saree" class="product-image">
-                <h3>Printed Floral Paradise Saree</h3>
-                <p>₹2,800 <span style="text-decoration: line-through; color: #999;">₹4,200</span></p>
+    <div class="main-container">
+        <aside class="filters-sidebar">
+            <div class="filter-section">
+                <h3 class="filter-title">Categories</h3>
+                <div class="filter-options">
+                    <div class="filter-option"><input type="checkbox" id="daily-wear"><label for="daily-wear">Daily Wear</label></div>
+                    <div class="filter-option"><input type="checkbox" id="office-wear"><label for="office-wear">Office Wear</label></div>
+                    <div class="filter-option"><input type="checkbox" id="party-wear"><label for="party-wear">Party Wear</label></div>
+                    <div class="filter-option"><input type="checkbox" id="floral-prints"><label for="floral-prints">Floral Prints</label></div>
+                </div>
             </div>
-            <div class="product-item-card" onclick="viewProduct('printed-geometric-delight', 'Printed Geometric Delight Saree', '₹3,200', '₹4,800', 'images/printed_saree_collection.jpg')">
-                <img src="images/printed_saree_collection.jpg" alt="Printed Geometric Delight Saree" class="product-image">
-                <h3>Printed Geometric Delight Saree</h3>
-                <p>₹3,200 <span style="text-decoration: line-through; color: #999;">₹4,800</span></p>
+            <div class="filter-section">
+                <h3 class="filter-title">Material</h3>
+                <div class="filter-options">
+                    <div class="filter-option"><input type="checkbox" id="georgette"><label for="georgette">Georgette</label></div>
+                    <div class="filter-option"><input type="checkbox" id="chiffon"><label for="chiffon">Chiffon</label></div>
+                    <div class="filter-option"><input type="checkbox" id="cotton-blend"><label for="cotton-blend">Cotton Blend</label></div>
+                    <div class="filter-option"><input type="checkbox" id="crepe"><label for="crepe">Crepe</label></div>
+                </div>
             </div>
-            <div class="product-item-card" onclick="viewProduct('printed-ethnic-motifs', 'Printed Ethnic Motifs Saree', '₹2,600', '₹3,900', 'images/background1.jpg')">
-                <img src="images/background1.jpg" alt="Printed Ethnic Motifs Saree" class="product-image">
-                <h3>Printed Ethnic Motifs Saree</h3>
-                <p>₹2,600 <span style="text-decoration: line-through; color: #999;">₹3,900</span></p>
+             <div class="filter-section">
+                <h3 class="filter-title">Color</h3>
+                <div class="filter-options">
+                    <div class="filter-option"><input type="checkbox" id="red"><label for="red">Red</label></div>
+                    <div class="filter-option"><input type="checkbox" id="black"><label for="black">Black</label></div>
+                    <div class="filter-option"><input type="checkbox" id="blue"><label for="blue">Blue</label></div>
+                    <div class="filter-option"><input type="checkbox" id="yellow"><label for="yellow">Yellow</label></div>
+                    <div class="filter-option"><input type="checkbox" id="multi-color"><label for="multi-color">Multi-Color</label></div>
+                </div>
             </div>
-            <div class="product-item-card" onclick="viewProduct('printed-abstract-art', 'Printed Abstract Art Saree', '₹3,500', '₹5,200', 'images/background2.jpg')">
-                <img src="images/background2.jpg" alt="Printed Abstract Art Saree" class="product-image">
-                <h3>Printed Abstract Art Saree</h3>
-                <p>₹3,500 <span style="text-decoration: line-through; color: #999;">₹5,200</span></p>
+            <div class="filter-section">
+                <h3 class="filter-title">Price Range</h3>
+                <div class="price-range">
+                    <input type="number" class="price-input" placeholder="Min" id="minPrice">
+                    <input type="number" class="price-input" placeholder="Max" id="maxPrice">
+                </div>
             </div>
-            <div class="product-item-card" onclick="viewProduct('printed-traditional-borders', 'Printed Traditional Borders Saree', '₹2,900', '₹4,300', 'images/background3.jpg')">
-                <img src="images/background3.jpg" alt="Printed Traditional Borders Saree" class="product-image">
-                <h3>Printed Traditional Borders Saree</h3>
-                <p>₹2,900 <span style="text-decoration: line-through; color: #999;">₹4,300</span></p>
+            <button class="clear-filters" onclick="clearAllFilters()">Clear All Filters</button>
+        </aside>
+
+        <main class="products-section">
+            <div class="products-grid" id="productsGrid">
+                <div class="product-card" onclick="viewProduct('floral-georgette-blue')">
+                    <div class="product-image">
+                        <img src="images/printed_saree.jpg" alt="Floral Georgette Saree">
+                        <button class="wishlist-btn" onclick="toggleWishlist(event, 'floral-georgette-blue')">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Lunsara Prints</div>
+                        <div class="product-name">Blue Floral Georgette Saree</div>
+                        <div class="product-details">Lightweight Georgette • Daily Wear</div>
+                        <div class="price-section">
+                            <span class="current-price">₹1,800</span>
+                            <span class="original-price">₹2,500</span>
+                            <span class="discount">28% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" onclick="viewProduct('abstract-crepe-saree')">
+                    <div class="product-image">
+                        <img src="images/printed_saree_collection.jpg" alt="Abstract Crepe Saree">
+                        <button class="wishlist-btn" onclick="toggleWishlist(event, 'abstract-crepe-saree')">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Lunsara Prints</div>
+                        <div class="product-name">Abstract Crepe Saree</div>
+                        <div class="product-details">Soft Crepe Fabric • Office Wear</div>
+                        <div class="price-section">
+                            <span class="current-price">₹2,200</span>
+                            <span class="original-price">₹3,000</span>
+                            <span class="discount">27% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" onclick="viewProduct('yellow-chiffon-saree')">
+                    <div class="product-image">
+                        <img src="images/printed_saree.jpg" alt="Yellow Chiffon Saree">
+                        <button class="wishlist-btn" onclick="toggleWishlist(event, 'yellow-chiffon-saree')">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                         <div class="product-brand">Lunsara Prints</div>
+                        <div class="product-name">Sunshine Yellow Chiffon Saree</div>
+                        <div class="product-details">Sheer Chiffon • Casual Wear</div>
+                        <div class="price-section">
+                            <span class="current-price">₹1,500</span>
+                            <span class="original-price">₹2,000</span>
+                            <span class="discount">25% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" onclick="viewProduct('red-party-wear-saree')">
+                    <div class="product-image">
+                        <img src="images/printed_saree_collection.jpg" alt="Red Party Wear Saree">
+                        <button class="wishlist-btn" onclick="toggleWishlist(event, 'red-party-wear-saree')">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                         <div class="product-brand">Lunsara Prints</div>
+                        <div class="product-name">Red Geometric Print Party Saree</div>
+                        <div class="product-details">Georgette • Party Wear</div>
+                        <div class="price-section">
+                            <span class="current-price">₹2,800</span>
+                            <span class="original-price">₹3,500</span>
+                            <span class="discount">20% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" onclick="viewProduct('black-cotton-blend')">
+                    <div class="product-image">
+                        <img src="images/printed_saree.jpg" alt="Black Cotton Blend Saree">
+                        <button class="wishlist-btn" onclick="toggleWishlist(event, 'black-cotton-blend')">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Lunsara Prints</div>
+                        <div class="product-name">Classic Black Cotton Blend Saree</div>
+                        <div class="product-details">Cotton Blend • Office Wear</div>
+                        <div class="price-section">
+                            <span class="current-price">₹1,900</span>
+                            <span class="original-price">₹2,400</span>
+                            <span class="discount">21% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" onclick="viewProduct('multi-color-digital-print')">
+                    <div class="product-image">
+                        <img src="images/printed_saree_collection.jpg" alt="Multi-Color Digital Print Saree">
+                        <button class="wishlist-btn" onclick="toggleWishlist(event, 'multi-color-digital-print')">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Lunsara Prints</div>
+                        <div class="product-name">Multi-Color Digital Print Saree</div>
+                        <div class="product-details">Crepe • Vibrant Party Wear</div>
+                        <div class="price-section">
+                            <span class="current-price">₹3,100</span>
+                            <span class="original-price">₹4,000</span>
+                            <span class="discount">23% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" onclick="viewProduct('green-leaf-print')">
+                    <div class="product-image">
+                        <img src="images/printed_saree.jpg" alt="Green Leaf Print Saree">
+                        <button class="wishlist-btn" onclick="toggleWishlist(event, 'green-leaf-print')">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Lunsara Prints</div>
+                        <div class="product-name">Green Leaf Print Chiffon Saree</div>
+                        <div class="product-details">Chiffon • Daily Wear</div>
+                        <div class="price-section">
+                            <span class="current-price">₹1,650</span>
+                            <span class="original-price">₹2,200</span>
+                            <span class="discount">25% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" onclick="viewProduct('purple-abstract-saree')">
+                    <div class="product-image">
+                        <img src="images/printed_saree_collection.jpg" alt="Purple Abstract Saree">
+                        <button class="wishlist-btn" onclick="toggleWishlist(event, 'purple-abstract-saree')">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Lunsara Prints</div>
+                        <div class="product-name">Purple Abstract Georgette Saree</div>
+                        <div class="product-details">Georgette • Modern Design</div>
+                        <div class="price-section">
+                            <span class="current-price">₹2,400</span>
+                            <span class="original-price">₹3,200</span>
+                            <span class="discount">25% OFF</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="product-item-card" onclick="viewProduct('printed-modern-geometric', 'Printed Modern Geometric Saree', '₹3,100', '₹4,600', 'images/printed_saree.jpg')">
-                <img src="images/printed_saree.jpg" alt="Printed Modern Geometric Saree" class="product-image">
-                <h3>Printed Modern Geometric Saree</h3>
-                <p>₹3,100 <span style="text-decoration: line-through; color: #999;">₹4,600</span></p>
+        </main>
+    </div>
+
+    <div id="wishlist-modal" class="wishlist-modal">
+        <div class="wishlist-modal-content">
+            <div class="wishlist-modal-icon">
+                <i class="fas fa-heart" id="wishlist-modal-icon"></i>
             </div>
-            <div class="product-item-card" onclick="viewProduct('printed-floral-vines', 'Printed Floral Vines Saree', '₹2,700', '₹4,000', 'images/printed_saree_collection.jpg')">
-                <img src="images/printed_saree_collection.jpg" alt="Printed Floral Vines Saree" class="product-image">
-                <h3>Printed Floral Vines Saree</h3>
-                <p>₹2,700 <span style="text-decoration: line-through; color: #999;">₹4,000</span></p>
-            </div>
-            <div class="product-item-card" onclick="viewProduct('printed-elegant-stripes', 'Printed Elegant Stripes Saree', '₹3,300', '₹4,900', 'images/background1.jpg')">
-                <img src="images/background1.jpg" alt="Printed Elegant Stripes Saree" class="product-image">
-                <h3>Printed Elegant Stripes Saree</h3>
-                <p>₹3,300 <span style="text-decoration: line-through; color: #999;">₹4,900</span></p>
-            </div>
-            <div class="product-item-card" onclick="viewProduct('printed-vintage-charm', 'Printed Vintage Charm Saree', '₹2,800', '₹4,100', 'images/background2.jpg')">
-                <img src="images/background2.jpg" alt="Printed Vintage Charm Saree" class="product-image">
-                <h3>Printed Vintage Charm Saree</h3>
-                <p>₹2,800 <span style="text-decoration: line-through; color: #999;">₹4,100</span></p>
-            </div>
-            <div class="product-item-card" onclick="viewProduct('printed-contemporary-twist', 'Printed Contemporary Twist Saree', '₹3,400', '₹5,000', 'images/background3.jpg')">
-                <img src="images/background3.jpg" alt="Printed Contemporary Twist Saree" class="product-image">
-                <h3>Printed Contemporary Twist Saree</h3>
-                <p>₹3,400 <span style="text-decoration: line-through; color: #999;">₹5,000</span></p>
-            </div>
-            <div class="product-item-card" onclick="viewProduct('printed-boho-chic', 'Printed Boho Chic Saree', '₹2,950', '₹4,400', 'images/printed_saree.jpg')">
-                <img src="images/printed_saree.jpg" alt="Printed Boho Chic Saree" class="product-image">
-                <h3>Printed Boho Chic Saree</h3>
-                <p>₹2,950 <span style="text-decoration: line-through; color: #999;">₹4,400</span></p>
-            </div>
-            <div class="product-item-card" onclick="viewProduct('printed-minimalist-lines', 'Printed Minimalist Lines Saree', '₹3,000', '₹4,500', 'images/printed_saree_collection.jpg')">
-                <img src="images/printed_saree_collection.jpg" alt="Printed Minimalist Lines Saree" class="product-image">
-                <h3>Printed Minimalist Lines Saree</h3>
-                <p>₹3,000 <span style="text-decoration: line-through; color: #999;">₹4,500</span></p>
+            <div class="wishlist-modal-text">
+                <h3 class="wishlist-modal-title" id="wishlist-modal-title"></h3>
+                <p class="wishlist-modal-message" id="wishlist-modal-message"></p>
             </div>
         </div>
-    </main>
+    </div>
     
-    <footer>
-        <p>&copy; 2025 Lunsara. All Rights Reserved.</p>
-    </footer>
-
-    <script src="cart.js"></script>
     <script>
-        // Update cart badge when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            updateCartBadge();
-        });
+        // --- JAVASCRIPT LOGIC ---
+        const productDatabase = {
+            'floral-georgette-blue': { id: 'floral-georgette-blue', name: 'Blue Floral Georgette Saree', description: 'Lightweight Georgette • Daily Wear', price: '₹1,800', image: 'images/printed_saree.jpg' },
+            'abstract-crepe-saree': { id: 'abstract-crepe-saree', name: 'Abstract Crepe Saree', description: 'Soft Crepe Fabric • Office Wear', price: '₹2,200', image: 'images/printed_saree_collection.jpg' },
+            'yellow-chiffon-saree': { id: 'yellow-chiffon-saree', name: 'Sunshine Yellow Chiffon Saree', description: 'Sheer Chiffon • Casual Wear', price: '₹1,500', image: 'images/printed_saree.jpg' },
+            'red-party-wear-saree': { id: 'red-party-wear-saree', name: 'Red Geometric Print Party Saree', description: 'Georgette • Party Wear', price: '₹2,800', image: 'images/printed_saree_collection.jpg' },
+            'black-cotton-blend': { id: 'black-cotton-blend', name: 'Classic Black Cotton Blend Saree', description: 'Cotton Blend • Office Wear', price: '₹1,900', image: 'images/printed_saree.jpg' },
+            'multi-color-digital-print': { id: 'multi-color-digital-print', name: 'Multi-Color Digital Print Saree', description: 'Crepe • Vibrant Party Wear', price: '₹3,100', image: 'images/printed_saree_collection.jpg' },
+            'green-leaf-print': { id: 'green-leaf-print', name: 'Green Leaf Print Chiffon Saree', description: 'Chiffon • Daily Wear', price: '₹1,650', image: 'images/printed_saree.jpg' },
+            'purple-abstract-saree': { id: 'purple-abstract-saree', name: 'Purple Abstract Georgette Saree', description: 'Georgette • Modern Design', price: '₹2,400', image: 'images/printed_saree_collection.jpg' }
+        };
 
-        function updateCartBadge() {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-            const badge = document.getElementById('cart-count');
+        function toggleWishlist(event, productId) {
+            event.stopPropagation();
+            const button = event.currentTarget;
+            const icon = button.querySelector('i');
+            button.classList.add('clicked');
+            setTimeout(() => button.classList.remove('clicked'), 300);
 
+            if (isInWishlist(productId)) {
+                if (removeFromWishlist(productId)) {
+                    icon.classList.remove('fas');
+                    icon.classList.add('far');
+                    button.classList.remove('favorited');
+                    showWishlistNotification('remove', productId);
+                }
+            } else {
+                if (addToWishlist(productId)) {
+                    icon.classList.remove('far');
+                    icon.classList.add('fas');
+                    button.classList.add('favorited');
+                    showWishlistNotification('add', productId);
+                }
+            }
+        }
+        
+        function isInWishlist(productId) {
+            const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+            return watchlist.some(item => String(item.id) === String(productId));
+        }
+
+        function addToWishlist(productId) {
+            const product = productDatabase[productId];
+            if (!product) return false;
+            const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+            if (!isInWishlist(productId)) {
+                watchlist.push({ ...product, dateAdded: new Date().toISOString() });
+                localStorage.setItem('watchlist', JSON.stringify(watchlist));
+                updateWatchlistCount();
+                window.dispatchEvent(new CustomEvent('watchlistUpdated'));
+                return true;
+            }
+            return false;
+        }
+
+        function removeFromWishlist(productId) {
+            let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+            if (isInWishlist(productId)) {
+                const updatedWatchlist = watchlist.filter(item => String(item.id) !== String(productId));
+                localStorage.setItem('watchlist', JSON.stringify(updatedWatchlist));
+                updateWatchlistCount();
+                window.dispatchEvent(new CustomEvent('watchlistUpdated'));
+                return true;
+            }
+            return false;
+        }
+        
+        function initializeWishlistButtons() {
+            document.querySelectorAll('.wishlist-btn').forEach(button => {
+                const onclickAttr = button.getAttribute('onclick');
+                const productIdMatch = onclickAttr.match(/'([^']+)'/);
+                if (productIdMatch) {
+                    const productId = productIdMatch[1];
+                    if (isInWishlist(productId)) {
+                        const icon = button.querySelector('i');
+                        icon.classList.remove('far');
+                        icon.classList.add('fas');
+                        button.classList.add('favorited');
+                    }
+                }
+            });
+        }
+        
+        function updateWatchlistCount() {
+            const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+            const count = watchlist.length;
+            const badge = document.getElementById('status-wishlist-count');
             if (badge) {
-                badge.textContent = totalItems;
-                badge.style.display = totalItems > 0 ? 'flex' : 'none';
+                badge.textContent = count;
+                badge.style.display = count > 0 ? 'flex' : 'none';
             }
         }
 
-        function viewProduct(productId, productName, productPrice, originalPrice, productImage) {
-            // Store product details in localStorage
-            const productDetails = {
-                id: productId,
-                name: productName,
-                price: Number(productPrice.replace(/[₹,]/g, '')),
-                originalPrice: Number(originalPrice.replace(/[₹,]/g, '')),
-                image: productImage,
-                category: 'printed-saree'
-            };
-
-            localStorage.setItem('selectedProduct', JSON.stringify(productDetails));
-
-            // Redirect to product detail page
-            window.location.href = 'product-detail.html';
+        function showWishlistNotification(action, productId) {
+            const modal = document.getElementById('wishlist-modal');
+            const title = document.getElementById('wishlist-modal-title');
+            const message = document.getElementById('wishlist-modal-message');
+            const productName = productDatabase[productId]?.name || 'Item';
+            if (action === 'add') {
+                title.textContent = 'Added to Wishlist';
+                message.textContent = `"${productName}" is now in your watchlist!`;
+            } else {
+                title.textContent = 'Removed from Wishlist';
+                message.textContent = `"${productName}" has been removed.`;
+            }
+            modal.classList.add('show');
+            setTimeout(() => modal.classList.remove('show'), 3000);
         }
+
+        function viewProduct(productId) {
+            const productDetails = productDatabase[productId];
+            if (productDetails) {
+                localStorage.setItem('selectedProduct', JSON.stringify(productDetails));
+                window.location.href = 'product-detail.html';
+            }
+        }
+        
+        function handleLogout(event) {
+            event.preventDefault();
+            alert("Logout clicked!");
+        }
+
+        function handleBagClick(event) {
+             event.preventDefault();
+             window.location.href = 'cart.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            updateWatchlistCount();
+            initializeWishlistButtons();
+            
+            const profileStatusBar = document.getElementById('profile-status-bar');
+            const authLogin = document.querySelector('.auth-login');
+            if (auth.isLoggedIn()) {
+                profileStatusBar.style.display = 'block';
+                authLogin.style.display = 'none';
+                document.getElementById('user-name-display').textContent = `Welcome, ${auth.getCurrentUser().name}!`;
+            } else {
+                profileStatusBar.style.display = 'none';
+                authLogin.style.display = 'flex';
+            }
+        });
     </script>
 </body>
 </html>

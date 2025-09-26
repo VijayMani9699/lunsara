@@ -66,6 +66,88 @@
             color: #8e44ad;
         }
 
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .auth-login, .auth-logout {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+        }
+
+        .auth-login:hover, .auth-logout:hover {
+            background: white;
+            color: #8e44ad;
+        }
+
+        .user-menu {
+            position: relative;
+            display: none;
+        }
+
+        .user-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            min-width: 200px;
+            padding: 8px 0;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .user-menu:hover .user-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .user-dropdown a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            color: #333;
+            text-decoration: none;
+            transition: background-color 0.2s ease;
+        }
+
+        .user-dropdown a:hover {
+            background-color: #f8f9fa;
+            color: #8e44ad;
+        }
+
+        .user-info {
+            padding: 15px 20px;
+            border-bottom: 1px solid #e1e5e9;
+            margin-bottom: 8px;
+        }
+
+        .user-name {
+            font-weight: 600;
+            color: #8e44ad;
+            margin-bottom: 2px;
+        }
+
+        .user-email {
+            font-size: 12px;
+            color: #666;
+        }
+
         .cart-icon-container {
             position: relative;
             display: flex;
@@ -345,7 +427,7 @@
         <div class="header-top">
             <h2>Lunsara</h2>
             <nav class="navbar">
-                <a href="index.html">Home</a>
+                <a href="homepage.html">Home</a>
                 <a href="cart.html" class="cart-nav-link cart-link">
                     <span class="cart-icon-container">
                         <i class="fas fa-shopping-cart"></i>
@@ -353,6 +435,39 @@
                     </span>
                     <span>Cart</span>
                 </a>
+
+                <!-- Authentication Buttons -->
+                <div class="auth-buttons">
+                    <a href="login.html" class="auth-login" style="display: none;">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Login
+                    </a>
+
+                    <div class="user-menu">
+                        <a href="#" class="auth-logout" onclick="handleLogout(event)" style="display: none;">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Logout
+                        </a>
+                        <div class="user-dropdown">
+                            <div class="user-info">
+                                <div class="user-name" id="user-name">User Name</div>
+                                <div class="user-email" id="user-email">user@example.com</div>
+                            </div>
+                            <a href="profile.html">
+                                <i class="fas fa-user"></i>
+                                My Profile
+                            </a>
+                            <a href="order-tracking.html">
+                                <i class="fas fa-box"></i>
+                                My Orders
+                            </a>
+                            <a href="#" onclick="handleLogout(event)">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </nav>
         </div>
     </header>
@@ -534,19 +649,32 @@
         </div>
     </main>
 
+    <script src="auth.js"></script>
     <script>
         // Load cart data and display order summary
         document.addEventListener('DOMContentLoaded', () => {
             loadOrderSummary();
             loadSavedAddress();
             updateCartBadge();
+            checkAuthentication();
         });
+
+        // Check if user is authenticated before allowing checkout
+        function checkAuthentication() {
+            if (!auth.isLoggedIn()) {
+                if (confirm('You need to login to proceed with checkout. Would you like to login now?')) {
+                    window.location.href = 'login.html?redirect=checkout.html';
+                } else {
+                    window.location.href = 'homepage.html';
+                }
+            }
+        }
 
         /**
          * Updates the cart count badge in the header.
          */
         function updateCartBadge() {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cart = getUserCart();
             const cartCountElement = document.getElementById('cart-count');
 
             const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -562,10 +690,23 @@
         }
 
         /**
+         * Gets the current user's cart from localStorage
+         */
+        function getUserCart() {
+            if (typeof auth !== 'undefined' && auth.isLoggedIn()) {
+                const currentUser = auth.getCurrentUser();
+                const userCartKey = `cart_${currentUser.id}`;
+                return JSON.parse(localStorage.getItem(userCartKey)) || [];
+            } else {
+                return JSON.parse(localStorage.getItem('cart')) || [];
+            }
+        }
+
+        /**
          * Loads cart data and displays order summary
          */
         function loadOrderSummary() {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cart = getUserCart();
             const orderItemsContainer = document.getElementById('order-items');
 
             if (cart.length === 0) {
@@ -763,7 +904,7 @@
                 const orderId = 'LUN' + Date.now();
 
                 // Get cart data for order details
-                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                const cart = getUserCart();
                 const selectedAddress = JSON.parse(localStorage.getItem('selectedDeliveryAddress')) || {};
 
                 // Create order object
@@ -774,6 +915,7 @@
                     items: cart,
                     total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
                     deliveryAddress: `${selectedAddress.address}, ${selectedAddress.city}, ${selectedAddress.state} - ${selectedAddress.pincode}`,
+                    paymentMethod: selectedPayment.value.toUpperCase(),
                     tracking: [
                         { status: 'Order Placed', date: new Date().toLocaleString('en-IN'), completed: true },
                         { status: 'Packed', date: 'In Progress', completed: false },
@@ -783,26 +925,34 @@
                     ]
                 };
 
-                // Get existing orders or create new array
-                const existingOrders = JSON.parse(localStorage.getItem('userOrders') || '[]');
-
-                // Add new order to the beginning of the array
-                existingOrders.unshift(orderData);
-
-                // Save to localStorage
-                localStorage.setItem('userOrders', JSON.stringify(existingOrders));
+                // Save order to user profile if logged in
+                if (auth.isLoggedIn()) {
+                    const currentUser = auth.getCurrentUser();
+                    auth.addUserOrder(currentUser.id, orderData);
+                } else {
+                    // Fallback for non-logged-in users
+                    const existingOrders = JSON.parse(localStorage.getItem('userOrders') || '[]');
+                    existingOrders.unshift(orderData);
+                    localStorage.setItem('userOrders', JSON.stringify(existingOrders));
+                }
 
                 // Store order ID for reference
                 localStorage.setItem('currentOrderId', orderId);
 
-                // Clear cart AFTER storing order data
-                localStorage.removeItem('cart');
+                // Clear user cart AFTER storing order data
+                if (auth.isLoggedIn()) {
+                    const currentUser = auth.getCurrentUser();
+                    const userCartKey = `cart_${currentUser.id}`;
+                    localStorage.removeItem(userCartKey);
+                } else {
+                    localStorage.removeItem('cart');
+                }
 
                 // Show success message
                 alert(`🎉 Order placed successfully!\n\n📋 Order ID: ${orderId}\n💳 Payment Method: ${selectedPayment.value.toUpperCase()}\n✅ Your order has been confirmed and will be delivered soon!\n\nClick OK to continue shopping.`);
 
                 // Redirect to home page
-                window.location.href = 'index.html';
+                window.location.href = 'homepage.html';
             }, 2000);
         }
 
@@ -828,6 +978,36 @@
         document.getElementById('city').addEventListener('input', function(e) {
             this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
         });
+
+        // Authentication event handlers
+        function handleLogout(event) {
+            event.preventDefault();
+            if (confirm('Are you sure you want to logout?')) {
+                auth.logout();
+                alert('You have been logged out successfully');
+                window.location.href = 'homepage.html';
+            }
+        }
+
+        // Update user interface based on authentication state
+        function updateUserInterface() {
+            const userNameElement = document.getElementById('user-name');
+            const userEmailElement = document.getElementById('user-email');
+
+            if (auth.isLoggedIn()) {
+                const currentUser = auth.getCurrentUser();
+                if (userNameElement) userNameElement.textContent = currentUser.name;
+                if (userEmailElement) userEmailElement.textContent = currentUser.email;
+            }
+        }
+
+        // Listen for authentication state changes
+        window.addEventListener('authStateChanged', function(e) {
+            updateUserInterface();
+        });
+
+        // Initialize user interface on page load
+        updateUserInterface();
     </script>
 </body>
 </html>

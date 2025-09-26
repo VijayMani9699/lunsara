@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Watchlist | Lunsara</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="auth.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            background-color: #8e44ad;
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(142, 68, 173, 0.3);
+        }
+
+        .header h2 {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .logo {
+            height: 40px;
+            width: auto;
+            margin-right: 5px;
+        }
+
+        .navbar {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .auth-login, .auth-logout {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+        }
+
+        .auth-login:hover, .auth-logout:hover {
+            background-color: white;
+            color: #8e44ad;
+        }
+
+        /* Profile Status Bar Styles */
+        .profile-status-bar {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            border-radius: 25px;
+            padding: 8px 16px;
+            box-shadow: 0 4px 15px rgba(142, 68, 173, 0.3);
+            margin-left: 15px;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .profile-status-bar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(142, 68, 173, 0.4);
+        }
+
+        .status-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+        }
+
+        .user-details {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .user-name-display {
+            font-weight: 600;
+            font-size: 14px;
+            color: white;
+        }
+
+        .status-actions {
+            display: flex;
+            gap: 15px;
+            margin-left: 8px;
+        }
+
+        .status-btn {
+            position: relative;
+            width: auto;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-size: 12px;
+            padding: 0 10px;
+            gap: 5px;
+        }
+
+        .status-label {
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .status-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .status-btn.home-btn:hover,
+        .status-btn.watchlist-btn:hover,
+        .status-btn.bag-btn:hover,
+        .status-btn.logout-btn:hover {
+            background: white;
+            color: #8e44ad;
+        }
+        
+        .status-cart-badge, .status-wishlist-badge {
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border: 2px solid #8e44ad;
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            display: none;
+        }
+        
+        .status-wishlist-badge {
+             background-color: #e91e63;
+        }
+
+        /* Main Content */
+        .main-content {
+            /* max-width: 1200px;  <-- REMOVED FOR FULL-SCREEN LAYOUT */
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .page-header {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #8e44ad;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .page-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            text-align: center;
+            margin-bottom: 0;
+        }
+
+        /* Empty State */
+        .empty-state {
+            background: white;
+            border-radius: 8px;
+            padding: 60px 30px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .empty-icon {
+            font-size: 4rem;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+
+        .empty-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .empty-message {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 30px;
+        }
+
+        .browse-btn {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .browse-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(142, 68, 173, 0.3);
+        }
+
+        /* Watchlist Grid */
+        .watchlist-grid {
+            display: grid;
+            /* UPDATED: Changed minmax for better 4-column layout */
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .watchlist-item {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .watchlist-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .watchlist-image {
+            position: relative;
+            /* UPDATED: Changed aspect ratio to decrease height */
+            aspect-ratio: 4 / 3;
+            overflow: hidden;
+            background: #f8f9fa;
+        }
+
+        .watchlist-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .watchlist-item:hover .watchlist-image img {
+            transform: scale(1.05);
+        }
+
+        .remove-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease;
+            z-index: 10;
+        }
+
+        .remove-btn:hover {
+            background: #ff4d4d;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .watchlist-info {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1; 
+        }
+
+        .watchlist-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .watchlist-price {
+            font-size: 16px;
+            font-weight: 700;
+            color: #8e44ad;
+            margin-bottom: 12px;
+        }
+
+        .watchlist-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: auto; 
+        }
+
+        .view-btn, .add-to-cart-btn {
+            flex: 1;
+            padding: 10px 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .view-btn {
+            background: #f8f9fa;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+
+        .view-btn:hover {
+            background: #e9ecef;
+        }
+
+        .add-to-cart-btn {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            color: white;
+        }
+
+        .add-to-cart-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(142, 68, 173, 0.3);
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #27ae60;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 10000;
+            transform: translateX(120%);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .notification.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        .notification.error {
+             background: #e74c3c;
+        }
+
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 15px;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .watchlist-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 15px;
+            }
+
+            .header {
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+             .watchlist-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h2>
+            <img src="images/logo.png" alt="Lunsara Logo" class="logo">
+            Lunsara
+        </h2>
+
+        <nav class="navbar">
+            <div class="auth-buttons">
+                <a href="login.html" class="auth-login" style="display: none;">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Login
+                </a>
+
+                <div class="profile-status-bar" id="profile-status-bar">
+                    <div class="status-content">
+                        <div class="user-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="user-details">
+                            <div class="user-name-display" id="user-name-display">Welcome!</div>
+                        </div>
+                        <div class="status-actions">
+                            <a href="homepage.html" class="status-btn home-btn" title="Home">
+                                <span class="status-label">Home</span>
+                                <i class="fas fa-home"></i>
+                            </a>
+                            <a href="watchlist.html" class="status-btn watchlist-btn" title="Watchlist">
+                                <span class="status-label">Watchlist</span>
+                                <i class="fas fa-heart"></i>
+                                <span id="status-wishlist-count" class="status-wishlist-badge">0</span>
+                            </a>
+                            <a href="cart.html" class="status-btn bag-btn" title="Shopping Bag">
+                                <span class="status-label">Cart</span>
+                                <i class="fas fa-shopping-bag"></i>
+                                <span id="status-cart-count" class="status-cart-badge">0</span>
+                            </a>
+                            <a href="#" class="status-btn logout-btn" onclick="handleLogout(event)" title="Logout">
+                                <span class="status-label">Logout</span>
+                                <i class="fas fa-sign-out-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="main-content">
+        <div class="page-header">
+            <h1 class="page-title"><i class="fas fa-heart"></i> My Watchlist</h1>
+            <p class="page-subtitle">Items you've saved for later</p>
+        </div>
+
+        <div id="watchlist-container">
+            </div>
+    </div>
+
+    <div id="notification" class="notification"></div>
+
+    <script src="cart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadWatchlist();
+            updateUserInterface();
+            updateCartCount();
+            updateWatchlistCount();
+        });
+
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'watchlist' || e.key === 'cart' || e.key === 'currentUser') {
+                loadWatchlist();
+                updateWatchlistCount();
+                updateCartCount();
+                updateUserInterface();
+            }
+        });
+
+        function loadWatchlist() {
+            const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+            const container = document.getElementById('watchlist-container');
+
+            if (watchlist.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon"><i class="far fa-heart"></i></div>
+                        <h2 class="empty-title">Your Watchlist Is Empty</h2>
+                        <p class="empty-message">Add items you love to your watchlist to keep track of them!</p>
+                        <a href="homepage.html" class="browse-btn">
+                            <i class="fas fa-shopping-bag"></i> Browse Collections
+                        </a>
+                    </div>
+                `;
+            } else {
+                const watchlistHTML = watchlist.map(item => `
+                    <div class="watchlist-item" data-product-id="${item.id}">
+                        <div class="watchlist-image">
+                            <img src="${item.image}" alt="${item.name}" onerror="this.src='images/placeholder.jpg';">
+                            <button class="remove-btn" onclick="removeFromWatchlist('${item.id}')" title="Remove from watchlist">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <div class="watchlist-info">
+                            <div class="watchlist-name">${item.name}</div>
+                            <div class="watchlist-price">₹${parseInt(item.price.toString().replace(/[^0-9]/g, '')).toLocaleString()}</div>
+                            <div class="watchlist-actions">
+                                <button class="view-btn" onclick="viewProduct('${item.id}')">
+                                    <i class="fas fa-eye"></i> View
+                                </button>
+                                <button class="add-to-cart-btn" onclick="addToCartFromWatchlist('${item.id}')">
+                                    <i class="fas fa-shopping-cart"></i> Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+
+                container.innerHTML = `<div class="watchlist-grid">${watchlistHTML}</div>`;
+            }
+        }
+        
+        function removeFromWatchlist(productId) {
+            let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+            const itemToRemove = watchlist.find(item => String(item.id) === String(productId));
+            
+            if (itemToRemove) {
+                const updatedWatchlist = watchlist.filter(item => String(item.id) !== String(productId));
+                localStorage.setItem('watchlist', JSON.stringify(updatedWatchlist));
+                
+                showNotification(`"${itemToRemove.name}" removed from your watchlist.`, 'error');
+                
+                loadWatchlist();
+                updateWatchlistCount();
+                window.dispatchEvent(new CustomEvent('watchlistUpdated'));
+            }
+        }
+        
+        function viewProduct(productId) {
+             const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+             const product = watchlist.find(item => String(item.id) === String(productId));
+             if (product) {
+                localStorage.setItem('selectedProduct', JSON.stringify(product));
+                window.location.href = 'product-detail.html';
+             } else {
+                showNotification('Could not find product details.', 'error');
+             }
+        }
+        
+        function addToCartFromWatchlist(productId) {
+            const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+            const product = watchlist.find(item => String(item.id) === String(productId));
+
+            if (product) {
+                if (typeof window.addToCart === 'function') {
+                    const priceNumber = parseInt(product.price.toString().replace(/[^0-9]/g, ''));
+                    window.addToCart(product.name, priceNumber, product.image, 1);
+                } else {
+                     showNotification('Error: Could not add item to cart.', 'error');
+                }
+            }
+        }
+        
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.classList.add('show');
+
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        function updateWatchlistCount() {
+            const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+            const count = watchlist.length;
+            const badge = document.getElementById('status-wishlist-count');
+            if (badge) {
+                badge.textContent = count;
+                badge.style.display = count > 0 ? 'flex' : 'none';
+            }
+        }
+        
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+            const badge = document.getElementById('status-cart-count');
+            if(badge) {
+                badge.textContent = totalItems;
+                badge.style.display = totalItems > 0 ? 'flex' : 'none';
+            }
+        }
+
+        function handleLogout(event) {
+            event.preventDefault();
+            if (window.auth && auth.isLoggedIn()) {
+                auth.logout();
+                showNotification('You have been logged out.', 'success');
+                setTimeout(() => window.location.reload(), 1000);
+            }
+        }
+
+        function updateUserInterface() {
+            const profileStatusBar = document.getElementById('profile-status-bar');
+            const userNameDisplay = document.getElementById('user-name-display');
+            const authLogin = document.querySelector('.auth-login');
+
+            let isLoggedIn = (window.auth && typeof auth.isLoggedIn === 'function') ? auth.isLoggedIn() : false;
+            let currentUser = isLoggedIn ? auth.getCurrentUser() : null;
+
+            if (isLoggedIn && currentUser) {
+                if (profileStatusBar) profileStatusBar.style.display = 'block';
+                if (userNameDisplay) userNameDisplay.textContent = `Welcome, ${currentUser.name}!`;
+                if (authLogin) authLogin.style.display = 'none';
+            } else {
+                if (profileStatusBar) profileStatusBar.style.display = 'none';
+                if (authLogin) authLogin.style.display = 'flex';
+            }
+        }
+    </script>
+</body>
+</html>
+
+can you add the login logout button functionality and if i logout i want to show the logout alertbox how to do

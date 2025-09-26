@@ -592,13 +592,53 @@
     </style>
 </head>
 <body>
-    <header>
-        <div class="header-top">
-            <h2>Lunsara</h2>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h2>
+                <img src="images/logo.png" alt="Lunsara Logo" class="logo">
+                Lunsara
+            </h2>
+
             <nav class="navbar">
-                <a href="index.html">Home</a>
-                <a href="cart.html">Cart</a>
-                <a href="order-tracking.html" class="active">Orders</a>
+                <!-- Authentication Buttons -->
+                <div class="auth-buttons">
+                    <a href="login.html" class="auth-login" style="display: none;">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Login
+                    </a>
+
+                    <!-- Profile Status Bar -->
+                    <div class="profile-status-bar" id="profile-status-bar" style="display: block;">
+                        <div class="status-content">
+                            <div class="user-avatar">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="user-details">
+                                <div class="user-name-display" id="user-name-display">Welcome!</div>
+                                <div class="user-status">Premium Member</div>
+                            </div>
+                            <div class="status-actions">
+                                <a href="homepage.html" class="status-btn home-btn" title="Home" onclick="handleHomeClick(event)">
+                                    <span class="status-label">Home</span>
+                                    <i class="fas fa-home"></i>
+                                </a>
+                               
+                                <a href="watchlist.html" class="status-btn watchlist-btn" title="Watchlist">
+                                    <span class="status-label">Watchlist</span>
+                                    <i class="fas fa-heart"></i>
+                                   
+                                </a>
+                                <a href="#" class="status-btn bag-btn" title="Shopping Bag" onclick="handleBagClick(event)">
+                                    <span class="status-label">Cart</span>
+                                    <i class="fas fa-shopping-bag"></i>
+                                   
+                                </a>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </nav>
         </div>
     </header>
@@ -784,7 +824,7 @@
                     <i class="fas fa-shopping-bag"></i>
                     <h3>No Orders Yet</h3>
                     <p>${message}</p>
-                    <a href="index.html" class="shop-now-btn">Continue Shopping</a>
+                    <a href="homepage.html" class="shop-now-btn">Continue Shopping</a>
                 </div>
             `;
         }
