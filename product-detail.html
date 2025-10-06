@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kanchipuram Silk Saree | Lunsara</title>
+    <title>Product Details | Lunsara</title>
     
     <!-- Font Awesome for the cart icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -29,6 +29,13 @@
             top: 0;
             z-index: 1000;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(142, 68, 173, 0.3);
+        }
+
+        .header-content {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
         header h2 {
@@ -84,139 +91,12 @@
             color: #8e44ad;
         }
 
-        /* Profile Status Bar Styles */
-        .profile-status-bar {
-            background: linear-gradient(135deg, #8e44ad, #9b59b6);
-            border-radius: 25px;
-            padding: 8px 16px;
-            box-shadow: 0 4px 15px rgba(142, 68, 173, 0.3);
-            margin-left: 15px;
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            position: relative;
-            z-index: 1001;
-            display: block !important;
-            visibility: visible;
-        }
-
-        .profile-status-bar:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(142, 68, 173, 0.4);
-        }
-
-        .status-content {
+.header-content {
+            width: 100%;
             display: flex;
             align-items: center;
-            gap: 12px;
-            color: white;
+            justify-content: space-between;
         }
-
-        .user-avatar {
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            color: white;
-        }
-
-        .user-details {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        .user-name-display {
-            font-weight: 600;
-            font-size: 14px;
-            color: white;
-        }
-
-        .user-status {
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.8);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            display: none;
-        }
-
-        .status-actions {
-            display: flex;
-            gap: 15px;
-            margin-left: 8px;
-        }
-
-        .status-btn {
-            width: auto;
-            height: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            font-size: 12px;
-            padding: 0 10px;
-            gap: 5px;
-        }
-
-        .status-label {
-            font-size: 12px;
-            font-weight: 700;
-            white-space: nowrap;
-        }
-
-        .status-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.1);
-        }
-
-        .status-btn.home-btn:hover {
-            background: white;
-            color: #8e44ad;
-            transform: scale(1.1);
-            box-shadow: 0 4px 12px rgba(142, 68, 173, 0.3);
-        }
-
-        .status-btn.watchlist-btn:hover {
-            background: white;
-            color: #8e44ad;
-        }
-
-        .status-btn.bag-btn:hover {
-            background: white;
-            color: #8e44ad;
-        }
-
-
-
-        .status-btn.logout-btn:hover {
-            background: white;
-            color: #8e44ad;
-        }
-
-        /* Status Bar Cart Badge */
-        .status-cart-badge {
-            position: absolute;
-            top: 2px;
-            right: 2px;
-            background-color: #e74c3c;
-            color: white;
-            border-radius: 50%;
-            width: 16px;
-            height: 16px;
-            font-size: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            border: 2px solid #8e44ad;
-            display: none;
-        }
-
 
         .cart-icon-container {
             position: relative;
@@ -239,6 +119,97 @@
             justify-content: center;
             font-weight: 600;
             border: 1px solid #8e44ad;
+        }
+.profile-status-bar {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            border-radius: 25px;
+            padding: 8px 16px;
+            box-shadow: 0 4px 15px rgba(142, 68, 173, 0.3);
+            margin-left: 15px;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        .status-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+        }
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+        }
+        .user-details {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .user-name-display {
+            font-weight: 600;
+            font-size: 14px;
+            color: white;
+        }
+        .status-actions {
+            display: flex;
+            gap: 15px;
+            margin-left: 8px;
+        }
+        .status-btn {
+            position: relative;
+            width: auto;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-size: 12px;
+            padding: 0 10px;
+            gap: 5px;
+        }
+        .status-label {
+            font-size: 12px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        .status-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+        .status-btn.home-btn:hover,
+        .status-btn.watchlist-btn:hover,
+        .status-btn.bag-btn:hover,
+        .status-btn.logout-btn:hover {
+            background: white;
+            color: #8e44ad;
+        }
+        .status-cart-badge, .status-wishlist-badge {
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border: 2px solid #8e44ad;
+            position: absolute;
+            top: -6px;
+            right: -8px;
+            display: none;
+        }
+        .status-wishlist-badge {
+             background-color: #e91e63;
         }
 
         /* Main Product Container */
@@ -548,6 +519,13 @@
 
         .btn-secondary:hover {
             background: #e55a1a;
+        }
+
+        .btn-watchlist:hover {
+            background: #8e44ad;
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(142, 68, 173, 0.3);
         }
 
         /* Delivery Info */
@@ -1060,21 +1038,56 @@
             }
 
             .status-actions {
-                gap: 8px;
+                gap: 15px;
                 margin-left: 8px;
-                justify-content: center;
             }
 
             .status-btn {
+                position: relative;
                 width: auto;
-                height: 26px;
-                font-size: 11px;
+                height: 28px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50px;
+                background: rgba(255, 255, 255, 0.2);
+                color: white;
+                text-decoration: none;
+                transition: all 0.2s ease;
+                font-size: 12px;
                 padding: 0 10px;
-                min-height: 26px;
+                gap: 5px;
+            }
+    
+            .status-label {
+                font-size: 12px;
+                font-weight: 700;
+                white-space: nowrap;
+            }
+    
+            .status-btn:hover {
+                background: rgba(255, 255, 255, 0.3);
+                transform: scale(1.1);
+            }
+    
+            .status-btn.home-btn:hover,
+            .status-btn.watchlist-btn:hover,
+            .status-btn.bag-btn:hover,
+            .status-btn.logout-btn:hover {
+                background: white;
+                color: #8e44ad;
             }
 
             .status-label {
                 font-size: 11px;
+            }
+
+            .status-count-text {
+                font-size: 10px;
+                padding: 1px 4px;
+                margin-left: 1px;
+                margin-right: 2px;
+                min-width: 18px;
             }
 
             .product-layout {
@@ -1138,7 +1151,8 @@
             }
 
             .btn-primary,
-            .btn-secondary {
+            .btn-secondary,
+            .btn-watchlist {
                 width: 100%;
                 justify-content: center;
             }
@@ -1264,21 +1278,56 @@
             }
 
             .status-actions {
-                gap: 6px;
-                margin-left: 6px;
-                justify-content: center;
+                gap: 15px;
+                margin-left: 8px;
             }
 
             .status-btn {
+                position: relative;
                 width: auto;
-                height: 22px;
-                font-size: 10px;
-                padding: 0 8px;
-                min-height: 22px;
+                height: 28px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50px;
+                background: rgba(255, 255, 255, 0.2);
+                color: white;
+                text-decoration: none;
+                transition: all 0.2s ease;
+                font-size: 12px;
+                padding: 0 10px;
+                gap: 5px;
+            }
+
+            .status-label {
+                font-size: 12px;
+                font-weight: 700;
+                white-space: nowrap;
+            }
+
+            .status-btn:hover {
+                background: rgba(255, 255, 255, 0.3);
+                transform: scale(1.1);
+            }
+
+            .status-btn.home-btn:hover,
+            .status-btn.watchlist-btn:hover,
+            .status-btn.bag-btn:hover,
+            .status-btn.logout-btn:hover {
+                background: white;
+                color: #8e44ad;
             }
 
             .status-label {
                 font-size: 10px;
+            }
+
+            .status-count-text {
+                font-size: 9px;
+                padding: 1px 3px;
+                margin-left: 1px;
+                margin-right: 2px;
+                min-width: 16px;
             }
 
             .cart-badge {
@@ -1363,39 +1412,25 @@
        </h2>
 
        <nav class="navbar">
-           <!-- Authentication Buttons -->
            <div class="auth-buttons">
                <a href="login.html" class="auth-login" style="display: none;">
-                   <i class="fas fa-sign-in-alt"></i>
-                   Login
+                   <i class="fas fa-sign-in-alt"></i> Login
                </a>
-
-               <!-- Profile Status Bar -->
-               <div class="profile-status-bar" id="profile-status-bar">
-                   <div class="status-content">
-                       <div class="user-avatar">
-                           <i class="fas fa-user-circle"></i>
-                       </div>
-                       <div class="user-details">
-                           <div class="user-name-display" id="user-name-display">Welcome, Demo User!</div>
-                           <div class="user-status">Premium Member</div>
-                       </div>
-                       <div class="status-actions">
-                       <a href="homepage.html" class="status-btn home-btn" title="Home">
-                           <span class="status-label">Home</span>
-                           <i class="fas fa-home"></i>
-                       </a>
-                       <a href="watchlist.html" class="status-btn watchlist-btn" title="Watchlist">
-                           <span class="status-label">Watchlist</span>
-                           <i class="fas fa-heart"></i>
-                       </a>
-                       <a href="#" class="status-btn bag-btn" title="Shopping Bag" onclick="handleBagClick(event)">
-                           <span class="status-label">Cart</span>
-                           <i class="fas fa-shopping-bag"></i>
-                           <span id="status-cart-count" class="status-cart-badge">0</span>
-                       </a>
-                   </div>
-                   </div>
+               <div class="status-actions" style="background: linear-gradient(135deg, #8e44ad, #9b59b6); border-radius: 25px; padding: 8px 16px; box-shadow: 0 4px 15px rgba(142, 68, 173, 0.3); margin-left: 15px; transition: all 0.3s ease; border: 2px solid rgba(255, 255, 255, 0.2);">
+                   <a href="homepage.html" class="status-btn home-btn" title="Home">
+                       <span class="status-label">Home</span>
+                       <i class="fas fa-home"></i>
+                   </a>
+                   <a href="watchlist.html" class="status-btn watchlist-btn" title="Watchlist">
+                       <span class="status-label">Watchlist</span>
+                       <span id="status-watchlist-text" class="status-count-text">(0)</span>
+                       <i class="fas fa-heart"></i>
+                   </a>
+                   <a href="cart.html" class="status-btn bag-btn" title="Shopping Bag">
+                       <span class="status-label">Cart</span>
+                       <span id="status-cart-text" class="status-count-text">(0)</span>
+                       <i class="fas fa-shopping-bag"></i>
+                   </a>
                </div>
            </div>
        </nav>
@@ -1406,7 +1441,7 @@
         <div class="product-layout">
             <!-- Product Gallery -->
             <div class="product-gallery">
-                <img src="images/silk_saree_collection.jpg" alt="Kanchipuram Silk Saree" class="main-image" id="mainImage">
+                <img src="images/handloom_lungi.jpg" alt="Product Image" class="main-image" id="mainImage">
                 <div class="thumbnail-container">
                     <img src="images/silk_saree_collection.jpg" alt="View 1" class="thumbnail active" onclick="changeImage(this, 0)">
                     <img src="images/silk_saree.jpg" alt="View 2" class="thumbnail" onclick="changeImage(this, 1)">
@@ -1417,7 +1452,7 @@
 
             <!-- Product Information -->
             <div class="product-info">
-                <h1 class="product-title">Kanchipuram Silk Saree</h1>
+                <h1 class="product-title">Product Details</h1>
 
                 <div class="product-rating">
                     <div class="rating-stars">
@@ -1431,9 +1466,9 @@
                 </div>
 
                 <div class="product-price">
-                    <span class="current-price">₹12,500</span>
-                    <span class="original-price">₹18,000</span>
-                    <div class="discount">30% off</div>
+                    <span class="current-price">₹0</span>
+                    <span class="original-price">₹0</span>
+                    <div class="discount">0% off</div>
                 </div>
 
                 <div class="price-breakdown">
@@ -1456,23 +1491,23 @@
                     <ul class="highlight-list">
                         <li class="highlight-item">
                             <i class="fas fa-check"></i>
-                            Premium Kanchipuram silk fabric
+                            Premium quality fabric
                         </li>
                         <li class="highlight-item">
                             <i class="fas fa-check"></i>
-                            Handwoven with golden zari work
+                            Comfortable and breathable
                         </li>
                         <li class="highlight-item">
                             <i class="fas fa-check"></i>
-                            Perfect for weddings and special occasions
+                            Perfect for daily wear and traditional occasions
                         </li>
                         <li class="highlight-item">
                             <i class="fas fa-check"></i>
-                            Traditional South Indian design
+                            Traditional patterns and modern designs
                         </li>
                         <li class="highlight-item">
                             <i class="fas fa-check"></i>
-                            Comes with matching blouse piece
+                            Easy to maintain and care for
                         </li>
                     </ul>
                 </div>
@@ -1486,6 +1521,23 @@
                     <button class="btn-primary" onclick="addToCart()">
                         <i class="fas fa-shopping-cart"></i>
                         ADD TO CART
+                    </button>
+                    <button class="btn-watchlist" onclick="addToWatchlist()" style="
+                        background: #fff;
+                        color: #8e44ad;
+                        border: 2px solid #8e44ad;
+                        padding: 12px 24px;
+                        border-radius: 10px;
+                        font-size: 16px;
+                        font-weight: 600;
+                        cursor: pointer;
+                        transition: all 0.2s;
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 8px;
+                    ">
+                        <i class="fas fa-heart"></i>
+                        ADD TO WATCHLIST
                     </button>
                     <button class="btn-secondary" onclick="buyNow()">
                         <i class="fas fa-bolt"></i>
@@ -1530,22 +1582,45 @@
             <div id="description" class="tab-content active">
                 <div class="tab-description">
                     <h3>Product Description</h3>
-                    <p>Experience the timeless elegance of our Kanchipuram Silk Saree, a masterpiece of traditional South Indian craftsmanship. This luxurious saree is handwoven using pure mulberry silk threads and features intricate golden zari work that creates stunning patterns across the fabric.</p>
-                    <p>Perfect for weddings, festivals, and special occasions, this saree comes with a matching blouse piece and showcases the rich heritage of Kanchipuram weaving. The silk fabric provides excellent drape and comfort, making it ideal for all-day wear.</p>
+                    <p>Discover our premium collection of traditional lungis, crafted with care and attention to detail. Made from high-quality cotton and cotton blend fabrics, these lungis offer superior comfort and breathability for everyday wear.</p>
+                    <p>Perfect for traditional occasions, casual wear, and daily use, our lungis feature traditional patterns and modern designs that reflect both heritage and contemporary style. Each piece is designed for maximum comfort and ease of maintenance.</p>
 
                     <h4>Care Instructions:</h4>
                     <ul>
-                        <li>Dry clean only</li>
-                        <li>Store in a cool, dry place</li>
-                        <li>Avoid direct sunlight</li>
-                        <li>Use mild detergent for washing</li>
+                        <li>Machine wash in cold water</li>
+                        <li>Use mild detergent</li>
+                        <li>Dry in shade</li>
+                        <li>Iron on medium heat</li>
                     </ul>
                 </div>
             </div>
 
             <div id="specifications" class="tab-content">
                 <table class="specifications-table" id="specifications-table">
-                    <!-- Specifications will be dynamically updated based on product type -->
+                    <tr>
+                        <th>Material</th>
+                        <td>Premium Cotton</td>
+                    </tr>
+                    <tr>
+                        <th>Length</th>
+                        <td>2.5 meters</td>
+                    </tr>
+                    <tr>
+                        <th>Width</th>
+                        <td>1.25 meters</td>
+                    </tr>
+                    <tr>
+                        <th>Pattern</th>
+                        <td>Traditional Checkered/Striped</td>
+                    </tr>
+                    <tr>
+                        <th>Occasion</th>
+                        <td>Daily Wear, Casual, Traditional</td>
+                    </tr>
+                    <tr>
+                        <th>Care</th>
+                        <td>Machine Wash</td>
+                    </tr>
                 </table>
             </div>
 
@@ -1620,10 +1695,10 @@
                 </div>
             </div>
             <div class="product-card" onclick="window.location.href='lungis.html'">
-                <img src="images/lungi_collection.jpg" alt="Traditional Lungi">
+                <img src="images/lungi_collection.jpg" alt="Blue Checkered Lungi">
                 <div class="product-card-info">
-                    <h3 class="product-card-title">Traditional Lungi</h3>
-                    <div class="product-card-price">₹950</div>
+                    <h3 class="product-card-title">Blue Checkered Lungi</h3>
+                    <div class="product-card-price">₹380</div>
                 </div>
             </div>
             <div class="product-card" onclick="window.location.href='silk.html'">
@@ -1648,14 +1723,14 @@
     <script>
         // Product data - will be updated by loadSelectedProduct()
         let product = {
-            name: 'Kanchipuram Silk Saree',
-            price: 12500,
-            originalPrice: 18000,
+            name: 'Product Details',
+            price: 0,
+            originalPrice: 0,
             images: [
-                'images/silk_saree_collection.jpg',
+                'images/handloom_lungi.jpg',
+                'images/lungi_collection.jpg',
                 'images/silk_saree.jpg',
-                'images/background1.jpg',
-                'images/background2.jpg'
+                'images/printed_saree.jpg'
             ]
         };
 
@@ -1666,110 +1741,31 @@
         document.addEventListener('DOMContentLoaded', function() {
             console.log('DOM Content Loaded - Initializing page...');
 
-            updateCartBadge();
             initializeImageGallery();
-            updateUserInterface(); // Initialize user interface
+            updateWatchlistCount();
 
             // Create a test user for demonstration if no users exist
             createTestUserIfNeeded();
-
-            // Force show profile status bar immediately
-            const profileStatusBar = document.getElementById('profile-status-bar');
-            if (profileStatusBar) {
-                profileStatusBar.style.display = 'block !important';
-                profileStatusBar.style.visibility = 'visible';
-                console.log('Profile status bar forced to show');
-            } else {
-                console.log('Profile status bar element not found');
-            }
-
-            // Also try to show it after a short delay
-            setTimeout(() => {
-                const profileStatusBar2 = document.getElementById('profile-status-bar');
-                if (profileStatusBar2) {
-                    profileStatusBar2.style.display = 'block !important';
-                    profileStatusBar2.style.visibility = 'visible';
-                    console.log('Profile status bar confirmed visible');
-                }
-            }, 500);
-
-            // Call manual function to ensure it shows
-            setTimeout(() => {
-                showProfileStatusBar();
-            }, 1000);
 
             // Load product data with a small delay to ensure DOM is fully ready
             setTimeout(() => {
                 console.log('Loading selected product after DOM ready...');
                 loadSelectedProduct();
             }, 100);
+
+            const profileStatusBar = document.getElementById('profile-status-bar');
+            const authLogin = document.querySelector('.auth-login');
+            if (auth.isLoggedIn()) {
+                profileStatusBar.style.display = 'block';
+                authLogin.style.display = 'none';
+                document.getElementById('user-name-display').textContent = `Welcome, ${auth.getCurrentUser().name}!`;
+            } else {
+                profileStatusBar.style.display = 'none';
+                authLogin.style.display = 'flex';
+            }
         });
 
-        // Create a test user for demonstration
-        function createTestUserIfNeeded() {
-            const users = JSON.parse(localStorage.getItem('users') || '[]');
-            const currentUser = localStorage.getItem('currentUser');
 
-            if (users.length === 0 && !currentUser) {
-                console.log('Creating test user for demonstration...');
-
-                // Create a test user
-                const testUser = {
-                    id: 'demo-user-123',
-                    name: 'Demo User',
-                    email: 'demo@lunsara.com',
-                    phone: '9876543210',
-                    password: 'demo123',
-                    createdAt: new Date().toISOString(),
-                    profile: {
-                        addresses: [],
-                        orders: [],
-                        preferences: {}
-                    }
-                };
-
-                // Save test user
-                users.push(testUser);
-                localStorage.setItem('users', JSON.stringify(users));
-
-                // Auto-login the test user
-                const sessionUser = {
-                    id: testUser.id,
-                    name: testUser.name,
-                    email: testUser.email,
-                    loginTime: new Date().toISOString()
-                };
-
-                localStorage.setItem('currentUser', JSON.stringify(sessionUser));
-
-                console.log('Test user created and logged in');
-                console.log('You can now see the profile status bar!');
-
-                // Update UI to show the logged-in state
-                updateUserInterface();
-
-                // Show notification
-                showNotification('Demo user logged in! You can now see the profile status bar.', 'success');
-            }
-        }
-
-        // Update cart badge
-        function updateCartBadge() {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-            const badge = document.getElementById('cart-count');
-            const statusBarCartCount = document.getElementById('status-cart-count');
-
-            if (badge) {
-                badge.textContent = totalItems;
-                badge.style.display = totalItems > 0 ? 'flex' : 'none';
-            }
-
-            if (statusBarCartCount) {
-                statusBarCartCount.textContent = totalItems;
-                statusBarCartCount.style.display = totalItems > 0 ? 'flex' : 'none';
-            }
-        }
 
         // Authentication event handlers
         function handleLogout(event) {
@@ -1826,11 +1822,59 @@
             window.location.href = 'cart.html';
         }
 
+        // Create a test user for demonstration
+        function createTestUserIfNeeded() {
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const currentUser = localStorage.getItem('currentUser');
+
+            if (users.length === 0 && !currentUser) {
+                console.log('Creating test user for demonstration...');
+
+                // Create a test user
+                const testUser = {
+                    id: 'demo-user-123',
+                    name: 'Demo User',
+                    email: 'demo@lunsara.com',
+                    phone: '9876543210',
+                    password: 'demo123',
+                    createdAt: new Date().toISOString(),
+                    profile: {
+                        addresses: [],
+                        orders: [],
+                        preferences: {}
+                    }
+                };
+
+                // Save test user
+                users.push(testUser);
+                localStorage.setItem('users', JSON.stringify(users));
+
+                // Auto-login the test user
+                const sessionUser = {
+                    id: testUser.id,
+                    name: testUser.name,
+                    email: testUser.email,
+                    loginTime: new Date().toISOString()
+                };
+
+                localStorage.setItem('currentUser', JSON.stringify(sessionUser));
+
+                console.log('Test user created and logged in');
+                console.log('You can now see the profile status bar!');
+
+                // Update UI to show the logged-in state
+                updateUserInterface();
+
+                // Show notification
+                showNotification('Demo user logged in! You can now see the profile status bar.', 'success');
+            }
+        }
+
+
         // Update user interface based on authentication state
         function updateUserInterface() {
             const profileStatusBar = document.getElementById('profile-status-bar');
             const userNameDisplay = document.getElementById('user-name-display');
-            const loginButtons = document.querySelectorAll('.auth-login');
             const logoutButtons = document.querySelectorAll('.auth-logout');
 
             console.log('Updating UI - isLoggedIn:', auth.isLoggedIn());
@@ -1838,17 +1882,16 @@
             if (auth.isLoggedIn()) {
                 const currentUser = auth.getCurrentUser();
 
-                // Update profile status bar
+                // Show profile status bar for logged-in users
                 if (profileStatusBar) {
-                    profileStatusBar.style.display = 'block !important';
+                    profileStatusBar.style.display = 'block';
                     profileStatusBar.style.visibility = 'visible';
                 }
                 if (userNameDisplay) {
                     userNameDisplay.textContent = `Welcome, ${currentUser.name}!`;
                 }
 
-                // Hide login buttons, show logout buttons
-                loginButtons.forEach(btn => btn.style.display = 'none');
+                // Show logout buttons
                 logoutButtons.forEach(btn => btn.style.display = 'block');
 
             } else {
@@ -1858,21 +1901,26 @@
                     profileStatusBar.style.visibility = 'visible';
                 }
 
-                // Show login buttons, hide logout buttons
-                loginButtons.forEach(btn => btn.style.display = 'block');
+                // Hide logout buttons
                 logoutButtons.forEach(btn => btn.style.display = 'none');
             }
         }
 
-        // Manual function to show profile status bar
-        function showProfileStatusBar() {
-            const profileStatusBar = document.getElementById('profile-status-bar');
-            if (profileStatusBar) {
-                profileStatusBar.style.display = 'block !important';
-                profileStatusBar.style.visibility = 'visible';
-                console.log('Profile status bar manually shown');
-            } else {
-                console.log('Profile status bar element not found');
+        // Update watchlist and cart counts in status bar
+        function updateWatchlistCount() {
+            const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+            const count = watchlist.length;
+            const badge = document.getElementById('status-watchlist-text');
+            if (badge) {
+                badge.textContent = `(${count})`;
+            }
+
+            // Update cart count
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalCartItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const cartBadge = document.getElementById('status-cart-text');
+            if (cartBadge) {
+                cartBadge.textContent = `(${totalCartItems})`;
             }
         }
 
@@ -1881,10 +1929,15 @@
             updateUserInterface();
         });
 
-        // Listen for cart updates
+        // Listen for cart and watchlist updates
         window.addEventListener('cartUpdated', function() {
-            updateCartBadge();
+            updateWatchlistCount();
         });
+
+        window.addEventListener('watchlistUpdated', function() {
+            updateWatchlistCount();
+        });
+
 
 
         // Show notification (global utility function)
@@ -1921,6 +1974,8 @@
 
         // Show custom cart notification
         function showCartNotification(quantity) {
+            console.log('showCartNotification called with quantity:', quantity);
+
             // Remove existing notification
             const existingNotification = document.getElementById('cart-notification');
             if (existingNotification) {
@@ -1930,33 +1985,74 @@
             // Create notification element
             const notification = document.createElement('div');
             notification.id = 'cart-notification';
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: linear-gradient(135deg, #27ae60, #2ecc71);
+                color: white;
+                padding: 1.2rem 1.5rem;
+                border-radius: 12px;
+                box-shadow: 0 8px 25px rgba(39, 174, 96, 0.3);
+                z-index: 10000;
+                transform: translateX(400px);
+                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                min-width: 280px;
+                border-left: 4px solid #219a52;
+                opacity: 0;
+                visibility: hidden;
+            `;
+
             notification.innerHTML = `
-                <div class="cart-notification-content">
-                    <div class="cart-notification-icon">
+                <div class="cart-notification-content" style="display: flex; align-items: center; gap: 12px;">
+                    <div class="cart-notification-icon" style="
+                        font-size: 20px;
+                        color: #2ecc71;
+                        background: white;
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    ">
                         <i class="fas fa-shopping-cart"></i>
                     </div>
-                    <div class="cart-notification-text">
-                        <div class="cart-notification-title">Added to Cart!</div>
-                        <div class="cart-notification-message">${quantity} item${quantity > 1 ? 's' : ''} added successfully</div>
+                    <div class="cart-notification-text" style="flex: 1;">
+                        <div class="cart-notification-title" style="font-weight: 600; font-size: 16px; margin-bottom: 4px;">Added to Cart!</div>
+                        <div class="cart-notification-message" style="font-size: 14px; opacity: 0.9;">${quantity} item${quantity > 1 ? 's' : ''} added successfully</div>
                     </div>
-                    <button class="cart-notification-close" onclick="closeCartNotification()">
+                    <button class="cart-notification-close" onclick="closeCartNotification()" style="
+                        background: none;
+                        border: none;
+                        color: white;
+                        font-size: 18px;
+                        cursor: pointer;
+                        padding: 4px;
+                        opacity: 0.7;
+                        transition: opacity 0.2s;
+                    ">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
-                <div class="cart-notification-progress"></div>
             `;
 
             document.body.appendChild(notification);
+            console.log('Notification element created and added to DOM');
 
             // Show notification with animation
             setTimeout(() => {
-                notification.classList.add('show');
+                console.log('Adding show class to notification');
+                notification.style.transform = 'translateX(0)';
+                notification.style.opacity = '1';
+                notification.style.visibility = 'visible';
             }, 100);
 
-            // Auto-hide after 3 seconds
+            // Auto-hide after 2 seconds
             setTimeout(() => {
+                console.log('Auto-hiding notification after 2 seconds');
                 closeCartNotification();
-            }, 3000);
+            }, 2000);
         }
 
         // Close cart notification
@@ -2381,6 +2477,128 @@
             element.classList.add('active');
         }
 
+        // Watchlist functions
+        function addToWatchlist() {
+            const watchlistItem = {
+                name: product.name,
+                price: product.price,
+                originalPrice: product.originalPrice,
+                image: product.images[0],
+                dateAdded: new Date().toISOString()
+            };
+
+            const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+            const existingItemIndex = watchlist.findIndex(item => item.name === product.name);
+
+            if (existingItemIndex === -1) {
+                watchlist.push(watchlistItem);
+                localStorage.setItem('watchlist', JSON.stringify(watchlist));
+                updateWatchlistCount();
+                window.dispatchEvent(new CustomEvent('watchlistUpdated'));
+                showWatchlistNotification();
+            } else {
+                showWatchlistNotification('Already in Watchlist');
+            }
+        }
+
+        // Show watchlist notification with same animation as cart
+        function showWatchlistNotification(message = '') {
+            console.log('showWatchlistNotification called');
+
+            // Remove existing notification
+            const existingNotification = document.getElementById('watchlist-notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+
+            // Default message
+            const displayMessage = message || 'Added to Watchlist!';
+
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.id = 'watchlist-notification';
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: linear-gradient(135deg, #e74c3c, #c0392b);
+                color: white;
+                padding: 1.2rem 1.5rem;
+                border-radius: 12px;
+                box-shadow: 0 8px 25px rgba(231, 76, 60, 0.3);
+                z-index: 10000;
+                transform: translateX(400px);
+                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                min-width: 280px;
+                border-left: 4px solid #a93226;
+                opacity: 0;
+                visibility: hidden;
+            `;
+
+            notification.innerHTML = `
+                <div class="watchlist-notification-content" style="display: flex; align-items: center; gap: 12px;">
+                    <div class="watchlist-notification-icon" style="
+                        font-size: 20px;
+                        color: #e74c3c;
+                        background: white;
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    ">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="watchlist-notification-text" style="flex: 1;">
+                        <div class="watchlist-notification-title" style="font-weight: 600; font-size: 16px; margin-bottom: 4px;">Watchlist Updated!</div>
+                        <div class="watchlist-notification-message" style="font-size: 14px; opacity: 0.9;">${displayMessage}</div>
+                    </div>
+                    <button class="watchlist-notification-close" onclick="closeWatchlistNotification()" style="
+                        background: none;
+                        border: none;
+                        color: white;
+                        font-size: 18px;
+                        cursor: pointer;
+                        padding: 4px;
+                        opacity: 0.7;
+                        transition: opacity 0.2s;
+                    ">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+
+            document.body.appendChild(notification);
+            console.log('Watchlist notification element created and added to DOM');
+
+            // Show notification with animation
+            setTimeout(() => {
+                console.log('Adding show animation to watchlist notification');
+                notification.style.transform = 'translateX(0)';
+                notification.style.opacity = '1';
+                notification.style.visibility = 'visible';
+            }, 100);
+
+            // Auto-hide after 2 seconds
+            setTimeout(() => {
+                console.log('Auto-hiding watchlist notification after 2 seconds');
+                closeWatchlistNotification();
+            }, 2000);
+        }
+
+        // Close watchlist notification
+        function closeWatchlistNotification() {
+            const notification = document.getElementById('watchlist-notification');
+            if (notification) {
+                notification.style.transform = 'translateX(400px)';
+                notification.style.opacity = '0';
+                setTimeout(() => {
+                    notification.remove();
+                }, 400);
+            }
+        }
+
         // Cart functions
         function addToCart() {
             const cartItem = {
@@ -2400,7 +2618,8 @@
             }
 
             localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartBadge();
+            updateWatchlistCount();
+            window.dispatchEvent(new CustomEvent('cartUpdated'));
             showCartNotification(quantity);
         }
 
@@ -2423,23 +2642,13 @@
             }
 
             localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartBadge();
+            updateWatchlistCount();
+            window.dispatchEvent(new CustomEvent('cartUpdated'));
 
             // Redirect directly to delivery address page - NO ALERT
             window.location.href = 'delivery-address.html';
         }
 
-        // Update cart badge
-        function updateCartBadge() {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-            const badge = document.getElementById('cart-count');
-
-            if (badge) {
-                badge.textContent = totalItems;
-                badge.style.display = totalItems > 0 ? 'flex' : 'none';
-            }
-        }
     </script>
 </body>
 </html>

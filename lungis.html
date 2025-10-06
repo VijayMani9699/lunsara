@@ -148,7 +148,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 20px;
+            border-radius: 50px;
             background: rgba(255, 255, 255, 0.2);
             color: white;
             text-decoration: none;
@@ -429,27 +429,21 @@
                     <a href="login.html" class="auth-login" style="display: none;">
                         <i class="fas fa-sign-in-alt"></i> Login
                     </a>
-                    <div class="profile-status-bar" id="profile-status-bar">
-                        <div class="status-content">
-                            <div class="user-avatar"><i class="fas fa-user-circle"></i></div>
-                            <div class="user-details">
-                                <div class="user-name-display" id="user-name-display">Welcome!</div>
-                            </div>
-                            <div class="status-actions">
-                                <a href="homepage.html" class="status-btn home-btn" title="Home"><span class="status-label">Home</span><i class="fas fa-home"></i></a>
-                                <a href="watchlist.html" class="status-btn watchlist-btn" title="Watchlist">
-                                    <span class="status-label">Watchlist</span><i class="fas fa-heart"></i>
-                                    <span id="status-wishlist-count" class="status-wishlist-badge">0</span>
-                                </a>
-                                <a href="cart.html" class="status-btn bag-btn" title="Shopping Bag">
-                                    <span class="status-label">Cart</span><i class="fas fa-shopping-bag"></i>
-                                    <span id="status-cart-count" class="status-cart-badge">0</span>
-                                </a>
-                                <a href="#" class="status-btn logout-btn" onclick="handleLogout(event)" title="Logout">
-                                    <span class="status-label">Logout</span><i class="fas fa-sign-out-alt"></i>
-                                </a>
-                            </div>
-                        </div>
+                    <div class="status-actions" style="background: linear-gradient(135deg, #8e44ad, #9b59b6); border-radius: 25px; padding: 8px 16px; box-shadow: 0 4px 15px rgba(142, 68, 173, 0.3); margin-left: 15px; transition: all 0.3s ease; border: 2px solid rgba(255, 255, 255, 0.2);">
+                        <a href="homepage.html" class="status-btn home-btn" title="Home">
+                            <span class="status-label">Home</span>
+                            <i class="fas fa-home"></i>
+                        </a>
+                        <a href="watchlist.html" class="status-btn watchlist-btn" title="Watchlist">
+                            <span class="status-label">Watchlist</span>
+                            <span id="status-watchlist-text" class="status-count-text">(0)</span>
+                            <i class="fas fa-heart"></i>
+                        </a>
+                        <a href="cart.html" class="status-btn bag-btn" title="Shopping Bag">
+                            <span class="status-label">Cart</span>
+                            <span id="status-cart-text" class="status-count-text">(0)</span>
+                            <i class="fas fa-shopping-bag"></i>
+                        </a>
                     </div>
                 </div>
             </nav>
@@ -658,14 +652,14 @@
     <script>
         // --- JAVASCRIPT LOGIC ---
         const productDatabase = {
-            'traditional-cotton-white': { id: 'traditional-cotton-white', name: 'Traditional White Cotton Lungi', description: '100% Cotton • Handwoven', price: '₹450', image: 'images/handloom_lungi.jpg' },
-            'blue-checkered-cotton': { id: 'blue-checkered-cotton', name: 'Blue Checkered Cotton Lungi', description: 'Cotton Blend • Machine Washable', price: '₹380', image: 'images/lungi_collection.jpg' },
-            'green-striped-lungi': { id: 'green-striped-lungi', name: 'Green Striped Lungi', description: '100% Cotton • Traditional Pattern', price: '₹520', image: 'images/handloom_lungi.jpg' },
-            'orange-floral-lungi': { id: 'orange-floral-lungi', name: 'Orange Floral Lungi', description: 'Silk Cotton Blend • Designer Pattern', price: '₹680', image: 'images/lungi_collection.jpg' },
-            'cream-solid-lungi': { id: 'cream-solid-lungi', name: 'Cream Solid Lungi', description: '100% Cotton • Classic Design', price: '₹420', image: 'images/handloom_lungi.jpg' },
-            'multi-color-lungi': { id: 'multi-color-lungi', name: 'Multi-color Lungi', description: 'Cotton Blend • Vibrant Design', price: '₹590', image: 'images/lungi_collection.jpg' },
-            'navy-blue-lungi': { id: 'navy-blue-lungi', name: 'Navy Blue Lungi', description: '100% Cotton • Professional Look', price: '₹480', image: 'images/handloom_lungi.jpg' },
-            'red-checkered-lungi': { id: 'red-checkered-lungi', name: 'Red Checkered Lungi', description: 'Cotton Blend • Modern Pattern', price: '₹410', image: 'images/lungi_collection.jpg' }
+            'traditional-cotton-white': { id: 'traditional-cotton-white', name: 'Traditional White Cotton Lungi', description: '100% Cotton • Handwoven', price: '₹450', originalPrice: '₹600', image: 'images/handloom_lungi.jpg' },
+            'blue-checkered-cotton': { id: 'blue-checkered-cotton', name: 'Blue Checkered Cotton Lungi', description: 'Cotton Blend • Machine Washable', price: '₹380', originalPrice: '₹500', image: 'images/lungi_collection.jpg' },
+            'green-striped-lungi': { id: 'green-striped-lungi', name: 'Green Striped Lungi', description: '100% Cotton • Traditional Pattern', price: '₹520', originalPrice: '₹650', image: 'images/handloom_lungi.jpg' },
+            'orange-floral-lungi': { id: 'orange-floral-lungi', name: 'Orange Floral Lungi', description: 'Silk Cotton Blend • Designer Pattern', price: '₹680', originalPrice: '₹850', image: 'images/lungi_collection.jpg' },
+            'cream-solid-lungi': { id: 'cream-solid-lungi', name: 'Cream Solid Lungi', description: '100% Cotton • Classic Design', price: '₹420', originalPrice: '₹550', image: 'images/handloom_lungi.jpg' },
+            'multi-color-lungi': { id: 'multi-color-lungi', name: 'Multi-color Lungi', description: 'Cotton Blend • Vibrant Design', price: '₹590', originalPrice: '₹750', image: 'images/lungi_collection.jpg' },
+            'navy-blue-lungi': { id: 'navy-blue-lungi', name: 'Navy Blue Lungi', description: '100% Cotton • Professional Look', price: '₹480', originalPrice: '₹620', image: 'images/handloom_lungi.jpg' },
+            'red-checkered-lungi': { id: 'red-checkered-lungi', name: 'Red Checkered Lungi', description: 'Cotton Blend • Modern Pattern', price: '₹410', originalPrice: '₹540', image: 'images/lungi_collection.jpg' }
         };
 
         function toggleWishlist(event, productId) {
@@ -742,10 +736,17 @@
         function updateWatchlistCount() {
             const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
             const count = watchlist.length;
-            const badge = document.getElementById('status-wishlist-count');
+            const badge = document.getElementById('status-watchlist-text');
             if (badge) {
-                badge.textContent = count;
-                badge.style.display = count > 0 ? 'flex' : 'none';
+                badge.textContent = `(${count})`;
+            }
+
+            // Update cart count
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalCartItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const cartBadge = document.getElementById('status-cart-text');
+            if (cartBadge) {
+                cartBadge.textContent = `(${totalCartItems})`;
             }
         }
 
