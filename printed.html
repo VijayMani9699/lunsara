@@ -148,7 +148,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 20px;
+            border-radius: 50px;
             background: rgba(255, 255, 255, 0.2);
             color: white;
             text-decoration: none;
@@ -427,27 +427,21 @@
                     <a href="login.html" class="auth-login" style="display: none;">
                         <i class="fas fa-sign-in-alt"></i> Login
                     </a>
-                    <div class="profile-status-bar" id="profile-status-bar">
-                        <div class="status-content">
-                            <div class="user-avatar"><i class="fas fa-user-circle"></i></div>
-                            <div class="user-details">
-                                <div class="user-name-display" id="user-name-display">Welcome!</div>
-                            </div>
-                            <div class="status-actions">
-                                <a href="homepage.html" class="status-btn home-btn" title="Home"><span class="status-label">Home</span><i class="fas fa-home"></i></a>
-                                <a href="watchlist.html" class="status-btn watchlist-btn" title="Watchlist">
-                                    <span class="status-label">Watchlist</span><i class="fas fa-heart"></i>
-                                    <span id="status-wishlist-count" class="status-wishlist-badge">0</span>
-                                </a>
-                                <a href="cart.html" class="status-btn bag-btn" title="Shopping Bag">
-                                    <span class="status-label">Cart</span><i class="fas fa-shopping-bag"></i>
-                                    <span id="status-cart-count" class="status-cart-badge">0</span>
-                                </a>
-                                <a href="#" class="status-btn logout-btn" onclick="handleLogout(event)" title="Logout">
-                                    <span class="status-label">Logout</span><i class="fas fa-sign-out-alt"></i>
-                                </a>
-                            </div>
-                        </div>
+                    <div class="status-actions" style="background: linear-gradient(135deg, #8e44ad, #9b59b6); border-radius: 25px; padding: 8px 16px; box-shadow: 0 4px 15px rgba(142, 68, 173, 0.3); margin-left: 15px; transition: all 0.3s ease; border: 2px solid rgba(255, 255, 255, 0.2);">
+                        <a href="homepage.html" class="status-btn home-btn" title="Home">
+                            <span class="status-label">Home</span>
+                            <i class="fas fa-home"></i>
+                        </a>
+                        <a href="watchlist.html" class="status-btn watchlist-btn" title="Watchlist">
+                            <span class="status-label">Watchlist</span>
+                            <span id="status-watchlist-text" class="status-count-text">(0)</span>
+                            <i class="fas fa-heart"></i>
+                        </a>
+                        <a href="cart.html" class="status-btn bag-btn" title="Shopping Bag">
+                            <span class="status-label">Cart</span>
+                            <span id="status-cart-text" class="status-count-text">(0)</span>
+                            <i class="fas fa-shopping-bag"></i>
+                        </a>
                     </div>
                 </div>
             </nav>
@@ -659,14 +653,14 @@
     <script>
         // --- JAVASCRIPT LOGIC ---
         const productDatabase = {
-            'floral-georgette-blue': { id: 'floral-georgette-blue', name: 'Blue Floral Georgette Saree', description: 'Lightweight Georgette • Daily Wear', price: '₹1,800', image: 'images/printed_saree.jpg' },
-            'abstract-crepe-saree': { id: 'abstract-crepe-saree', name: 'Abstract Crepe Saree', description: 'Soft Crepe Fabric • Office Wear', price: '₹2,200', image: 'images/printed_saree_collection.jpg' },
-            'yellow-chiffon-saree': { id: 'yellow-chiffon-saree', name: 'Sunshine Yellow Chiffon Saree', description: 'Sheer Chiffon • Casual Wear', price: '₹1,500', image: 'images/printed_saree.jpg' },
-            'red-party-wear-saree': { id: 'red-party-wear-saree', name: 'Red Geometric Print Party Saree', description: 'Georgette • Party Wear', price: '₹2,800', image: 'images/printed_saree_collection.jpg' },
-            'black-cotton-blend': { id: 'black-cotton-blend', name: 'Classic Black Cotton Blend Saree', description: 'Cotton Blend • Office Wear', price: '₹1,900', image: 'images/printed_saree.jpg' },
-            'multi-color-digital-print': { id: 'multi-color-digital-print', name: 'Multi-Color Digital Print Saree', description: 'Crepe • Vibrant Party Wear', price: '₹3,100', image: 'images/printed_saree_collection.jpg' },
-            'green-leaf-print': { id: 'green-leaf-print', name: 'Green Leaf Print Chiffon Saree', description: 'Chiffon • Daily Wear', price: '₹1,650', image: 'images/printed_saree.jpg' },
-            'purple-abstract-saree': { id: 'purple-abstract-saree', name: 'Purple Abstract Georgette Saree', description: 'Georgette • Modern Design', price: '₹2,400', image: 'images/printed_saree_collection.jpg' }
+            'floral-georgette-blue': { id: 'floral-georgette-blue', name: 'Blue Floral Georgette Saree', description: 'Lightweight Georgette • Daily Wear', price: '₹1,800', originalPrice: '₹2,500', image: 'images/printed_saree.jpg' },
+            'abstract-crepe-saree': { id: 'abstract-crepe-saree', name: 'Abstract Crepe Saree', description: 'Soft Crepe Fabric • Office Wear', price: '₹2,200', originalPrice: '₹3,000', image: 'images/printed_saree_collection.jpg' },
+            'yellow-chiffon-saree': { id: 'yellow-chiffon-saree', name: 'Sunshine Yellow Chiffon Saree', description: 'Sheer Chiffon • Casual Wear', price: '₹1,500', originalPrice: '₹2,000', image: 'images/printed_saree.jpg' },
+            'red-party-wear-saree': { id: 'red-party-wear-saree', name: 'Red Geometric Print Party Saree', description: 'Georgette • Party Wear', price: '₹2,800', originalPrice: '₹3,500', image: 'images/printed_saree_collection.jpg' },
+            'black-cotton-blend': { id: 'black-cotton-blend', name: 'Classic Black Cotton Blend Saree', description: 'Cotton Blend • Office Wear', price: '₹1,900', originalPrice: '₹2,400', image: 'images/printed_saree.jpg' },
+            'multi-color-digital-print': { id: 'multi-color-digital-print', name: 'Multi-Color Digital Print Saree', description: 'Crepe • Vibrant Party Wear', price: '₹3,100', originalPrice: '₹4,000', image: 'images/printed_saree_collection.jpg' },
+            'green-leaf-print': { id: 'green-leaf-print', name: 'Green Leaf Print Chiffon Saree', description: 'Chiffon • Daily Wear', price: '₹1,650', originalPrice: '₹2,200', image: 'images/printed_saree.jpg' },
+            'purple-abstract-saree': { id: 'purple-abstract-saree', name: 'Purple Abstract Georgette Saree', description: 'Georgette • Modern Design', price: '₹2,400', originalPrice: '₹3,200', image: 'images/printed_saree_collection.jpg' }
         };
 
         function toggleWishlist(event, productId) {
@@ -743,10 +737,17 @@
         function updateWatchlistCount() {
             const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
             const count = watchlist.length;
-            const badge = document.getElementById('status-wishlist-count');
+            const badge = document.getElementById('status-watchlist-text');
             if (badge) {
-                badge.textContent = count;
-                badge.style.display = count > 0 ? 'flex' : 'none';
+                badge.textContent = `(${count})`;
+            }
+
+            // Update cart count
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalCartItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const cartBadge = document.getElementById('status-cart-text');
+            if (cartBadge) {
+                cartBadge.textContent = `(${totalCartItems})`;
             }
         }
 

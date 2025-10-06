@@ -148,7 +148,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 20px;
+            border-radius: 50px;
             background: rgba(255, 255, 255, 0.2);
             color: white;
             text-decoration: none;
@@ -429,27 +429,21 @@
                     <a href="login.html" class="auth-login" style="display: none;">
                         <i class="fas fa-sign-in-alt"></i> Login
                     </a>
-                    <div class="profile-status-bar" id="profile-status-bar">
-                        <div class="status-content">
-                            <div class="user-avatar"><i class="fas fa-user-circle"></i></div>
-                            <div class="user-details">
-                                <div class="user-name-display" id="user-name-display">Welcome!</div>
-                            </div>
-                            <div class="status-actions">
-                                <a href="homepage.html" class="status-btn home-btn" title="Home"><span class="status-label">Home</span><i class="fas fa-home"></i></a>
-                                <a href="watchlist.html" class="status-btn watchlist-btn" title="Watchlist">
-                                    <span class="status-label">Watchlist</span><i class="fas fa-heart"></i>
-                                    <span id="status-wishlist-count" class="status-wishlist-badge">0</span>
-                                </a>
-                                <a href="cart.html" class="status-btn bag-btn" title="Shopping Bag">
-                                    <span class="status-label">Cart</span><i class="fas fa-shopping-bag"></i>
-                                    <span id="status-cart-count" class="status-cart-badge">0</span>
-                                </a>
-                                <a href="#" class="status-btn logout-btn" onclick="handleLogout(event)" title="Logout">
-                                    <span class="status-label">Logout</span><i class="fas fa-sign-out-alt"></i>
-                                </a>
-                            </div>
-                        </div>
+                    <div class="status-actions" style="background: linear-gradient(135deg, #8e44ad, #9b59b6); border-radius: 25px; padding: 8px 16px; box-shadow: 0 4px 15px rgba(142, 68, 173, 0.3); margin-left: 15px; transition: all 0.3s ease; border: 2px solid rgba(255, 255, 255, 0.2);">
+                        <a href="homepage.html" class="status-btn home-btn" title="Home">
+                            <span class="status-label">Home</span>
+                            <i class="fas fa-home"></i>
+                        </a>
+                        <a href="watchlist.html" class="status-btn watchlist-btn" title="Watchlist">
+                            <span class="status-label">Watchlist</span>
+                            <span id="status-watchlist-text" class="status-count-text">(0)</span>
+                            <i class="fas fa-heart"></i>
+                        </a>
+                        <a href="cart.html" class="status-btn bag-btn" title="Shopping Bag">
+                            <span class="status-label">Cart</span>
+                            <span id="status-cart-text" class="status-count-text">(0)</span>
+                            <i class="fas fa-shopping-bag"></i>
+                        </a>
                     </div>
                 </div>
             </nav>
@@ -660,14 +654,14 @@
     <script>
         // --- JAVASCRIPT LOGIC ---
         const productDatabase = {
-            'kanchipuram-crimson-red': { id: 'kanchipuram-crimson-red', name: 'Crimson Red Kanchipuram Saree', description: 'Pure Silk • Gold Zari Work', price: '₹12,500', image: 'images/silk_saree.jpg' },
-            'royal-blue-banarasi': { id: 'royal-blue-banarasi', name: 'Royal Blue Banarasi Saree', description: 'Art Silk • Silver Weaving', price: '₹8,200', image: 'images/silk_saree_collection.jpg' },
-            'emerald-green-designer': { id: 'emerald-green-designer', name: 'Emerald Green Designer Saree', description: 'Silk Blend • Modern Motifs', price: '₹9,800', image: 'images/silk_saree.jpg' },
-            'majestic-gold-bridal': { id: 'majestic-gold-bridal', name: 'Majestic Gold Bridal Saree', description: 'Pure Kanchipuram Silk • Heavy Zari', price: '₹25,000', image: 'images/silk_saree_collection.jpg' },
-            'pastel-pink-art-silk': { id: 'pastel-pink-art-silk', name: 'Pastel Pink Art Silk Saree', description: 'Art Silk • Lightweight • Floral Print', price: '₹4,500', image: 'images/silk_saree.jpg' },
-            'peacock-blue-kanchipuram': { id: 'peacock-blue-kanchipuram', name: 'Peacock Blue Kanchipuram Saree', description: 'Pure Silk • Temple Border', price: '₹14,200', image: 'images/silk_saree_collection.jpg' },
-            'black-gold-banarasi': { id: 'black-gold-banarasi', name: 'Black & Gold Banarasi Saree', description: 'Art Silk • Party Wear', price: '₹7,500', image: 'images/silk_saree.jpg' },
-            'mustard-yellow-blend': { id: 'mustard-yellow-blend', name: 'Mustard Yellow Silk Blend Saree', description: 'Silk Blend • Daily Wear', price: '₹3,800', image: 'images/silk_saree_collection.jpg' }
+            'kanchipuram-crimson-red': { id: 'kanchipuram-crimson-red', name: 'Crimson Red Kanchipuram Saree', description: 'Pure Silk • Gold Zari Work', price: '₹12,500', originalPrice: '₹15,000', image: 'images/silk_saree.jpg' },
+            'royal-blue-banarasi': { id: 'royal-blue-banarasi', name: 'Royal Blue Banarasi Saree', description: 'Art Silk • Silver Weaving', price: '₹8,200', originalPrice: '₹10,000', image: 'images/silk_saree_collection.jpg' },
+            'emerald-green-designer': { id: 'emerald-green-designer', name: 'Emerald Green Designer Saree', description: 'Silk Blend • Modern Motifs', price: '₹9,800', originalPrice: '₹12,000', image: 'images/silk_saree.jpg' },
+            'majestic-gold-bridal': { id: 'majestic-gold-bridal', name: 'Majestic Gold Bridal Saree', description: 'Pure Kanchipuram Silk • Heavy Zari', price: '₹25,000', originalPrice: '₹30,000', image: 'images/silk_saree_collection.jpg' },
+            'pastel-pink-art-silk': { id: 'pastel-pink-art-silk', name: 'Pastel Pink Art Silk Saree', description: 'Art Silk • Lightweight • Floral Print', price: '₹4,500', originalPrice: '₹6,000', image: 'images/silk_saree.jpg' },
+            'peacock-blue-kanchipuram': { id: 'peacock-blue-kanchipuram', name: 'Peacock Blue Kanchipuram Saree', description: 'Pure Silk • Temple Border', price: '₹14,200', originalPrice: '₹18,000', image: 'images/silk_saree_collection.jpg' },
+            'black-gold-banarasi': { id: 'black-gold-banarasi', name: 'Black & Gold Banarasi Saree', description: 'Art Silk • Party Wear', price: '₹7,500', originalPrice: '₹9,500', image: 'images/silk_saree.jpg' },
+            'mustard-yellow-blend': { id: 'mustard-yellow-blend', name: 'Mustard Yellow Silk Blend Saree', description: 'Silk Blend • Daily Wear', price: '₹3,800', originalPrice: '₹5,000', image: 'images/silk_saree_collection.jpg' }
         };
 
         function toggleWishlist(event, productId) {
@@ -744,10 +738,17 @@
         function updateWatchlistCount() {
             const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
             const count = watchlist.length;
-            const badge = document.getElementById('status-wishlist-count');
+            const badge = document.getElementById('status-watchlist-text');
             if (badge) {
-                badge.textContent = count;
-                badge.style.display = count > 0 ? 'flex' : 'none';
+                badge.textContent = `(${count})`;
+            }
+
+            // Update cart count
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalCartItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const cartBadge = document.getElementById('status-cart-text');
+            if (cartBadge) {
+                cartBadge.textContent = `(${totalCartItems})`;
             }
         }
 
