@@ -26,8 +26,8 @@
             overflow-x: hidden;
         }
 
-        /* Header */
-        .header {
+        /* Header Styles (from product-detail.html) */
+        header {
             background-color: #8e44ad;
             color: white;
             padding: 1rem 2rem;
@@ -41,7 +41,7 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(142, 68, 173, 0.3);
         }
 
-        .header h2 {
+        header h2 {
             display: flex;
             align-items: center;
             gap: 0.25rem;
@@ -61,40 +61,13 @@
             align-items: center;
         }
 
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            display: flex;
-            align-items: center;
-        }
-
         .auth-buttons {
             display: flex;
             gap: 10px;
             align-items: center;
         }
 
-        .auth-login, .auth-logout {
-            color: white;
-            text-decoration: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 14px;
-        }
-
-        .auth-login:hover, .auth-logout:hover {
-            background-color: white;
-            color: #8e44ad;
-        }
-
-        /* Profile Status Bar Styles */
+        /* Profile Status Bar Styles (from product-detail.html) */
         .profile-status-bar {
             background: linear-gradient(135deg, #8e44ad, #9b59b6);
             border-radius: 25px;
@@ -103,11 +76,6 @@
             margin-left: 15px;
             transition: all 0.3s ease;
             border: 2px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .profile-status-bar:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(142, 68, 173, 0.4);
         }
 
         .status-content {
@@ -167,6 +135,14 @@
             font-weight: 700;
             white-space: nowrap;
         }
+        
+        /* This is the class for the text count, like (0) */
+        .status-count-text {
+            font-size: 12px;
+            font-weight: 700;
+            color: white; /* A highlight color to make it visible */
+            margin-left: 2px;
+        }
 
         .status-btn:hover {
             background: rgba(255, 255, 255, 0.3);
@@ -180,32 +156,23 @@
             background: white;
             color: #8e44ad;
         }
-        
-        .status-cart-badge, .status-wishlist-badge {
-            background-color: #e74c3c;
-            color: white;
-            border-radius: 50%;
-            width: 16px;
-            height: 16px;
-            font-size: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            border: 2px solid #8e44ad;
-            position: absolute;
-            top: -6px;
-            right: -6px;
-            display: none;
-        }
-        
-        .status-wishlist-badge {
-             background-color: #e91e63;
+
+        .status-btn.login-btn {
+            background: white;
+            color: #8e44ad;
+            border: 1px solid #8e44ad;
+            text-align: center;
         }
 
+        .status-btn.login-btn:hover {
+            background: rgba(255, 255, 255, 0.9);
+            color: #8e44ad;
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(142, 68, 173, 0.3);
+        }
+        
         /* Main Content */
         .main-content {
-            /* max-width: 1200px;  <-- REMOVED FOR FULL-SCREEN LAYOUT */
             margin: 0 auto;
             padding: 20px;
         }
@@ -285,7 +252,6 @@
         /* Watchlist Grid */
         .watchlist-grid {
             display: grid;
-            /* UPDATED: Changed minmax for better 4-column layout */
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 20px;
         }
@@ -307,7 +273,6 @@
 
         .watchlist-image {
             position: relative;
-            /* UPDATED: Changed aspect ratio to decrease height */
             aspect-ratio: 4 / 3;
             overflow: hidden;
             background: #f8f9fa;
@@ -411,31 +376,6 @@
             box-shadow: 0 2px 8px rgba(142, 68, 173, 0.3);
         }
 
-        /* Notification */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: #27ae60;
-            color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            z-index: 10000;
-            transform: translateX(120%);
-            opacity: 0;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .notification.show {
-            transform: translateX(0);
-            opacity: 1;
-        }
-        .notification.error {
-             background: #e74c3c;
-        }
-
-
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .main-content {
@@ -451,59 +391,47 @@
                 gap: 15px;
             }
 
-            .header {
+            header {
                 flex-direction: column;
                 padding: 1rem;
                 gap: 1rem;
             }
         }
-        
+
         @media (max-width: 480px) {
-             .watchlist-grid {
+            .watchlist-grid {
                 grid-template-columns: 1fr;
             }
         }
-
     </style>
 </head>
 <body>
-    <header class="header">
+    <header>
         <h2>
             <img src="images/logo.png" alt="Lunsara Logo" class="logo">
             Lunsara
         </h2>
-
         <nav class="navbar">
             <div class="auth-buttons">
-                <a href="login.html" class="auth-login" style="display: none;">
-                    <i class="fas fa-sign-in-alt"></i>
-                    Login
-                </a>
-
                 <div class="profile-status-bar" id="profile-status-bar">
                     <div class="status-content">
                         <div class="user-avatar">
                             <i class="fas fa-user-circle"></i>
                         </div>
                         <div class="user-details">
-                            <div class="user-name-display" id="user-name-display">Welcome!</div>
+                            <div class="user-name-display" id="user-name-display">Welcome, Guest!</div>
                         </div>
                         <div class="status-actions">
                             <a href="homepage.html" class="status-btn home-btn" title="Home">
                                 <span class="status-label">Home</span>
                                 <i class="fas fa-home"></i>
                             </a>
-                            <a href="watchlist.html" class="status-btn watchlist-btn" title="Watchlist">
-                                <span class="status-label">Watchlist</span>
-                                <i class="fas fa-heart"></i>
-                                <span id="status-wishlist-count" class="status-wishlist-badge">0</span>
-                            </a>
                             <a href="cart.html" class="status-btn bag-btn" title="Shopping Bag">
                                 <span class="status-label">Cart</span>
+                                <span id="status-cart-text" class="status-count-text">(0)</span>
                                 <i class="fas fa-shopping-bag"></i>
-                                <span id="status-cart-count" class="status-cart-badge">0</span>
                             </a>
-                            <a href="#" class="status-btn logout-btn" onclick="handleLogout(event)" title="Logout">
+                            <a href="#" class="status-btn logout-btn" onclick="handleLogout(event)" title="Logout" style="display: none;">
                                 <span class="status-label">Logout</span>
                                 <i class="fas fa-sign-out-alt"></i>
                             </a>
@@ -516,33 +444,34 @@
 
     <div class="main-content">
         <div class="page-header">
-            <h1 class="page-title"><i class="fas fa-heart"></i> My Watchlist</h1>
-            <p class="page-subtitle">Items you've saved for later</p>
+            <h1 class="page-title">My Watchlist</h1>
+            <p class="page-subtitle">Your curated collection of favorite items.</p>
         </div>
-
         <div id="watchlist-container">
             </div>
     </div>
-
-    <div id="notification" class="notification"></div>
 
     <script src="cart.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             loadWatchlist();
-            updateUserInterface();
-            updateCartCount();
-            updateWatchlistCount();
+            updateUserInterface(); // For status bar
+            updateWatchlistCount(); // For status bar counts
         });
 
+        // Listen for storage changes to keep UI in sync across tabs
         window.addEventListener('storage', function(e) {
             if (e.key === 'watchlist' || e.key === 'cart' || e.key === 'currentUser') {
                 loadWatchlist();
-                updateWatchlistCount();
-                updateCartCount();
                 updateUserInterface();
+                updateWatchlistCount();
             }
         });
+
+        // Listen for custom events for immediate UI updates
+        window.addEventListener('authStateChanged', updateUserInterface);
+        window.addEventListener('cartUpdated', updateWatchlistCount);
+        window.addEventListener('watchlistUpdated', updateWatchlistCount);
 
         function loadWatchlist() {
             const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
@@ -561,21 +490,21 @@
                 `;
             } else {
                 const watchlistHTML = watchlist.map(item => `
-                    <div class="watchlist-item" data-product-id="${item.id}">
+                    <div class="watchlist-item" data-product-id="${item.id || item.name}">
                         <div class="watchlist-image">
                             <img src="${item.image}" alt="${item.name}" onerror="this.src='images/placeholder.jpg';">
-                            <button class="remove-btn" onclick="removeFromWatchlist('${item.id}')" title="Remove from watchlist">
+                            <button class="remove-btn" onclick="removeFromWatchlist('${item.id || item.name}')" title="Remove from watchlist">
                                 <i class="fas fa-times"></i>
                             </button>
                         </div>
                         <div class="watchlist-info">
                             <div class="watchlist-name">${item.name}</div>
-                            <div class="watchlist-price">₹${parseInt(item.price.toString().replace(/[^0-9]/g, '')).toLocaleString()}</div>
+                            <div class="watchlist-price">₹${parseInt(String(item.price).replace(/[^0-9]/g, '')).toLocaleString()}</div>
                             <div class="watchlist-actions">
-                                <button class="view-btn" onclick="viewProduct('${item.id}')">
+                                <button class="view-btn" onclick="viewProduct('${item.id || item.name}')">
                                     <i class="fas fa-eye"></i> View
                                 </button>
-                                <button class="add-to-cart-btn" onclick="addToCartFromWatchlist('${item.id}')">
+                                <button class="add-to-cart-btn" onclick="addToCartFromWatchlist('${item.id || item.name}')">
                                     <i class="fas fa-shopping-cart"></i> Add to Cart
                                 </button>
                             </div>
@@ -586,41 +515,42 @@
                 container.innerHTML = `<div class="watchlist-grid">${watchlistHTML}</div>`;
             }
         }
-        
+
         function removeFromWatchlist(productId) {
             let watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
-            const itemToRemove = watchlist.find(item => String(item.id) === String(productId));
+            const itemToRemove = watchlist.find(item => (item.id || item.name) === productId);
             
             if (itemToRemove) {
-                const updatedWatchlist = watchlist.filter(item => String(item.id) !== String(productId));
+                const updatedWatchlist = watchlist.filter(item => (item.id || item.name) !== productId);
                 localStorage.setItem('watchlist', JSON.stringify(updatedWatchlist));
                 
-                showNotification(`"${itemToRemove.name}" removed from your watchlist.`, 'error');
+                showNotification(`"${itemToRemove.name}" was removed from your watchlist.`);
                 
                 loadWatchlist();
-                updateWatchlistCount();
                 window.dispatchEvent(new CustomEvent('watchlistUpdated'));
             }
         }
-        
+
         function viewProduct(productId) {
              const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
-             const product = watchlist.find(item => String(item.id) === String(productId));
+             const product = watchlist.find(item => (item.id || item.name) === productId);
              if (product) {
                 localStorage.setItem('selectedProduct', JSON.stringify(product));
                 window.location.href = 'product-detail.html';
              } else {
-                showNotification('Could not find product details.', 'error');
+                showNotification('Error: Could not find product details.', 'error');
              }
         }
-        
+
         function addToCartFromWatchlist(productId) {
             const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
-            const product = watchlist.find(item => String(item.id) === String(productId));
+            const product = watchlist.find(item => (item.id || item.name) === productId);
 
             if (product) {
+                // This function is assumed to be in cart.js
+                // It should handle adding the item and showing its own notification.
                 if (typeof window.addToCart === 'function') {
-                    const priceNumber = parseInt(product.price.toString().replace(/[^0-9]/g, ''));
+                    const priceNumber = parseInt(String(product.price).replace(/[^0-9]/g, ''));
                     window.addToCart(product.name, priceNumber, product.image, 1);
                 } else {
                      showNotification('Error: Could not add item to cart.', 'error');
@@ -628,62 +558,93 @@
             }
         }
         
-        function showNotification(message, type = 'success') {
-            const notification = document.getElementById('notification');
-            notification.textContent = message;
-            notification.className = `notification ${type}`;
-            notification.classList.add('show');
-
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
-        }
-        
-        function updateWatchlistCount() {
-            const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
-            const count = watchlist.length;
-            const badge = document.getElementById('status-wishlist-count');
-            if (badge) {
-                badge.textContent = count;
-                badge.style.display = count > 0 ? 'flex' : 'none';
-            }
-        }
-        
-        function updateCartCount() {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
-            const badge = document.getElementById('status-cart-count');
-            if(badge) {
-                badge.textContent = totalItems;
-                badge.style.display = totalItems > 0 ? 'flex' : 'none';
-            }
-        }
+        // --- NEW STATUS BAR FUNCTIONS FROM product-detail.html ---
 
         function handleLogout(event) {
             event.preventDefault();
-            if (window.auth && auth.isLoggedIn()) {
-                auth.logout();
-                showNotification('You have been logged out.', 'success');
-                setTimeout(() => window.location.reload(), 1000);
-            }
+            // This logic uses a simple confirm pop-up if a modal element isn't found.
+            showLogoutModal();
         }
 
+        function handleLoginClick(event) {
+            event.preventDefault();
+            window.location.href = 'login.html';
+        }
+
+        function showLogoutModal() {
+            // Fallback if modal HTML doesn't exist on this page
+            if (confirm('Are you sure you want to logout?')) {
+                auth.logout();
+                showNotification('You have been logged out successfully');
+                window.location.reload();
+            }
+        }
+        
         function updateUserInterface() {
             const profileStatusBar = document.getElementById('profile-status-bar');
             const userNameDisplay = document.getElementById('user-name-display');
-            const authLogin = document.querySelector('.auth-login');
+            const loginBtn = document.querySelector('.status-btn.login-btn');
+            const logoutBtn = document.querySelector('.status-btn.logout-btn');
 
-            let isLoggedIn = (window.auth && typeof auth.isLoggedIn === 'function') ? auth.isLoggedIn() : false;
-            let currentUser = isLoggedIn ? auth.getCurrentUser() : null;
-
-            if (isLoggedIn && currentUser) {
+            if (auth.isLoggedIn()) {
+                const currentUser = auth.getCurrentUser();
                 if (profileStatusBar) profileStatusBar.style.display = 'block';
                 if (userNameDisplay) userNameDisplay.textContent = `Welcome, ${currentUser.name}!`;
-                if (authLogin) authLogin.style.display = 'none';
+                if (loginBtn) loginBtn.style.display = 'none';
+                if (logoutBtn) logoutBtn.style.display = 'flex'; // Use flex to match display
             } else {
-                if (profileStatusBar) profileStatusBar.style.display = 'none';
-                if (authLogin) authLogin.style.display = 'flex';
+                if (profileStatusBar) profileStatusBar.style.display = 'block';
+                if (userNameDisplay) userNameDisplay.textContent = 'Welcome, Guest!';
+                if (loginBtn) loginBtn.style.display = 'flex'; // Use flex to match display
+                if (logoutBtn) logoutBtn.style.display = 'none';
             }
+        }
+
+        function updateWatchlistCount() {
+            // Updates both watchlist and cart counts in the status bar
+            const watchlist = JSON.parse(localStorage.getItem('watchlist')) || [];
+            const watchlistCount = watchlist.length;
+            const watchlistBadge = document.getElementById('status-watchlist-text');
+            if (watchlistBadge) {
+                watchlistBadge.textContent = `(${watchlistCount})`;
+            }
+
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalCartItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const cartBadge = document.getElementById('status-cart-text');
+            if (cartBadge) {
+                cartBadge.textContent = `(${totalCartItems})`;
+            }
+        }
+        
+        // General notification function
+        function showNotification(message, type = 'success') {
+            const existingNotification = document.querySelector('.global-notification');
+            if (existingNotification) existingNotification.remove();
+
+            const notification = document.createElement('div');
+            notification.className = 'global-notification';
+            notification.style.cssText = `
+                position: fixed; top: 100px; right: 20px; z-index: 10000;
+                background: ${type === 'error' ? '#e74c3c' : '#27ae60'}; color: white;
+                padding: 1rem 1.2rem; border-radius: 8px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                transform: translateX(120%); opacity: 0;
+                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+                notification.style.opacity = '1';
+            }, 50);
+
+            setTimeout(() => {
+                notification.style.transform = 'translateX(120%)';
+                notification.style.opacity = '0';
+                setTimeout(() => notification.remove(), 400);
+            }, 3000);
         }
     </script>
 </body>
