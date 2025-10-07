@@ -5,6 +5,98 @@ p<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | Lunsara</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        // EmailJS Configuration - REPLACE WITH YOUR ACTUAL CREDENTIALS
+        const EMAILJS_CONFIG = {
+            serviceId: 'service_your_actual_service_id', // ⚠️ REPLACE: Get from EmailJS Dashboard > Email Services
+            publicKey: 'your_actual_public_key', // ⚠️ REPLACE: Get from EmailJS Dashboard > Account > General
+            templates: {
+                passwordReset: 'template_your_actual_template_id' // ⚠️ REPLACE: Get from EmailJS Dashboard > Email Templates
+            }
+        };
+
+        // Initialize EmailJS
+        (function() {
+            // Initialize EmailJS with provided credentials
+            try {
+                emailjs.init(EMAILJS_CONFIG.publicKey);
+                window.EMAILJS_CONFIGURED = true;
+            } catch (error) {
+                console.error('Failed to initialize EmailJS:', error);
+                window.EMAILJS_CONFIGURED = false;
+            }
+        })();
+
+        // Email Service Module
+        const EmailService = {
+            /**
+             * Send password reset email
+             * @param {string} userEmail - User's email address
+             * @param {string} resetToken - Password reset token
+             * @param {string} userName - User's name
+             * @returns {Promise} - EmailJS response
+             */
+            async sendPasswordResetEmail(userEmail, resetToken, userName = 'Valued Customer') {
+                try {
+                    // Check if EmailJS is configured
+                    if (!window.EMAILJS_CONFIGURED) {
+                        return {
+                            success: false,
+                            error: 'Email service is temporarily unavailable. Please try again later or contact support.'
+                        };
+                    }
+
+                    const templateParams = {
+                        to_email: userEmail,
+                        to_name: userName,
+                        reset_token: resetToken,
+                        reset_link: `${window.location.origin}/login.html?tab=reset&token=${resetToken}`,
+                        company_name: 'Lunsara',
+                        current_year: new Date().getFullYear(),
+                        support_email: 'support@lunsara.com'
+                    };
+
+                    const response = await emailjs.send(
+                        EMAILJS_CONFIG.serviceId,
+                        EMAILJS_CONFIG.templates.passwordReset,
+                        templateParams
+                    );
+
+                    return {
+                        success: true,
+                        messageId: response.text || 'Email sent successfully'
+                    };
+                } catch (error) {
+                    console.error('Email sending failed:', error);
+                    return {
+                        success: false,
+                        error: error.message || 'Failed to send email'
+                    };
+                }
+            },
+
+            /**
+             * Generate a secure password reset token
+             * @returns {string} - Generated token
+             */
+            generateResetToken() {
+                const timestamp = Date.now().toString(36);
+                const randomStr = Math.random().toString(36).substring(2, 15);
+                return timestamp + randomStr;
+            },
+
+            /**
+             * Validate email address format
+             * @param {string} email - Email to validate
+             * @returns {boolean} - Is valid email
+             */
+            isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+        };
+    </script>
     <style>
         * {
             margin: 0;
@@ -142,6 +234,330 @@ p<!DOCTYPE html>
         /* Modal overlay with website purple color */
         .modal-overlay {
             background: rgba(142, 68, 173, 0.7) !important;
+        }
+
+        /* Custom Message Modal Styles */
+        .message-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(142, 68, 173, 0.8);
+            z-index: 10003;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .message-modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .message-modal.show .message-modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .message-modal-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 32px;
+            color: white;
+        }
+
+        .message-modal-icon.info {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+        }
+
+        .message-modal-icon.success {
+            background: linear-gradient(135deg, #27ae60, #229954);
+        }
+
+        .message-modal-icon.error {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+
+        .message-modal-icon.warning {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+        }
+
+        .message-modal-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .message-modal-message {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+
+        .message-modal-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .message-modal-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 100px;
+        }
+
+        .message-modal-btn-primary {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            color: white;
+        }
+
+        .message-modal-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(142, 68, 173, 0.3);
+        }
+
+        .message-modal-btn-secondary {
+            background: #f8f9fa;
+            color: #666;
+            border: 2px solid #e1e5e9;
+        }
+
+        .message-modal-btn-secondary:hover {
+            background: #e9ecef;
+            border-color: #8e44ad;
+            color: #8e44ad;
+        }
+
+        /* Forgot Password Modal Styles */
+        .forgot-password-modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 0;
+            max-width: 450px;
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .forgot-password-modal-content.show {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            color: white;
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .close-modal {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 40px 30px;
+        }
+
+        .reset-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 32px;
+            color: white;
+            box-shadow: 0 8px 20px rgba(142, 68, 173, 0.3);
+        }
+
+        .reset-description {
+            text-align: center;
+            color: #666;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            color: #8e44ad;
+            font-size: 16px;
+            z-index: 2;
+        }
+
+        .input-group input {
+            padding-left: 45px !important;
+        }
+
+        .reset-btn {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .reset-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .reset-btn .loading {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .modal-footer {
+            text-align: center;
+            padding-top: 10px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #666;
+            border: 2px solid #e1e5e9;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: #e9ecef;
+            border-color: #8e44ad;
+            color: #8e44ad;
+        }
+
+        /* Reset Password Form Styles */
+        .reset-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 32px;
+            color: white;
+            box-shadow: 0 8px 20px rgba(142, 68, 173, 0.3);
+        }
+
+        .reset-description {
+            text-align: center;
+            color: #666;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .success-message i {
+            font-size: 48px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .success-message h3 {
+            margin-bottom: 10px;
+            color: #155724;
+        }
+
+        .success-message p {
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .back-to-login {
+            text-align: center;
+        }
+
+        .reset-btn .loading {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
 
         .auth-container {
@@ -424,12 +840,12 @@ p<!DOCTYPE html>
             }
 
             .auth-tabs {
-                margin: 0 20px;
+                margin: 0 10px;
             }
 
             .auth-tab {
-                padding: 12px;
-                font-size: 14px;
+                padding: 8px 6px;
+                font-size: 12px;
             }
 
             .auth-form {
@@ -638,6 +1054,7 @@ p<!DOCTYPE html>
         <div class="auth-tabs">
             <div class="auth-tab active" onclick="showTab('login')">Login</div>
             <div class="auth-tab" onclick="showTab('register')">Register</div>
+            <!-- <div class="auth-tab" onclick="showTab('reset')">Reset Password</div> -->
         </div>
 
         <!-- Login Form -->
@@ -717,6 +1134,51 @@ p<!DOCTYPE html>
             </form>
         </div>
 
+        <!-- Reset Password Form -->
+        <div id="reset-form" class="auth-form">
+            <div id="reset-email-section">
+                <div class="reset-icon">
+                    <i class="fas fa-key"></i>
+                </div>
+
+                <p class="reset-description">
+                    Enter your email address and we'll send you a secure link to reset your password.
+                </p>
+
+                <form id="resetPasswordForm">
+                    <div class="form-group">
+                        <label for="reset-email">Email Address</label>
+                        <div class="input-group">
+                            <i class="fas fa-envelope input-icon"></i>
+                            <input type="email" id="reset-email" placeholder="Enter your email address" required>
+                        </div>
+                        <div class="error-message" id="reset-email-error"></div>
+                    </div>
+
+                    <button type="submit" class="auth-btn reset-btn" id="send-reset-btn">
+                        <span class="btn-text">Send Reset Link</span>
+                        <div class="loading" style="display: none;"></div>
+                    </button>
+
+                    <div class="back-to-login" style="text-align: center; margin-top: 15px;">
+                        <button type="button" class="btn-secondary" onclick="showTab('login')">Back to Login</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="reset-success-section" style="display: none;">
+                <div class="success-message">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Reset Link Sent!</h3>
+                    <p>Password reset instructions have been sent to your email address. Please check your inbox and follow the instructions to reset your password.</p>
+                </div>
+
+                <div class="back-to-login" style="text-align: center; margin-top: 20px;">
+                    <button type="button" class="btn-secondary" onclick="showTab('login')">Back to Login</button>
+                </div>
+            </div>
+        </div>
+
         <div class="auth-divider">
             <span>Or continue with</span>
         </div>
@@ -778,51 +1240,113 @@ p<!DOCTYPE html>
  
     </div>
 
-    <!-- Forgot Password Modal -->
-    <div id="forgot-password-modal" class="modal-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; align-items: center; justify-content: center;">
-        <div style="background: white; border-radius: 15px; padding: 30px; width: 90%; max-width: 400px;">
-            <h3 style="margin-bottom: 20px; color: #8e44ad; text-align: center;">Reset Password</h3>
-            <p style="margin-bottom: 20px; color: #666; text-align: center; font-size: 14px;">
-                Enter your email address and we'll send you a link to reset your password.
+
+    <!-- Custom Message Dialog -->
+    <div id="message-modal" class="message-modal">
+        <div class="message-modal-content">
+            <div class="message-modal-icon">
+                <i class="fas fa-info-circle"></i>
+            </div>
+            <h3 class="message-modal-title">Message</h3>
+            <p class="message-modal-message">
+                This is a sample message.
             </p>
-            <form id="forgotPasswordForm">
-                <div class="form-group">
-                    <label for="forgot-email">Email Address</label>
-                    <input type="email" id="forgot-email" required>
-                    <div class="error-message" id="forgot-email-error"></div>
-                </div>
-                <button type="submit" class="auth-btn">
-                    <span class="btn-text">Send Reset Link</span>
+            <div class="message-modal-buttons">
+                <button class="message-modal-btn message-modal-btn-primary" onclick="hideMessageModal()">
+                    OK
                 </button>
-                <div style="text-align: center; margin-top: 15px;">
-                    <button type="button" onclick="hideForgotPassword()" style="background: none; border: none; color: #8e44ad; cursor: pointer; font-size: 14px;">
-                        Back to Login
-                    </button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 
-    <script>
-        // Tab switching functionality
-        function showTab(tab) {
-            // Update tab buttons
-            document.querySelectorAll('.auth-tab').forEach(tabBtn => {
-                tabBtn.classList.remove('active');
-            });
-            event.currentTarget.classList.add('active');
+     <script>
+         // Custom Message Modal Functions
+         function showMessageModal(title, message, type = 'info', showCancel = false) {
+             const modal = document.getElementById('message-modal');
+             const modalTitle = document.querySelector('.message-modal-title');
+             const modalMessage = document.querySelector('.message-modal-message');
+             const modalIcon = document.querySelector('.message-modal-icon');
+             const modalButtons = document.querySelector('.message-modal-buttons');
 
-            // Update forms
-            document.querySelectorAll('.auth-form').forEach(form => {
-                form.classList.remove('active');
-            });
+             // Set content
+             modalTitle.textContent = title;
+             modalMessage.textContent = message;
 
-            if (tab === 'login') {
-                document.getElementById('login-form').classList.add('active');
-            } else {
-                document.getElementById('register-form').classList.add('active');
-            }
-        }
+             // Set type and icon
+             modalIcon.className = `message-modal-icon ${type}`;
+
+             // Update icon
+             const icon = modalIcon.querySelector('i');
+             switch(type) {
+                 case 'success':
+                     icon.className = 'fas fa-check-circle';
+                     break;
+                 case 'error':
+                     icon.className = 'fas fa-exclamation-circle';
+                     break;
+                 case 'warning':
+                     icon.className = 'fas fa-exclamation-triangle';
+                     break;
+                 default:
+                     icon.className = 'fas fa-info-circle';
+             }
+
+             // Handle buttons
+             if (showCancel) {
+                 modalButtons.innerHTML = `
+                     <button class="message-modal-btn message-modal-btn-primary" onclick="hideMessageModal(true)">OK</button>
+                     <button class="message-modal-btn message-modal-btn-secondary" onclick="hideMessageModal(false)">Cancel</button>
+                 `;
+             } else {
+                 modalButtons.innerHTML = `
+                     <button class="message-modal-btn message-modal-btn-primary" onclick="hideMessageModal()">OK</button>
+                 `;
+             }
+
+             // Show modal
+             modal.style.display = 'flex';
+             setTimeout(() => {
+                 modal.classList.add('show');
+             }, 10);
+         }
+
+         function hideMessageModal(confirmed = true) {
+             const modal = document.getElementById('message-modal');
+             modal.classList.remove('show');
+
+             setTimeout(() => {
+                 modal.style.display = 'none';
+                 // Execute callback if provided
+                 if (window.messageModalCallback) {
+                     window.messageModalCallback(confirmed);
+                     window.messageModalCallback = null;
+                 }
+             }, 300);
+         }
+
+         // Tab switching functionality
+         function showTab(tab) {
+             // Update tab buttons
+             document.querySelectorAll('.auth-tab').forEach(tabBtn => {
+                 tabBtn.classList.remove('active');
+             });
+             event.currentTarget.classList.add('active');
+
+             // Update forms
+             document.querySelectorAll('.auth-form').forEach(form => {
+                 form.classList.remove('active');
+             });
+
+             if (tab === 'login') {
+                 document.getElementById('login-form').classList.add('active');
+             } else if (tab === 'register') {
+                 document.getElementById('register-form').classList.add('active');
+             } else if (tab === 'reset') {
+                 document.getElementById('reset-form').classList.add('active');
+                 // Reset to email input section
+                 showResetEmailSection();
+             }
+         }
 
         // Password toggle functionality
         function togglePassword(inputId) {
@@ -840,59 +1364,106 @@ p<!DOCTYPE html>
             }
         }
 
-        // Show forgot password modal
-        function showForgotPassword() {
-            document.getElementById('forgot-password-modal').style.display = 'flex';
-        }
-
-        // Hide forgot password modal
-        function hideForgotPassword() {
-            document.getElementById('forgot-password-modal').style.display = 'none';
-            document.getElementById('forgotPasswordForm').reset();
+        // Show reset email section
+        function showResetEmailSection() {
+            document.getElementById('reset-email-section').style.display = 'block';
+            document.getElementById('reset-success-section').style.display = 'none';
+            document.getElementById('resetPasswordForm').reset();
             clearErrors();
         }
 
-        // Forgot password form submission
-        document.getElementById('forgotPasswordForm').addEventListener('submit', function(e) {
+        // Show forgot password modal (legacy support)
+        function showForgotPassword() {
+            showTab('reset');
+        }
+
+        // Hide forgot password modal (legacy support)
+        function hideForgotPassword() {
+            showTab('login');
+        }
+
+        // Reset password form submission
+        document.getElementById('resetPasswordForm').addEventListener('submit', async function(e) {
             e.preventDefault();
+            clearErrors();
 
-            const email = document.getElementById('forgot-email').value.trim();
+            const email = document.getElementById('reset-email').value.trim();
+            const submitBtn = document.getElementById('send-reset-btn');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const loading = submitBtn.querySelector('.loading');
 
+            // Validation
             if (!email) {
-                showError('forgot-email', 'Email is required');
+                showError('reset-email', 'Email address is required');
                 return;
             }
 
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                showError('forgot-email', 'Please enter a valid email address');
+            if (!EmailService.isValidEmail(email)) {
+                showError('reset-email', 'Please enter a valid email address');
                 return;
             }
 
             // Show loading state
-            const submitBtn = this.querySelector('.auth-btn');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<div class="loading"></div>';
+            btnText.style.display = 'none';
+            loading.style.display = 'block';
             submitBtn.disabled = true;
 
-            // Use auth module for password reset
-            setTimeout(() => {
-                const result = auth.requestPasswordReset(email);
+            try {
+                // Generate reset token
+                const resetToken = EmailService.generateResetToken();
 
-                if (result.success) {
-                    alert(`Password reset instructions have been sent to ${email}\n\nFor demo purposes, the reset token is: ${result.token}`);
-                    hideForgotPassword();
+                // Get user name if available
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+                const user = users.find(u => u.email === email);
+                const userName = user ? user.name : 'Valued Customer';
+
+                // Send email
+                const emailResult = await EmailService.sendPasswordResetEmail(email, resetToken, userName);
+
+                if (emailResult.success) {
+                    // Store reset token for verification (in production, store in database)
+                    const resetData = {
+                        email: email,
+                        token: resetToken,
+                        expires: Date.now() + (15 * 60 * 1000), // 15 minutes expiry
+                        used: false
+                    };
+                    localStorage.setItem('passwordResetData', JSON.stringify(resetData));
+
+                    // Show success message in form
+                    document.getElementById('reset-email-section').style.display = 'none';
+                    document.getElementById('reset-success-section').style.display = 'block';
                 } else {
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.disabled = false;
-                    showError('forgot-email', result.message);
+                    // Show user-friendly error message
+                    showMessageModal(
+                        'Email Sending Failed',
+                        'Unable to send password reset email. Please check your email address and try again. If the problem persists, contact support.',
+                        'error'
+                    );
                 }
-            }, 1000);
+
+            } catch (error) {
+                console.error('Password reset error:', error);
+                showMessageModal(
+                    'Email Sending Failed',
+                    'Unable to send password reset email. Please check your email address and try again. If the problem persists, contact support.',
+                    'error'
+                );
+            } finally {
+                // Reset button state
+                btnText.style.display = 'inline';
+                loading.style.display = 'none';
+                submitBtn.disabled = false;
+            }
         });
 
         // Social login placeholder
         function socialLogin(provider) {
-            alert(`${provider} login will be implemented soon!`);
+            showMessageModal(
+                'Coming Soon',
+                `${provider} login will be implemented soon!`,
+                'info'
+            );
         }
 
         // Form validation
@@ -973,7 +1544,11 @@ p<!DOCTYPE html>
                     // Login failed
                     loginBtn.innerHTML = originalText;
                     loginBtn.disabled = false;
-                    showError('login-password', 'Invalid email or password');
+                    showMessageModal(
+                        'Login Failed',
+                        'Invalid email or password. Please check your credentials and try again.',
+                        'error'
+                    );
                 }
             }, 1000);
         });
@@ -1055,7 +1630,11 @@ p<!DOCTYPE html>
                 if (existingUser) {
                     registerBtn.innerHTML = originalText;
                     registerBtn.disabled = false;
-                    showError('register-email', 'An account with this email already exists');
+                    showMessageModal(
+                        'Registration Failed',
+                        'An account with this email already exists. Please use a different email address or try logging in.',
+                        'error'
+                    );
                     return;
                 }
 
@@ -1082,12 +1661,16 @@ p<!DOCTYPE html>
 
                 localStorage.setItem('currentUser', JSON.stringify(userSession));
 
-                alert('Account created successfully! Please login to continue.');
+                showMessageModal(
+                    'Account Created',
+                    'Account created successfully! Please login to continue.',
+                    'success'
+                );
                 window.location.href = 'login.html';
             }, 1000);
         });
 
-        // Load remembered email and handle redirects
+        // Add event listeners for message modal
         document.addEventListener('DOMContentLoaded', function() {
             const rememberedEmail = localStorage.getItem('rememberedUser');
             if (rememberedEmail) {
@@ -1095,13 +1678,25 @@ p<!DOCTYPE html>
                 document.getElementById('remember-me').checked = true;
             }
 
-            // Handle redirect parameter
+            // Handle URL parameters for direct tab access and redirect
             const urlParams = new URLSearchParams(window.location.search);
             const redirectTo = urlParams.get('redirect');
+            const tabParam = urlParams.get('tab');
+            const tokenParam = urlParams.get('token');
 
+            // Handle redirect parameter
             if (redirectTo) {
                 localStorage.setItem('redirectAfterLogin', redirectTo);
             }
+
+            // Handle direct tab access
+            if (tabParam === 'reset' && tokenParam) {
+                // Show reset tab and pre-fill token (token handling will be implemented in the reset form)
+                setTimeout(() => showTab('reset'), 100);
+            } else if (tabParam === 'reset') {
+                setTimeout(() => showTab('reset'), 100);
+            }
+
 
             // Check if user is already logged in
             if (window.auth && window.auth.isLoggedIn()) {
@@ -1109,6 +1704,24 @@ p<!DOCTYPE html>
                 localStorage.removeItem('redirectAfterLogin');
                 window.location.href = redirectPage;
             }
+    
+                 // Add event listeners for message modal
+                 const messageModal = document.getElementById('message-modal');
+                 if (messageModal) {
+                     // Close modal when clicking outside
+                     messageModal.addEventListener('click', function(e) {
+                         if (e.target === this) {
+                             hideMessageModal();
+                         }
+                     });
+    
+                     // Close modal when pressing Escape key
+                     document.addEventListener('keydown', function(e) {
+                         if (e.key === 'Escape' && messageModal.style.display === 'flex') {
+                             hideMessageModal();
+                         }
+                     });
+                 }
         });
     </script>
 </body>

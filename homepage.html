@@ -63,7 +63,7 @@
     color: white;
     text-decoration: none;
     padding: 8px 15px;
-    border-radius: 5px;
+    border-radius: 12px;
     transition: background-color 0.3s ease, color 0.3s ease;
     /* --- Add these two lines --- */
     display: flex;
@@ -76,7 +76,7 @@
     align-items: center;
 }
 
-.auth-login, .auth-logout {
+auth-login, .auth-logout {
     color: white;
     text-decoration: none;
     padding: 8px 15px;
@@ -108,7 +108,7 @@
     top: 100%;
     right: 0;
     background: white;
-    border-radius: 8px;
+    border-radius: 15px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     min-width: 200px;
     padding: 8px 0;
@@ -143,7 +143,7 @@
 /* Profile Status Bar Styles */
 .profile-status-bar {
     background: linear-gradient(135deg, #8e44ad, #9b59b6);
-    border-radius: 25px;
+    border-radius: 35px;
     padding: 8px 16px;
     box-shadow: 0 4px 15px rgba(142, 68, 173, 0.3);
     margin-left: 15px;
@@ -205,7 +205,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 20px;
+    border-radius: 30px;
     background: rgba(255, 255, 255, 0.2);
     color: white;
     text-decoration: none;
@@ -249,9 +249,22 @@
 }
 
 .status-btn.logout-btn:hover {
+      background: white;
+      color: #8e44ad;
+  }
+
+.status-btn.login-btn {
      background: white;
      color: #8e44ad;
- }
+     border: 1px solid #8e44ad;
+  }
+
+.status-btn.login-btn:hover {
+     background: rgba(255, 255, 255, 0.9);
+     color: #8e44ad;
+     transform: scale(1.1);
+     box-shadow: 0 4px 12px rgba(142, 68, 173, 0.3);
+  }
 
 /* Profile Dropdown Styles */
 .profile-dropdown-container {
@@ -264,7 +277,7 @@
     top: 100%;
     right: 0;
     background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f8f9fa 100%);
-    border-radius: 12px;
+    border-radius: 20px;
     box-shadow: 0 8px 25px rgba(142, 68, 173, 0.25);
     min-width: 200px;
     padding: 8px 0;
@@ -295,7 +308,7 @@
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
-    border-radius: 6px;
+    border-radius: 12px;
     margin: 2px 8px;
     background: transparent;
 }
@@ -385,7 +398,7 @@
 
 .login-prompt-content {
     background: white;
-    border-radius: 20px;
+    border-radius: 30px;
     padding: 30px;
     max-width: 400px;
     width: 90%;
@@ -437,7 +450,7 @@
 .login-prompt-btn {
     padding: 12px 24px;
     border: none;
-    border-radius: 10px;
+    border-radius: 15px;
     font-size: 16px;
     font-weight: 500;
     cursor: pointer;
@@ -483,16 +496,16 @@ backdrop-filter: blur(5px);
 }
 
 .logout-modal-content {
-background: white;
-border-radius: 20px;
-padding: 30px;
-max-width: 400px;
-width: 90%;
-text-align: center;
-box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-transform: scale(0.8);
-opacity: 0;
-transition: all 0.3s ease;
+    background: white;
+    border-radius: 30px;
+    padding: 30px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    transform: scale(0.8);
+    opacity: 0;
+    transition: all 0.3s ease;
 }
 
 .logout-modal.show .logout-modal-content {
@@ -534,14 +547,14 @@ justify-content: center;
 }
 
 .logout-modal-btn {
-padding: 12px 24px;
-border: none;
-border-radius: 10px;
-font-size: 16px;
-font-weight: 500;
-cursor: pointer;
-transition: all 0.3s ease;
-min-width: 120px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 15px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 120px;
 }
 
 .logout-modal-btn-primary {
@@ -599,7 +612,7 @@ color: #e74c3c;
       position: relative;
       z-index: 0;
       color: white;
-      height: 50vh;
+      height: 72vh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -614,7 +627,7 @@ color: #e74c3c;
       width: 100%;
       height: 100%;
       background-size: cover;
-      background-position: center;
+      background-position: center 60%;
       background-repeat: no-repeat;
       opacity: 0;
       transition: opacity 1s ease-in-out;
@@ -626,23 +639,23 @@ color: #e74c3c;
     }
 
     .hero-background.bg1 {
-      background-image: url('images/background2.jpg');
+      background-image: url('images/segment_thumbnail/segment_s4.jpg');
     }
 
     .hero-background.bg2 {
-      background-image: url('images/background1.jpg');
+      background-image: url('images/segment_thumbnail/segment_s3.webp');
     }
 
     .hero-background.bg3 {
-      background-image: url('images/background3.jpg');
+      background-image: url('images/segment_thumbnail/segment_s2.jpg');
     }
 
     .hero-background.bg4 {
-      background-image: url('images/silk_saree.jpg');
+      background-image: url('images/segment_thumbnail/segment_s1.jpg');
     }
 
     .hero-background.bg5 {
-      background-image: url('images/handloom_lungi.jpg');
+      background-image: url('images/segment_thumbnail/segment_s2.webp');
     }
 
 
@@ -662,7 +675,7 @@ color: #e74c3c;
       font-size: 2.5rem;
       background-color: rgba(137, 133, 133, 0.6);
       padding: 1rem;
-      border-radius: 10px;
+      border-radius: 20px;
       position: relative;
       z-index: 1;
     }
@@ -747,7 +760,7 @@ color: #e74c3c;
     .product-card {
       background-color: #9356ad;
       color: white;
-      border-radius: 12px;
+      border-radius: 20px;
       padding: 1.2rem;
       width: 300px;
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
@@ -837,12 +850,12 @@ color: #e74c3c;
     }
 
     .bottom-bar-section {
-      background: rgba(143, 102, 151, 0.05);
-      padding: 1.5rem;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
+        background: rgba(143, 102, 151, 0.05);
+        padding: 1.5rem;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
     }
 
     .bottom-bar-section:hover {
@@ -894,16 +907,16 @@ color: #e74c3c;
     }
 
     .social-links a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 36px;
-      height: 36px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 50%;
-      color: rgb(94, 91, 91);
-      transition: all 0.3s ease;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        color: rgb(94, 91, 91);
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     .social-links a:hover {
@@ -928,13 +941,13 @@ color: #e74c3c;
     }
 
     .newsletter-form input {
-      flex: 1;
-      padding: 0.6rem;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 6px;
-      background: rgba(255, 255, 255, 0.1);
-      color: rgb(94, 91, 91);
-      font-size: 0.8rem;
+        flex: 1;
+        padding: 0.6rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.1);
+        color: rgb(94, 91, 91);
+        font-size: 0.8rem;
     }
 
     .newsletter-form input::placeholder {
@@ -948,13 +961,13 @@ color: #e74c3c;
     }
 
     .newsletter-form button {
-      padding: 0.6rem 0.8rem;
-      background: rgba(255, 255, 255, 0.2);
-      color: rgb(94, 91, 91);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.3s ease;
+        padding: 0.6rem 0.8rem;
+        background: rgba(255, 255, 255, 0.2);
+        color: rgb(94, 91, 91);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
     }
 
     .newsletter-form button:hover {
@@ -979,11 +992,18 @@ color: #e74c3c;
       gap: 1rem;
     }
 
-    .copyright p {
-      color: rgb(94, 91, 91);
-      font-size: 0.8rem;
-      margin: 0;
-    }
+    .copyright {
+       text-align: center;
+       width: 100%;
+       margin: 0;
+     }
+
+     .copyright p {
+       color: rgb(94, 91, 91);
+       font-size: 0.8rem;
+       margin: 0;
+       text-align: center;
+     }
 
     .bottom-links {
       display: flex;
@@ -1014,9 +1034,9 @@ color: #e74c3c;
     .coming-soon-card {
       background: linear-gradient(135deg, #f8f9fa, #e9ecef);
       color: #666;
-      border: 3px dashed #8e44ad;
+      border: 2px dashed #9661ac;
       position: relative;
-      opacity: 0.8;
+      /* opacity: 0.8; */
       cursor: not-allowed;
     }
 
@@ -1225,8 +1245,10 @@ color: #e74c3c;
     }
 
     .craft-image img {
-        width: 120%;
+        width: 100%;
         max-width: 500px;
+        height: 350px;
+        object-fit: cover;
         box-shadow: 0 8px 30px rgba(0,0,0,0.15);
         border-radius: 25px;
         border: 5px solid #8e44ad;
@@ -1273,7 +1295,7 @@ color: #e74c3c;
         }
 
         .craft-image img {
-            max-width: 450px;
+            max-width: 480px;
         }
     }
 
@@ -1294,7 +1316,8 @@ color: #e74c3c;
 
         .craft-image img {
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
+            height: 300px;
         }
 
         .section {
@@ -1396,7 +1419,7 @@ color: #e74c3c;
 
         /* Hero Section - Perfect Center */
         .hero {
-            height: 45vh;
+            height: 55vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1472,7 +1495,8 @@ color: #e74c3c;
 
         .craft-image img {
             width: 100%;
-            max-width: 350px;
+            max-width: 380px;
+            height: 280px;
             margin: 0 auto;
         }
 
@@ -1716,7 +1740,7 @@ color: #e74c3c;
 
         /* Hero Section - Perfect Center */
         .hero {
-            height: 40vh;
+            height: 50vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1830,7 +1854,8 @@ color: #e74c3c;
 
         .craft-image img {
             width: 100%;
-            max-width: 280px;
+            max-width: 300px;
+            height: 240px;
             margin: 0 auto;
         }
 
@@ -1978,7 +2003,7 @@ color: #e74c3c;
 
         /* Hero - Perfect Center */
         .hero {
-            height: 35vh;
+            height: 45vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -2087,7 +2112,8 @@ color: #e74c3c;
         }
 
         .craft-image img {
-            max-width: 240px;
+            max-width: 260px;
+            height: 220px;
             margin: 0 auto;
         }
 
@@ -2241,7 +2267,7 @@ color: #e74c3c;
     @media (max-width: 896px) and (orientation: landscape) {
         /* Center all elements in landscape */
         .hero {
-            height: 60vh;
+            height: 70vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -2379,11 +2405,6 @@ color: #e74c3c;
     <nav class="navbar">
       <!-- Authentication Buttons -->
       <div class="auth-buttons">
-          <a href="login.html" class="auth-login" style="display: none;">
-              <i class="fas fa-sign-in-alt"></i>
-              Login
-          </a>
-
           <!-- Profile Status Bar -->
           <div class="profile-status-bar" id="profile-status-bar" style="display: none;">
               <div class="status-content">
@@ -2412,10 +2433,6 @@ color: #e74c3c;
                           <i class="fas fa-shopping-bag"></i>
                           <span id="status-cart-count" class="status-cart-badge">0</span>
                       </a>
-                      <a href="#" class="status-btn logout-btn" onclick="handleLogout(event)" title="Logout">
-                          <span class="status-label">Logout</span>
-                          <i class="fas fa-sign-out-alt"></i>
-                      </a>
                   </div>
               </div>
           </div>
@@ -2440,14 +2457,14 @@ color: #e74c3c;
       <span class="indicator" data-slide="4"></span>
     </div>
   </section>
-  
+
   <section class="section craftsmanship">
     <h2>The Art of Our Weaves</h2>
     <div class="craft-container">
       
       <div class="craft-item">
         <div class="craft-image">
-          <img src="images/silk_saree.jpg" alt="Handwoven Silk Saree Making">
+          <img src="images/product_thumbnail/silk_thumbnail.jpeg" alt="Handwoven Silk Saree Making">
         </div>
         <div class="craft-text">
           <h3>Handwoven Silk Sarees</h3>
@@ -2459,7 +2476,7 @@ color: #e74c3c;
       
       <div class="craft-item reverse">
         <div class="craft-image">
-          <img src="images/handloom_lungi.jpg" alt="Traditional Lungi Making">
+          <img src="images/product_thumbnail/lungi_thumbnail.jpg" alt="Traditional Lungi Making">
         </div>
         <div class="craft-text">
           <h3>The Craft of Lungi Making</h3>
@@ -2471,7 +2488,7 @@ color: #e74c3c;
       
       <div class="craft-item">
         <div class="craft-image">
-          <img src="images/printed_saree.jpg" alt="Handloom Printed Saree Making">
+          <img src="images/product_thumbnail/printed_thumbnail.jpeg" alt="Handloom Printed Saree Making">
         </div>
         <div class="craft-text">
           <h3>Handloom Printed Sarees</h3>
@@ -2489,21 +2506,21 @@ color: #e74c3c;
     <div class="products">
       <a href="lungis.html" class="product-card-link">
         <div class="product-card">
-          <img src="images/lungi_collection.jpg" alt="Lungis" />
+          <img src="images/product_thumbnail/lungi_thumbnail.jpg" alt="Lungis" />
           <h3>Traditional Lungis</h3>
           <p>Premium cotton and export quality lungis for every season.</p>
         </div>
       </a>
       <a href="silk.html" class="product-card-link">
         <div class="product-card">
-          <img src="images/silk_saree_collection.jpg" alt="Silk Sarees" />
+          <img src="images/product_thumbnail/silk_thumbnail.jpeg" alt="Silk Sarees" />
           <h3>Silk Sarees</h3>
           <p>Luxurious silk sarees that define tradition and grace.</p>
         </div>
       </a>
       <a href="printed.html" class="product-card-link">
         <div class="product-card">
-          <img src="images/printed_saree_collection.jpg" alt="Printed Sarees" />
+          <img src="images/product_thumbnail/printed_thumbnail.jpeg" alt="Printed Sarees" />
           <h3>Printed Sarees</h3>
           <p>Everyday printed sarees with modern and traditional designs.</p>
         </div>
@@ -2692,6 +2709,11 @@ color: #e74c3c;
       showLogoutModal();
     }
 
+    function handleLoginClick(event) {
+      event.preventDefault();
+      window.location.href = 'login.html';
+    }
+
     // Show logout confirmation modal
     function showLogoutModal() {
       const modal = document.getElementById('logout-modal');
@@ -2850,14 +2872,15 @@ color: #e74c3c;
       const userEmailElement = document.getElementById('user-email');
       const profileStatusBar = document.getElementById('profile-status-bar');
       const userNameDisplay = document.getElementById('user-name-display');
-      const loginButtons = document.querySelectorAll('.auth-login');
       const logoutButtons = document.querySelectorAll('.auth-logout');
+      const statusLoginBtn = document.querySelector('.status-btn.login-btn');
+      const statusLogoutBtn = document.querySelector('.status-btn.logout-btn');
       const userMenu = document.querySelector('.user-menu');
 
       if (auth.isLoggedIn()) {
         const currentUser = auth.getCurrentUser();
 
-        // Update profile status bar
+        // Always show profile status bar (for demo purposes)
         if (profileStatusBar) {
           profileStatusBar.style.display = 'block';
         }
@@ -2869,20 +2892,27 @@ color: #e74c3c;
         if (userNameElement) userNameElement.textContent = currentUser.name;
         if (userEmailElement) userEmailElement.textContent = currentUser.email;
 
-        // Hide login buttons, show logout buttons
-        loginButtons.forEach(btn => btn.style.display = 'none');
+        // Hide login button, show logout button in status bar
         logoutButtons.forEach(btn => btn.style.display = 'block');
+        if (statusLoginBtn) statusLoginBtn.style.display = 'none';
+        if (statusLogoutBtn) statusLogoutBtn.style.display = 'block';
         if (userMenu) userMenu.style.display = 'block';
 
       } else {
-        // Hide profile status bar
+        // Always show profile status bar (for demo purposes)
         if (profileStatusBar) {
-          profileStatusBar.style.display = 'none';
+          profileStatusBar.style.display = 'block';
         }
 
-        // Show login buttons, hide logout buttons
-        loginButtons.forEach(btn => btn.style.display = 'block');
+        // Update welcome message for non-logged-in users
+        if (userNameDisplay) {
+          userNameDisplay.textContent = 'Welcome, Guest!';
+        }
+
+        // Show login button, hide logout button in status bar
         logoutButtons.forEach(btn => btn.style.display = 'none');
+        if (statusLoginBtn) statusLoginBtn.style.display = 'block';
+        if (statusLogoutBtn) statusLogoutBtn.style.display = 'none';
         if (userMenu) userMenu.style.display = 'none';
       }
     }
@@ -2998,71 +3028,74 @@ color: #e74c3c;
     const totalSlides = slides.length;
 
     function updateIndicators() {
-      // Update indicator states
-      indicators.forEach((indicator, index) => {
-        if (index === currentSlide) {
-          indicator.classList.add('active');
-        } else {
-          indicator.classList.remove('active');
-        }
-      });
-    }
+       // Update indicator states
+       indicators.forEach((indicator, index) => {
+         if (index === currentSlide) {
+           indicator.classList.add('active');
+         } else {
+           indicator.classList.remove('active');
+         }
+       });
+     }
 
-    function changeBackground() {
-      // Remove active class from current slide
-      slides[currentSlide].classList.remove('active');
+     function changeBackground() {
+       // Remove active class from current slide
+       slides[currentSlide].classList.remove('active');
 
-      // Move to next slide
-      currentSlide = (currentSlide + 1) % totalSlides;
+       // Move to next slide
+       currentSlide = (currentSlide + 1) % totalSlides;
 
-      // Add active class to new slide
-      slides[currentSlide].classList.add('active');
+       // Add active class to new slide
+       slides[currentSlide].classList.add('active');
 
-      // Update indicators
-      updateIndicators();
-    }
+       // Update indicators
+       updateIndicators();
+     }
 
-    function goToSlide(slideIndex) {
-      // Remove active class from current slide
-      slides[currentSlide].classList.remove('active');
+     function goToSlide(slideIndex) {
+       // Remove active class from current slide
+       slides[currentSlide].classList.remove('active');
 
-      // Set new current slide
-      currentSlide = slideIndex;
+       // Set new current slide
+       currentSlide = slideIndex;
 
-      // Add active class to new slide
-      slides[currentSlide].classList.add('active');
+       // Add active class to new slide
+       slides[currentSlide].classList.add('active');
 
-      // Update indicators
-      updateIndicators();
-    }
+       // Update indicators
+       updateIndicators();
+     }
 
-    // Add click event listeners to indicators
-    indicators.forEach((indicator, index) => {
-      indicator.addEventListener('click', () => {
-        goToSlide(index);
-      });
-    });
+     // Add click event listeners to indicators
+     indicators.forEach((indicator, index) => {
+       indicator.addEventListener('click', () => {
+         goToSlide(index);
+       });
+     });
 
-    // Start the slideshow - change every 2 seconds
-    setInterval(changeBackground, 2000);
+     // Start the slideshow - change every 2 seconds
+     setInterval(changeBackground, 2000);
 
-    // Optional: Pause slideshow when user hovers over hero section
-    const heroSection = document.querySelector('.hero');
-    let slideshowInterval;
+     // Optional: Pause slideshow when user hovers over hero section
+     const heroSection = document.querySelector('.hero');
+     let slideshowInterval;
 
-    function startSlideshow() {
-      slideshowInterval = setInterval(changeBackground, 2000);
-    }
+     function startSlideshow() {
+       slideshowInterval = setInterval(changeBackground, 2000);
+     }
 
-    function stopSlideshow() {
-      clearInterval(slideshowInterval);
-    }
+     function stopSlideshow() {
+       clearInterval(slideshowInterval);
+     }
 
-    heroSection.addEventListener('mouseenter', stopSlideshow);
-    heroSection.addEventListener('mouseleave', startSlideshow);
+     heroSection.addEventListener('mouseenter', stopSlideshow);
+     heroSection.addEventListener('mouseleave', startSlideshow);
 
-    // Start slideshow on page load
-    startSlideshow();
+     // Start slideshow on page load
+     startSlideshow();
+
+    // Smooth scroll functionality
+    document.documentElement.style.scrollBehavior = 'smooth';
 
     // Scroll to products section
     function toggleProductsSection(event) {

@@ -62,7 +62,7 @@
             color: white;
             text-decoration: none;
             padding: 8px 15px;
-            border-radius: 5px;
+            border-radius: 12px;
             transition: background-color 0.3s ease, color 0.3s ease;
             display: flex;
             align-items: center;
@@ -122,7 +122,7 @@
         }
 .profile-status-bar {
             background: linear-gradient(135deg, #8e44ad, #9b59b6);
-            border-radius: 25px;
+            border-radius: 35px;
             padding: 8px 16px;
             box-shadow: 0 4px 15px rgba(142, 68, 173, 0.3);
             margin-left: 15px;
@@ -191,6 +191,21 @@
             background: white;
             color: #8e44ad;
         }
+
+        .status-btn.login-btn {
+            background: white;
+            color: #8e44ad;
+            border: 1px solid #8e44ad;
+            text-align: center;
+        }
+
+        .status-btn.login-btn:hover {
+            background: rgba(255, 255, 255, 0.9);
+            color: #8e44ad;
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(142, 68, 173, 0.3);
+        }
+
         .status-cart-badge, .status-wishlist-badge {
             background-color: #e74c3c;
             color: white;
@@ -218,7 +233,7 @@
             margin: 20px auto;
             padding: 0 20px;
             background: white;
-            border-radius: 10px;
+            border-radius: 15px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
 
@@ -239,7 +254,7 @@
             width: 100%;
             height: 400px;
             object-fit: cover;
-            border-radius: 10px;
+            border-radius: 15px;
             border: 1px solid #f0f0f0;
         }
 
@@ -254,7 +269,7 @@
             width: 80px;
             height: 80px;
             object-fit: cover;
-            border-radius: 10px;
+            border-radius: 15px;
             cursor: pointer;
             border: 2px solid transparent;
             transition: border-color 0.2s;
@@ -324,7 +339,7 @@
         .price-breakdown {
             background: #f8f9fa;
             padding: 16px;
-            border-radius: 10px;
+            border-radius: 15px;
             margin-bottom: 20px;
         }
 
@@ -453,7 +468,7 @@
             display: flex;
             align-items: center;
             border: 1px solid #d7d7d7;
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
         }
 
@@ -486,7 +501,7 @@
             color: white;
             border: 1px solid #8e44ad;
             padding: 12px 24px;
-            border-radius: 10px;
+            border-radius: 15px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
@@ -506,7 +521,7 @@
             color: white;
             border: 1px solid #fb641b;
             padding: 12px 24px;
-            border-radius: 10px;
+            border-radius: 15px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
@@ -521,6 +536,21 @@
             background: #e55a1a;
         }
 
+        .btn-watchlist {
+            background: #fff;
+            color: #8e44ad;
+            border: 2px solid #8e44ad;
+            padding: 12px 24px;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         .btn-watchlist:hover {
             background: #8e44ad;
             color: white;
@@ -532,7 +562,7 @@
         .delivery-info {
             background: #f8f9fa;
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 15px;
             margin-bottom: 24px;
         }
 
@@ -561,7 +591,7 @@
         .seller-info {
             background: #fff8e1;
             padding: 16px;
-            border-radius: 10px;
+            border-radius: 15px;
             border-left: 4px solid #8e44ad;
         }
 
@@ -647,7 +677,7 @@
             width: 100%;
             border-collapse: collapse;
             background: white;
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
@@ -735,7 +765,7 @@
         .review-item {
             padding: 20px;
             border: 1px solid #f0f0f0;
-            border-radius: 10px;
+            border-radius: 15px;
             margin-bottom: 16px;
             background: white;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
@@ -781,7 +811,7 @@
             background: white;
             margin: 20px auto;
             padding: 30px;
-            border-radius: 10px;
+            border-radius: 15px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             max-width: 1200px;
         }
@@ -804,7 +834,7 @@
         .product-card {
             background: white;
             border: 1px solid #f0f0f0;
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
             transition: transform 0.2s, box-shadow 0.2s;
             cursor: pointer;
@@ -1078,6 +1108,20 @@
                 color: #8e44ad;
             }
 
+       .status-btn.login-btn {
+           background: white;
+           color: #8e44ad;
+           border: 1px solid #8e44ad;
+           text-align: center;
+       }
+
+       .status-btn.login-btn:hover {
+           background: rgba(255, 255, 255, 0.9);
+           color: #8e44ad;
+           transform: scale(1.1);
+           box-shadow: 0 4px 12px rgba(142, 68, 173, 0.3);
+       }
+
             .status-label {
                 font-size: 11px;
             }
@@ -1313,9 +1357,16 @@
             .status-btn.home-btn:hover,
             .status-btn.watchlist-btn:hover,
             .status-btn.bag-btn:hover,
-            .status-btn.logout-btn:hover {
+            .status-btn.logout-btn:hover,
+            .status-btn.login-btn:hover {
                 background: white;
                 color: #8e44ad;
+            }
+
+            .status-btn.login-btn {
+                background: white;
+                color: #8e44ad;
+                border: 1px solid #8e44ad;
             }
 
             .status-label {
@@ -1413,24 +1464,36 @@
 
        <nav class="navbar">
            <div class="auth-buttons">
-               <a href="login.html" class="auth-login" style="display: none;">
-                   <i class="fas fa-sign-in-alt"></i> Login
-               </a>
-               <div class="status-actions" style="background: linear-gradient(135deg, #8e44ad, #9b59b6); border-radius: 25px; padding: 8px 16px; box-shadow: 0 4px 15px rgba(142, 68, 173, 0.3); margin-left: 15px; transition: all 0.3s ease; border: 2px solid rgba(255, 255, 255, 0.2);">
-                   <a href="homepage.html" class="status-btn home-btn" title="Home">
-                       <span class="status-label">Home</span>
-                       <i class="fas fa-home"></i>
-                   </a>
-                   <a href="watchlist.html" class="status-btn watchlist-btn" title="Watchlist">
-                       <span class="status-label">Watchlist</span>
-                       <span id="status-watchlist-text" class="status-count-text">(0)</span>
-                       <i class="fas fa-heart"></i>
-                   </a>
-                   <a href="cart.html" class="status-btn bag-btn" title="Shopping Bag">
-                       <span class="status-label">Cart</span>
-                       <span id="status-cart-text" class="status-count-text">(0)</span>
-                       <i class="fas fa-shopping-bag"></i>
-                   </a>
+               <!-- Profile Status Bar -->
+               <div class="profile-status-bar" id="profile-status-bar">
+                   <div class="status-content">
+                       <div class="user-avatar">
+                           <i class="fas fa-user-circle"></i>
+                       </div>
+                       <div class="user-details">
+                           <div class="user-name-display" id="user-name-display">Welcome, Guest!</div>
+                       </div>
+                       <div class="status-actions">
+                           <a href="homepage.html" class="status-btn home-btn" title="Home">
+                               <span class="status-label">Home</span>
+                               <i class="fas fa-home"></i>
+                           </a>
+                           <a href="watchlist.html" class="status-btn watchlist-btn" title="Watchlist">
+                               <span class="status-label">Watchlist</span>
+                               <span id="status-watchlist-text" class="status-count-text">(0)</span>
+                               <i class="fas fa-heart"></i>
+                           </a>
+                           <a href="cart.html" class="status-btn bag-btn" title="Shopping Bag">
+                               <span class="status-label">Cart</span>
+                               <span id="status-cart-text" class="status-count-text">(0)</span>
+                               <i class="fas fa-shopping-bag"></i>
+                           </a>
+                           <a href="#" class="status-btn logout-btn" onclick="handleLogout(event)" title="Logout" style="display: none;">
+                               <span class="status-label">Logout</span>
+                               <i class="fas fa-sign-out-alt"></i>
+                           </a>
+                       </div>
+                   </div>
                </div>
            </div>
        </nav>
@@ -1687,28 +1750,28 @@
     <section class="related-products">
         <h2 class="section-title">You Might Also Like</h2>
         <div class="products-grid">
-            <div class="product-card" onclick="window.location.href='printed.html'">
+            <div class="product-card" onclick="loadRecommendedProduct('printed-saree')">
                 <img src="images/printed_saree_collection.jpg" alt="Printed Saree">
                 <div class="product-card-info">
                     <h3 class="product-card-title">Printed Saree</h3>
                     <div class="product-card-price">₹2,800</div>
                 </div>
             </div>
-            <div class="product-card" onclick="window.location.href='lungis.html'">
+            <div class="product-card" onclick="loadRecommendedProduct('blue-lungi')">
                 <img src="images/lungi_collection.jpg" alt="Blue Checkered Lungi">
                 <div class="product-card-info">
                     <h3 class="product-card-title">Blue Checkered Lungi</h3>
                     <div class="product-card-price">₹380</div>
                 </div>
             </div>
-            <div class="product-card" onclick="window.location.href='silk.html'">
+            <div class="product-card" onclick="loadRecommendedProduct('red-silk-saree')">
                 <img src="images/silk_saree.jpg" alt="Red Silk Saree">
                 <div class="product-card-info">
                     <h3 class="product-card-title">Red Silk Saree</h3>
                     <div class="product-card-price">₹15,000</div>
                 </div>
             </div>
-            <div class="product-card" onclick="window.location.href='printed.html'">
+            <div class="product-card" onclick="loadRecommendedProduct('designer-printed-saree')">
                 <img src="images/printed_saree.jpg" alt="Designer Printed Saree">
                 <div class="product-card-info">
                     <h3 class="product-card-title">Designer Printed Saree</h3>
@@ -1734,6 +1797,42 @@
             ]
         };
 
+        // Products data for recommendations
+        const productsData = {
+            'printed-saree': {
+                id: 'printed-saree-1',
+                name: 'Printed Saree',
+                price: 2800,
+                originalPrice: 3500,
+                image: 'images/printed_saree_collection.jpg',
+                category: 'saree'
+            },
+            'blue-lungi': {
+                id: 'lungi-1',
+                name: 'Blue Checkered Lungi',
+                price: 380,
+                originalPrice: 450,
+                image: 'images/lungi_collection.jpg',
+                category: 'lungi'
+            },
+            'red-silk-saree': {
+                id: 'silk-saree-1',
+                name: 'Red Silk Saree',
+                price: 15000,
+                originalPrice: 18000,
+                image: 'images/silk_saree.jpg',
+                category: 'saree'
+            },
+            'designer-printed-saree': {
+                id: 'printed-saree-2',
+                name: 'Designer Printed Saree',
+                price: 3200,
+                originalPrice: 4000,
+                image: 'images/printed_saree.jpg',
+                category: 'saree'
+            }
+        };
+
         let currentImageIndex = 0;
         let quantity = 1;
 
@@ -1753,16 +1852,8 @@
                 loadSelectedProduct();
             }, 100);
 
-            const profileStatusBar = document.getElementById('profile-status-bar');
-            const authLogin = document.querySelector('.auth-login');
-            if (auth.isLoggedIn()) {
-                profileStatusBar.style.display = 'block';
-                authLogin.style.display = 'none';
-                document.getElementById('user-name-display').textContent = `Welcome, ${auth.getCurrentUser().name}!`;
-            } else {
-                profileStatusBar.style.display = 'none';
-                authLogin.style.display = 'flex';
-            }
+            // Initialize status bar - always show for all users
+            updateUserInterface();
         });
 
 
@@ -1771,6 +1862,11 @@
         function handleLogout(event) {
             event.preventDefault();
             showLogoutModal();
+        }
+
+        function handleLoginClick(event) {
+            event.preventDefault();
+            window.location.href = 'login.html';
         }
 
         // Show logout confirmation modal
@@ -1875,34 +1971,38 @@
         function updateUserInterface() {
             const profileStatusBar = document.getElementById('profile-status-bar');
             const userNameDisplay = document.getElementById('user-name-display');
-            const logoutButtons = document.querySelectorAll('.auth-logout');
-
-            console.log('Updating UI - isLoggedIn:', auth.isLoggedIn());
+            const loginBtn = document.querySelector('.status-btn.login-btn');
+            const logoutBtn = document.querySelector('.status-btn.logout-btn');
 
             if (auth.isLoggedIn()) {
                 const currentUser = auth.getCurrentUser();
 
-                // Show profile status bar for logged-in users
+                // Always show profile status bar (for demo purposes)
                 if (profileStatusBar) {
                     profileStatusBar.style.display = 'block';
-                    profileStatusBar.style.visibility = 'visible';
                 }
                 if (userNameDisplay) {
                     userNameDisplay.textContent = `Welcome, ${currentUser.name}!`;
                 }
 
-                // Show logout buttons
-                logoutButtons.forEach(btn => btn.style.display = 'block');
+                // Show logout button, hide login button
+                if (loginBtn) loginBtn.style.display = 'none';
+                if (logoutBtn) logoutBtn.style.display = 'block';
 
             } else {
-                // Show profile status bar for demo
+                // Always show profile status bar (for demo purposes)
                 if (profileStatusBar) {
-                    profileStatusBar.style.display = 'block !important';
-                    profileStatusBar.style.visibility = 'visible';
+                    profileStatusBar.style.display = 'block';
                 }
 
-                // Hide logout buttons
-                logoutButtons.forEach(btn => btn.style.display = 'none');
+                // Update welcome message for non-logged-in users
+                if (userNameDisplay) {
+                    userNameDisplay.textContent = 'Welcome, Guest!';
+                }
+
+                // Show login button, hide logout button
+                if (loginBtn) loginBtn.style.display = 'block';
+                if (logoutBtn) logoutBtn.style.display = 'none';
             }
         }
 
@@ -2072,24 +2172,73 @@
             console.log('Available localStorage keys:', Object.keys(localStorage));
             console.log('Raw selectedProduct from localStorage:', localStorage.getItem('selectedProduct'));
 
-            const selectedProduct = JSON.parse(localStorage.getItem('selectedProduct'));
-            console.log('Parsed selectedProduct:', selectedProduct);
+            try {
+                const selectedProduct = JSON.parse(localStorage.getItem('selectedProduct'));
+                console.log('Parsed selectedProduct:', selectedProduct);
 
-            if (selectedProduct) {
-                console.log('Loading selected product:', selectedProduct);
-                console.log('Product name:', selectedProduct.name);
-                console.log('Product image path:', selectedProduct.image);
-                console.log('Product category:', selectedProduct.category);
-                console.log('Product ID:', selectedProduct.id);
+                if (selectedProduct && selectedProduct.name) {
+                    console.log('Loading selected product:', selectedProduct);
+                    console.log('Product name:', selectedProduct.name);
+                    console.log('Product image path:', selectedProduct.image);
+                    console.log('Product price:', selectedProduct.price);
+                    console.log('Product originalPrice:', selectedProduct.originalPrice);
+                    console.log('Product category:', selectedProduct.category);
+                    console.log('Product ID:', selectedProduct.id);
 
-                // Update all product content
-                updateProductContent(selectedProduct);
+                    // Validate required fields
+                    if (!selectedProduct.image) {
+                        console.error('Product image is missing!');
+                        selectedProduct.image = 'images/handloom_lungi.jpg'; // Fallback image
+                    }
+
+                    if (!selectedProduct.price) {
+                        console.error('Product price is missing!');
+                        selectedProduct.price = '0';
+                    }
+
+                    if (!selectedProduct.originalPrice) {
+                        console.error('Product originalPrice is missing!');
+                        selectedProduct.originalPrice = String(Math.round(parseInt(selectedProduct.price) * 1.3));
+                    }
+
+                    // Update all product content
+                    updateProductContent(selectedProduct);
+                } else {
+                    console.log('No valid selected product found in localStorage');
+                    console.log('Available localStorage keys:', Object.keys(localStorage));
+                    console.log('localStorage content:', JSON.stringify(localStorage, null, 2));
+                    // Show error message if no product is selected
+                    showNotification('No product selected. Please go back and select a product.', 'error');
+                }
+            } catch (error) {
+                console.error('Error loading selected product:', error);
+                showNotification('Error loading product data. Please try again.', 'error');
+            }
+        }
+
+        // Load recommended product and update current page
+        function loadRecommendedProduct(productKey) {
+            console.log('=== loadRecommendedProduct called ===');
+            console.log('Product key:', productKey);
+
+            const productData = productsData[productKey];
+            if (productData) {
+                console.log('Loading recommended product:', productData);
+
+                // Update all product content with the new product data
+                updateProductContent(productData);
+
+                // Scroll to top of the page smoothly
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+
+                // Show notification
+                showNotification(`Now showing: ${productData.name}`, 'success');
             } else {
-                console.log('No selected product found in localStorage');
-                console.log('Available localStorage keys:', Object.keys(localStorage));
-                console.log('localStorage content:', JSON.stringify(localStorage, null, 2));
-                // Show error message if no product is selected
-                showNotification('No product selected. Please go back and select a product.', 'error');
+                console.error('Product not found for key:', productKey);
+                showNotification('Product not found!', 'error');
             }
         }
 
@@ -2098,9 +2247,14 @@
             console.log('=== updateProductContent called ===');
             console.log('Updating content for:', selectedProduct.name);
 
-            // Clean price strings and convert to numbers
-            const cleanPrice = parseInt(selectedProduct.price.replace(/[^\d]/g, ''));
-            const cleanOriginalPrice = parseInt(selectedProduct.originalPrice.replace(/[^\d]/g, ''));
+            // Handle price conversion - check if already number or string
+            const cleanPrice = typeof selectedProduct.price === 'string'
+                ? parseInt(selectedProduct.price.replace(/[^\d]/g, ''))
+                : parseInt(selectedProduct.price);
+
+            const cleanOriginalPrice = typeof selectedProduct.originalPrice === 'string'
+                ? parseInt(selectedProduct.originalPrice.replace(/[^\d]/g, ''))
+                : parseInt(selectedProduct.originalPrice);
 
             console.log('Cleaned prices:', { cleanPrice, cleanOriginalPrice });
 
@@ -2116,26 +2270,48 @@
             const originalPrice = document.querySelector('.original-price');
             const discount = document.querySelector('.discount');
 
-            if (currentPrice) currentPrice.textContent = `₹${cleanPrice.toLocaleString()}`;
-            if (originalPrice) originalPrice.textContent = `₹${cleanOriginalPrice.toLocaleString()}`;
+            console.log('Price elements found:', { currentPrice: !!currentPrice, originalPrice: !!originalPrice, discount: !!discount });
+            console.log('Price values - cleanPrice:', cleanPrice, 'cleanOriginalPrice:', cleanOriginalPrice);
+
+            if (currentPrice) {
+                currentPrice.textContent = `₹${cleanPrice.toLocaleString()}`;
+                console.log('Updated current price to:', currentPrice.textContent);
+            }
+            if (originalPrice) {
+                originalPrice.textContent = `₹${cleanOriginalPrice.toLocaleString()}`;
+                console.log('Updated original price to:', originalPrice.textContent);
+            }
 
             // Calculate discount percentage
             const discountPercent = Math.round(((cleanOriginalPrice - cleanPrice) / cleanOriginalPrice) * 100);
-            if (discount) discount.textContent = `${discountPercent}% off`;
+            console.log('Calculated discount percent:', discountPercent);
+            if (discount) {
+                discount.textContent = `${discountPercent}% off`;
+                console.log('Updated discount to:', discount.textContent);
+            }
 
             // Update price breakdown
             const priceBreakdownRows = document.querySelectorAll('.price-breakdown .price-row');
+            console.log('Price breakdown rows found:', priceBreakdownRows.length);
             if (priceBreakdownRows.length >= 3) {
+                console.log('Updating price breakdown with cleanPrice:', cleanPrice);
                 priceBreakdownRows[0].querySelector('span:last-child').textContent = `₹${cleanPrice.toLocaleString()}`;
                 priceBreakdownRows[2].querySelector('span:last-child').textContent = `₹${cleanPrice.toLocaleString()}`;
+                console.log('Price breakdown updated successfully');
+            } else {
+                console.error('Price breakdown rows not found or insufficient rows');
             }
 
             // Update main image
             const mainImage = document.getElementById('mainImage');
             if (mainImage) {
                 console.log('Updating main image to:', selectedProduct.image);
+                console.log('Main image element found:', mainImage);
                 mainImage.src = selectedProduct.image;
                 mainImage.alt = selectedProduct.name;
+                console.log('Main image src set to:', mainImage.src);
+            } else {
+                console.error('Main image element not found!');
             }
 
             // Update thumbnails

@@ -163,6 +163,299 @@
     border-color: #e74c3c;
     color: #e74c3c;
 }
+
+/* Payment Confirmation Modal Styles */
+.payment-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 10002;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+}
+
+.payment-modal-content {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    transform: scale(0.8);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.payment-modal.show .payment-modal-content {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.payment-modal-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #8e44ad, #9b59b6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 32px;
+    color: white;
+}
+
+.payment-modal-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.payment-modal-message {
+    color: #666;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
+
+.modal-order-summary {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.modal-summary-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #212121;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #8e44ad;
+}
+
+.modal-order-items {
+    max-height: 150px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+}
+
+.modal-order-items .order-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.modal-order-items .order-item:last-child {
+    border-bottom: none;
+}
+
+.modal-order-items .order-item img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 10px;
+}
+
+.modal-order-items .order-item-details {
+    flex-grow: 1;
+}
+
+.modal-order-items .order-item-details h4 {
+    font-size: 13px;
+    font-weight: 500;
+    color: #212121;
+    margin: 0 0 2px 0;
+    line-height: 1.3;
+}
+
+.modal-order-items .quantity {
+    font-size: 11px;
+    color: #878787;
+}
+
+.modal-order-items .order-item-price {
+    font-size: 13px;
+    font-weight: 600;
+    color: #212121;
+}
+
+.modal-price-breakdown {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    border: 1px solid #e9ecef;
+}
+
+.modal-price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: #212121;
+    margin-bottom: 8px;
+}
+
+.modal-price-row.total {
+    border-top: 1px solid #e9ecef;
+    padding-top: 10px;
+    margin-top: 10px;
+    font-size: 18px;
+    color: #8e44ad;
+}
+
+.payment-modal-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.payment-modal-btn {
+    padding: 14px 28px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 140px;
+}
+
+.payment-modal-btn-primary {
+    background: linear-gradient(135deg, #8e44ad, #9b59b6);
+    color: white;
+}
+
+.payment-modal-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(142, 68, 173, 0.4);
+}
+
+.payment-modal-btn-secondary {
+    background: #f8f9fa;
+    color: #666;
+    border: 2px solid #e1e5e9;
+}
+
+.payment-modal-btn-secondary:hover {
+    background: #e9ecef;
+    border-color: #8e44ad;
+    color: #8e44ad;
+    transform: translateY(-1px);
+}
+
+/* Login Prompt Modal Styles */
+.login-prompt-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(180, 177, 182, 0.8);
+    z-index: 10004;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+}
+
+.login-prompt-modal-content {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    transform: scale(0.8);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.login-prompt-modal.show .login-prompt-modal-content {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.login-prompt-modal-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #8e44ad, #8e44ad);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 32px;
+    color: white;
+}
+
+.login-prompt-modal-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.login-prompt-modal-message {
+    color: #666;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
+
+.login-prompt-modal-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.login-prompt-modal-btn {
+    padding: 14px 28px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.login-prompt-modal-btn-primary {
+    background: linear-gradient(135deg, #8e44ad, #9b59b6);
+    color: white;
+}
+
+.login-prompt-modal-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(142, 68, 173, 0.4);
+}
+
+.login-prompt-modal-btn-secondary {
+    background: #f8f9fa;
+    color: #666;
+    border: 2px solid #e1e5e9;
+}
+
+.login-prompt-modal-btn-secondary:hover {
+    background: #e9ecef;
+    border-color: #8e44ad;
+    color: #8e44ad;
+    transform: translateY(-1px);
+}
         /* Profile Status Bar Styles */
         .profile-status-bar {
             background: linear-gradient(135deg, #8e44ad, #9b59b6);
@@ -1023,7 +1316,64 @@
     </div>
 </div>
 
-    <script src="auth.js"></script>
+<!-- Payment Confirmation Modal -->
+<div id="payment-modal" class="payment-modal">
+    <div class="payment-modal-content">
+        <div class="payment-modal-icon">
+            <i class="fas fa-credit-card"></i>
+        </div>
+        <h3 class="payment-modal-title">Confirm Payment</h3>
+        <p class="payment-modal-message">
+            You are about to proceed to payment. Please review your order details and delivery address before continuing.
+        </p>
+
+        <!-- Order Summary in Modal -->
+        <div class="modal-order-summary">
+            <div class="modal-summary-title">Order Summary</div>
+            <div class="modal-order-items" id="modal-order-items">
+                <!-- Order items will be populated here -->
+            </div>
+            <div class="modal-price-breakdown">
+                <div class="modal-price-row">
+                    <span>Total Amount:</span>
+                    <span id="modal-total-amount">₹0</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="payment-modal-buttons">
+            <button class="payment-modal-btn payment-modal-btn-primary" onclick="confirmPayment()">
+                Proceed to Payment
+            </button>
+            <button class="payment-modal-btn payment-modal-btn-secondary" onclick="cancelPayment()">
+                Review Order
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Login Prompt Modal -->
+<div id="login-prompt-modal" class="login-prompt-modal">
+    <div class="login-prompt-modal-content">
+        <div class="login-prompt-modal-icon">
+            <i class="fas fa-user-lock"></i>
+        </div>
+        <h3 class="login-prompt-modal-title">Login Required</h3>
+        <p class="login-prompt-modal-message">
+            You need to be logged in to proceed with payment. Please sign in to your account to continue.
+        </p>
+        <div class="login-prompt-modal-buttons">
+            <button class="login-prompt-modal-btn login-prompt-modal-btn-primary" onclick="proceedToLogin()">
+                Login
+            </button>
+            <button class="login-prompt-modal-btn login-prompt-modal-btn-secondary" onclick="cancelLoginPrompt()">
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>
+
+ <script src="auth.js"></script>
     <script>
         // Load data when page loads
         document.addEventListener('DOMContentLoaded', () => {
@@ -1271,7 +1621,7 @@
         }
 
         /**
-         * Continues to payment
+         * Shows payment confirmation dialog
          */
         function continueToPayment() {
             const selectedAddressIndex = localStorage.getItem('selectedAddressIndex');
@@ -1280,13 +1630,154 @@
                 return;
             }
 
+            // Check if user is logged in
+            if (window.auth && window.auth.isLoggedIn()) {
+                // User is logged in, show payment confirmation dialog
+                showPaymentModal();
+            } else {
+                // User is not logged in, show login prompt
+                showLoginPrompt();
+            }
+        }
+
+        /**
+         * Shows the payment confirmation modal
+         */
+        function showPaymentModal() {
+            const modal = document.getElementById('payment-modal');
+            modal.style.display = 'flex';
+
+            // Small delay to allow display:flex before starting animation
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 10);
+
+            // Populate modal with order summary
+            populatePaymentModal();
+        }
+
+        /**
+         * Hides the payment confirmation modal
+         */
+        function hidePaymentModal() {
+            const modal = document.getElementById('payment-modal');
+            modal.classList.remove('show');
+
+            // Wait for animation to finish before hiding
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+
+        /**
+         * Populates the payment modal with order details
+         */
+        function populatePaymentModal() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const modalOrderItems = document.getElementById('modal-order-items');
+            const modalTotalAmount = document.getElementById('modal-total-amount');
+
+            // Clear existing items
+            modalOrderItems.innerHTML = '';
+
+            if (cart.length === 0) {
+                modalOrderItems.innerHTML = '<p style="text-align: center; color: #878787; padding: 10px;">No items in cart</p>';
+                return;
+            }
+
+            let grandTotal = 0;
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                grandTotal += itemTotal;
+
+                const orderItemElement = document.createElement('div');
+                orderItemElement.classList.add('order-item');
+                orderItemElement.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="order-item-details">
+                        <h4>${item.name}</h4>
+                        <div class="quantity">Qty: ${item.quantity}</div>
+                    </div>
+                    <div class="order-item-price">₹${itemTotal.toLocaleString()}</div>
+                `;
+                modalOrderItems.appendChild(orderItemElement);
+            });
+
+            // Calculate final total (same logic as in updatePriceDetails)
+            const mrpTotal = Math.round(grandTotal * 1.3);
+            const discountAmount = mrpTotal - grandTotal;
+            const deliveryCharges = grandTotal > 500 ? 0 : 40;
+            const packagingFee = 29;
+            const taxes = Math.round(grandTotal * 0.18);
+            const finalTotal = grandTotal + deliveryCharges + packagingFee + taxes;
+
+            modalTotalAmount.textContent = `₹${finalTotal.toLocaleString()}`;
+        }
+
+        /**
+         * Confirms payment and proceeds to checkout
+         */
+        function confirmPayment() {
             // Store selected address for checkout
             const savedAddresses = JSON.parse(localStorage.getItem('deliveryAddresses')) || [];
+            const selectedAddressIndex = localStorage.getItem('selectedAddressIndex');
             const selectedAddress = savedAddresses[selectedAddressIndex];
             localStorage.setItem('selectedDeliveryAddress', JSON.stringify(selectedAddress));
 
-            // Redirect to checkout
+            // Hide modal and redirect to checkout
+            hidePaymentModal();
             window.location.href = 'checkout.html';
+        }
+
+        /**
+         * Cancels payment and returns to address selection
+         */
+        function cancelPayment() {
+            hidePaymentModal();
+        }
+
+        /**
+         * Shows the login prompt modal
+         */
+        function showLoginPrompt() {
+            const modal = document.getElementById('login-prompt-modal');
+            modal.style.display = 'flex';
+
+            // Small delay to allow display:flex before starting animation
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 10);
+        }
+
+        /**
+         * Hides the login prompt modal
+         */
+        function hideLoginPrompt() {
+            const modal = document.getElementById('login-prompt-modal');
+            modal.classList.remove('show');
+
+            // Wait for animation to finish before hiding
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+
+        /**
+         * Proceeds to login page with return URL
+         */
+        function proceedToLogin() {
+            // Store current page URL to redirect back after login
+            localStorage.setItem('redirectAfterLogin', 'delivery-address.html');
+            hideLoginPrompt();
+            window.location.href = 'login.html';
+        }
+
+        /**
+         * Cancels login prompt and returns to address selection
+         */
+        function cancelLoginPrompt() {
+            hideLoginPrompt();
         }
 
         /**
@@ -1426,10 +1917,31 @@ document.getElementById('logout-modal').addEventListener('click', function(e) {
 
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
-        const modal = document.getElementById('logout-modal');
-        if (modal.style.display === 'flex') {
+        const logoutModal = document.getElementById('logout-modal');
+        const paymentModal = document.getElementById('payment-modal');
+        const loginPromptModal = document.getElementById('login-prompt-modal');
+
+        if (logoutModal && logoutModal.style.display === 'flex') {
             cancelLogout();
+        } else if (paymentModal && paymentModal.style.display === 'flex') {
+            cancelPayment();
+        } else if (loginPromptModal && loginPromptModal.style.display === 'flex') {
+            cancelLoginPrompt();
         }
+    }
+});
+
+// Add event listener for payment modal to close when clicking outside
+document.getElementById('payment-modal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        cancelPayment();
+    }
+});
+
+// Add event listener for login prompt modal to close when clicking outside
+document.getElementById('login-prompt-modal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        cancelLoginPrompt();
     }
 });
     </script>

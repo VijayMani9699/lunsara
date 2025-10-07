@@ -65,7 +65,7 @@
             color: white;
             text-decoration: none;
             padding: 8px 15px;
-            border-radius: 5px;
+            border-radius: 12px;
             transition: background-color 0.3s ease, color 0.3s ease;
             display: flex;
             align-items: center;
@@ -104,7 +104,7 @@
         /* Profile Status Bar Styles */
         .profile-status-bar {
             background: linear-gradient(135deg, #8e44ad, #9b59b6);
-            border-radius: 25px;
+            border-radius: 35px;
             padding: 8px 16px;
             box-shadow: 0 4px 15px rgba(142, 68, 173, 0.3);
             margin-left: 15px;
@@ -141,7 +141,7 @@
             gap: 15px;
             margin-left: 8px;
         }
-        .status-btn {
+       .status-btn {
             position: relative;
             width: auto;
             height: 28px;
@@ -157,21 +157,30 @@
             padding: 0 10px;
             gap: 5px;
         }
+
         .status-label {
             font-size: 12px;
             font-weight: 700;
             white-space: nowrap;
         }
+
         .status-btn:hover {
             background: rgba(255, 255, 255, 0.3);
             transform: scale(1.1);
         }
+
         .status-btn.home-btn:hover,
         .status-btn.watchlist-btn:hover,
         .status-btn.bag-btn:hover,
         .status-btn.logout-btn:hover {
             background: white;
             color: #8e44ad;
+        }
+
+        .status-btn.login-btn {
+            background: white;
+            color: #8e44ad;
+            border: 1px solid #8e44ad;
         }
         .status-cart-badge, .status-wishlist-badge {
             background-color: #e74c3c;
@@ -206,8 +215,8 @@
         /* Filters Sidebar */
         .filters-sidebar {
             background: white;
-            border: 2px solid #8e44ad; 
-            border-radius: 8px;
+            border: 2px solid #8e44ad;
+            border-radius: 15px;
             padding: 20px;
             height: fit-content;
             position: sticky;
@@ -244,26 +253,59 @@
         .price-input {
             padding: 8px;
             border: 1px solid #ddd;
-            border-radius: 4px;
+            border-radius: 10px;
             font-size: 14px;
         }
-        .clear-filters {
-            background: #f8f9fa;
-            border: 1px solid #ddd;
+        .apply-filters {
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            border: none;
             padding: 8px 16px;
-            border-radius: 4px;
+            border-radius: 10px;
             cursor: pointer;
             font-size: 14px;
-            color: #666;
+            color: white;
             width: 100%;
             margin-top: 10px;
+            transition: all 0.3s ease;
         }
-        .clear-filters:hover { background: #e9ecef; }
+        .apply-filters:hover {
+             transform: translateY(-1px);
+             box-shadow: 0 2px 8px rgba(142, 68, 173, 0.3);
+         }
+
+         .apply-filters:disabled {
+             background: #bdc3c7;
+             cursor: not-allowed;
+             transform: none;
+             box-shadow: none;
+         }
+
+         .apply-filters .loading {
+             width: 16px;
+             height: 16px;
+             border: 2px solid rgba(255, 255, 255, 0.3);
+             border-top: 2px solid white;
+             border-radius: 50%;
+             animation: spin 1s linear infinite;
+             display: inline-block;
+             margin-right: 8px;
+         }
+
+        /* Enhanced checkbox styling for "All" options */
+        .filter-option input[id^="all-"] + label {
+            font-weight: 600;
+            color: #8e44ad;
+        }
+
+        .filter-option input[id^="all-"]:checked + label {
+            color: #27ae60;
+        }
+
 
         /* Products Section */
         .products-section {
             background: white;
-            border-radius: 8px;
+            border-radius: 15px;
             padding: 20px;
         }
         .products-header {
@@ -278,7 +320,7 @@
         .sort-select {
             padding: 8px 12px;
             border: 1px solid #ddd;
-            border-radius: 4px;
+            border-radius: 10px;
             font-size: 14px;
             background: white;
             cursor: pointer;
@@ -292,7 +334,7 @@
         /* Product Card */
         .product-card {
             background: white;
-            border-radius: 8px;
+            border-radius: 15px;
             overflow: hidden;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             cursor: pointer;
@@ -324,8 +366,8 @@
             background: white;
             border: none;
             border-radius: 50%;
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -362,58 +404,26 @@
         .current-price { font-size: 16px; font-weight: 600; color: #333; }
         .original-price { font-size: 14px; color: #999; text-decoration: line-through; }
         .discount { font-size: 12px; color: #ff4d4d; font-weight: 500; }
-        
-        .wishlist-modal { position: fixed; top: 90px; right: 20px; z-index: 10002; display: none; }
-        .wishlist-modal.show { display: block !important; }
-        .wishlist-modal-content {
-            background: #e8f5e8;
-            border-radius: 12px;
-            padding: 20px;
-            min-width: 320px;
-            max-width: 420px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-            border-left: 4px solid #4caf50;
-            border: 1px solid #c8e6c9;
-            transform: translateX(120%);
-            opacity: 1;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            position: relative;
-            overflow: hidden;
-        }
-        .wishlist-modal.show .wishlist-modal-content {
-            transform: translateX(0);
-            opacity: 1;
-            animation: slideInRight 0.3s ease-out;
-        }
-        @keyframes slideInRight { from { transform: translateX(120%); } to { transform: translateX(0); } }
-        .wishlist-modal-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #e91e63, #ad1457);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            color: white;
-            flex-shrink: 0;
-        }
-        .wishlist-modal-text { flex: 1; }
-        .wishlist-modal-title { font-size: 16px; font-weight: 600; color: #333; margin-bottom: 4px; }
-        .wishlist-modal-message { color: #666; font-size: 14px; line-height: 1.4; margin: 0; }
 
         @media (max-width: 768px) {
-            .main-container { grid-template-columns: 1fr; }
-            .filters-sidebar { position: static; }
-            .products-grid { grid-template-columns: repeat(2, 1fr); }
-            .header { flex-direction: column; }
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+            .filters-sidebar {
+                position: static;
+            }
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .header {
+                flex-direction: column;
+            }
         }
-        
+
         @media (max-width: 480px) {
-            .products-grid { grid-template-columns: 1fr; }
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -426,24 +436,35 @@
             </h2>
             <nav class="navbar">
                 <div class="auth-buttons">
-                    <a href="login.html" class="auth-login" style="display: none;">
-                        <i class="fas fa-sign-in-alt"></i> Login
-                    </a>
-                    <div class="status-actions" style="background: linear-gradient(135deg, #8e44ad, #9b59b6); border-radius: 25px; padding: 8px 16px; box-shadow: 0 4px 15px rgba(142, 68, 173, 0.3); margin-left: 15px; transition: all 0.3s ease; border: 2px solid rgba(255, 255, 255, 0.2);">
-                        <a href="homepage.html" class="status-btn home-btn" title="Home">
-                            <span class="status-label">Home</span>
-                            <i class="fas fa-home"></i>
-                        </a>
-                        <a href="watchlist.html" class="status-btn watchlist-btn" title="Watchlist">
-                            <span class="status-label">Watchlist</span>
-                            <span id="status-watchlist-text" class="status-count-text">(0)</span>
-                            <i class="fas fa-heart"></i>
-                        </a>
-                        <a href="cart.html" class="status-btn bag-btn" title="Shopping Bag">
-                            <span class="status-label">Cart</span>
-                            <span id="status-cart-text" class="status-count-text">(0)</span>
-                            <i class="fas fa-shopping-bag"></i>
-                        </a>
+                    <div class="profile-status-bar" id="profile-status-bar">
+                        <div class="status-content">
+                            <div class="user-avatar">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="user-details">
+                                <div class="user-name-display" id="user-name-display">Welcome, Guest!</div>
+                            </div>
+                            <div class="status-actions">
+                                <a href="homepage.html" class="status-btn home-btn" title="Home">
+                                    <span class="status-label">Home</span>
+                                    <i class="fas fa-home"></i>
+                                </a>
+                                <a href="watchlist.html" class="status-btn watchlist-btn" title="Watchlist">
+                                    <span class="status-label">Watchlist</span>
+                                    <span id="status-watchlist-text" class="status-count-text">(0)</span>
+                                    <i class="fas fa-heart"></i>
+                                </a>
+                                <a href="cart.html" class="status-btn bag-btn" title="Shopping Bag">
+                                    <span class="status-label">Cart</span>
+                                    <span id="status-cart-text" class="status-count-text">(0)</span>
+                                    <i class="fas fa-shopping-bag"></i>
+                                </a>
+                                <a href="#" class="status-btn logout-btn" onclick="handleLogout(event)" title="Logout" style="display: none;">
+                                    <span class="status-label">Logout</span>
+                                    <i class="fas fa-sign-out-alt"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -455,6 +476,7 @@
             <div class="filter-section">
                 <h3 class="filter-title">Categories</h3>
                 <div class="filter-options">
+                    <div class="filter-option"><input type="checkbox" id="all-categories" checked><label for="all-categories">All Categories</label></div>
                     <div class="filter-option"><input type="checkbox" id="kanchipuram"><label for="kanchipuram">Kanchipuram Silk</label></div>
                     <div class="filter-option"><input type="checkbox" id="banarasi"><label for="banarasi">Banarasi Silk</label></div>
                     <div class="filter-option"><input type="checkbox" id="designer"><label for="designer">Designer Silk</label></div>
@@ -464,6 +486,7 @@
             <div class="filter-section">
                 <h3 class="filter-title">Material</h3>
                 <div class="filter-options">
+                    <div class="filter-option"><input type="checkbox" id="all-materials" checked><label for="all-materials">All Materials</label></div>
                     <div class="filter-option"><input type="checkbox" id="pure-silk"><label for="pure-silk">Pure Mulberry Silk</label></div>
                     <div class="filter-option"><input type="checkbox" id="art-silk"><label for="art-silk">Art Silk</label></div>
                     <div class="filter-option"><input type="checkbox" id="silk-blend"><label for="silk-blend">Silk Blend</label></div>
@@ -472,6 +495,7 @@
              <div class="filter-section">
                 <h3 class="filter-title">Color</h3>
                 <div class="filter-options">
+                    <div class="filter-option"><input type="checkbox" id="all-colors" checked><label for="all-colors">All Colors</label></div>
                     <div class="filter-option"><input type="checkbox" id="red"><label for="red">Red</label></div>
                     <div class="filter-option"><input type="checkbox" id="gold"><label for="gold">Gold</label></div>
                     <div class="filter-option"><input type="checkbox" id="blue"><label for="blue">Blue</label></div>
@@ -486,14 +510,17 @@
                     <input type="number" class="price-input" placeholder="Max" id="maxPrice">
                 </div>
             </div>
-            <button class="clear-filters" onclick="clearAllFilters()">Clear All Filters</button>
+            <button class="apply-filters" onclick="applyAllFilters()">
+                <span class="btn-text">Apply All Filters</span>
+                <div class="loading" style="display: none;"></div>
+            </button>
         </aside>
 
         <main class="products-section">
             <div class="products-grid" id="productsGrid">
                 <div class="product-card" onclick="viewProduct('kanchipuram-crimson-red')">
                     <div class="product-image">
-                        <img src="images/silk_saree.jpg" alt="Crimson Red Kanchipuram Saree">
+                        <img src="images/silk_saress/s1.jpeg" alt="Crimson Red Kanchipuram Saree">
                         <button class="wishlist-btn" onclick="toggleWishlist(event, 'kanchipuram-crimson-red')">
                             <i class="far fa-heart"></i>
                         </button>
@@ -511,7 +538,7 @@
                 </div>
                 <div class="product-card" onclick="viewProduct('royal-blue-banarasi')">
                     <div class="product-image">
-                        <img src="images/silk_saree_collection.jpg" alt="Royal Blue Banarasi Saree">
+                        <img src="images/silk_saress/s2.jpeg" alt="Royal Blue Banarasi Saree">
                         <button class="wishlist-btn" onclick="toggleWishlist(event, 'royal-blue-banarasi')">
                             <i class="far fa-heart"></i>
                         </button>
@@ -529,7 +556,7 @@
                 </div>
                 <div class="product-card" onclick="viewProduct('emerald-green-designer')">
                     <div class="product-image">
-                        <img src="images/silk_saree.jpg" alt="Emerald Green Designer Saree">
+                        <img src="images/silk_saress/s3.jpeg" alt="Emerald Green Designer Saree">
                         <button class="wishlist-btn" onclick="toggleWishlist(event, 'emerald-green-designer')">
                             <i class="far fa-heart"></i>
                         </button>
@@ -547,7 +574,7 @@
                 </div>
                 <div class="product-card" onclick="viewProduct('majestic-gold-bridal')">
                     <div class="product-image">
-                        <img src="images/silk_saree_collection.jpg" alt="Majestic Gold Bridal Saree">
+                        <img src="images/silk_saress/s4.jpeg" alt="Majestic Gold Bridal Saree">
                         <button class="wishlist-btn" onclick="toggleWishlist(event, 'majestic-gold-bridal')">
                             <i class="far fa-heart"></i>
                         </button>
@@ -565,7 +592,7 @@
                 </div>
                 <div class="product-card" onclick="viewProduct('pastel-pink-art-silk')">
                     <div class="product-image">
-                        <img src="images/silk_saree.jpg" alt="Pastel Pink Art Silk Saree">
+                        <img src="images/silk_saress/s5.jpeg" alt="Pastel Pink Art Silk Saree">
                         <button class="wishlist-btn" onclick="toggleWishlist(event, 'pastel-pink-art-silk')">
                             <i class="far fa-heart"></i>
                         </button>
@@ -583,7 +610,7 @@
                 </div>
                 <div class="product-card" onclick="viewProduct('peacock-blue-kanchipuram')">
                     <div class="product-image">
-                        <img src="images/silk_saree_collection.jpg" alt="Peacock Blue Kanchipuram Saree">
+                        <img src="images/silk_saress/s6.jpeg" alt="Peacock Blue Kanchipuram Saree">
                         <button class="wishlist-btn" onclick="toggleWishlist(event, 'peacock-blue-kanchipuram')">
                             <i class="far fa-heart"></i>
                         </button>
@@ -601,7 +628,7 @@
                 </div>
                 <div class="product-card" onclick="viewProduct('black-gold-banarasi')">
                     <div class="product-image">
-                        <img src="images/silk_saree.jpg" alt="Black & Gold Banarasi Saree">
+                        <img src="images/silk_saress/s7.jpeg" alt="Black & Gold Banarasi Saree">
                         <button class="wishlist-btn" onclick="toggleWishlist(event, 'black-gold-banarasi')">
                             <i class="far fa-heart"></i>
                         </button>
@@ -619,7 +646,7 @@
                 </div>
                 <div class="product-card" onclick="viewProduct('mustard-yellow-blend')">
                     <div class="product-image">
-                        <img src="images/silk_saree_collection.jpg" alt="Mustard Yellow Silk Blend Saree">
+                        <img src="images/silk_saress/s8.jpeg" alt="Mustard Yellow Silk Blend Saree">
                         <button class="wishlist-btn" onclick="toggleWishlist(event, 'mustard-yellow-blend')">
                             <i class="far fa-heart"></i>
                         </button>
@@ -635,33 +662,249 @@
                         </div>
                     </div>
                 </div>
+                <div class="product-card" onclick="viewProduct('magenta-kanchipuram')">
+                    <div class="product-image">
+                        <img src="images/silk_saress/s9.jpeg" alt="Magenta Kanchipuram Saree">
+                        <button class="wishlist-btn" onclick="toggleWishlist(event, 'magenta-kanchipuram')">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Lunsara Silk</div>
+                        <div class="product-name">Magenta Kanchipuram Silk Saree</div>
+                        <div class="product-details">Pure Silk • Traditional Weave</div>
+                        <div class="price-section">
+                            <span class="current-price">₹15,500</span>
+                            <span class="original-price">₹19,000</span>
+                            <span class="discount">18% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" onclick="viewProduct('cream-banarasi-saree')">
+                    <div class="product-image">
+                        <img src="images/silk_saress/s10.jpeg" alt="Cream Banarasi Saree">
+                        <button class="wishlist-btn" onclick="toggleWishlist(event, 'cream-banarasi-saree')">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Lunsara Silk</div>
+                        <div class="product-name">Cream Banarasi Silk Saree</div>
+                        <div class="product-details">Art Silk • Classic Design</div>
+                        <div class="price-section">
+                            <span class="current-price">₹9,200</span>
+                            <span class="original-price">₹11,500</span>
+                            <span class="discount">20% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" onclick="viewProduct('wine-red-designer')">
+                    <div class="product-image">
+                        <img src="images/silk_saress/s11.jpeg" alt="Wine Red Designer Saree">
+                        <button class="wishlist-btn" onclick="toggleWishlist(event, 'wine-red-designer')">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Lunsara Silk</div>
+                        <div class="product-name">Wine Red Designer Saree</div>
+                        <div class="product-details">Silk Blend • Contemporary Style</div>
+                        <div class="price-section">
+                            <span class="current-price">₹10,800</span>
+                            <span class="original-price">₹13,500</span>
+                            <span class="discount">20% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" onclick="viewProduct('bottle-green-bridal')">
+                    <div class="product-image">
+                        <img src="images/silk_saress/s12.jpeg" alt="Bottle Green Bridal Saree">
+                        <button class="wishlist-btn" onclick="toggleWishlist(event, 'bottle-green-bridal')">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Lunsara Silk</div>
+                        <div class="product-name">Bottle Green Bridal Saree</div>
+                        <div class="product-details">Pure Kanchipuram Silk • Heavy Work</div>
+                        <div class="price-section">
+                            <span class="current-price">₹28,000</span>
+                            <span class="original-price">₹35,000</span>
+                            <span class="discount">20% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" onclick="viewProduct('soft-pink-saree')">
+                    <div class="product-image">
+                        <img src="images/silk_saress/s13.jpeg" alt="Soft Pink Saree">
+                        <button class="wishlist-btn" onclick="toggleWishlist(event, 'soft-pink-saree')">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Lunsara Silk</div>
+                        <div class="product-name">Soft Pink Art Silk Saree</div>
+                        <div class="product-details">Art Silk • Light & Airy</div>
+                        <div class="price-section">
+                            <span class="current-price">₹5,200</span>
+                            <span class="original-price">₹7,000</span>
+                            <span class="discount">26% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" onclick="viewProduct('royal-purple-saree')">
+                    <div class="product-image">
+                        <img src="images/silk_saress/s14.jpeg" alt="Royal Purple Saree">
+                        <button class="wishlist-btn" onclick="toggleWishlist(event, 'royal-purple-saree')">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Lunsara Silk</div>
+                        <div class="product-name">Royal Purple Kanchipuram Saree</div>
+                        <div class="product-details">Pure Silk • Royal Collection</div>
+                        <div class="price-section">
+                            <span class="current-price">₹16,500</span>
+                            <span class="original-price">₹21,000</span>
+                            <span class="discount">21% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" onclick="viewProduct('light-blue-saree')">
+                    <div class="product-image">
+                        <img src="images/silk_saress/s15.jpeg" alt="Light Blue Saree">
+                        <button class="wishlist-btn" onclick="toggleWishlist(event, 'light-blue-saree')">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Lunsara Silk</div>
+                        <div class="product-name">Light Blue Banarasi Saree</div>
+                        <div class="product-details">Art Silk • Subtle Elegance</div>
+                        <div class="price-section">
+                            <span class="current-price">₹7,800</span>
+                            <span class="original-price">₹10,000</span>
+                            <span class="discount">22% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" onclick="viewProduct('deep-maroon-saree')">
+                    <div class="product-image">
+                        <img src="images/silk_saress/s16.jpeg" alt="Deep Maroon Saree">
+                        <button class="wishlist-btn" onclick="toggleWishlist(event, 'deep-maroon-saree')">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Lunsara Silk</div>
+                        <div class="product-name">Deep Maroon Designer Saree</div>
+                        <div class="product-details">Silk Blend • Rich Color</div>
+                        <div class="price-section">
+                            <span class="current-price">₹11,200</span>
+                            <span class="original-price">₹14,000</span>
+                            <span class="discount">20% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" onclick="viewProduct('antique-gold-saree')">
+                    <div class="product-image">
+                        <img src="images/silk_saress/s17.jpeg" alt="Antique Gold Saree">
+                        <button class="wishlist-btn" onclick="toggleWishlist(event, 'antique-gold-saree')">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Lunsara Silk</div>
+                        <div class="product-name">Antique Gold Bridal Saree</div>
+                        <div class="product-details">Pure Kanchipuram Silk • Antique Finish</div>
+                        <div class="price-section">
+                            <span class="current-price">₹32,000</span>
+                            <span class="original-price">₹40,000</span>
+                            <span class="discount">20% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" onclick="viewProduct('turquoise-silk-saree')">
+                    <div class="product-image">
+                        <img src="images/silk_saress/s18.jpeg" alt="Turquoise Silk Saree">
+                        <button class="wishlist-btn" onclick="toggleWishlist(event, 'turquoise-silk-saree')">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Lunsara Silk</div>
+                        <div class="product-name">Turquoise Art Silk Saree</div>
+                        <div class="product-details">Art Silk • Modern Appeal</div>
+                        <div class="price-section">
+                            <span class="current-price">₹6,800</span>
+                            <span class="original-price">₹8,500</span>
+                            <span class="discount">20% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" onclick="viewProduct('coral-orange-saree')">
+                    <div class="product-image">
+                        <img src="images/silk_saress/s19.jpeg" alt="Coral Orange Saree">
+                        <button class="wishlist-btn" onclick="toggleWishlist(event, 'coral-orange-saree')">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Lunsara Silk</div>
+                        <div class="product-name">Coral Orange Kanchipuram Saree</div>
+                        <div class="product-details">Pure Silk • Vibrant Weave</div>
+                        <div class="price-section">
+                            <span class="current-price">₹18,500</span>
+                            <span class="original-price">₹23,000</span>
+                            <span class="discount">20% OFF</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" onclick="viewProduct('midnight-blue-saree')">
+                    <div class="product-image">
+                        <img src="images/silk_saress/s20.jpeg" alt="Midnight Blue Saree">
+                        <button class="wishlist-btn" onclick="toggleWishlist(event, 'midnight-blue-saree')">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-brand">Lunsara Silk</div>
+                        <div class="product-name">Midnight Blue Banarasi Saree</div>
+                        <div class="product-details">Art Silk • Evening Collection</div>
+                        <div class="price-section">
+                            <span class="current-price">₹8,900</span>
+                            <span class="original-price">₹11,200</span>
+                            <span class="discount">21% OFF</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
-    </div>
-
-    <div id="wishlist-modal" class="wishlist-modal">
-        <div class="wishlist-modal-content">
-            <div class="wishlist-modal-icon">
-                <i class="fas fa-heart" id="wishlist-modal-icon"></i>
-            </div>
-            <div class="wishlist-modal-text">
-                <h3 class="wishlist-modal-title" id="wishlist-modal-title"></h3>
-                <p class="wishlist-modal-message" id="wishlist-modal-message"></p>
-            </div>
-        </div>
     </div>
     
     <script>
         // --- JAVASCRIPT LOGIC ---
         const productDatabase = {
-            'kanchipuram-crimson-red': { id: 'kanchipuram-crimson-red', name: 'Crimson Red Kanchipuram Saree', description: 'Pure Silk • Gold Zari Work', price: '₹12,500', originalPrice: '₹15,000', image: 'images/silk_saree.jpg' },
-            'royal-blue-banarasi': { id: 'royal-blue-banarasi', name: 'Royal Blue Banarasi Saree', description: 'Art Silk • Silver Weaving', price: '₹8,200', originalPrice: '₹10,000', image: 'images/silk_saree_collection.jpg' },
-            'emerald-green-designer': { id: 'emerald-green-designer', name: 'Emerald Green Designer Saree', description: 'Silk Blend • Modern Motifs', price: '₹9,800', originalPrice: '₹12,000', image: 'images/silk_saree.jpg' },
-            'majestic-gold-bridal': { id: 'majestic-gold-bridal', name: 'Majestic Gold Bridal Saree', description: 'Pure Kanchipuram Silk • Heavy Zari', price: '₹25,000', originalPrice: '₹30,000', image: 'images/silk_saree_collection.jpg' },
-            'pastel-pink-art-silk': { id: 'pastel-pink-art-silk', name: 'Pastel Pink Art Silk Saree', description: 'Art Silk • Lightweight • Floral Print', price: '₹4,500', originalPrice: '₹6,000', image: 'images/silk_saree.jpg' },
-            'peacock-blue-kanchipuram': { id: 'peacock-blue-kanchipuram', name: 'Peacock Blue Kanchipuram Saree', description: 'Pure Silk • Temple Border', price: '₹14,200', originalPrice: '₹18,000', image: 'images/silk_saree_collection.jpg' },
-            'black-gold-banarasi': { id: 'black-gold-banarasi', name: 'Black & Gold Banarasi Saree', description: 'Art Silk • Party Wear', price: '₹7,500', originalPrice: '₹9,500', image: 'images/silk_saree.jpg' },
-            'mustard-yellow-blend': { id: 'mustard-yellow-blend', name: 'Mustard Yellow Silk Blend Saree', description: 'Silk Blend • Daily Wear', price: '₹3,800', originalPrice: '₹5,000', image: 'images/silk_saree_collection.jpg' }
+            'kanchipuram-crimson-red': { id: 'kanchipuram-crimson-red', name: 'Crimson Red Kanchipuram Saree', description: 'Pure Silk • Gold Zari Work', price: '₹12,500', originalPrice: '₹15,000', image: 'images/silk_saress/s1.jpeg' },
+            'royal-blue-banarasi': { id: 'royal-blue-banarasi', name: 'Royal Blue Banarasi Saree', description: 'Art Silk • Silver Weaving', price: '₹8,200', originalPrice: '₹10,000', image: 'images/silk_saress/s2.jpeg' },
+            'emerald-green-designer': { id: 'emerald-green-designer', name: 'Emerald Green Designer Saree', description: 'Silk Blend • Modern Motifs', price: '₹9,800', originalPrice: '₹12,000', image: 'images/silk_saress/s3.jpeg' },
+            'majestic-gold-bridal': { id: 'majestic-gold-bridal', name: 'Majestic Gold Bridal Saree', description: 'Pure Kanchipuram Silk • Heavy Zari', price: '₹25,000', originalPrice: '₹30,000', image: 'images/silk_saress/s4.jpeg' },
+            'pastel-pink-art-silk': { id: 'pastel-pink-art-silk', name: 'Pastel Pink Art Silk Saree', description: 'Art Silk • Lightweight • Floral Print', price: '₹4,500', originalPrice: '₹6,000', image: 'images/silk_saress/s5.jpeg' },
+            'peacock-blue-kanchipuram': { id: 'peacock-blue-kanchipuram', name: 'Peacock Blue Kanchipuram Saree', description: 'Pure Silk • Temple Border', price: '₹14,200', originalPrice: '₹18,000', image: 'images/silk_saress/s6.jpeg' },
+            'black-gold-banarasi': { id: 'black-gold-banarasi', name: 'Black & Gold Banarasi Saree', description: 'Art Silk • Party Wear', price: '₹7,500', originalPrice: '₹9,500', image: 'images/silk_saress/s7.jpeg' },
+            'mustard-yellow-blend': { id: 'mustard-yellow-blend', name: 'Mustard Yellow Silk Blend Saree', description: 'Silk Blend • Daily Wear', price: '₹3,800', originalPrice: '₹5,000', image: 'images/silk_saress/s8.jpeg' },
+            'magenta-kanchipuram': { id: 'magenta-kanchipuram', name: 'Magenta Kanchipuram Silk Saree', description: 'Pure Silk • Traditional Weave', price: '₹15,500', originalPrice: '₹19,000', image: 'images/silk_saress/s9.jpeg' },
+            'cream-banarasi-saree': { id: 'cream-banarasi-saree', name: 'Cream Banarasi Silk Saree', description: 'Art Silk • Classic Design', price: '₹9,200', originalPrice: '₹11,500', image: 'images/silk_saress/s10.jpeg' },
+            'wine-red-designer': { id: 'wine-red-designer', name: 'Wine Red Designer Saree', description: 'Silk Blend • Contemporary Style', price: '₹10,800', originalPrice: '₹13,500', image: 'images/silk_saress/s11.jpeg' },
+            'bottle-green-bridal': { id: 'bottle-green-bridal', name: 'Bottle Green Bridal Saree', description: 'Pure Kanchipuram Silk • Heavy Work', price: '₹28,000', originalPrice: '₹35,000', image: 'images/silk_saress/s12.jpeg' },
+            'soft-pink-saree': { id: 'soft-pink-saree', name: 'Soft Pink Art Silk Saree', description: 'Art Silk • Light & Airy', price: '₹5,200', originalPrice: '₹7,000', image: 'images/silk_saress/s13.jpeg' },
+            'royal-purple-saree': { id: 'royal-purple-saree', name: 'Royal Purple Kanchipuram Saree', description: 'Pure Silk • Royal Collection', price: '₹16,500', originalPrice: '₹21,000', image: 'images/silk_saress/s14.jpeg' },
+            'light-blue-saree': { id: 'light-blue-saree', name: 'Light Blue Banarasi Saree', description: 'Art Silk • Subtle Elegance', price: '₹7,800', originalPrice: '₹10,000', image: 'images/silk_saress/s15.jpeg' },
+            'deep-maroon-saree': { id: 'deep-maroon-saree', name: 'Deep Maroon Designer Saree', description: 'Silk Blend • Rich Color', price: '₹11,200', originalPrice: '₹14,000', image: 'images/silk_saress/s16.jpeg' },
+            'antique-gold-saree': { id: 'antique-gold-saree', name: 'Antique Gold Bridal Saree', description: 'Pure Kanchipuram Silk • Antique Finish', price: '₹32,000', originalPrice: '₹40,000', image: 'images/silk_saress/s17.jpeg' },
+            'turquoise-silk-saree': { id: 'turquoise-silk-saree', name: 'Turquoise Art Silk Saree', description: 'Art Silk • Modern Appeal', price: '₹6,800', originalPrice: '₹8,500', image: 'images/silk_saress/s18.jpeg' },
+            'coral-orange-saree': { id: 'coral-orange-saree', name: 'Coral Orange Kanchipuram Saree', description: 'Pure Silk • Vibrant Weave', price: '₹18,500', originalPrice: '₹23,000', image: 'images/silk_saress/s19.jpeg' },
+            'midnight-blue-saree': { id: 'midnight-blue-saree', name: 'Midnight Blue Banarasi Saree', description: 'Art Silk • Evening Collection', price: '₹8,900', originalPrice: '₹11,200', image: 'images/silk_saress/s20.jpeg' }
         };
 
         function toggleWishlist(event, productId) {
@@ -671,19 +914,22 @@
             button.classList.add('clicked');
             setTimeout(() => button.classList.remove('clicked'), 300);
 
+            const product = productDatabase[productId];
+            if (!product) return;
+
             if (isInWishlist(productId)) {
                 if (removeFromWishlist(productId)) {
                     icon.classList.remove('fas');
                     icon.classList.add('far');
                     button.classList.remove('favorited');
-                    showWishlistNotification('remove', productId);
+                    showNotification('Removed from Wishlist', `"${product.name}" has been removed.`, 'fas fa-trash-alt', 'info');
                 }
             } else {
                 if (addToWishlist(productId)) {
                     icon.classList.remove('far');
                     icon.classList.add('fas');
                     button.classList.add('favorited');
-                    showWishlistNotification('add', productId);
+                    showNotification('Added to Wishlist', `"${product.name}" is now in your watchlist!`, 'fas fa-heart', 'success');
                 }
             }
         }
@@ -752,20 +998,65 @@
             }
         }
 
-        function showWishlistNotification(action, productId) {
-            const modal = document.getElementById('wishlist-modal');
-            const title = document.getElementById('wishlist-modal-title');
-            const message = document.getElementById('wishlist-modal-message');
-            const productName = productDatabase[productId]?.name || 'Item';
-            if (action === 'add') {
-                title.textContent = 'Added to Wishlist';
-                message.textContent = `"${productName}" is now in your watchlist!`;
-            } else {
-                title.textContent = 'Removed from Wishlist';
-                message.textContent = `"${productName}" has been removed.`;
+        function showNotification(title, message, iconClass, type = 'success') {
+            const existingNotification = document.getElementById('dynamic-notification');
+            if (existingNotification) {
+                existingNotification.remove();
             }
-            modal.classList.add('show');
-            setTimeout(() => modal.classList.remove('show'), 3000);
+
+            const styles = {
+                success: {
+                    background: 'linear-gradient(135deg, #27ae60, #2ecc71)',
+                    boxShadow: '0 8px 25px rgba(39, 174, 96, 0.3)',
+                    borderColor: '#219a52',
+                    iconColor: '#2ecc71'
+                },
+                info: {
+                    background: 'linear-gradient(135deg, #e74c3c, #c0392b)',
+                    boxShadow: '0 8px 25px rgba(231, 76, 60, 0.3)',
+                    borderColor: '#b33525',
+                    iconColor: '#e74c3c'
+                }
+            };
+            const currentStyle = styles[type] || styles.success;
+
+            const notification = document.createElement('div');
+            notification.id = 'dynamic-notification';
+            notification.style.cssText = `
+                position: fixed; top: 100px; right: 20px; z-index: 10000;
+                background: ${currentStyle.background}; color: white;
+                padding: 1rem 1.2rem; border-radius: 20px;
+                box-shadow: ${currentStyle.boxShadow};
+                transform: translateX(120%); opacity: 0;
+                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                min-width: 300px; max-width: 350px;
+                border-left: 4px solid ${currentStyle.borderColor};
+            `;
+
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="font-size: 22px; color: ${currentStyle.iconColor}; background: white; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                        <i class="${iconClass}"></i>
+                    </div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; font-size: 16px; margin-bottom: 4px;">${title}</div>
+                        <div style="font-size: 14px; opacity: 0.9;">${message}</div>
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+                notification.style.opacity = '1';
+            }, 50);
+
+            setTimeout(() => {
+                notification.style.transform = 'translateX(120%)';
+                notification.style.opacity = '0';
+                setTimeout(() => notification.remove(), 400);
+            }, 3000);
         }
 
         function viewProduct(productId) {
@@ -778,7 +1069,13 @@
         
         function handleLogout(event) {
             event.preventDefault();
-            alert("Logout clicked!");
+            // Assuming a function showLogoutModal() exists elsewhere
+            // showLogoutModal();
+        }
+
+        function handleLoginClick(event) {
+            event.preventDefault();
+            window.location.href = 'login.html';
         }
 
         function handleBagClick(event) {
@@ -786,20 +1083,283 @@
              window.location.href = 'cart.html';
         }
 
+        // --- NEW --- Apply all filters function
+        function applyAllFilters() {
+            const productsGrid = document.getElementById('productsGrid');
+            const allProducts = Array.from(productsGrid.children);
+            let filteredProducts = [...allProducts];
+            let activeFilters = [];
+
+            // Check if "All" options are selected
+            const allCategoriesChecked = document.getElementById('all-categories')?.checked;
+            const allMaterialsChecked = document.getElementById('all-materials')?.checked;
+            const allColorsChecked = document.getElementById('all-colors')?.checked;
+
+                // Handle Categories filtering
+                if (allCategoriesChecked) {
+                    // If "All Categories" is checked, show all products (no category filtering)
+                    // Reset filteredProducts to all products
+                    filteredProducts = [...allProducts];
+                } else {
+                    // Get selected categories
+                    const categories = ['kanchipuram', 'banarasi', 'designer', 'bridal'];
+                    const selectedCategories = categories.filter(id => {
+                        const checkbox = document.getElementById(id);
+                        return checkbox && checkbox.checked;
+                    });
+
+                    if (selectedCategories.length > 0) {
+                        filteredProducts = filteredProducts.filter(product => {
+                            return selectedCategories.some(category => {
+                                // Check if product matches any of the selected categories
+                                const productText = product.textContent.toLowerCase();
+                                switch(category) {
+                                    case 'kanchipuram':
+                                        return productText.includes('kanchipuram') || productText.includes('pure') || productText.includes('temple') || productText.includes('crimson') || productText.includes('peacock');
+                                    case 'banarasi':
+                                        return productText.includes('banarasi') || productText.includes('art silk') || productText.includes('weaving') || productText.includes('royal') || productText.includes('black');
+                                    case 'designer':
+                                        return productText.includes('designer') || productText.includes('modern') || productText.includes('motifs') || productText.includes('emerald');
+                                    case 'bridal':
+                                        return productText.includes('bridal') || productText.includes('heavy') || productText.includes('majestic') || productText.includes('gold');
+                                    default:
+                                        return productText.includes(category.toLowerCase());
+                                }
+                            });
+                        });
+                        activeFilters.push(`${selectedCategories.length} categories`);
+                    } else {
+                        // If no specific categories selected and "All Categories" is not checked, show no products
+                        filteredProducts = [];
+                    }
+                }
+
+            // Get selected materials (only if "All Materials" is not checked)
+            if (!allMaterialsChecked) {
+                const materials = ['pure-silk', 'art-silk', 'silk-blend'];
+                const selectedMaterials = materials.filter(id => {
+                    const checkbox = document.getElementById(id);
+                    return checkbox && checkbox.checked;
+                });
+
+                if (selectedMaterials.length > 0) {
+                    filteredProducts = filteredProducts.filter(product => {
+                        return selectedMaterials.some(material => {
+                            const productText = product.textContent.toLowerCase();
+                            switch(material) {
+                                case 'pure-silk':
+                                    return productText.includes('pure') || productText.includes('mulberry') || productText.includes('kanchipuram');
+                                case 'art-silk':
+                                    return productText.includes('art silk') || productText.includes('art');
+                                case 'silk-blend':
+                                    return productText.includes('silk blend') || productText.includes('blend');
+                                default:
+                                    return productText.includes(material.toLowerCase());
+                            }
+                        });
+                    });
+                    activeFilters.push(`${selectedMaterials.length} materials`);
+                }
+            }
+
+            // Get selected colors (only if "All Colors" is not checked)
+            if (!allColorsChecked) {
+                const colors = ['red', 'gold', 'blue', 'green', 'pink'];
+                const selectedColors = colors.filter(id => {
+                    const checkbox = document.getElementById(id);
+                    return checkbox && checkbox.checked;
+                });
+
+                if (selectedColors.length > 0) {
+                    filteredProducts = filteredProducts.filter(product => {
+                        return selectedColors.some(color => {
+                            const productText = product.textContent.toLowerCase();
+                            return productText.includes(color.toLowerCase());
+                        });
+                    });
+                    activeFilters.push(`${selectedColors.length} colors`);
+                }
+            }
+
+            // Apply price range filter
+            const minPrice = document.getElementById('minPrice')?.value;
+            const maxPrice = document.getElementById('maxPrice')?.value;
+
+            if (minPrice || maxPrice) {
+                filteredProducts = filteredProducts.filter(product => {
+                    const priceText = product.querySelector('.current-price')?.textContent;
+                    if (!priceText) return true;
+
+                    const price = parseInt(priceText.replace(/[^0-9]/g, ''));
+                    if (minPrice && price < parseInt(minPrice)) return false;
+                    if (maxPrice && price > parseInt(maxPrice)) return false;
+                    return true;
+                });
+                activeFilters.push('price range');
+            }
+
+            // Show filtered products
+            productsGrid.innerHTML = '';
+            if (filteredProducts.length === 0) {
+                productsGrid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+                        <h3 style="color: #666; margin-bottom: 10px;">No products match your filters</h3>
+                        <p style="color: #999;">Try adjusting your filter criteria</p>
+                    </div>
+                `;
+            } else {
+                filteredProducts.forEach(product => productsGrid.appendChild(product));
+            }
+
+            // Optional: Show notification (currently disabled per user request)
+            // const filterText = activeFilters.length > 0 ? `Applied ${activeFilters.join(', ')}` : 'No filters applied';
+            // showNotification('Filters Applied', `Showing ${filteredProducts.length} products. ${filterText}`, 'fas fa-filter', 'success');
+        }
+
+        function updateUserInterface() {
+            const profileStatusBar = document.getElementById('profile-status-bar');
+            const userNameDisplay = document.getElementById('user-name-display');
+            const loginBtn = document.querySelector('.status-btn.login-btn');
+            const logoutBtn = document.querySelector('.status-btn.logout-btn');
+
+            if (auth.isLoggedIn()) {
+                const currentUser = auth.getCurrentUser();
+                if (profileStatusBar) profileStatusBar.style.display = 'block';
+                if (userNameDisplay) userNameDisplay.textContent = `Welcome, ${currentUser.name}!`;
+                if (loginBtn) loginBtn.style.display = 'none';
+                if (logoutBtn) logoutBtn.style.display = 'block';
+            } else {
+                if (profileStatusBar) profileStatusBar.style.display = 'block';
+                if (userNameDisplay) userNameDisplay.textContent = 'Welcome, Guest!';
+                if (loginBtn) loginBtn.style.display = 'block';
+                if (logoutBtn) logoutBtn.style.display = 'none';
+            }
+        }
+
+        window.addEventListener('authStateChanged', function(e) {
+            updateUserInterface();
+        });
+
+        // --- NEW --- Checkbox management functions
+        function setupCheckboxBehavior() {
+            // Categories behavior
+            const allCategoriesCheckbox = document.getElementById('all-categories');
+            const categoryCheckboxes = ['kanchipuram', 'banarasi', 'designer', 'bridal'];
+
+            if (allCategoriesCheckbox) {
+                allCategoriesCheckbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        // Uncheck all other category checkboxes
+                        categoryCheckboxes.forEach(id => {
+                            const checkbox = document.getElementById(id);
+                            if (checkbox) checkbox.checked = false;
+                        });
+                        // Also check "All Materials" and "All Colors" for true "show all" behavior
+                        const allMaterialsCheckbox = document.getElementById('all-materials');
+                        const allColorsCheckbox = document.getElementById('all-colors');
+                        if (allMaterialsCheckbox) allMaterialsCheckbox.checked = true;
+                        if (allColorsCheckbox) allColorsCheckbox.checked = true;
+
+                        // Uncheck all specific material and color checkboxes
+                        const materialCheckboxes = ['pure-silk', 'art-silk', 'silk-blend'];
+                        const colorCheckboxes = ['red', 'gold', 'blue', 'green', 'pink'];
+
+                        materialCheckboxes.forEach(id => {
+                            const checkbox = document.getElementById(id);
+                            if (checkbox) checkbox.checked = false;
+                        });
+
+                        colorCheckboxes.forEach(id => {
+                            const checkbox = document.getElementById(id);
+                            if (checkbox) checkbox.checked = false;
+                        });
+
+                        // Don't apply filters immediately - wait for user to click Apply button
+                    } else {
+                        // If "All Categories" is unchecked, don't auto-check other categories
+                        // Let user manually select what they want
+                    }
+                });
+            }
+
+            categoryCheckboxes.forEach(id => {
+                const checkbox = document.getElementById(id);
+                if (checkbox) {
+                    checkbox.addEventListener('change', function() {
+                        if (this.checked && allCategoriesCheckbox) {
+                            allCategoriesCheckbox.checked = false;
+                            // Don't apply filters immediately - wait for user to click Apply button
+                        }
+                    });
+                }
+            });
+
+            // Materials behavior
+            const allMaterialsCheckbox = document.getElementById('all-materials');
+            const materialCheckboxes = ['pure-silk', 'art-silk', 'silk-blend'];
+
+            if (allMaterialsCheckbox) {
+                allMaterialsCheckbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        materialCheckboxes.forEach(id => {
+                            const checkbox = document.getElementById(id);
+                            if (checkbox) checkbox.checked = false;
+                        });
+                    }
+                });
+            }
+
+            materialCheckboxes.forEach(id => {
+                const checkbox = document.getElementById(id);
+                if (checkbox) {
+                    checkbox.addEventListener('change', function() {
+                        if (this.checked && allMaterialsCheckbox) {
+                            allMaterialsCheckbox.checked = false;
+                        }
+                    });
+                }
+            });
+
+            // Colors behavior
+            const allColorsCheckbox = document.getElementById('all-colors');
+            const colorCheckboxes = ['red', 'gold', 'blue', 'green', 'pink'];
+
+            if (allColorsCheckbox) {
+                allColorsCheckbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        colorCheckboxes.forEach(id => {
+                            const checkbox = document.getElementById(id);
+                            if (checkbox) checkbox.checked = false;
+                        });
+                    }
+                });
+            }
+
+            colorCheckboxes.forEach(id => {
+                const checkbox = document.getElementById(id);
+                if (checkbox) {
+                    checkbox.addEventListener('change', function() {
+                        if (this.checked && allColorsCheckbox) {
+                            allColorsCheckbox.checked = false;
+                        }
+                    });
+                }
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             updateWatchlistCount();
             initializeWishlistButtons();
-            
-            const profileStatusBar = document.getElementById('profile-status-bar');
-            const authLogin = document.querySelector('.auth-login');
-            if (auth.isLoggedIn()) {
-                profileStatusBar.style.display = 'block';
-                authLogin.style.display = 'none';
-                document.getElementById('user-name-display').textContent = `Welcome, ${auth.getCurrentUser().name}!`;
-            } else {
-                profileStatusBar.style.display = 'none';
-                authLogin.style.display = 'flex';
-            }
+            updateUserInterface();
+            setupCheckboxBehavior();
+
+            window.addEventListener('cartUpdated', function() {
+                updateWatchlistCount();
+            });
+
+            window.addEventListener('watchlistUpdated', function() {
+                updateWatchlistCount();
+            });
         });
     </script>
 </body>

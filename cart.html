@@ -58,7 +58,7 @@
             color: white;
             text-decoration: none;
             padding: 8px 15px;
-            border-radius: 5px;
+            border-radius: 12px;
             transition: background-color 0.3s ease, color 0.3s ease;
             display: flex;
             align-items: center;
@@ -166,7 +166,7 @@
         /* Profile Status Bar Styles */
         .profile-status-bar {
             background: linear-gradient(135deg, #8e44ad, #9b59b6);
-            border-radius: 25px;
+            border-radius: 35px;
             padding: 8px 16px;
             box-shadow: 0 4px 15px rgba(142, 68, 173, 0.3);
             margin-left: 15px;
@@ -228,7 +228,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 20px;
+            border-radius: 30px;
             background: rgba(255, 255, 255, 0.2);
             color: white;
             text-decoration: none;
@@ -271,9 +271,16 @@
             color: #8e44ad;
         }
 
-        .status-btn.logout-btn:hover {
+        .status-btn.logout-btn:hover,
+        .status-btn.login-btn:hover {
             background: white;
             color: #8e44ad;
+        }
+
+        .status-btn.login-btn {
+            background: white;
+            color: #8e44ad;
+            border: 1px solid #8e44ad;
         }
 
         .status-btn.address-btn:hover {
@@ -331,11 +338,34 @@
             background: transparent;
         }
 
+        .page-header {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #8e44ad;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .page-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            text-align: center;
+            margin-bottom: 0;
+        }
+
         .cart-header {
             background: white;
             padding: 16px 20px;
             margin-bottom: 12px;
-            border-radius: 10px;
+            border-radius: 15px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
 
@@ -350,7 +380,7 @@
         /* Cart Items */
         .cart-items-container {
             background: white;
-            border-radius: 10px;
+            border-radius: 15px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             overflow: hidden;
         }
@@ -371,7 +401,7 @@
             width: 120px;
             height: 120px;
             object-fit: cover;
-            border-radius: 10px;
+            border-radius: 15px;
             margin-right: 16px;
             cursor: pointer;
             transition: transform 0.2s, opacity 0.2s;
@@ -380,15 +410,38 @@
         .cart-item img:hover {
             transform: scale(0.95);
             opacity: 0.8;
+            border: 2px solid #8e44ad;
         }
 
         .cart-item .product-name-clickable {
             cursor: pointer;
             transition: color 0.2s;
+            position: relative;
         }
 
         .cart-item .product-name-clickable:hover {
             color: #8e44ad;
+        }
+
+        .cart-item .product-name-clickable::after {
+            content: '👁️ View Details';
+            position: absolute;
+            right: -120px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #8e44ad;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: none;
+        }
+
+        .cart-item .product-name-clickable:hover::after {
+            opacity: 1;
         }
 
         .item-details {
@@ -458,7 +511,7 @@
             height: 32px;
             border: 1px solid #d7d7d7;
             background: white;
-            border-radius: 8px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -511,7 +564,7 @@
             border: 1px solid #d7d7d7;
             color: #878787;
             padding: 6px 12px;
-            border-radius: 10px;
+            border-radius: 15px;
             cursor: pointer;
             font-size: 12px;
             transition: all 0.2s;
@@ -526,7 +579,7 @@
         .cart-summary {
             background: white;
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 15px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             margin-top: 12px;
             position: sticky;
@@ -566,7 +619,7 @@
             padding: 16px;
             font-size: 16px;
             font-weight: 600;
-            border-radius: 10px;
+            border-radius: 15px;
             cursor: pointer;
             transition: background-color 0.2s;
         }
@@ -591,7 +644,7 @@
         .price-details-section {
             background: white;
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 15px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             margin-top: 12px;
         }
@@ -703,7 +756,7 @@
         .recommendations-section {
             background: white;
             margin: 12px 0;
-            border-radius: 10px;
+            border-radius: 15px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             padding: 20px;
         }
@@ -732,7 +785,7 @@
             align-items: center;
             padding: 12px;
             border: 1px solid #f0f0f0;
-            border-radius: 10px;
+            border-radius: 15px;
             transition: box-shadow 0.2s;
         }
 
@@ -768,7 +821,7 @@
             color: white;
             border: 1px solid #8e44ad;
             padding: 6px 12px;
-            border-radius: 10px;
+            border-radius: 15px;
             font-size: 12px;
             cursor: pointer;
             margin-top: 8px;
@@ -784,7 +837,7 @@
             background: white;
             padding: 60px 20px;
             text-align: center;
-            border-radius: 10px;
+            border-radius: 15px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             display: none;
         }
@@ -805,7 +858,7 @@
             color: white;
             border: 1px solid #8e44ad;
             padding: 12px 24px;
-            border-radius: 10px;
+            border-radius: 15px;
             cursor: pointer;
             font-size: 14px;
             text-decoration: none;
@@ -814,6 +867,13 @@
 
         .continue-shopping:hover {
             background: #9356ad;
+        }
+
+        /* Hide tooltip on mobile devices */
+        @media (max-width: 768px) {
+            .cart-item .product-name-clickable::after {
+                display: none;
+            }
         }
 
         /* Mobile Responsiveness */
@@ -1158,13 +1218,10 @@
         <nav class="navbar">
             <!-- Authentication Buttons -->
             <div class="auth-buttons">
-                <a href="login.html" class="auth-login" style="display: none;">
-                    <i class="fas fa-sign-in-alt"></i>
-                    Login
-                </a>
+                
 
                 <!-- Profile Status Bar -->
-                <div class="profile-status-bar" id="profile-status-bar" style="display: none;">
+                <div class="profile-status-bar" id="profile-status-bar">
                     <div class="status-content">
                         <div class="user-avatar">
                             <i class="fas fa-user-circle"></i>
@@ -1194,8 +1251,9 @@
     </header>
 
     <main class="cart-container">
-        <div class="cart-header">
-            <h1>My Cart</h1>
+        <div class="page-header">
+            <h1 class="page-title">My Cart</h1>
+            <p class="page-subtitle">Review and manage items in your shopping cart</p>
         </div>
 
         <div id="cart-content">
@@ -1381,10 +1439,16 @@
        });
 
          // Handle bag/cart click
-        function handleBagClick(event) {
-            event.preventDefault();
-            window.location.href = 'cart.html';
-        }
+          function handleBagClick(event) {
+              event.preventDefault();
+              window.location.href = 'cart.html';
+          }
+ 
+          // Handle login click
+          function handleLoginClick(event) {
+              event.preventDefault();
+              window.location.href = 'login.html';
+          }
 
         // Update cart count in status bar
         function updateCartCount() {
@@ -1416,16 +1480,19 @@
             const userEmailElement = document.getElementById('user-email');
             const profileStatusBar = document.getElementById('profile-status-bar');
             const userNameDisplay = document.getElementById('user-name-display');
-            const loginButtons = document.querySelectorAll('.auth-login');
-            const logoutButtons = document.querySelectorAll('.auth-logout');
+            const loginButton = document.getElementById('login-btn');
+            const logoutButton = document.querySelector('.logout-btn');
             const userMenu = document.querySelector('.user-menu');
 
             if (auth.isLoggedIn()) {
                 const currentUser = auth.getCurrentUser();
 
-                // Update profile status bar
+                // Show profile status bar
                 if (profileStatusBar) {
                     profileStatusBar.style.display = 'block';
+                }
+                if (loginButton) {
+                    loginButton.style.display = 'none';
                 }
                 if (userNameDisplay) {
                     userNameDisplay.textContent = `Welcome, ${currentUser.name}!`;
@@ -1435,20 +1502,28 @@
                 if (userNameElement) userNameElement.textContent = currentUser.name;
                 if (userEmailElement) userEmailElement.textContent = currentUser.email;
 
-                // Hide login buttons, show logout buttons
-                loginButtons.forEach(btn => btn.style.display = 'none');
-                logoutButtons.forEach(btn => btn.style.display = 'block');
+                // Show logout button
+                if (logoutButton) {
+                    logoutButton.style.display = 'flex';
+                }
                 if (userMenu) userMenu.style.display = 'block';
 
             } else {
-                // Hide profile status bar
+                // Show profile status bar for guests
                 if (profileStatusBar) {
-                    profileStatusBar.style.display = 'none';
+                    profileStatusBar.style.display = 'block';
+                }
+                if (loginButton) {
+                    loginButton.style.display = 'flex';
+                }
+                if (userNameDisplay) {
+                    userNameDisplay.textContent = 'Welcome, Guest!';
                 }
 
-                // Show login buttons, hide logout buttons
-                loginButtons.forEach(btn => btn.style.display = 'block');
-                logoutButtons.forEach(btn => btn.style.display = 'none');
+                // Show login button, hide logout button
+                if (logoutButton) {
+                    logoutButton.style.display = 'none';
+                }
                 if (userMenu) userMenu.style.display = 'none';
             }
         }
@@ -1467,6 +1542,7 @@
         window.addEventListener('watchlistUpdated', function() {
             updateWatchlistCount();
         });
+
 
         // Show notification (global utility function)
         function showNotification(message, type = 'success') {
@@ -1549,28 +1625,28 @@
         }
 
         /**
-         * Displays all items from the cart on the page.
-         */
-        function displayCartItems() {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const cartItemsContainer = document.getElementById('cart-items-container');
-            const emptyCartMessage = document.getElementById('empty-cart-message');
-            const cartContent = document.getElementById('cart-content');
+          * Displays all items from the cart on the page.
+          */
+         function displayCartItems() {
+             const cart = getUserCart();
+             const cartItemsContainer = document.getElementById('cart-items-container');
+             const emptyCartMessage = document.getElementById('empty-cart-message');
+             const cartContent = document.getElementById('cart-content');
 
-            cartItemsContainer.innerHTML = '';
+             cartItemsContainer.innerHTML = '';
 
-            if (cart.length === 0) {
-                cartContent.style.display = 'none';
-                emptyCartMessage.style.display = 'block';
-            } else {
-                cartContent.style.display = 'block';
-                emptyCartMessage.style.display = 'none';
+             if (cart.length === 0) {
+                 cartContent.style.display = 'none';
+                 emptyCartMessage.style.display = 'block';
+             } else {
+                 cartContent.style.display = 'block';
+                 emptyCartMessage.style.display = 'none';
 
-                let grandTotal = 0;
-                let totalItems = 0;
+                 let grandTotal = 0;
+                 let totalItems = 0;
 
-                // Updated cart display logic with new Flipkart-like layout
-                cart.forEach((item, index) => {
+                 // Updated cart display logic with new Flipkart-like layout
+                 cart.forEach((item, index) => {
                     const itemPrice = parseFloat(item.price) || 0;
                     const itemQuantity = parseInt(item.quantity) || 1;
                     const itemTotal = itemPrice * itemQuantity;
@@ -1584,9 +1660,9 @@
                     const productRating = getProductRating(item.name);
 
                     itemElement.innerHTML = `
-                        <img src="${item.image}" alt="${item.name}" onclick="decreaseQuantityFromProduct(${index})">
+                        <img src="${item.image}" alt="${item.name}" onclick="viewProductFromCart(${index})" style="cursor: pointer;">
                         <div class="item-details">
-                            <h3 class="product-name-clickable" onclick="decreaseQuantityFromProduct(${index})">${item.name}</h3>
+                            <h3 class="product-name-clickable" onclick="viewProductFromCart(${index})" style="cursor: pointer;">${item.name}</h3>
                             <div class="cart-item-rating">
                                 <div class="rating-stars">
                                     ${generateStars(productRating.rating)}
@@ -1664,17 +1740,17 @@
                     {
                         name: "Premium Cotton Saree",
                         price: 1299,
-                        image: "images/silk_saree.jpg"
+                        image: "images/silk_saress/s1.jpeg"
                     },
                     {
                         name: "Designer Blouse Piece",
                         price: 599,
-                        image: "images/printed_saree.jpg"
+                        image: "images/printed_sarees/p1.jpeg"
                     },
                     {
                         name: "Traditional Jewelry Set",
                         price: 899,
-                        image: "images/silk_saree_collection.jpg"
+                        image: "images/silk_saress/s2.jpeg"
                     }
                 ];
 
@@ -1705,10 +1781,10 @@
          * @param {number} itemIndex - The index of the item to remove.
          */
         function removeItemFromCart(itemIndex) {
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
-            cart.splice(itemIndex, 1); 
-            localStorage.setItem('cart', JSON.stringify(cart));
-            
+            let cart = getUserCart();
+            cart.splice(itemIndex, 1);
+            saveUserCart(cart);
+
             // Refresh the display
             displayCartItems();
             // CHANGED: Corrected function name from updateCartIcon to updateCartBadge
@@ -1719,10 +1795,10 @@
          * Increases the quantity of an item in the cart.
          */
         function increaseQuantity(itemIndex) {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cart = getUserCart();
             if (cart[itemIndex]) {
                 cart[itemIndex].quantity += 1;
-                localStorage.setItem('cart', JSON.stringify(cart));
+                saveUserCart(cart);
                 displayCartItems();
                 updateCartBadge();
             }
@@ -1730,14 +1806,21 @@
 
         /**
          * Decreases the quantity of an item in the cart.
+         * If quantity is 1, removes the item from cart.
          */
         function decreaseQuantity(itemIndex) {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            if (cart[itemIndex] && cart[itemIndex].quantity > 1) {
-                cart[itemIndex].quantity -= 1;
-                localStorage.setItem('cart', JSON.stringify(cart));
-                displayCartItems();
-                updateCartBadge();
+            const cart = getUserCart();
+            if (cart[itemIndex]) {
+                if (cart[itemIndex].quantity > 1) {
+                    // Decrease quantity if more than 1
+                    cart[itemIndex].quantity -= 1;
+                    saveUserCart(cart);
+                    displayCartItems();
+                    updateCartBadge();
+                } else {
+                    // Remove item if quantity is 1
+                    removeItemFromCart(itemIndex);
+                }
             }
         }
 
@@ -1745,11 +1828,11 @@
          * Updates the quantity of an item in the cart.
          */
         function updateQuantity(itemIndex, newQuantity) {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cart = getUserCart();
             const quantity = parseInt(newQuantity);
             if (cart[itemIndex] && quantity > 0) {
                 cart[itemIndex].quantity = quantity;
-                localStorage.setItem('cart', JSON.stringify(cart));
+                saveUserCart(cart);
                 displayCartItems();
                 updateCartBadge();
             }
@@ -1759,10 +1842,10 @@
          * Saves an item for later (moves to a separate saved items list).
          */
         function saveForLater(itemIndex) {
-            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cart = getUserCart();
             if (cart[itemIndex]) {
                 const savedItem = cart.splice(itemIndex, 1)[0];
-                localStorage.setItem('cart', JSON.stringify(cart));
+                saveUserCart(cart);
 
                 // Save to localStorage as saved for later
                 const savedItems = JSON.parse(localStorage.getItem('savedForLater')) || [];
@@ -1776,16 +1859,16 @@
         }
 
         /**
-          * Proceeds to delivery address page.
-          */
-         function proceedToCheckout() {
-             const cart = JSON.parse(localStorage.getItem('cart')) || [];
-             if (cart.length > 0) {
-                 window.location.href = 'delivery-address.html';
-             } else {
-                 alert('Your cart is empty!');
-             }
-         }
+         * Proceeds to delivery address page.
+         */
+        function proceedToCheckout() {
+            const cart = getUserCart();
+            if (cart.length > 0) {
+                window.location.href = 'delivery-address.html';
+            } else {
+                alert('Your cart is empty!');
+            }
+        }
 
         /**
          * A placeholder function for the "Buy Now" button (legacy).
@@ -1881,7 +1964,56 @@
         }
 
         /**
-         * Decreases quantity when clicking on product image or name
+         * Navigates to product detail page when clicking on product from cart
+         * @param {number} itemIndex - The index of the item in the cart
+         */
+        function viewProductFromCart(itemIndex) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const item = cart[itemIndex];
+
+            if (item) {
+                console.log('Cart item data:', item);
+                console.log('Item price type:', typeof item.price);
+                console.log('Item price value:', item.price);
+
+                // Create comprehensive product data for the detail page
+                const productData = {
+                    id: item.name.toLowerCase().replace(/\s+/g, '-'),
+                    name: item.name,
+                    price: typeof item.price === 'string' ? item.price : String(item.price), // Ensure price is string
+                    originalPrice: typeof (Math.round(parseInt(item.price) * 1.3)) === 'string'
+                        ? String(Math.round(parseInt(item.price) * 1.3))
+                        : String(Math.round(parseInt(item.price) * 1.3)), // Ensure original price is string
+                    image: item.image,
+                    category: getProductCategory(item.name)
+                };
+
+                console.log('Product data being stored:', productData);
+
+                // Store selected product in localStorage
+                localStorage.setItem('selectedProduct', JSON.stringify(productData));
+
+                // Navigate to product detail page
+                window.location.href = 'product-detail.html';
+            }
+        }
+
+        /**
+         * Determines product category based on product name
+         * @param {string} productName - The name of the product
+         * @returns {string} The product category
+         */
+        function getProductCategory(productName) {
+            const name = productName.toLowerCase();
+            if (name.includes('lungi')) return 'lungi';
+            if (name.includes('saree')) return 'saree';
+            if (name.includes('cotton')) return 'cotton';
+            if (name.includes('silk')) return 'silk';
+            return 'general';
+        }
+
+        /**
+         * Decreases quantity when clicking on product image or name (for quantity control)
          * @param {number} itemIndex - The index of the item in the cart
          */
         function decreaseQuantityFromProduct(itemIndex) {
