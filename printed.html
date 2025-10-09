@@ -220,8 +220,7 @@
             border-radius: 15px;
             padding: 20px;
             height: fit-content;
-            position: sticky;
-            top: 100px;
+            position: static;
         }
         .filter-section { margin-bottom: 24px; }
         .filter-title {
@@ -385,6 +384,30 @@
             50% { transform: scale(1.3); }
             100% { transform: scale(1); }
         }
+
+        .add-to-cart-btn {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            border: none;
+            border-radius: 8px 0 0 0;
+            padding: 8px 16px;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
+            transition: all 0.2s ease;
+            z-index: 10;
+            opacity: 0.9;
+        }
+        .add-to-cart-btn:hover {
+            background: linear-gradient(135deg, #c0392b, #a93226);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.4);
+            opacity: 1;
+        }
         .product-info { padding: 16px; }
         .product-brand { font-size: 12px; color: #666; margin-bottom: 4px; }
         .product-name {
@@ -525,6 +548,9 @@
                         <button class="wishlist-btn" onclick="toggleWishlist(event, 'floral-georgette-blue')">
                             <i class="far fa-heart"></i>
                         </button>
+                        <button class="add-to-cart-btn" onclick="addToCart(event, 'floral-georgette-blue')">
+                            Add to Cart
+                        </button>
                     </div>
                     <div class="product-info">
                         <div class="product-brand">Lunsara Prints</div>
@@ -542,6 +568,9 @@
                         <img src="images/printed_sarees/p2.jpeg" alt="Abstract Crepe Saree">
                         <button class="wishlist-btn" onclick="toggleWishlist(event, 'abstract-crepe-saree')">
                             <i class="far fa-heart"></i>
+                        </button>
+                        <button class="add-to-cart-btn" onclick="addToCart(event, 'abstract-crepe-saree')">
+                            Add to Cart
                         </button>
                     </div>
                     <div class="product-info">
@@ -561,6 +590,9 @@
                         <button class="wishlist-btn" onclick="toggleWishlist(event, 'yellow-chiffon-saree')">
                             <i class="far fa-heart"></i>
                         </button>
+                        <button class="add-to-cart-btn" onclick="addToCart(event, 'yellow-chiffon-saree')">
+                            Add to Cart
+                        </button>
                     </div>
                     <div class="product-info">
                          <div class="product-brand">Lunsara Prints</div>
@@ -578,6 +610,9 @@
                         <img src="images/printed_sarees/p4.jpeg" alt="Red Party Wear Saree">
                         <button class="wishlist-btn" onclick="toggleWishlist(event, 'red-party-wear-saree')">
                             <i class="far fa-heart"></i>
+                        </button>
+                        <button class="add-to-cart-btn" onclick="addToCart(event, 'red-party-wear-saree')">
+                            Add to Cart
                         </button>
                     </div>
                     <div class="product-info">
@@ -597,6 +632,9 @@
                         <button class="wishlist-btn" onclick="toggleWishlist(event, 'black-cotton-blend')">
                             <i class="far fa-heart"></i>
                         </button>
+                        <button class="add-to-cart-btn" onclick="addToCart(event, 'black-cotton-blend')">
+                            Add to Cart
+                        </button>
                     </div>
                     <div class="product-info">
                         <div class="product-brand">Lunsara Prints</div>
@@ -614,6 +652,9 @@
                         <img src="images/printed_sarees/p6.jpeg" alt="Multi-Color Digital Print Saree">
                         <button class="wishlist-btn" onclick="toggleWishlist(event, 'multi-color-digital-print')">
                             <i class="far fa-heart"></i>
+                        </button>
+                        <button class="add-to-cart-btn" onclick="addToCart(event, 'multi-color-digital-print')">
+                            Add to Cart
                         </button>
                     </div>
                     <div class="product-info">
@@ -633,6 +674,9 @@
                         <button class="wishlist-btn" onclick="toggleWishlist(event, 'green-leaf-print')">
                             <i class="far fa-heart"></i>
                         </button>
+                        <button class="add-to-cart-btn" onclick="addToCart(event, 'green-leaf-print')">
+                            Add to Cart
+                        </button>
                     </div>
                     <div class="product-info">
                         <div class="product-brand">Lunsara Prints</div>
@@ -650,6 +694,9 @@
                         <img src="images/printed_sarees/p8.jpeg" alt="Purple Abstract Saree">
                         <button class="wishlist-btn" onclick="toggleWishlist(event, 'purple-abstract-saree')">
                             <i class="far fa-heart"></i>
+                        </button>
+                        <button class="add-to-cart-btn" onclick="addToCart(event, 'purple-abstract-saree')">
+                            Add to Cart
                         </button>
                     </div>
                     <div class="product-info">
@@ -669,6 +716,9 @@
                         <button class="wishlist-btn" onclick="toggleWishlist(event, 'orange-floral-saree')">
                             <i class="far fa-heart"></i>
                         </button>
+                        <button class="add-to-cart-btn" onclick="addToCart(event, 'orange-floral-saree')">
+                            Add to Cart
+                        </button>
                     </div>
                     <div class="product-info">
                         <div class="product-brand">Lunsara Prints</div>
@@ -686,6 +736,9 @@
                         <img src="images/printed_sarees/p10.jpeg" alt="Navy Blue Geometric Saree">
                         <button class="wishlist-btn" onclick="toggleWishlist(event, 'navy-blue-geometric')">
                             <i class="far fa-heart"></i>
+                        </button>
+                        <button class="add-to-cart-btn" onclick="addToCart(event, 'navy-blue-geometric')">
+                            Add to Cart
                         </button>
                     </div>
                     <div class="product-info">
@@ -705,6 +758,9 @@
                         <button class="wishlist-btn" onclick="toggleWishlist(event, 'pink-abstract-saree')">
                             <i class="far fa-heart"></i>
                         </button>
+                        <button class="add-to-cart-btn" onclick="addToCart(event, 'pink-abstract-saree')">
+                            Add to Cart
+                        </button>
                     </div>
                     <div class="product-info">
                         <div class="product-brand">Lunsara Prints</div>
@@ -722,6 +778,9 @@
                         <img src="images/printed_sarees/p12.jpeg" alt="Cream Floral Saree">
                         <button class="wishlist-btn" onclick="toggleWishlist(event, 'cream-floral-saree')">
                             <i class="far fa-heart"></i>
+                        </button>
+                        <button class="add-to-cart-btn" onclick="addToCart(event, 'cream-floral-saree')">
+                            Add to Cart
                         </button>
                     </div>
                     <div class="product-info">
@@ -741,6 +800,9 @@
                         <button class="wishlist-btn" onclick="toggleWishlist(event, 'maroon-party-saree')">
                             <i class="far fa-heart"></i>
                         </button>
+                        <button class="add-to-cart-btn" onclick="addToCart(event, 'maroon-party-saree')">
+                            Add to Cart
+                        </button>
                     </div>
                     <div class="product-info">
                         <div class="product-brand">Lunsara Prints</div>
@@ -758,6 +820,9 @@
                         <img src="images/printed_sarees/p14.jpeg" alt="Light Green Saree">
                         <button class="wishlist-btn" onclick="toggleWishlist(event, 'light-green-saree')">
                             <i class="far fa-heart"></i>
+                        </button>
+                        <button class="add-to-cart-btn" onclick="addToCart(event, 'light-green-saree')">
+                            Add to Cart
                         </button>
                     </div>
                     <div class="product-info">
@@ -777,6 +842,9 @@
                         <button class="wishlist-btn" onclick="toggleWishlist(event, 'purple-floral-print')">
                             <i class="far fa-heart"></i>
                         </button>
+                        <button class="add-to-cart-btn" onclick="addToCart(event, 'purple-floral-print')">
+                            Add to Cart
+                        </button>
                     </div>
                     <div class="product-info">
                         <div class="product-brand">Lunsara Prints</div>
@@ -794,6 +862,9 @@
                         <img src="images/printed_sarees/p16.jpeg" alt="Beige Office Saree">
                         <button class="wishlist-btn" onclick="toggleWishlist(event, 'beige-office-saree')">
                             <i class="far fa-heart"></i>
+                        </button>
+                        <button class="add-to-cart-btn" onclick="addToCart(event, 'beige-office-saree')">
+                            Add to Cart
                         </button>
                     </div>
                     <div class="product-info">
@@ -813,6 +884,9 @@
                         <button class="wishlist-btn" onclick="toggleWishlist(event, 'turquoise-blue-saree')">
                             <i class="far fa-heart"></i>
                         </button>
+                        <button class="add-to-cart-btn" onclick="addToCart(event, 'turquoise-blue-saree')">
+                            Add to Cart
+                        </button>
                     </div>
                     <div class="product-info">
                         <div class="product-brand">Lunsara Prints</div>
@@ -830,6 +904,9 @@
                         <img src="images/printed_sarees/p18.jpeg" alt="Olive Green Saree">
                         <button class="wishlist-btn" onclick="toggleWishlist(event, 'olive-green-saree')">
                             <i class="far fa-heart"></i>
+                        </button>
+                        <button class="add-to-cart-btn" onclick="addToCart(event, 'olive-green-saree')">
+                            Add to Cart
                         </button>
                     </div>
                     <div class="product-info">
@@ -849,6 +926,9 @@
                         <button class="wishlist-btn" onclick="toggleWishlist(event, 'coral-pink-saree')">
                             <i class="far fa-heart"></i>
                         </button>
+                        <button class="add-to-cart-btn" onclick="addToCart(event, 'coral-pink-saree')">
+                            Add to Cart
+                        </button>
                     </div>
                     <div class="product-info">
                         <div class="product-brand">Lunsara Prints</div>
@@ -866,6 +946,9 @@
                         <img src="images/printed_sarees/p20.jpeg" alt="Lavender Party Saree">
                         <button class="wishlist-btn" onclick="toggleWishlist(event, 'lavender-party-saree')">
                             <i class="far fa-heart"></i>
+                        </button>
+                        <button class="add-to-cart-btn" onclick="addToCart(event, 'lavender-party-saree')">
+                            Add to Cart
                         </button>
                     </div>
                     <div class="product-info">
@@ -1070,6 +1153,42 @@
                 localStorage.setItem('selectedProduct', JSON.stringify(productDetails));
                 window.location.href = 'product-detail.html';
             }
+        }
+
+        function addToCart(event, productId) {
+            event.stopPropagation();
+            const product = productDatabase[productId];
+            if (!product) return;
+
+            // Get existing cart or create new one
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Check if product already exists in cart
+            const existingProduct = cart.find(item => item.id === productId);
+
+            if (existingProduct) {
+                // Increase quantity if product already exists
+                existingProduct.quantity += 1;
+            } else {
+                // Add new product to cart
+                cart.push({
+                    ...product,
+                    quantity: 1,
+                    dateAdded: new Date().toISOString()
+                });
+            }
+
+            // Save cart to localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Update cart count in header
+            updateWatchlistCount();
+
+            // Show notification
+            showNotification('Added to Cart', `"${product.name}" has been added to your cart!`, 'fas fa-shopping-cart', 'success');
+
+            // Dispatch event for other components that might be listening
+            window.dispatchEvent(new CustomEvent('cartUpdated'));
         }
         
         function handleLogout(event) {
