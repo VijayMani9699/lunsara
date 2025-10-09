@@ -234,9 +234,15 @@ auth-login, .auth-logout {
 }
 
 .status-btn.watchlist-btn:hover {
-     background: white;
-     color: #8e44ad;
- }
+      background: white;
+      color: #8e44ad;
+  }
+
+  .status-count-text {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.8);
+      margin-left: 2px;
+  }
 
 .status-btn.product-btn:hover {
      background: white;
@@ -2416,7 +2422,7 @@ color: #e74c3c;
                       <div class="user-status">Premium Member</div>
                   </div>
                   <div class="status-actions">
-                      <a href="profile.html" class="status-btn profile-btn" title="Profile">
+                      <a href="profile.html" class="status-btn profile-btn" title="Profile" onclick="handleProfileClick(event)" id="profile-button" style="display: none;">
                           <span class="status-label">Profile</span>
                           <i class="fas fa-user"></i>
                       </a>
@@ -2426,12 +2432,13 @@ color: #e74c3c;
                       </a>
                       <a href="watchlist.html" class="status-btn watchlist-btn" title="Watchlist">
                           <span class="status-label">Watchlist</span>
+                          <span id="status-watchlist-text" class="status-count-text">(0)</span>
                           <i class="fas fa-heart"></i>
                       </a>
                       <a href="#" class="status-btn bag-btn" title="Shopping Bag" onclick="handleBagClick(event)">
                           <span class="status-label">Cart</span>
+                          <span id="status-cart-text" class="status-count-text">(0)</span>
                           <i class="fas fa-shopping-bag"></i>
-                          <span id="status-cart-count" class="status-cart-badge">0</span>
                       </a>
                   </div>
               </div>
@@ -2663,6 +2670,7 @@ color: #e74c3c;
   <script src="auth.js"></script>
   <script src="cart.js"></script>
   <script>
+    // Ensure auth object is available
     const cards = document.querySelectorAll('.product-card');
 
     function isInViewport(el) {
@@ -2836,16 +2844,188 @@ color: #e74c3c;
       window.location.href = 'cart.html';
     }
 
+    // Handle profile click
+    function handleProfileClick(event) {
+      event.preventDefault();
+
+      // Since profile button only shows when logged in, always redirect to profile page
+      window.location.href = 'profile.html';
+    }
+
+    // Show profile dialog for non-logged-in users
+    function showProfileDialog() {
+      // Remove existing dialog if any
+      const existingDialog = document.getElementById('profile-dialog');
+      if (existingDialog) {
+        existingDialog.remove();
+      }
+
+      // Create dialog element
+      const dialog = document.createElement('div');
+      dialog.id = 'profile-dialog';
+      dialog.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(5px);
+      `;
+
+      dialog.innerHTML = `
+        <div style="
+          background: white;
+          border-radius: 25px;
+          padding: 30px;
+          max-width: 400px;
+          width: 90%;
+          text-align: center;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+          transform: scale(0.8);
+          opacity: 0;
+          transition: all 0.3s ease;
+          border: 3px solid #8e44ad;
+        ">
+          <div style="
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 32px;
+            color: white;
+            box-shadow: 0 8px 20px rgba(142, 68, 173, 0.3);
+          ">
+            <i class="fas fa-user-circle"></i>
+          </div>
+          <h3 style="
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            font-family: 'Cinzel Decorative', serif;
+          ">Welcome to Lunsara!</h3>
+          <p style="
+            color: #666;
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 25px;
+          ">
+            Please log in to access your profile, view your orders, manage your watchlist, and enjoy a personalized shopping experience.
+          </p>
+          <div style="
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+          ">
+            <button onclick="goToLoginFromDialog()" style="
+              padding: 12px 24px;
+              background: linear-gradient(135deg, #8e44ad, #9b59b6);
+              color: white;
+              border: none;
+              border-radius: 15px;
+              font-size: 16px;
+              font-weight: 500;
+              cursor: pointer;
+              transition: all 0.3s ease;
+              min-width: 120px;
+            ">
+              Login Now
+            </button>
+            <button onclick="closeProfileDialog()" style="
+              padding: 12px 24px;
+              background: #f8f9fa;
+              color: #666;
+              border: 2px solid #e1e5e9;
+              border-radius: 15px;
+              font-size: 16px;
+              font-weight: 500;
+              cursor: pointer;
+              transition: all 0.3s ease;
+              min-width: 120px;
+            ">
+              Maybe Later
+            </button>
+          </div>
+        </div>
+      `;
+
+      document.body.appendChild(dialog);
+
+      // Animate in
+      setTimeout(() => {
+        const dialogContent = dialog.querySelector('div style*="white"');
+        if (dialogContent) {
+          dialogContent.style.transform = 'scale(1)';
+          dialogContent.style.opacity = '1';
+        }
+      }, 50);
+
+      // Close on outside click
+      dialog.addEventListener('click', function(e) {
+        if (e.target === this) {
+          closeProfileDialog();
+        }
+      });
+
+      // Close on Escape key
+      document.addEventListener('keydown', handleDialogEscape);
+    }
+
+    // Close profile dialog
+    function closeProfileDialog() {
+      const dialog = document.getElementById('profile-dialog');
+      if (dialog) {
+        const dialogContent = dialog.querySelector('div style*="white"');
+        dialogContent.style.transform = 'scale(0.8)';
+        dialogContent.style.opacity = '0';
+
+        setTimeout(() => {
+          dialog.remove();
+          document.removeEventListener('keydown', handleDialogEscape);
+        }, 300);
+      }
+    }
+
+    // Handle escape key for dialog
+    function handleDialogEscape(e) {
+      if (e.key === 'Escape') {
+        closeProfileDialog();
+      }
+    }
+
+    // Go to login from dialog
+    function goToLoginFromDialog() {
+      closeProfileDialog();
+      window.location.href = 'login.html';
+    }
+
+
     // Update cart count in status bar
     function updateCartCount() {
        const cartCount = document.getElementById('cart-count');
-       const statusBarCartCount = document.getElementById('status-cart-count');
+       const statusBarCartCount = document.getElementById('status-cart-text');
 
-       if (cartCount && statusBarCartCount) {
-         const count = cartCount.textContent || '0';
-         statusBarCartCount.textContent = count;
-         // Always show the badge, even when count is 0
-         statusBarCartCount.style.display = 'flex';
+       if (statusBarCartCount) {
+         // Calculate total number of products in cart (sum of quantities)
+         const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+         const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+         statusBarCartCount.textContent = `(${totalItems})`;
+       }
+
+       // Also update the main cart count element if it exists
+       if (cartCount) {
+         const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+         const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+         cartCount.textContent = totalItems;
        }
      }
 
@@ -2871,6 +3051,7 @@ color: #e74c3c;
       const userNameElement = document.getElementById('user-name');
       const userEmailElement = document.getElementById('user-email');
       const profileStatusBar = document.getElementById('profile-status-bar');
+      const profileButton = document.getElementById('profile-button');
       const userNameDisplay = document.getElementById('user-name-display');
       const logoutButtons = document.querySelectorAll('.auth-logout');
       const statusLoginBtn = document.querySelector('.status-btn.login-btn');
@@ -2884,6 +3065,12 @@ color: #e74c3c;
         if (profileStatusBar) {
           profileStatusBar.style.display = 'block';
         }
+
+        // Show profile button only when logged in
+        if (profileButton) {
+          profileButton.style.display = 'flex';
+        }
+
         if (userNameDisplay) {
           userNameDisplay.textContent = `Welcome, ${currentUser.name}!`;
         }
@@ -2902,6 +3089,11 @@ color: #e74c3c;
         // Always show profile status bar (for demo purposes)
         if (profileStatusBar) {
           profileStatusBar.style.display = 'block';
+        }
+
+        // Hide profile button when not logged in
+        if (profileButton) {
+          profileButton.style.display = 'none';
         }
 
         // Update welcome message for non-logged-in users
@@ -2929,7 +3121,7 @@ color: #e74c3c;
        updateWatchlistCount(); // Initialize watchlist count
 
        // Show login prompt after 5 seconds for non-logged-in users
-       if (!auth.isLoggedIn()) {
+       if (typeof auth === 'undefined' || !auth.isLoggedIn()) {
          setTimeout(function() {
            showLoginPrompt();
          }, 5000);
@@ -2939,12 +3131,24 @@ color: #e74c3c;
     // Listen for cart updates
     window.addEventListener('cartUpdated', function() {
        updateCartCount();
+       updateWatchlistCount();
      });
 
     // Listen for watchlist updates
     window.addEventListener('watchlistUpdated', function() {
        updateWatchlistCount();
      });
+
+    // Update watchlist count in status bar
+    function updateWatchlistCount() {
+       const statusBarWatchlistCount = document.getElementById('status-watchlist-text');
+
+       if (statusBarWatchlistCount) {
+         const watchlist = JSON.parse(localStorage.getItem('watchlist') || '[]');
+         const count = watchlist.length;
+         statusBarWatchlistCount.textContent = `(${count})`;
+       }
+     }
 
     // Show login prompt modal
     function showLoginPrompt() {
