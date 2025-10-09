@@ -1,18 +1,25 @@
 p<!DOCTYPE html>
 <html lang="en">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | Lunsara</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <!-- Supabase Initialization -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
+        // Supabase configuration
+        const SUPABASE_URL = "https://zkdorrnjujzuqxvvmlak.supabase.co";
+        const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InprZG9ycm5qdWp6dXF4dnZtbGFrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk4MTEyMDIsImV4cCI6MjA3NTM4NzIwMn0.x4zDHFmEtuSu-99B8RecLNYIShG8gRZ3IdEb8u3Y7j8";
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         // EmailJS Configuration - REPLACE WITH YOUR ACTUAL CREDENTIALS
         const EMAILJS_CONFIG = {
             serviceId: 'service_your_actual_service_id', // ⚠️ REPLACE: Get from EmailJS Dashboard > Email Services
             publicKey: 'your_actual_public_key', // ⚠️ REPLACE: Get from EmailJS Dashboard > Account > General
             templates: {
-                passwordReset: 'template_your_actual_template_id' // ⚠️ REPLACE: Get from EmailJS Dashboard > Email Templates
+                passwordReset: '{{ .ConfirmationURL }}' // ⚠️ REPLACE: Get from EmailJS Dashboard > Email Templates
             }
         };
 
@@ -782,6 +789,29 @@ p<!DOCTYPE html>
             box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
         }
 
+        /* Google button for OAuth login */
+        .google-btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          width: 100%;
+          background-color: #fff;
+          border: 1px solid #ccc;
+          border-radius: 6px;
+          padding: 10px 0;
+          cursor: pointer;
+          font-size: 16px;
+          transition: background-color 0.2s;
+        }
+        .google-btn:hover {
+          background-color: #f7f7f7;
+        }
+        .google-icon {
+          width: 20px;
+          height: 20px;
+        }
+
         .auth-footer {
             text-align: center;
             padding: 20px;
@@ -1051,6 +1081,35 @@ p<!DOCTYPE html>
             <p>Sign in to your account or create a new one</p>
         </div>
 
+        <!-- New Password Section -->
+        <div id="new-password-section" style="display: none;">
+          <div class="reset-icon">
+            <i class="fas fa-lock"></i>
+          </div>
+          <p class="reset-description">
+            Enter your new password below to complete the reset.
+          </p>
+
+          <form id="newPasswordForm">
+            <div class="form-group">
+              <label for="new-password">New Password</label>
+              <input type="password" id="new-password" required>
+              <div class="error-message" id="new-password-error"></div>
+            </div>
+
+            <div class="form-group">
+              <label for="confirm-new-password">Confirm Password</label>
+              <input type="password" id="confirm-new-password" required>
+              <div class="error-message" id="confirm-new-password-error"></div>
+            </div>
+
+            <button type="submit" class="auth-btn reset-btn" id="update-password-btn">
+              <span class="btn-text">Update Password</span>
+              <div class="loading" style="display: none;"></div>
+            </button>
+          </form>
+        </div>
+
         <div class="auth-tabs">
             <div class="auth-tab active" onclick="showTab('login')">Login</div>
             <div class="auth-tab" onclick="showTab('register')">Register</div>
@@ -1086,6 +1145,12 @@ p<!DOCTYPE html>
                 <button type="submit" class="auth-btn" id="login-btn">
                     <span class="btn-text">Sign In</span>
                 </button>
+                <div class="social-login" style="margin-top: 16px;">
+                  <button type="button" class="google-btn" id="google-login-btn">
+                    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google logo" class="google-icon">
+                    Continue with Google
+                  </button>
+                </div>
             </form>
         </div>
 
@@ -1181,15 +1246,6 @@ p<!DOCTYPE html>
 
         <div class="auth-divider">
             <span>Or continue with</span>
-        </div>
-
-        <div class="auth-form active">
-            <div class="social-login">
-                <button class="social-btn" onclick="socialLogin('google')">
-                    <i class="fab fa-google"></i>
-                    Continue with Google
-                </button>
-            </div>
         </div>
 
         <div class="auth-footer">
@@ -1382,78 +1438,31 @@ p<!DOCTYPE html>
             showTab('login');
         }
 
-        // Reset password form submission
+        // Reset password form submission (Supabase)
         document.getElementById('resetPasswordForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             clearErrors();
 
             const email = document.getElementById('reset-email').value.trim();
-            const submitBtn = document.getElementById('send-reset-btn');
-            const btnText = submitBtn.querySelector('.btn-text');
-            const loading = submitBtn.querySelector('.loading');
-
-            // Validation
             if (!email) {
                 showError('reset-email', 'Email address is required');
                 return;
             }
 
-            if (!EmailService.isValidEmail(email)) {
-                showError('reset-email', 'Please enter a valid email address');
-                return;
-            }
-
-            // Show loading state
-            btnText.style.display = 'none';
-            loading.style.display = 'block';
-            submitBtn.disabled = true;
-
             try {
-                // Generate reset token
-                const resetToken = EmailService.generateResetToken();
+                const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+                    redirectTo: `${window.location.origin}/login.html?tab=reset`
+                });
 
-                // Get user name if available
-                const users = JSON.parse(localStorage.getItem('users') || '[]');
-                const user = users.find(u => u.email === email);
-                const userName = user ? user.name : 'Valued Customer';
-
-                // Send email
-                const emailResult = await EmailService.sendPasswordResetEmail(email, resetToken, userName);
-
-                if (emailResult.success) {
-                    // Store reset token for verification (in production, store in database)
-                    const resetData = {
-                        email: email,
-                        token: resetToken,
-                        expires: Date.now() + (15 * 60 * 1000), // 15 minutes expiry
-                        used: false
-                    };
-                    localStorage.setItem('passwordResetData', JSON.stringify(resetData));
-
-                    // Show success message in form
-                    document.getElementById('reset-email-section').style.display = 'none';
-                    document.getElementById('reset-success-section').style.display = 'block';
-                } else {
-                    // Show user-friendly error message
-                    showMessageModal(
-                        'Email Sending Failed',
-                        'Unable to send password reset email. Please check your email address and try again. If the problem persists, contact support.',
-                        'error'
-                    );
+                if (error) {
+                    showMessageModal('Error', error.message, 'error');
+                    return;
                 }
 
-            } catch (error) {
-                console.error('Password reset error:', error);
-                showMessageModal(
-                    'Email Sending Failed',
-                    'Unable to send password reset email. Please check your email address and try again. If the problem persists, contact support.',
-                    'error'
-                );
-            } finally {
-                // Reset button state
-                btnText.style.display = 'inline';
-                loading.style.display = 'none';
-                submitBtn.disabled = false;
+                document.getElementById('reset-email-section').style.display = 'none';
+                document.getElementById('reset-success-section').style.display = 'block';
+            } catch (err) {
+                showMessageModal('Error', err.message, 'error');
             }
         });
 
@@ -1465,6 +1474,30 @@ p<!DOCTYPE html>
                 'info'
             );
         }
+
+        // Google OAuth login
+        document.addEventListener('DOMContentLoaded', function() {
+          const googleBtn = document.getElementById('google-login-btn');
+          if (googleBtn) {
+            googleBtn.addEventListener('click', async function() {
+              try {
+                const redirectTo = `${window.location.origin}/homepage.html`; // Adjust as needed
+                const { data, error } = await supabase.auth.signInWithOAuth({
+                  provider: 'google',
+                  options: { redirectTo }
+                });
+
+                if (error) {
+                  showMessageModal('Login Failed', error.message, 'error');
+                }
+                // Supabase handles redirect after login automatically
+
+              } catch (err) {
+                showMessageModal('Error', err.message, 'error');
+              }
+            });
+          }
+        });
 
         // Form validation
         function showError(inputId, message) {
@@ -1485,76 +1518,53 @@ p<!DOCTYPE html>
             });
         }
 
-        // Login form submission
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
+        // Login form submission (Supabase)
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             clearErrors();
 
             const email = document.getElementById('login-email').value.trim();
             const password = document.getElementById('login-password').value;
 
-            // Basic validation
             if (!email || !password) {
                 if (!email) showError('login-email', 'Email is required');
                 if (!password) showError('login-password', 'Password is required');
                 return;
             }
 
-            // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                showError('login-email', 'Please enter a valid email address');
-                return;
-            }
-
-            // Show loading state
             const loginBtn = document.getElementById('login-btn');
             const originalText = loginBtn.innerHTML;
             loginBtn.innerHTML = '<div class="loading"></div>';
             loginBtn.disabled = true;
 
-            // Simulate login process
-            setTimeout(() => {
-                // Check if user exists in localStorage
-                const users = JSON.parse(localStorage.getItem('users') || '[]');
-                const user = users.find(u => u.email === email && u.password === password);
-
-                if (user) {
-                    // Successful login
-                    const userSession = {
-                        id: user.id,
-                        name: user.name,
-                        email: user.email,
-                        loginTime: new Date().toISOString()
-                    };
-
-                    localStorage.setItem('currentUser', JSON.stringify(userSession));
-
-                    // Remember me functionality
-                    if (document.getElementById('remember-me').checked) {
-                        localStorage.setItem('rememberedUser', email);
-                    } else {
-                        localStorage.removeItem('rememberedUser');
-                    }
-
-                    const redirectPage = localStorage.getItem('redirectAfterLogin') || 'homepage.html';
-                    localStorage.removeItem('redirectAfterLogin');
-                    window.location.href = redirectPage;
-                } else {
-                    // Login failed
-                    loginBtn.innerHTML = originalText;
-                    loginBtn.disabled = false;
-                    showMessageModal(
-                        'Login Failed',
-                        'Invalid email or password. Please check your credentials and try again.',
-                        'error'
-                    );
+            try {
+                const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+                if (error) {
+                    showMessageModal('Login Failed', error.message, 'error');
+                    return;
                 }
-            }, 1000);
+
+                const user = data.user;
+                localStorage.setItem('currentUser', JSON.stringify({
+                    id: user.id,
+                    email: user.email,
+                    loginTime: new Date().toISOString()
+                }));
+
+                const redirectPage = localStorage.getItem('redirectAfterLogin') || 'homepage.html';
+                localStorage.removeItem('redirectAfterLogin');
+                window.location.href = redirectPage;
+
+            } catch (err) {
+                showMessageModal('Login Failed', err.message, 'error');
+            } finally {
+                loginBtn.innerHTML = originalText;
+                loginBtn.disabled = false;
+            }
         });
 
-        // Register form submission
-        document.getElementById('registerForm').addEventListener('submit', function(e) {
+        // Register form submission (Supabase)
+        document.getElementById('registerForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             clearErrors();
 
@@ -1564,49 +1574,12 @@ p<!DOCTYPE html>
             const password = document.getElementById('register-password').value;
             const confirmPassword = document.getElementById('register-confirm-password').value;
 
-            // Validation
-            if (!name) {
-                showError('register-name', 'Full name is required');
-                return;
-            }
-
-            if (!email) {
-                showError('register-email', 'Email is required');
-                return;
-            }
-
-            if (!phone) {
-                showError('register-phone', 'Phone number is required');
-                return;
-            }
-
-            if (!password) {
-                showError('register-password', 'Password is required');
-                return;
-            }
-
-            if (!confirmPassword) {
-                showError('register-confirm-password', 'Please confirm your password');
-                return;
-            }
-
-            // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                showError('register-email', 'Please enter a valid email address');
-                return;
-            }
-
-            // Phone validation
-            const phoneRegex = /^[6-9]\d{9}$/;
-            if (!phoneRegex.test(phone)) {
-                showError('register-phone', 'Please enter a valid 10-digit mobile number');
-                return;
-            }
-
-            // Password validation
-            if (password.length < 6) {
-                showError('register-password', 'Password must be at least 6 characters long');
+            if (!name || !email || !phone || !password || !confirmPassword) {
+                if (!name) showError('register-name', 'Full name is required');
+                if (!email) showError('register-email', 'Email is required');
+                if (!phone) showError('register-phone', 'Phone is required');
+                if (!password) showError('register-password', 'Password is required');
+                if (!confirmPassword) showError('register-confirm-password', 'Please confirm password');
                 return;
             }
 
@@ -1615,69 +1588,39 @@ p<!DOCTYPE html>
                 return;
             }
 
-            // Show loading state
             const registerBtn = document.getElementById('register-btn');
             const originalText = registerBtn.innerHTML;
             registerBtn.innerHTML = '<div class="loading"></div>';
             registerBtn.disabled = true;
 
-            // Simulate registration process
-            setTimeout(() => {
-                // Check if user already exists
-                const users = JSON.parse(localStorage.getItem('users') || '[]');
-                const existingUser = users.find(u => u.email === email);
+            try {
+                const { data, error } = await supabase.auth.signUp({
+                    email,
+                    password,
+                    options: {
+                        data: { name, phone },
+                        emailRedirectTo: `${window.location.origin}/login.html`
+                    }
+                });
 
-                if (existingUser) {
-                    registerBtn.innerHTML = originalText;
-                    registerBtn.disabled = false;
-                    showMessageModal(
-                        'Registration Failed',
-                        'An account with this email already exists. Please use a different email address or try logging in.',
-                        'error'
-                    );
+                if (error) {
+                    showMessageModal('Registration Failed', error.message, 'error');
                     return;
                 }
 
-                // Create new user
-                const newUser = {
-                    id: Date.now().toString(),
-                    name,
-                    email,
-                    phone,
-                    password,
-                    createdAt: new Date().toISOString()
-                };
+                showMessageModal('Account Created', 'Account created successfully! Please check your email to verify your account before logging in.', 'success');
+                setTimeout(() => { window.location.href = 'login.html'; }, 2000);
 
-                users.push(newUser);
-                localStorage.setItem('users', JSON.stringify(users));
-
-                // Auto-login after registration
-                const userSession = {
-                    id: newUser.id,
-                    name: newUser.name,
-                    email: newUser.email,
-                    loginTime: new Date().toISOString()
-                };
-
-                localStorage.setItem('currentUser', JSON.stringify(userSession));
-
-                showMessageModal(
-                    'Account Created',
-                    'Account created successfully! Please login to continue.',
-                    'success'
-                );
-                window.location.href = 'login.html';
-            }, 1000);
+            } catch (err) {
+                showMessageModal('Registration Failed', err.message, 'error');
+            } finally {
+                registerBtn.innerHTML = originalText;
+                registerBtn.disabled = false;
+            }
         });
 
-        // Add event listeners for message modal
-        document.addEventListener('DOMContentLoaded', function() {
-            const rememberedEmail = localStorage.getItem('rememberedUser');
-            if (rememberedEmail) {
-                document.getElementById('login-email').value = rememberedEmail;
-                document.getElementById('remember-me').checked = true;
-            }
-
+        // Add event listeners for message modal and handle Supabase login state
+        document.addEventListener('DOMContentLoaded', async function() {
             // Handle URL parameters for direct tab access and redirect
             const urlParams = new URLSearchParams(window.location.search);
             const redirectTo = urlParams.get('redirect');
@@ -1691,37 +1634,95 @@ p<!DOCTYPE html>
 
             // Handle direct tab access
             if (tabParam === 'reset' && tokenParam) {
-                // Show reset tab and pre-fill token (token handling will be implemented in the reset form)
                 setTimeout(() => showTab('reset'), 100);
             } else if (tabParam === 'reset') {
                 setTimeout(() => showTab('reset'), 100);
             }
 
+            // Removed auto-redirect to prevent conflicts with local authentication system
 
-            // Check if user is already logged in
-            if (window.auth && window.auth.isLoggedIn()) {
-                const redirectPage = localStorage.getItem('redirectAfterLogin') || 'homepage.html';
-                localStorage.removeItem('redirectAfterLogin');
-                window.location.href = redirectPage;
+            // Add event listeners for message modal
+            const messageModal = document.getElementById('message-modal');
+            if (messageModal) {
+                // Close modal when clicking outside
+                messageModal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        hideMessageModal();
+                    }
+                });
+
+                // Close modal when pressing Escape key
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && messageModal.style.display === 'flex') {
+                        hideMessageModal();
+                    }
+                });
             }
-    
-                 // Add event listeners for message modal
-                 const messageModal = document.getElementById('message-modal');
-                 if (messageModal) {
-                     // Close modal when clicking outside
-                     messageModal.addEventListener('click', function(e) {
-                         if (e.target === this) {
-                             hideMessageModal();
-                         }
-                     });
-    
-                     // Close modal when pressing Escape key
-                     document.addEventListener('keydown', function(e) {
-                         if (e.key === 'Escape' && messageModal.style.display === 'flex') {
-                             hideMessageModal();
-                         }
-                     });
-                 }
+        });
+
+        // Handle Supabase password reset link
+        document.addEventListener('DOMContentLoaded', async function() {
+          const hash = window.location.hash;
+
+          // If the URL contains an access token, it's a password reset link
+          if (hash.includes('access_token')) {
+            // Switch to reset form
+            showTab('reset');
+
+            // Hide the email entry form, show new password form
+            document.getElementById('reset-email-section').style.display = 'none';
+            document.getElementById('reset-success-section').style.display = 'none';
+            document.getElementById('new-password-section').style.display = 'block';
+          }
+        });
+
+        // Handle new password submission
+        document.getElementById('newPasswordForm').addEventListener('submit', async function(e) {
+          e.preventDefault();
+          clearErrors();
+
+          const newPassword = document.getElementById('new-password').value;
+          const confirmPassword = document.getElementById('confirm-new-password').value;
+
+          if (!newPassword || !confirmPassword) {
+            if (!newPassword) showError('new-password', 'New password is required');
+            if (!confirmPassword) showError('confirm-new-password', 'Please confirm your password');
+            return;
+          }
+
+          if (newPassword !== confirmPassword) {
+            showError('confirm-new-password', 'Passwords do not match');
+            return;
+          }
+
+          const updateBtn = document.getElementById('update-password-btn');
+          const btnText = updateBtn.querySelector('.btn-text');
+          const loading = updateBtn.querySelector('.loading');
+
+          btnText.style.display = 'none';
+          loading.style.display = 'block';
+          updateBtn.disabled = true;
+
+          try {
+            const { data, error } = await supabase.auth.updateUser({ password: newPassword });
+
+            if (error) {
+              showMessageModal('Error', error.message, 'error');
+              return;
+            }
+
+            showMessageModal('Password Updated', 'Your password has been successfully updated. You can now log in with your new password.', 'success');
+            setTimeout(() => {
+              window.location.href = 'login.html';
+            }, 2000);
+
+          } catch (err) {
+            showMessageModal('Error', err.message, 'error');
+          } finally {
+            btnText.style.display = 'inline';
+            loading.style.display = 'none';
+            updateBtn.disabled = false;
+          }
         });
     </script>
 </body>
