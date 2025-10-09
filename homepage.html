@@ -3120,11 +3120,14 @@ color: #e74c3c;
        updateCartCount(); // Initialize cart count
        updateWatchlistCount(); // Initialize watchlist count
 
-       // Show login prompt after 5 seconds for non-logged-in users
+       // Show login prompt after 5 seconds for non-logged-in users (only if not on login page)
        if (typeof auth === 'undefined' || !auth.isLoggedIn()) {
-         setTimeout(function() {
-           showLoginPrompt();
-         }, 5000);
+         // Don't show login prompt if user is already on login page or if redirected from login
+         if (!document.referrer.includes('login.html') && !window.location.href.includes('login.html')) {
+           setTimeout(function() {
+             showLoginPrompt();
+           }, 5000);
+         }
        }
      });
 
